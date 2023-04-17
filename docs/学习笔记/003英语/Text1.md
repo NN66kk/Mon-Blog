@@ -6,7 +6,7 @@
 
 If you intend using humor in your talk to make people smile, you must know how to identify **shared** experiences and problems. Your humor must be relevant to the audience and should help to show them that you are one of them or that you understand their situation and are in **sympathy** with **their point of view**.  Depending on whom you are **addressing**, the problems will be different. If you are talking to a group of managers, you may **refer to** the **disorganized** methods of their **secretaries**; **alternatively** if you are addressing secretaries, you may want to comment on their disorganized bosses.
 
-> [!done] 词汇和听课笔记
+
 > - shared **→** ==**共有的**，共享的==
 > - sympathy  **→** ==同情；**赞同**==
 > - in sympathy with sb./sth **→** ==同情，赞同或支持某人/某事==
@@ -21,7 +21,7 @@ If you intend using humor in your talk to make people smile, you must know how t
 
 Here is an example, which I heard at a nurses’ **convention**, of a story which **works well** because the audience all shared the same view of doctors. A man arrives in heaven and is **being shown around** by St. Peter. He sees wonderful accommodations, beautiful gardens, sunny weather, and so on. Everyone is very peaceful, polite and friendly until, waiting in a line for lunch, the new arrival is suddenly pushed aside by a man in a white coat, who rushes to the head of the line, **grabs** his food and **stomps** over to a table by himself. “Who is that?” the new arrival asked St. Peter.  “Oh, that’s God,” came the reply, “but sometimes he thinks he’s a doctor.”
 
-> [!done] 词汇和听课笔记
+
 > - convention **→** ==**大会，会议**；习俗，惯例==
 > - work well **→** ==有效，效果好（考研英语中 work 常用的意思是**起效果**）==
 > - show sb. around **→** ==带某人参观、到处转转==
@@ -35,7 +35,7 @@ Here is an example, which I heard at a nurses’ **convention**, of a story whic
 
 If you are part of the group which you are addressing, you will **be in a position to know** the experiences and problems which are common to all of you and it’ll be appropriate for you to **make a passing remark about** the **inedible** canteen food or the chairman’s notorious bad taste in ties. With other audiences you mustn’t attempt to **cut in** with humor **as** they will **resent** an **outsider** making **disparaging** remarks about their canteen or their chairman.  You will **be on safer ground** if you **stick to** **scapegoats** like the Post Office or the telephone system.
 
-> [!done] 词汇和听课笔记
+
 > - be in a position to do sth. → ==有资格、有能力做某事==
 > - inedible **→** ==不能吃的==
 > - make a passing remark about ...  **→** ==顺便评价关于 ...== 
@@ -52,7 +52,7 @@ If you are part of the group which you are addressing, you will **be in a positi
 
 If you feel **awkward** being humorous, you must practice so that it becomes more natural. Include a few **casual** and apparently **off-the-cuff** remarks which you can deliver in a relaxed and unforced **manner**. Often it’s the **delivery** which causes the audience to smile, so speak slowly and remember that a raised eyebrow or an **unbelieving look** may help to show that you are making a **light-hearted** remark.
 
-> [!done] 词汇和听课笔记
+
 > - awkward **→** ==adj. 令人尴尬的，使人难堪的==
 > - casual **→** ==非正式的；漫不经心的，随意的==
 > - off-the-cuff **→** ==adj. 即兴的，即席的==
@@ -66,7 +66,7 @@ If you feel **awkward** being humorous, you must practice so that it becomes mor
 
 Look for the humor. It often comes from the **unexpected**. A **twist** on a familiar **quote** “If at first you don’t succeed, give up” or a play on words or on a situation. Search for **exaggeration** and **understatement**. Look at your talk and **pick out** a few words or sentences which you can turn about and inject with humor.
 
-> [!done] 词汇和听课笔记
+
 > - unexpected **→** ==想不到的，意外的==
 > - twist **→** ==曲解，歪曲，**转变**==
 > - quote **→** ==引语，引用==
@@ -88,7 +88,7 @@ To make your humor work, you should
 [C] address different problems to different people 
 [D] show sympathy for your listeners
 
-> [!done] 词汇和听课笔记
+
 > - take advantage of **→** ==利用==
 > - 审题的时候只看题干不看选项！看四个定位点 **→** 名词、数字、引号、否定。
 > - 不凭借印象，仔细比对信息做题！ **→** 有否？全否？匹配否（答非所问）？
@@ -107,7 +107,7 @@ The **joke** about doctors implies that, in the eyes of nurses, they are
 [C] entitled to some **privileges**
 [D] very busy even during lunch hours
 
-> [!done] 词汇和听课笔记
+
 > - joke **→** ==笑话，玩笑==
 > - conscious **→** ==意识到的，有知觉的；刻意的，慎重的，**在乎**==
 > - privilege **→** ==特权，特殊待遇==
@@ -126,7 +126,7 @@ It can be inferred from the text that public services
 [C] are an inappropriate subject for humor 
 [D] have often been the laughing stock
 
-> [!done] 词汇和听课笔记
+
 > - focus **→** ==重点，中心点，**焦点**==
 > - 最后一句邮局和电话系统代表的就是公共服务！
 > - 选项看起来对，文章中没有的话就是错的，不要无中生有！
@@ -141,7 +141,7 @@ To achieve the desired result, humorous stories should be delivered
 [C] in exaggerated statements
 [D] as casually as possible
 
-> [!done] 词汇和听课笔记
+
 > - well-worded **→** ==有文采的，精心措辞的，动听的==
 > - 问你用什么样的方式表达！
 
@@ -154,7 +154,7 @@ The best title for the text may be
 [C] Add Humor to Speech
 [D] Different Humor Strategies
 
-> [!done] 词汇和听课笔记
+
 > - Speech **→** ==n. **演说**，发言，谈话==
 > - 主旨题解题策略
 > 	1. 有主题词（全文反复出现）
