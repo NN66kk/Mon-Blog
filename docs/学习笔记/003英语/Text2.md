@@ -6,7 +6,7 @@
 
 Since the **dawn** of human **ingenuity**, people have devised ever more **cunning** tools to cope with work that is dangerous, boring, **burdensome**, or just **plain** **nasty**. That **compulsion** has **resulted in** robotics—the science of **conferring** various human capabilities on machines. And **if** scientists **have yet to create** the mechanical version of science fiction, they have begun to **come close**.
 
-> [!done] 词汇和听课笔记
+
 > - dawn **→** ==开端，萌芽==
 > - ingenuity **→** ==创造力==
 > - cunning **→** ==巧妙的==
@@ -24,7 +24,7 @@ Since the **dawn** of human **ingenuity**, people have devised ever more **cunni
 
 As a result, the modern world is increasingly **populated** by intelligent gizmos whose presence we barely notice but whose universal existence has **removed much human labor**. Our factories **hum** to the rhythm of robot **assembly** arms. Our banking is done at automated **teller** terminals that thank us with mechanical politeness for the transaction. Our subway trains are controlled by tireless robot-drivers. And thanks to the continual **miniaturization** of electronics and micro-mechanics, there are already robot systems that can perform some kinds of brain and bone surgery with **submillimeter** accuracy—far greater **precision** than highly skilled **physicians** can achieve with their hands alone.
 
-> [!done] 词汇和听课笔记
+
 > - populated **→** ==v. 居住在==
 > - removed human labor **→** ==解放人类劳动力==
 > - hum **→** ==v. 哼（曲子）；发嗡嗡声；活跃，**繁忙**==
@@ -39,7 +39,7 @@ As a result, the modern world is increasingly **populated** by intelligent gizmo
 
 But if robots **are to reach** the next stage of laborsaving utility, they will have to **operate** with less human **supervision** and be able to make at least a few decisions for themselves—goals that **pose a real challenge**. “While we know how to tell a robot to handle a **specific** error," says Dave Lavery, manager of a robotics program at NASA, “we can't yet give a robot enough ‘**common sense**’ to reliably interact with a dynamic world.”
 
-> [!done] 词汇和听课笔记
+
 > - be to reach **→** ==将要做 ...== 
 > - operate **→** ==**运行**，操作，管理==
 > - supervision **→** ==监管，监控==
@@ -51,7 +51,7 @@ But if robots **are to reach** the next stage of laborsaving utility, they will 
 
 Indeed the **quest** for true artificial intelligence has produced very mixed results. Despite a spell of initial optimism in the 1960s and 1970s when it appeared that transistor circuits and microprocessors might be able to copy the action of the human brain by the year 2010, researchers lately have begun to **extend** that forecast by decades **if not** centuries.
 
-> [!done] 词汇和听课笔记
+
 > - quest **→** ==n. 寻求，探索==
 > - extend **→** ==延长==
 > - if not **→** ==如果不；不然的话==
@@ -60,7 +60,7 @@ Indeed the **quest** for true artificial intelligence has produced very mixed re
 
 What they found, in attempting to **model** thought, is that the human brain's roughly one hundred billion nerve cells are much more talented—and human **perception** far more complicated—than previously imagined. They have built robots that can recognize the error of a machine panel by **a fraction of** a millimeter in a controlled factory environment. But the human mind can glimpse a rapidly changing scene and immediately disregard the 98 percent that is irrelevant, **instantaneously** focusing on the monkey at the side of a **winding** forest road or the single suspicious face in a big crowd. The most **advanced** computer systems on Earth can't **approach** that kind of ability, and **neuroscientists** still don’t know quite how we do it.
 
-> [!done] 词汇和听课笔记
+
 > - model **→** ==v. 模仿==
 > - perception **→** ==n. 看法，认识；感觉，感知；洞察力==
 > - perceptive **→** ==adj. 洞察力强的，敏锐的==
@@ -84,7 +84,7 @@ Human ingenuity was initially demonstrated in
 [C] the **invention** of tools for difficult and dangerous work
 [D] the elite’s cunning tackling of dangerous and boring work
 
-> [!done] 词汇和听课笔记
+
 > - initially 是考研陷阱的关键点！这里和原文中的 dawn，相对应，属于同义改写。
 > - invention **→** ==n. 发明物；发明，创造==
 > 1. 与原文不对应，信息不全，时间也对不上。
@@ -101,7 +101,7 @@ The word “gizmos” (Line 1, Paragraph 2) most probably means
 [C] devices 
 [D] creatures
 
-> [!done] 词汇和听课笔记
+
 > - experts **→** ==n. 专家；人才（expert 的复数）==
 > - 根据上下文的例子可以判断出这是一个设备！
 
@@ -114,7 +114,7 @@ According to the text, what is beyond man’s ability now is to design a robot t
 [C] have a little common sense
 [D] respond independently to a changing world
 
-> [!done] 词汇和听课笔记
+
 > - verbally **→** ==口头上地==
 > - beyond 表示否定的，是重点。
 > - 题目的意思是目前的机器人不能干啥？
@@ -132,7 +132,7 @@ Besides reducing human labor, robots can also
 [C] improve factory environments
 [D] cultivate human creativity
 
-> [!done] 词汇和听课笔记
+
 > - 除了节省劳动力，机器人还能干啥？
 > 1. 文章说的将要能做决定
 > 2. 对应原文，虽然单复数对不上，但是它是相对正确的选项
@@ -148,7 +148,7 @@ The author uses the example of a monkey to argue that robots are
 [C] far less able than human brain in focusing on relevant information 
 [D] best used in a controlled environment
 
-> [!done] 词汇和听课笔记
+
 > - internal **→** ==内部的==
 > - 猴子的例子为了说明机器人的什么？
 > - 例证题选项里面考察的都是它所服务的主旨，重点关注例子前后的观点。
