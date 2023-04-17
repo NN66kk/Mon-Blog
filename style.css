@@ -3,7 +3,6 @@
 
 @import "{{ site.theme }}";
 
-aside, body, input {
-    font-feature-settings: "kern","liga";
-    color: var(--md-typeset-color);
-    font-family: 楷体;
+table {
+width: 20;
+}
