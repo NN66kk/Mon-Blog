@@ -13,10 +13,10 @@
 }
 
 body {
-	font-family: Quicksand, 'Times New Roman', 'HarmonyOS Sans SC';
+	font-family: 'Quicksand', 'Times New Roman', 'HarmonyOS Sans SC';
 }
 
 
 div {
-  overflow-wrap: break-word;
+  word-break: normal;
 }
