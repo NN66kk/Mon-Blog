@@ -1,0 +1,17 @@
+---
+---
+@import "{{ site.theme }}";
+
+@font-face {
+	font-family: "Quicksand";
+	src: url("/assets/fonts/Quicksand-Medium.ttf");
+}
+
+@font-face {
+	font-family: "HarmonyOS Sans SC";
+	src: url("/assets/fonts/HarmonyOS_Sans_SC_Regular.ttf");
+}
+
+body {
+	font-family: Quicksand, 'Times New Roman', 'HarmonyOS Sans SC';
+}
