@@ -9,5 +9,5 @@
 }
 
 body {
-	font-family: var(--global-font),-apple-system, Quicksand, HarmonyOS Sans SC, "微软雅黑", sans-serif
+	font-family: 'Quicksand', 'HarmonyOS Sans SC', serif;
 }
