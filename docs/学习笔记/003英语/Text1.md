@@ -84,8 +84,11 @@ Look for the humor. It often comes from the **unexpected**. A **twist** on a fam
 To make your humor work, you should
 
 [A] **take advantage of** different kinds of audience
+
 [B] make fun of the disorganized people
+
 [C] address different problems to different people 
+
 [D] show sympathy for your listeners
 
 
@@ -103,8 +106,11 @@ To make your humor work, you should
 The **joke** about doctors implies that, in the eyes of nurses, they are
 
 [A] impolite to new arrivals
+
 [B] very **conscious** of their godlike role 
+
 [C] entitled to some **privileges**
+
 [D] very busy even during lunch hours
 
 
@@ -122,8 +128,11 @@ The **joke** about doctors implies that, in the eyes of nurses, they are
 It can be inferred from the text that public services
 
 [A] have benefited many people
+
 [B] are the **focus** of public attention
+
 [C] are an inappropriate subject for humor 
+
 [D] have often been the laughing stock
 
 
@@ -137,8 +146,11 @@ It can be inferred from the text that public services
 To achieve the desired result, humorous stories should be delivered
 
 [A] in **well-worded** language
+
 [B] as awkwardly as possible 
+
 [C] in exaggerated statements
+
 [D] as casually as possible
 
 
@@ -150,8 +162,11 @@ To achieve the desired result, humorous stories should be delivered
 The best title for the text may be
 
 [A] Use Humor Effectively
+
 [B] Various Kinds of Humor
+
 [C] Add Humor to Speech
+
 [D] Different Humor Strategies
 
 
