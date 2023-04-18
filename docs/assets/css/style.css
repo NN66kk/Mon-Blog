@@ -17,3 +17,7 @@ body {
 }
 
 
+div {
+word-wrap:break-word;
+word-break:normal; 
+}
