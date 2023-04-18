@@ -59,3 +59,6 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://unpkg.com/mermaid/dist/mermaid.min.js 
   
+# 自定义css
+extra_css:
+- 'assets/css/style.css'
