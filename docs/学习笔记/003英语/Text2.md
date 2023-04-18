@@ -80,8 +80,11 @@ What they found, in attempting to **model** thought, is that the human brain's r
 Human ingenuity was initially demonstrated in
 
 [A] the use of machines to produce science fiction
+
 [B] the wide use of machines in manufacturing industry
+
 [C] the **invention** of tools for difficult and dangerous work
+
 [D] the elite’s cunning tackling of dangerous and boring work
 
 
@@ -97,8 +100,11 @@ Human ingenuity was initially demonstrated in
 The word “gizmos” (Line 1, Paragraph 2) most probably means
 
 [A] programs
+
 [B] experts 
+
 [C] devices 
+
 [D] creatures
 
 
@@ -110,8 +116,11 @@ The word “gizmos” (Line 1, Paragraph 2) most probably means
 According to the text, what is beyond man’s ability now is to design a robot that can . 
 
 [A] fulfill delicate tasks like performing brain surgery
+
 [B] interact with human beings **verbally** 
+
 [C] have a little common sense
+
 [D] respond independently to a changing world
 
 
@@ -128,8 +137,11 @@ According to the text, what is beyond man’s ability now is to design a robot t
 Besides reducing human labor, robots can also
 
 [A] make a few decisions for themselves
+
 [B] deal with some errors with human intervention 
+
 [C] improve factory environments
+
 [D] cultivate human creativity
 
 
@@ -144,8 +156,11 @@ Besides reducing human labor, robots can also
 The author uses the example of a monkey to argue that robots are
 
 [A] expected to copy human brain in **internal** structure
+
 [B] able to perceive abnormalities immediately
+
 [C] far less able than human brain in focusing on relevant information 
+
 [D] best used in a controlled environment
 
 
