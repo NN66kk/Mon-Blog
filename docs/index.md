@@ -1,6 +1,6 @@
 # 欢迎您的到来！
 
-![010e5b5c1c79aaa80121df902c62bb.gif (750×750) (zcool.cn)](https://img.zcool.cn/community/010e5b5c1c79aaa80121df902c62bb.gif)
+![010e5b5c1c79aaa80121df902c62bb.gif (750×750) (zcool.cn)|200](https://img.zcool.cn/community/010e5b5c1c79aaa80121df902c62bb.gif)
 
 ## 你相信世界上有龙的存在吗？
 
