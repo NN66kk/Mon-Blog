@@ -17,7 +17,7 @@ body {
 }
 
 
-div {
-word-wrap:break-word;
-word-break:normal; 
+.break-word {
+  width: min-content;
+  overflow-wrap: break-word;
 }
