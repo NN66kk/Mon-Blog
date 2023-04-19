@@ -151,4 +151,4 @@ From the text we can see that the writer seems
 > 		- appreciation（欣赏，理解）
 > 		- affirmation（肯定，确认）
 
-[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/#hello-world)
+[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/)

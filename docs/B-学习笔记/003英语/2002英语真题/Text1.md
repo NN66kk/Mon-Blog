@@ -166,4 +166,4 @@ The best title for the text may be
 > 	- 每看完一段话进行简单的总结，1 和 3 一般最常用。
 > - 可以判断 A 选项是可以覆盖全文的！（三个方法一个个往下排除）
 
-[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/#hello-world)
+[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/)

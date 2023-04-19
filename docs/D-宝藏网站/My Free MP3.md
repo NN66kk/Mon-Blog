@@ -10,4 +10,4 @@
 
 网站链接：[点我😊](https://tool.liumingye.cn/music/?page=searchPage#/)
 
-[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/#hello-world)
+[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/)

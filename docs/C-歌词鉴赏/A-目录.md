@@ -24,4 +24,4 @@
 
 - [玄奘](https://nn66kk.github.io/Mon-Blog/C-%E6%AD%8C%E8%AF%8D%E9%89%B4%E8%B5%8F/%E7%8E%84%E5%A5%98/)
 
-[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/#hello-world)
+[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/)
