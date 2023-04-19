@@ -9,5 +9,6 @@
 ## 资源网站
 
 - [阿里云盘资源分享社区](https://yunpan1.com/)
+- [小雅的自建云盘](http://alist.xiaoya.pro/)
 
 [点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/#hello-world)
