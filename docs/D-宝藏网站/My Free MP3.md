@@ -9,3 +9,5 @@
 ![](https://api2.mubu.com/v3/document_image/836a2a7e-7524-4410-aea1-ce3ffc0e4a64-7449034.jpg)
 
 网站链接：[点我😊](https://tool.liumingye.cn/music/?page=searchPage#/)
+
+[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/#hello-world)
