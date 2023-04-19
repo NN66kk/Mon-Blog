@@ -1,5 +1,7 @@
 # 🏡主页
 
+<center>No matter how favourable the conditions are, we'll still rely on ourown efforts.</center><div align="right">——To Mon</div>
+
 <img src="https://api2.mubu.com/v3/document_image/addb612f-02f4-497a-9e7a-eb7d4ff941c4-7449034.jpg" width="50%" >
 
 ## 你相信世界上有龙的存在吗？
