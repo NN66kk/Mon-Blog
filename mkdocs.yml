@@ -61,4 +61,4 @@ extra_javascript:
   
 # 自定义css
 extra_css:
-- 'assets/css/style.css'
+- 'assets/css/style.scss'
