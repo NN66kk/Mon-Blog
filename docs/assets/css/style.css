@@ -21,5 +21,5 @@ body {
 }
 
 [data-md-color-scheme=slate] {
-    --md-default-fg-color--light: hsla(var(--md-hue),100%,100%,1);
+    --md-default-fg-color--light: hsla(var(--md-hue),11, 0%, 100%);
 }
