@@ -3,6 +3,22 @@
 
 @import "material";
 
+@font-face {
+	font-family: "Quicksand";
+	src: url("/docs/assets/fonts/Quicksand-Medium.ttf");
+}
+
+@font-face {
+	font-family: "HarmonyOS Sans SC";
+	src: url("docs/assets/fonts/HarmonyOS_Sans_SC_Regular.ttf");
+}
+
+@font-face {
+	font-family: "霞骛文楷 GB 屏幕阅读版 R";
+	src: url("docs/assets/fonts/LXGWWenKaiGBScreenR.ttf");
+	src: url("docs/assets/fonts/LXGWWenKaiGBScreenR.svg");
+}
+
 body {
-	font-family: 'Arial';
+	font-family: 'Quicksand', '霞骛文楷 GB 屏幕阅读版 R', serif;
 }
