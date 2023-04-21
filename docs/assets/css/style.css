@@ -12,14 +12,32 @@ body {
 	font-family: 'Quicksand', 'HarmonyOS Sans SC', 'PingFang SC', 'HarmonyOS_Regular', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
 }
 
+/**标题颜色**/
+
 .md-typeset h1 {
     text-align: center;
+    color: black;
 }
 
-:root, [data-md-color-scheme=default] {
-    --md-default-fg-color: black;
+.md-typeset h2 {
+    color: #9F4E00;
 }
 
-[data-md-color-scheme=slate] {
-    --md-default-fg-color--light: hsla(var(--md-hue),11, 0%, 100%);
+.md-typeset h3 {
+    color: #0C9B6E;
+}
+
+.md-typeset h4 {
+    color: black;
+}
+
+.md-typeset h5 {
+    color: #06620C;
+}
+
+/**图片居中和圆角**/
+
+.md-typeset img, .md-typeset svg, .md-typeset video {
+    text-align: center;
+    border-radius: 25px;
 }
