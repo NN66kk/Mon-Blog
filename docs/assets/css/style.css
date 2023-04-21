@@ -1,17 +1,22 @@
+---
+---
+
+@import "material";
+
 @font-face {
 	font-family: "Quicksand";
-	src: url("/assets/fonts/Quicksand-Medium.ttf");
+	src: url("/docs/assets/fonts/Quicksand-Medium.ttf");
 }
 
 @font-face {
 	font-family: "HarmonyOS Sans SC";
-	src: url("/assets/fonts/HarmonyOS_Sans_SC_Regular.ttf");
+	src: url("docs/assets/fonts/HarmonyOS_Sans_SC_Regular.ttf");
 }
 
 @font-face {
 	font-family: "霞骛文楷 GB 屏幕阅读版 R";
-	src: url("/assets/fonts/LXGWWenKaiGBScreenR.ttf");
-	src: url("/assets/fonts/LXGWWenKaiGBScreenR.svg");
+	src: url("docs/assets/fonts/LXGWWenKaiGBScreenR.ttf");
+	src: url("docs/assets/fonts/LXGWWenKaiGBScreenR.svg");
 }
 
 body {
