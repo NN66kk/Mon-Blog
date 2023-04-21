@@ -17,22 +17,27 @@ body {
 .md-typeset h1 {
     text-align: center;
     color: #4cae4f;
+    font-weight: bold;
 }
 
 .md-typeset h2 {
     color: #9F4E00;
+    font-weight: bold;
 }
 
 .md-typeset h3 {
     color: #0C9B6E;
+    font-weight: bold;
 }
 
 .md-typeset h4 {
     color: black;
+    font-weight: bold;
 }
 
 .md-typeset h5 {
     color: #06620C;
+    font-weight: bold;
 }
 
 /**图片居中和圆角**/
@@ -45,7 +50,7 @@ body {
 }
 
 .md-typeset img, .md-typeset svg, .md-typeset video {
-    max-width: 80%;
+    max-width: 90%;
 }
 
 /**转换挖空**/
