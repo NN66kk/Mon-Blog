@@ -50,7 +50,7 @@ body {
 }
 
 .md-typeset img, .md-typeset svg, .md-typeset video {
-    max-width: 90%;
+    max-width: 100%;
 }
 
 /**转换挖空**/
