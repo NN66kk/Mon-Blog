@@ -47,3 +47,13 @@ body {
 .md-typeset img, .md-typeset svg, .md-typeset video {
     max-width: 80%;
 }
+
+/**转换挖空**/
+
+.md-typeset mark {
+    color: transparent;
+}
+
+.md-typeset mark:hover {
+  color: var(--text-highlight) !important;
+}
