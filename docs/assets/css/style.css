@@ -17,7 +17,7 @@ body {
 }
 
 :root, [data-md-color-scheme=default] {
-    --md-default-fg-color: #000000de;
+    --md-default-fg-color: black;
 }
 
 [data-md-color-scheme=slate] {
