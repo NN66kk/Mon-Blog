@@ -7,7 +7,7 @@ theme:
     # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: green
+      primary: pink
       accent: indigo
       toggle:
         icon: material/toggle-switch-off-outline
