@@ -30,7 +30,7 @@ body {
 /**图片居中和圆角**/
 
 .md-typeset img, .md-typeset svg, .md-typeset video {
-    border-radius: 25px;
+    border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -43,8 +43,8 @@ body {
 /**行高和字符间距**/
 
 .md-typeset {
-    line-height: 1.5;
-    letter-spacing: 1px;
+    line-height: 1.8;
+    letter-spacing: 1.2px;
 }
 
 /**转换挖空**/
