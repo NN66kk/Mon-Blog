@@ -1,5 +1,6 @@
 body {
-	font-family: 'Quicksand', 'HarmonyOS Sans SC', 'PingFang SC', 'Arial', 'HarmonyOS_Regular', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+	font-family: 'Quicksand', 'HarmonyOS Sans SC', PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif !important;
+	font-size: 17px;
 }
 
 
@@ -43,8 +44,8 @@ body {
 /**行高和字符间距**/
 
 .md-typeset {
-    line-height: 1.8;
-    letter-spacing: 1.2px;
+    line-height: 1.69;
+    letter-spacing: 1px;
 }
 
 /**转换挖空**/
