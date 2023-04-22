@@ -1,15 +1,15 @@
 @font-face {
-	font-family: "Quicksand";
-	src: url("/docs/assets/fonts/Quicksand-Medium.ttf");
-}
-
-@font-face {
-	font-family: "HarmonyOS Sans SC";
-	src: url("docs/assets/fonts/HarmonyOS_Sans_SC_Regular.ttf");
+    font-family: 'LXGW WenKai';
+    src: url('docs/assets/fonts/LXGWWenKaiGBScreenR.ttf');
+    src: url('docs/assets/fonts/LXGWWenKaiGBScreenR.otf');
+    src: url('docs/assets/fonts/LXGWWenKaiGBScreenR.woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
 }
 
 body {
-	font-family: 'Quicksand', 'HarmonyOS Sans SC', 'PingFang SC', 'HarmonyOS_Regular', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+	font-family: 'LXGW WenKai', 'PingFang SC', 'HarmonyOS_Regular', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
 }
 
 /**标题颜色**/
