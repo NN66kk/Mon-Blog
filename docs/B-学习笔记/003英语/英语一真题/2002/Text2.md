@@ -162,5 +162,3 @@ The author uses the example of a monkey to argue that robots are
 > 2. 与文章意思相反；
 > 3. 正确选项；
 > 4. 从原文扣两个词捏造的，与题目问的不符合。
-
-[点我回到🏡主页](https://nn66kk.github.io/Mon-Blog/)
