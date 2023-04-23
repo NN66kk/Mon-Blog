@@ -62,3 +62,7 @@ extra_javascript:
 # 自定义css
 extra_css:
 - 'assets/css/style.css'
+
+theme:
+  features:
+    - navigation.tabs
