@@ -3,9 +3,6 @@ site_name: Mon
 theme:
     name: 'material'
     palette:
-    features:
-      - navigation.tabs
-      - navigation.tabs.sticky
 
     # Light mode
     - media: "(prefers-color-scheme: light)"
