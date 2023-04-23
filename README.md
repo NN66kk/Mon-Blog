@@ -1,3 +1,6 @@
-# 自用仓库
+# My Blog
 
-📌并不是因为事情难我们不敢做，而是因为我们不敢做事情才难的。
+I use 
+
+- [obsidian](http://obsidian.md) to take note
+- [mkdocs-obsidian/foam-template](https://github.com/Jackiexiao/foam-mkdocs-template) to generate blog's web page
