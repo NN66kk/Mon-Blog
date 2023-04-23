@@ -4,7 +4,8 @@ theme:
     name: 'material'
     palette:
     features:
-      - navigation.tracking
+      - navigation.tabs
+      - navigation.tabs.sticky
 
     # Light mode
     - media: "(prefers-color-scheme: light)"
