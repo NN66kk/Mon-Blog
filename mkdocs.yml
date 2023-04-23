@@ -3,6 +3,8 @@ site_name: Mon
 theme:
     name: 'material'
     palette:
+    features:
+      - navigation.tracking
 
     # Light mode
     - media: "(prefers-color-scheme: light)"
