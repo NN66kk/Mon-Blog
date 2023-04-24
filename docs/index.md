@@ -6,9 +6,9 @@
 
 ## 苏州吴中天气
 
-<iframe width="680" scrolling="no" height="260" frameborder="0" allowtransparency="true" src="https://i.tianqi.com?c=code&id=13&bgc=%2300B0F0&bdc=%23&icon=1&py=wuzhong1&temp=1&site=12"></iframe>
+<iframe width="280" scrolling="no" height="300" frameborder="0" allowtransparency="true" src="https://i.tianqi.com?c=code&id=55&icon=1&py=wuzhong1&site=12"></iframe>
 
 ## 威海环翠天气
 
-<iframe width="680" scrolling="no" height="260" frameborder="0" allowtransparency="true" src="https://i.tianqi.com?c=code&id=13&bgc=%2300B0F0&bdc=%23&icon=1&py=huancuiqu&temp=1&site=12"></iframe>
+<iframe width="280" scrolling="no" height="300" frameborder="0" allowtransparency="true" src="https://i.tianqi.com?c=code&id=55&icon=1&py=huancuiqu&site=12"></iframe>
 
