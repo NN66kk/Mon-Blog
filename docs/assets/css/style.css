@@ -55,3 +55,19 @@ body {
 .md-typeset mark:hover {
   color: var(--text-highlight) !important;
 }
+
+/**测试**/
+
+span.cm-strong,
+:not(font)>strong,
+.cm-s-obsidian .cm-highlight.cm-strong {
+  color: red !important;
+  font-family: var(--font-family-strong) !important;
+}
+
+.is-mobile span.cm-strong,
+.is-mobile :not(font)>strong,
+.is-mobile .cm-highlight.cm-strong {
+  color: red;
+  font-weight: bold;
+}
