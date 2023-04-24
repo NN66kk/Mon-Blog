@@ -2,7 +2,7 @@
 
 ## 威海荣成天气
 
-<iframe width="680" scrolling="no" height="260" frameborder="0" allowtransparency="true" src="https://i.tianqi.com?c=code&id=13&bgc=%2300B0F0&bdc=%23&icon=1&py=rongcheng2&temp=1&site=12"></iframe>
+<iframe width="500" scrolling="no" height="40" frameborder="0" allowtransparency="true" src="https://i.tianqi.com?c=code&id=40&icon=1&py=rongcheng2&site=12"></iframe>
 
 ## 苏州吴中天气
 
