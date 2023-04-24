@@ -56,11 +56,11 @@ body {
   color: var(--text-highlight) !important;
 }
 
-/**测试**/
+/**加粗变色**/
 
 span.cm-strong,
 :not(font)>strong,
 .cm-s-obsidian .cm-highlight.cm-strong {
-  color: #f8772b!important;
+  color: #eb6ea5!important;
   font-family: var(--font-family-strong) !important;
 }
