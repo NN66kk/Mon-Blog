@@ -7,8 +7,6 @@ body {
 /**标题颜色**/
 
 .md-typeset h1 {
-    text-align: center;
-    color: #5d8a9e;
     font-weight: bold;
 }
 
