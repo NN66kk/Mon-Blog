@@ -61,13 +61,6 @@ body {
 span.cm-strong,
 :not(font)>strong,
 .cm-s-obsidian .cm-highlight.cm-strong {
-  color: red !important;
+  color: #f8772b!important;
   font-family: var(--font-family-strong) !important;
-}
-
-.is-mobile span.cm-strong,
-.is-mobile :not(font)>strong,
-.is-mobile .cm-highlight.cm-strong {
-  color: red;
-  font-weight: bold;
 }
