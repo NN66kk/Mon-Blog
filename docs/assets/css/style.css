@@ -56,7 +56,7 @@ body {
   color: var(--text-highlight) !important;
 }
 
-/**加粗变色**/
+/**加粗变色
 
 span.cm-strong,
 :not(font)>strong,
@@ -66,4 +66,14 @@ span.cm-strong,
   padding: 1px 2px;
   margin: 0px 2px;
   font-family: var(--font-family-strong) !important;
+}**/
+
+/**高亮样式**/
+
+.md-typeset mark {
+  color: black;
+  background-image:linear-gradient(to right, #ffafbd,#ffc3a0);
+  border-radius: 5px;
+  padding: 1px 2px;
+  margin: 0px 2px;
 }
