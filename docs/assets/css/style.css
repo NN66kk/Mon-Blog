@@ -61,6 +61,6 @@ body {
 span.cm-strong,
 :not(font)>strong,
 .cm-s-obsidian .cm-highlight.cm-strong {
-  color: #eb6ea5!important;
+  background-image:linear-gradient(to right, #ff0099,#493240);!important;
   font-family: var(--font-family-strong) !important;
 }
