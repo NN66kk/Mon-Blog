@@ -64,14 +64,12 @@ body {
   margin: 0px 2px;
 }
 
-/**加粗变色
+/**引用框美化**/
 
-span.cm-strong,
-:not(font)>strong,
-.cm-s-obsidian .cm-highlight.cm-strong {
-  background-image:linear-gradient(to right, #ee9ca7,#ffdde1);
-  border-radius: 5px;
-  padding: 1px 2px;
-  margin: 0px 2px;
-  font-family: var(--font-family-strong) !important;
-}**/
+.md-typeset blockquote {
+    color: #000000;
+    padding: 1px 15px;
+    border-left: 5px solid #0095d9!important;
+    background-image: linear-gradient(to right, #d3cce3,#e9e4f0);
+    border-radius: 10px;
+}
