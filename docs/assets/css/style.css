@@ -80,5 +80,5 @@ body {
 }
 
 [dir=ltr] .md-typeset blockquote {
-    border-left: 1#dff2ea!mportant;
+    border-left: 3px solid #bde4d47a;
 }
