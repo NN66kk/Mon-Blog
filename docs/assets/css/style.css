@@ -78,3 +78,7 @@ body {
     background-color: transparent;
     border-radius: 0.4375em;
 }
+
+[dir=ltr] .md-typeset blockquote {
+    border-left: 1#dff2ea!mportant;
+}
