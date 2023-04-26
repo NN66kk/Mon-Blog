@@ -65,11 +65,16 @@ body {
 }
 
 /**引用框美化**/
-
+/*
 .md-typeset blockquote {
     color: #000000;
     padding: 1px 15px;
     border-left: 6px solid #546d78!important;
     background-image: linear-gradient(to right, #d3cce3,#e9e4f0);
     border-radius: 10px;
+}*/
+.md-typeset blockquote {
+    border: 3px solid #bde4d47a;
+    background-color: transparent;
+    border-radius: 0.4375em;
 }
