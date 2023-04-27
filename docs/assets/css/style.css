@@ -74,6 +74,7 @@ body {
     border-radius: 10px;
 }*/
 .md-typeset blockquote {
+    color: #000000;
     border: 3px solid #bde4d47a;
     background-color: transparent;
     border-radius: 0.4375em;
