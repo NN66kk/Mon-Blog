@@ -82,3 +82,9 @@ body {
 [dir=ltr] .md-typeset blockquote {
     border-left: 3px solid #bde4d47a;
 }
+
+body {
+  background-image: url("z-附件/wallhaven-m3pk2k.jpg");
+  background-size: cover;
+  opacity: 0.95; // 透明度
+}
