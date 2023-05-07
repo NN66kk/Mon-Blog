@@ -43,8 +43,12 @@ body {
 /**行高和字符间距**/
 
 .md-typeset {
-    line-height: 1.5;
+    line-height: 1.69;
     letter-spacing: 1px;
+}
+
+.md-typeset ol li, .md-typeset ul li {
+    margin-bottom: 0.3em;
 }
 
 /**转换挖空**/
