@@ -87,3 +87,13 @@ body {
 [dir=ltr] .md-typeset blockquote {
     border-left: 3px solid #bde4d47a;
 }
+
+/**表格框线**/
+
+.md-typeset table:not([class]) td:not([align]), .md-typeset table:not([class]) th:not([align]) {
+    border: 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+}
