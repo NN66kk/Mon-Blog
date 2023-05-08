@@ -48,7 +48,7 @@ body {
 }
 
 .md-typeset ol li, .md-typeset ul li {
-    margin-bottom: 0em;
+    margin-bottom: 0.25em;
 }
 
 /**转换挖空**/
