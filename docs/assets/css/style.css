@@ -108,12 +108,12 @@ body {
 
 @media screen and (min-width: 76.25em)
 .md-nav--primary .md-nav__title {
-    background: #fef9f1;
-    box-shadow: 0 0 0.4rem 0.4rem #fef9f1;
+    background: #fef9f1 !important;
+    box-shadow: 0 0 0.4rem 0.4rem #fef9f1 !important;
 }
 
 @media screen and (min-width: 60em)
 .md-nav--secondary .md-nav__title {
-    background: #fef9f1;
-    box-shadow: 0 0 0.4rem 0.4rem #fef9f1;
+    background: #fef9f1 !important;
+    box-shadow: 0 0 0.4rem 0.4rem #fef9f1 !important;
 }
