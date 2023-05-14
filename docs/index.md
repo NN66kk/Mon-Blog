@@ -1,5 +1,7 @@
 # 🏡主页
 
+<div style="display: block; position: absolute; left: 0; top: 0; width: 100%; height: 100%;overflow: hidden; "><iframe src="https://pkmer.cn/products/widget/RandomMusic" allow="fullscreen" style=" height: 100%; width: 100%;"></iframe></div>
+
 ## 博客内容更新时间戳（点击冒号后面的内容即可跳转）
 
 - 2023-05-14 ：[2023-05-14-周日](2023-05-14-%E5%91%A8%E6%97%A5.md)
