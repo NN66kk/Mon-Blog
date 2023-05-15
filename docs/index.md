@@ -1,6 +1,8 @@
 # 🏡主页
 
-<div style="display: block; position: absolute; left: 240; top: 30; width: 100%; height: 100%;overflow: hidden; "><iframe src="https://pkmer.cn/products/widget/NeumorphicClock" allow="fullscreen" style=" height: 100%; width: 100%; border: none"></iframe></div>
+<div style="display: block; position: absolute; left: 0; top: 45; width: 100%; height: 100%;overflow: hidden; "><iframe src="https://pkmer.cn/products/widget/NeumorphicClock" allow="fullscreen" style=" height: 100%; width: 100%; border: none"></iframe></div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## 博客内容更新时间戳（点击冒号后面的内容即可跳转）
 
