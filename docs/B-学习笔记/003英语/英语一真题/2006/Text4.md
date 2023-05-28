@@ -8,9 +8,9 @@ Many things make people think artists are **weird**. But the **weirdest** may be
 
 ---
 
-- [ ] weird **→** ==adj. 奇怪的，不寻常的；怪异的，超自然的==
-- [ ] weirdest **→** ==最奇怪的（weird 的最高级）==
-- [ ] and yet **→** ==相当于 but==
+- weird **→** ==adj. 奇怪的，不寻常的；怪异的，超自然的==
+- weirdest **→** ==最奇怪的（weird 的最高级）==
+- and yet **→** ==相当于 but==
 
 ---
 
@@ -20,10 +20,10 @@ This wasn’t always so. The earliest forms of art, like painting and music, are
 
 ---
 
-- [ ] somewhere **→** ==adv. 在某处；到某处==
-- [ ] onward **→** ==adv. 向前；**从……以后**；取得进步，获得成功==
-- [ ] phony **→** ==adj. 伪造的，假的；虚伪的，做作的==
-- [x] evil **→** ==adj. 恶毒的，邪恶的；有害的，易造成伤害的；讨厌的==
+- somewhere **→** ==adv. 在某处；到某处==
+- onward **→** ==adv. 向前；**从……以后**；取得进步，获得成功==
+- phony **→** ==adj. 伪造的，假的；虚伪的，做作的==
+- evil **→** ==adj. 恶毒的，邪恶的；有害的，易造成伤害的；讨厌的==
 
 ---
 
@@ -33,11 +33,11 @@ You could argue that art became more **skeptical** of happiness because modern t
 
 ---
 
-- [x] skeptical **→** ==adj. 不相信的，持怀疑态度的；（哲）怀疑论的，不可知论的==
-- [ ] misery **→** ==n. 痛苦，苦难==
-- [x] perpetual **→** ==adj. 长期的，永恒的；连续不断的==
-- [ ] massacre **→** ==n. 屠杀，残杀==
-- [ ] damn **→** ==adj. 该死的，糟糕的==
+- skeptical **→** ==adj. 不相信的，持怀疑态度的；（哲）怀疑论的，不可知论的==
+- misery **→** ==n. 痛苦，苦难==
+- perpetual **→** ==adj. 长期的，永恒的；连续不断的==
+- massacre **→** ==n. 屠杀，残杀==
+- damn **→** ==adj. 该死的，糟糕的==
 
 ---
 
@@ -47,11 +47,11 @@ You could argue that art became more **skeptical** of happiness because modern t
 
 ---
 
-- [ ] After all **→** ==毕竟，终究==
-- [ ] dedicate **→** ==v. 致力于，献身于==
-- [ ] depict **→** ==v. 描述，描绘==
-- [x] track **→** ==v. 跟踪，追踪（跟在其后的意思）==
-- [x] emergence **→** ==n. 出现，显现；崭露头角；摆脱困境==
+- After all **→** ==毕竟，终究==
+- dedicate **→** ==v. 致力于，献身于==
+- depict **→** ==v. 描述，描绘==
+- track **→** ==v. 跟踪，追踪（跟在其后的意思）==
+- emergence **→** ==n. 出现，显现；崭露头角；摆脱困境==
 
 ---
 
@@ -61,12 +61,12 @@ People in earlier eras were surrounded by reminders of misery. They worked until
 
 ---
 
-- [x] literacy **→** ==n. 识字，读写能力；专业知识；精通文学==
-- [ ] medium **→** ==n. 媒介，媒体；方法，手段==
-- [ ] worshipper **→** ==n. 崇拜者；**礼拜者**；爱慕者==
-- [ ] worm **→** ==蠕虫==
-- [ ] given all this **→** ==鉴于这一切：表示在考虑到所有这些因素的情况下。==
-- [ ] given **→** ==prep. 考虑到；鉴于==
+- literacy **→** ==n. 识字，读写能力；专业知识；精通文学==
+- medium **→** ==n. 媒介，媒体；方法，手段==
+- worshipper **→** ==n. 崇拜者；**礼拜者**；爱慕者==
+- worm **→** ==蠕虫==
+- given all this **→** ==鉴于这一切：表示在考虑到所有这些因素的情况下。==
+- given **→** ==prep. 考虑到；鉴于==
 
 ---
 
@@ -76,10 +76,10 @@ Today the messages the average Westerner is surrounded with are not religious bu
 
 ---
 
-- [ ] anchor **→** ==n. 锚；支柱，<美>**新闻节目主持人**==
-- [ ] feature **→** ==v. 以……为特色==
-- [ ] agenda **→** ==n. 待议事项，议事日程；（政治）议题；秘密计划，**秘密目标**（做事情的目的）==
-- [ ] lure **→** ==v. 引诱，诱惑==
+- anchor **→** ==n. 锚；支柱，<美>**新闻节目主持人**==
+- feature **→** ==v. 以……为特色==
+- agenda **→** ==n. 待议事项，议事日程；（政治）议题；秘密计划，**秘密目标**（做事情的目的）==
+- lure **→** ==v. 引诱，诱惑==
 
 ---
 
@@ -89,9 +89,9 @@ But what we forget—what our economy depends on us forgetting—is that happine
 
 ---
 
-- [x] once **→** ==adv. 一次， 一回；**曾经，一度**==
-- [ ] live with **→** ==1、与...... 共同生活：指与某人或某物共同生活在一起，可以是家人、室友或宠物等。2、**忍受**：指接受并适应某种不理想的情况，如病痛、困难或缺陷等。==
-- [x] bitter **→** ==adj. 味苦的；**痛苦的**，辛酸的；激烈的，充满敌意的==
+- once **→** ==adv. 一次， 一回；**曾经，一度**==
+- live with **→** ==1、与...... 共同生活：指与某人或某物共同生活在一起，可以是家人、室友或宠物等。2、**忍受**：指接受并适应某种不理想的情况，如病痛、困难或缺陷等。==
+- bitter **→** ==adj. 味苦的；**痛苦的**，辛酸的；激烈的，充满敌意的==
 
 ---
 
@@ -135,8 +135,8 @@ In the author’s opinion, advertising	.
 
 ---
 
-- [ ] in the wake of **→** ==在......之后：指在某个事件或情况之后紧接着发生或出现。==
-- [x] illusion **→** ==n. 错觉，幻觉；幻想，错误的观念==
+- in the wake of **→** ==在......之后：指在某个事件或情况之后紧接着发生或出现。==
+- illusion **→** ==n. 错觉，幻觉；幻想，错误的观念==
 
 ---
 

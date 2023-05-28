@@ -12,11 +12,11 @@ Americans today don't **place a very high value on** intellect. Our heroes are a
 
 ---
 
-- [x] place a very high value on sth./sb. **→** ==很重视某事物/某人==
-- [ ] entertainer **→** ==n. 演艺人员，表演者==
-- [ ] sake **→** ==n. 利益，好处；目的==
-- [ ] for the sake of **→** ==为了……的利益==
-- [ ] pervasive **→** ==adj. 弥漫的，遍布的==
+- place a very high value on sth./sb. **→** ==很重视某事物/某人==
+- entertainer **→** ==n. 演艺人员，表演者==
+- sake **→** ==n. 利益，好处；目的==
+- for the sake of **→** ==为了……的利益==
+- pervasive **→** ==adj. 弥漫的，遍布的==
 - 写作应用:: 很重视某事物/某人 **→** place a very high value on sth./sb.
 
 ---
@@ -27,8 +27,8 @@ Americans today don't **place a very high value on** intellect. Our heroes are a
 
 ---
 
-- [ ] anything but **→** ==绝不是，远远不是==
-- [ ] distaste **→** ==n. v. 反感，不喜欢==
+- anything but **→** ==绝不是，远远不是==
+- distaste **→** ==n. v. 反感，不喜欢==
 
 ---
 
@@ -38,9 +38,9 @@ But they could and should be. Encouraging kids to reject the life of the mind le
 
 ---
 
-- [x] vulnerable **→** ==adj. （身体或精神）脆弱的，易受伤的==
-- [x] exploitation **→** ==n. 剥削，压榨；开发，开采；（出于私利、不公正的）利用==
-- [x] defend one's ideas **→** ==捍卫某人的思想==
+- vulnerable **→** ==adj. （身体或精神）脆弱的，易受伤的==
+- exploitation **→** ==n. 剥削，压榨；开发，开采；（出于私利、不公正的）利用==
+- defend one's ideas **→** ==捍卫某人的思想==
 
 ---
 
@@ -50,9 +50,9 @@ But they could and should be. Encouraging kids to reject the life of the mind le
 
 ---
 
-- [ ] populist **→** ==adj. 平民主义的==
-- [ ] native intelligence **→** ==先天智力==
-- [ ] noble qualities **→** ==高贵的品质==
+- populist **→** ==adj. 平民主义的==
+- native intelligence **→** ==先天智力==
+- noble qualities **→** ==高贵的品质==
 
 ---
 
@@ -62,9 +62,9 @@ Ralph Waldo Emerson and other Transcendentalist philosophers thought schooling a
 
 ---
 
-- [ ] rigorous **→** ==adj. 僵化的，严格的==
-- [ ] put unnatural restraints on ...  **→** ==人为限制 ...==
-- [x] bellyful **→** ==n. 满腹；满肚子；过量==
+- rigorous **→** ==adj. 僵化的，严格的==
+- put unnatural restraints on ...  **→** ==人为限制 ...==
+- bellyful **→** ==n. 满腹；满肚子；过量==
 
 ---
 
@@ -74,11 +74,11 @@ Intellect, according to Hofstadter, is different from native intelligence, a qua
 
 ---
 
-- [x] reluctantly **→** ==adv. 不情愿地==
-- [x] contemplative **→** ==adj. 沉思的，冥思的==
-- [ ] grasp **→** ==v. 抓牢，握紧；**理解，领会**；抓住（机会）==
-- [x] manipulate **→** ==v. 操纵，摆布；运用==
-- [ ] ponder **→** ==v. 仔细考虑，琢磨，沉思==
+- reluctantly **→** ==adv. 不情愿地==
+- contemplative **→** ==adj. 沉思的，冥思的==
+- grasp **→** ==v. 抓牢，握紧；**理解，领会**；抓住（机会）==
+- manipulate **→** ==v. 操纵，摆布；运用==
+- ponder **→** ==v. 仔细考虑，琢磨，沉思==
 
 ---
 
@@ -88,13 +88,13 @@ School remains a place where intellect is **mistrusted**. Hofstadter says our co
 
 ---
 
-- [x] mistrust **→** ==v. n. 不信任，怀疑==
-- [ ] in the grip of **→** ==受……控制==
-- [ ] joyfully **→** ==adv. 高兴地，喜悦地==
-- [ ] militantly **→** ==adv. 好战地；好斗地；强硬地==
-- [ ] proclaim **→** ==v. （正式）宣告，（公开）声明；强调，声称==
-- [x] hostility **→** ==n. 敌意，对抗；强烈的反对，愤怒反抗；战斗，战争行动==
-- [x] intellectual promise **→** ==才智上的前途==
+- mistrust **→** ==v. n. 不信任，怀疑==
+- in the grip of **→** ==受……控制==
+- joyfully **→** ==adv. 高兴地，喜悦地==
+- militantly **→** ==adv. 好战地；好斗地；强硬地==
+- proclaim **→** ==v. （正式）宣告，（公开）声明；强调，声称==
+- hostility **→** ==n. 敌意，对抗；强烈的反对，愤怒反抗；战斗，战争行动==
+- intellectual promise **→** ==才智上的前途==
 
 ---
 
@@ -139,8 +139,8 @@ The views of Ravitch and Emerson on schooling are	.
 
 ---
 
-- [ ] identical **→** ==adj. 完全相同的；同一的==
-- [ ] complementary **→** ==adj. 相互补充的，相辅相成的==
+- identical **→** ==adj. 完全相同的；同一的==
+- complementary **→** ==adj. 相互补充的，相辅相成的==
 
 ---
 
@@ -170,9 +170,9 @@ What does the author think of **intellect**?
 
 ---
 
-- [ ] intellect **→** ==才智（后天学习）==
-- [ ] intelligence **→** ==先天智力（与生俱来）==
-- [x] underlie **→** ==vt. 构成……的基础，为……的起因；位于……的下面==
+- intellect **→** ==才智（后天学习）==
+- intelligence **→** ==先天智力（与生俱来）==
+- underlie **→** ==vt. 构成……的基础，为……的起因；位于……的下面==
 1. 不能体现是第二，不是作者的观点。
 2. 无中生有
 3. 正确

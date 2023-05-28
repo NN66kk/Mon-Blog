@@ -13,11 +13,11 @@ In recent years, railroads have been combining with each other, merging into sup
 
 ---
 
-- [x] cause heightened concerns about... **→** ==引起对 ... 的高度关注==
-- [ ] heighten **→** ==v. 使 ... 加强；提高，增加==
-- [x] account for ...  **→** ==**占…比例**；解释，说明；对 ... 负责==
-- [x] well over **→** ==远远超过==
-- [x] freight **→** ==n. 货运==
+- cause heightened concerns about... **→** ==引起对 ... 的高度关注==
+- heighten **→** ==v. 使 ... 加强；提高，增加==
+- account for ...  **→** ==**占…比例**；解释，说明；对 ... 负责==
+- well over **→** ==远远超过==
+- freight **→** ==n. 货运==
 - 写作应用:: 引起对 ... 的高度关注 **→** cause heightened concerns about...
 
 ---
@@ -28,14 +28,14 @@ Supporters of the new supersystems argue that these mergers will allow for subst
 
 ---
 
-- [x] coordinated **→** ==adj. 协调的，协调一致的==
-- [x] threat **→** ==n. 威胁，恐吓==
-- [ ] ship **→** ==n. 船 v. 运输==
-- [x] shipper **→** ==托运商==
-- [x] bulk **→** ==adj. 大批的，大量的==
-- [x] therefore **→** ==adv. 因此，所以==
-- [x] throat **→** ==n. 咽喉，喉咙==
-- [x] have sb. by the throat **→** ==牵制，控制（扼住某人的咽喉）==
+- coordinated **→** ==adj. 协调的，协调一致的==
+- threat **→** ==n. 威胁，恐吓==
+- ship **→** ==n. 船 v. 运输==
+- shipper **→** ==托运商==
+- bulk **→** ==adj. 大批的，大量的==
+- therefore **→** ==adv. 因此，所以==
+- throat **→** ==n. 咽喉，喉咙==
+- have sb. by the throat **→** ==牵制，控制（扼住某人的咽喉）==
 - 遇到转折词立即划开，重点所在！
 
 ---
@@ -46,13 +46,13 @@ The vast **consolidation** within the rail industry means that most shippers are
 
 ---
 
-- [x] consolidation **→** ==n. 巩固；**合并**==
-- [x] typically **→** ==adv. **通常，一般**；典型地；代表性地==
-- [x] charge **→** ==收费==
-- [x] captive **→** ==adj. 受控制的，**受垄断的**，无权选择的；被俘虏的==
-- [x] overcharged **→** ==v. **对……要价过高；较正常价格多收**；给（电池）过量充电；（使）夸张（overcharge 的过去式及过去分词）adj. 情绪激昂的==
-- [x] appeal **→** ==v. 上诉，申诉==
-- [x] extreme cases **→** ==极端情况==
+- consolidation **→** ==n. 巩固；**合并**==
+- typically **→** ==adv. **通常，一般**；典型地；代表性地==
+- charge **→** ==收费==
+- captive **→** ==adj. 受控制的，**受垄断的**，无权选择的；被俘虏的==
+- overcharged **→** ==v. **对……要价过高；较正常价格多收**；给（电池）过量充电；（使）夸张（overcharge 的过去式及过去分词）adj. 情绪激昂的==
+- appeal **→** ==v. 上诉，申诉==
+- extreme cases **→** ==极端情况==
 
 ---
 
@@ -62,10 +62,10 @@ Railroads justify rate discrimination against captive shippers **on the grounds 
 
 ---
 
-- [x] on the grounds that ...  **→** ==基于，鉴于 ... 理由==
-- [x] in the long run **→** ==从长远来看==
-- [x] subscribe **→** ==v. 同意，赞成；订购，认购==
-- [x] represent **→** ==v. 代表，象征；表示，表达==
+- on the grounds that ...  **→** ==基于，鉴于 ... 理由==
+- in the long run **→** ==从长远来看==
+- subscribe **→** ==v. 同意，赞成；订购，认购==
+- represent **→** ==v. 代表，象征；表示，表达==
 
 ---
 
@@ -75,14 +75,14 @@ Many captive shippers also worry they will soon be **hit** with a round of huge 
 
 ---
 
-- [ ] hit **→** ==打击==
-- [x] brightening **→** ==明亮的，**光明的**==
-- [x] fortune **→** ==n. 时运，命运；未来，前途==
-- [x] cover the cost **→** ==支付成本==
-- [x] capital **→** ==资本==
-- [x] keep up with ...  **→** ==与 ... 保持一致==
-- [ ] surge **→** ==v. 汹涌，奔腾（文中指“急剧增加、飞涨”）==
-- [ ] carrying costs **→** ==运营成本，持有成本==
+- hit **→** ==打击==
+- brightening **→** ==明亮的，**光明的**==
+- fortune **→** ==n. 时运，命运；未来，前途==
+- cover the cost **→** ==支付成本==
+- capital **→** ==资本==
+- keep up with ...  **→** ==与 ... 保持一致==
+- surge **→** ==v. 汹涌，奔腾（文中指“急剧增加、飞涨”）==
+- carrying costs **→** ==运营成本，持有成本==
 - 遇到名词 + 主谓，后面直接判定为定语从句！
 
 ---
@@ -103,8 +103,8 @@ According to those who support mergers, railway monopoly is **unlikely** because
 
 ---
 
-- [x] unlikely **→** ==不可能的==
-- [x] cross-trade **→** ==跨行业的==
+- unlikely **→** ==不可能的==
+- cross-trade **→** ==跨行业的==
 1. 原文说的合并造成成本降低，题目说的是竞争造成成本降低，偷换概念。
 2. 原文说的内部协调，并不是跨行业！
 3. 正确
@@ -126,8 +126,8 @@ What is many captive shippers’ attitude towards the consolidation in the rail 
 
 ---
 
-- [x] Indignant **→** ==愤怒的==
-- [x] Apprehensive **→** ==忧虑的==
+- Indignant **→** ==愤怒的==
+- Apprehensive **→** ==忧虑的==
 
 ---
 
@@ -145,8 +145,8 @@ It can be inferred from Paragraph 3 that	.
 
 ---
 
-- [x] rival **→** ==竞争对手==
-- [x] board **→** ==董事会，委员会==
+- rival **→** ==竞争对手==
+- board **→** ==董事会，委员会==
 1. 原文意思相反，没有竞争对手的时候多收钱，有竞争对手的时候就少收钱了。
 2. 原文说的大部分托运商由这一家铁路公司服务，没说只有这一家！
 3. 正确
@@ -168,7 +168,7 @@ The word "arbiters" (Line 7, Paragraph 4) most probably refers to those	.
 
 ---
 
-- [x] supervise **→** ==v. 指导（某人）的工作；**监督**（任务，计划，活动）==
+- supervise **→** ==v. 指导（某人）的工作；**监督**（任务，计划，活动）==
 
 ---
 
@@ -186,7 +186,7 @@ According to the text, the cost increase in the rail industry is mainly caused b
 
 ---
 
-- [x] acquisition **→** ==收购==
+- acquisition **→** ==收购==
 - 警惕“主要的，最初的”往往是文章的出题点！
 
 ---

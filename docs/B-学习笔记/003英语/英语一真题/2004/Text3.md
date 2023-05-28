@@ -9,14 +9,14 @@
 
 ---
 
-- [ ] When it comes to ...  **→** ==当谈到/涉及到==
-- [ ] not ... just yet **→** ==还没有==
-- [ ] filing **→** ==n. 存档，归档；存档档案，归档记录；**锉屑**==
-- [ ] polishing **→** ==抛光==
-- [ ] showing up **→** ==**露面**；露出；揭露==
-- [ ] indicator **→** ==n. 标志，迹象；方向灯==
-- [ ] downscale **→** ==v. 缩小……的尺寸（或规模）；降低……的程度==
-- [ ] suburban **→** ==adj. 郊区的，城郊的==
+- When it comes to ...  **→** ==当谈到/涉及到==
+- not ... just yet **→** ==还没有==
+- filing **→** ==n. 存档，归档；存档档案，归档记录；**锉屑**==
+- polishing **→** ==抛光==
+- showing up **→** ==**露面**；露出；揭露==
+- indicator **→** ==n. 标志，迹象；方向灯==
+- downscale **→** ==v. 缩小……的尺寸（或规模）；降低……的程度==
+- suburban **→** ==adj. 郊区的，城郊的==
 
 ---
 
@@ -26,11 +26,11 @@ Even before Alan Greenspan's admission that America's red-hot economy is cooling
 
 ---
 
-- [ ] dealership **→** ==n. 代理权，经销权==
-- [ ] outlet **→** ==n. 经销店；出路==
-- [ ] lag **→** ==v. 落后==
-- [ ] temper **→** ==v. 使缓和，调节（文中指“减少”）==
-- [ ] sound any alarms **→** ==拉响警报==
+- dealership **→** ==n. 代理权，经销权==
+- outlet **→** ==n. 经销店；出路==
+- lag **→** ==v. 落后==
+- temper **→** ==v. 使缓和，调节（文中指“减少”）==
+- sound any alarms **→** ==拉响警报==
 
 ---
 
@@ -40,14 +40,14 @@ Consumers say they're not in **despair** because, despite the **dreadful** headl
 
 ---
 
-- [ ] despair **→** ==n. 绝望；令人绝望的人或事==
-- [x] desperate **→** ==adj. 不顾一切的；渴望的；绝望的，无望的==
-- [ ] dreadful **→** ==adj. 糟糕透顶的；可怕的，令人畏惧的==
-- [x] fortune **→** ==财富==
-- [ ] predominantly **→** ==adv. 绝大多数，主要地==
-- [ ] broker **→** ==n. 经纪人，中间人==
-- [ ] frenzied **→** ==adj. 疯狂的，狂暴的，狂热的==
-- [x] quiet **→** ==安静的==
+- despair **→** ==n. 绝望；令人绝望的人或事==
+- desperate **→** ==adj. 不顾一切的；渴望的；绝望的，无望的==
+- dreadful **→** ==adj. 糟糕透顶的；可怕的，令人畏惧的==
+- fortune **→** ==财富==
+- predominantly **→** ==adv. 绝大多数，主要地==
+- broker **→** ==n. 经纪人，中间人==
+- frenzied **→** ==adj. 疯狂的，狂暴的，狂热的==
+- quiet **→** ==安静的==
 
 ---
 
@@ -57,13 +57,13 @@ Many folks see silver linings to this slowdown. **Potential** home buyers would 
 
 ---
 
-- [ ] Potential **→** ==adj. **潜在的**，可能的 n. 潜力，可能性==
-- [x] seem to do **→** ==好像要做某事（相当于 appear）==
-- [x] stock-market **→** ==股票市场==
-- [ ] ingredient **→** ==n. （食品的）成分，原料；**要素，因素**==
-- [ ] upside **→** ==n. **好的一面**，优势；（股票价格）上涨==
-- [x] used to do sth. **→** ==过去常常做某事==
-- [ ] toasting **→** ==v. 为……举杯祝酒==
+- Potential **→** ==adj. **潜在的**，可能的 n. 潜力，可能性==
+- seem to do **→** ==好像要做某事（相当于 appear）==
+- stock-market **→** ==股票市场==
+- ingredient **→** ==n. （食品的）成分，原料；**要素，因素**==
+- upside **→** ==n. **好的一面**，优势；（股票价格）上涨==
+- used to do sth. **→** ==过去常常做某事==
+- toasting **→** ==v. 为……举杯祝酒==
 
 ---
 
@@ -131,7 +131,7 @@ To which of the following is the author likely to agree?
 
 ---
 
-- [ ] remedy **→** ==n. 解决方法==
+- remedy **→** ==n. 解决方法==
 
 ---
 

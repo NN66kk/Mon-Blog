@@ -15,9 +15,9 @@ The Supreme Court’s decisions on physician-assisted suicide **carry important 
 
 - physician = doctor 常考这两个的同义改写。
 - 写作应用:: 对 ... 具有重要意义 **→** carry important implications for ... 
-- [x] carry important implications for ...  **→** ==对 ... 具有重要意义==
-- [x] medicine **→** ==n. 药物，药剂；医疗，医学==
-- [x] dying **→** ==临终的，垂死的==
+- carry important implications for ...  **→** ==对 ... 具有重要意义==
+- medicine **→** ==n. 药物，药剂；医疗，医学==
+- dying **→** ==临终的，垂死的==
 
 ---
 
@@ -27,9 +27,9 @@ Although it ruled that there is no **constitutional** right to physician-assiste
 
 ---
 
-- [x] constitution **→** ==n. **宪法**，章程；组成，构成，制定==
-- [x] hold **→** ==v. 认为，相信；持有，拥有==
-- [x] intended **→** ==adj. 预期的，打算中的==
+- constitution **→** ==n. **宪法**，章程；组成，构成，制定==
+- hold **→** ==v. 认为，相信；持有，拥有==
+- intended **→** ==adj. 预期的，打算中的==
 
 ---
 
@@ -39,8 +39,8 @@ Doctors have used that principle in recent years to justify using high **doses**
 
 ---
 
-- [x] doses **→** ==n. 剂量（dose 的复数）==
-- [x] dosages **→** ==n. [药]剂量；用量（dosage 的复数）==
+- doses **→** ==n. 剂量（dose 的复数）==
+- dosages **→** ==n. [药]剂量；用量（dosage 的复数）==
 
 ---
 
@@ -50,8 +50,8 @@ Nancy Dubler, director of Montefiore Medical Center, **contends** that the princ
 
 ---
 
-- [x] contend **→** ==v. 声称，主张，**认为**；竞争，争夺；处理，对付==
-- [x] shield **→** ==v. 保护，庇护==
+- contend **→** ==v. 声称，主张，**认为**；竞争，争夺；处理，对付==
+- shield **→** ==v. 保护，庇护==
 
 ---
 
@@ -61,9 +61,9 @@ George Annas, chair of the health law department at Boston University, maintains
 
 ---
 
-- [x] prescribe **→** ==v. 开药方，开处方==
-- [x] legitimate **→** ==adj. 合情合理的；合法的==
-- [x] homicide **→** ==n. 杀人，谋杀==
+- prescribe **→** ==v. 开药方，开处方==
+- legitimate **→** ==adj. 合情合理的；合法的==
+- homicide **→** ==n. 杀人，谋杀==
 
 ---
 
@@ -73,7 +73,7 @@ On another level, many in the medical community acknowledge that the assisted-su
 
 ---
 
-- [x] fuel **→** ==n. 燃料；v. 加燃料==
+- fuel **→** ==n. 燃料；v. 加燃料==
 
 ---
 
@@ -83,11 +83,11 @@ Just three weeks before the Court’s ruling on physician-assisted suicide, the 
 
 ---
 
-- [x] volume **→** ==n. 一卷，一册==
-- [x] Care at the End of Life **→** ==临终护理==
-- [x] undertreatment **→** ==处理不力==
-- [x] dishonor **→** ==vt. 使蒙羞，使丢脸==
-- [x] twin problems **→** ==双重问题==
+- volume **→** ==n. 一卷，一册==
+- Care at the End of Life **→** ==临终护理==
+- undertreatment **→** ==处理不力==
+- dishonor **→** ==vt. 使蒙羞，使丢脸==
+- twin problems **→** ==双重问题==
 
 ---
 
@@ -97,9 +97,9 @@ The **profession** is **taking steps** to require young doctors to train in **ho
 
 ---
 
-- [x] profession **→** ==行业，职业==
-- [x] taking steps **→** ==采取措施==
-- [x] hospices **→** ==（晚期病人）护理所==
+- profession **→** ==行业，职业==
+- taking steps **→** ==采取措施==
+- hospices **→** ==（晚期病人）护理所==
 
 ---
 
@@ -109,16 +109,16 @@ Annas says lawyers can play a key role in insisting that these **well-meaning** 
 
 ---
 
-- [x] well-meaning **→** ==adj. 意图良好的==
-- [x] initiative **→** ==n. 倡议；主动性，主动的行动==
-- [x] translate into ...  **→** ==转化为 ...== 
-- [x] seem unconcerned with **→** ==似乎对 ... 不关心==
+- well-meaning **→** ==adj. 意图良好的==
+- initiative **→** ==n. 倡议；主动性，主动的行动==
+- translate into ...  **→** ==转化为 ...== 
+- seem unconcerned with **→** ==似乎对 ... 不关心==
 - 如果遇到了名词 + 主谓，则后面的主谓直接就是定语从句！
-- [x] constitute **→** ==v. 构成，组成==
-- [x] systematic **→** ==系统的，有计划的（这里引申为**故意的**）==
-- [x] abuse **→** ==n. 滥用；**虐待**==
-- [x] presumptively **→** ==据推测==
-- [x] license suspension  **→** ==吊销执照==
+- constitute **→** ==v. 构成，组成==
+- systematic **→** ==系统的，有计划的（这里引申为**故意的**）==
+- abuse **→** ==n. 滥用；**虐待**==
+- presumptively **→** ==据推测==
+- license suspension  **→** ==吊销执照==
 
 ---
 
@@ -138,8 +138,8 @@ From the first three paragraphs, we learn that
 
 ---
 
-- [x] used to do sth. **→** ==过去常常做某事，言外之意是现在不做了==
-- [x] commit **→** ==v. 犯错==
+- used to do sth. **→** ==过去常常做某事，言外之意是现在不做了==
+- commit **→** ==v. 犯错==
 1. 原文中的 have used 表示从过去到现在一直都是这样，与 used to do 不一样，时态错误；
 2. 典型的同意改写；
 3. 反向干扰；
@@ -202,8 +202,8 @@ Which of the following best defines the word “aggressive” (Line 3, Paragraph
 
 ---
 
-- [x] Bold **→** ==大胆的==
-- [x] Careless **→** ==粗心的==
+- Bold **→** ==大胆的==
+- Careless **→** ==粗心的==
 - 只有 A 选项代入合适
 
 ---

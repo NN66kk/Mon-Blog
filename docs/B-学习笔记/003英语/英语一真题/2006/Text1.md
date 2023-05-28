@@ -8,21 +8,21 @@
 
 ---
 
-- [x] In spite of **→** ==**尽管**；不管，不顾==
+- In spite of **→** ==**尽管**；不管，不顾==
 - 表示尽管的词组或者单词
 	- in spite of + 名词/代词/相当于名词的词组
 	- although + 句子
 	- 明让步，暗转折
-- [x] democratizing **→** ==民主化==
-- [x] uniformity **→** ==n. 统一（性)，一致（性）；统一的实例==
-- [ ] discourse **→** ==n. 演讲，论述；谈话，交流==
-- [ ] casualness **→** ==n. 偶然；漫不经心；**随便**==
-- [ ] deference **→** ==n. 尊重，遵从==
-- [x] elegant **→** ==adj. （人）高雅的，举止优雅的；精美的，雅致的；简练的，巧妙的==
-- [x] Instead of **→** ==**代替**；而不是…==
-- [ ] intimate **→** ==adj. 亲密的；个人的，隐私的；温馨的==
-- [x] cater to **→** ==迎合；为……服务==
-- [x] elite **→** ==n. 尖子，精英 adj. 出类拔萃的，精锐的==
+- democratizing **→** ==民主化==
+- uniformity **→** ==n. 统一（性)，一致（性）；统一的实例==
+- discourse **→** ==n. 演讲，论述；谈话，交流==
+- casualness **→** ==n. 偶然；漫不经心；**随便**==
+- deference **→** ==n. 尊重，遵从==
+- elegant **→** ==adj. （人）高雅的，举止优雅的；精美的，雅致的；简练的，巧妙的==
+- Instead of **→** ==**代替**；而不是…==
+- intimate **→** ==adj. 亲密的；个人的，隐私的；温馨的==
+- cater to **→** ==迎合；为……服务==
+- elite **→** ==n. 尖子，精英 adj. 出类拔萃的，精锐的==
 
 ---
 
@@ -32,9 +32,9 @@ Immigrants are quickly fitting into this common culture, which may not be altoge
 
 ---
 
-- [x] poisonous **→** ==adj. 有毒的；会产生毒素的；恶毒的，令人很不愉快的；有许多危害的，恶性的==
-- [ ] elevating **→** ==adj. **起提升作用的**；发人深省的==
-- [ ] indices **→** ==n. 指数；目录（index的复数）==
+- poisonous **→** ==adj. 有毒的；会产生毒素的；恶毒的，令人很不愉快的；有许多危害的，恶性的==
+- elevating **→** ==adj. **起提升作用的**；发人深省的==
+- indices **→** ==n. 指数；目录（index的复数）==
 
 ---
 
@@ -44,11 +44,11 @@ The 1990 **Census** revealed that "a majority of immigrants from each of the fif
 
 ---
 
-- [x] Census **→** ==n. （官方的）统计，人口普查==
-- [x] tend to do sth. **→** ==倾向于；往往会==
-- [ ] bilingual **→** ==adj. （人）熟悉两种语言的，能说两种语言的；涉及两种语言的，使用两种语言的==
-- [ ] Hence **→** ==adv. **因此**；之后==
-- [x] graveyard **→** ==n. 墓地==
+- Census **→** ==n. （官方的）统计，人口普查==
+- tend to do sth. **→** ==倾向于；往往会==
+- bilingual **→** ==adj. （人）熟悉两种语言的，能说两种语言的；涉及两种语言的，使用两种语言的==
+- Hence **→** ==adv. **因此**；之后==
+- graveyard **→** ==n. 墓地==
 
 ---
 
@@ -58,7 +58,7 @@ Foreign-born Asians and Hispanics "have higher rates of **intermarriage** than d
 
 ---
 
-- [x] intermarriage **→** ==n. 联姻，**异族结婚**；近亲结婚==
+- intermarriage **→** ==n. 联姻，**异族结婚**；近亲结婚==
 
 ---
 
@@ -68,7 +68,7 @@ Rodriguez notes that children in remote villages around the world are fans of su
 
 ---
 
-- [ ] somehow **→** ==adv. 以某种方式，用某种方法；**由于某种不明原因，不知为什么**==
+- somehow **→** ==adv. 以某种方式，用某种方法；**由于某种不明原因，不知为什么**==
 
 ---
 
@@ -78,8 +78,8 @@ Are there **divisive** issues and pockets of **seething** anger in America? Inde
 
 ---
 
-- [ ] divisive **→** ==adj. 有争议的，造成分裂的==
-- [ ] seethe **→** ==v. 翻滚；涌动，翻腾==
+- divisive **→** ==adj. 有争议的，造成分裂的==
+- seethe **→** ==v. 翻滚；涌动，翻腾==
 
 ---
 
@@ -112,8 +112,8 @@ According to the author, the department stores of the 19th century	.
 ---
 
 - 这种题可以采用排除法！
-- [x] popular culture **→** ==**大众文化**，通俗文化；流行文化==
-- [ ] owe ... to ...  **→** ==归因于 ...==
+- popular culture **→** ==**大众文化**，通俗文化；流行文化==
+- owe ... to ...  **→** ==归因于 ...==
 
 ---
 
@@ -161,8 +161,8 @@ In the author’s opinion, the **absorption** of immigrants into American societ
 
 ---
 
-- [x] absorption **→** ==n. (液体、气体等的)吸收；吸纳，**同化**；专注，着迷；（液体、气体等的）吸收==
-- [x] fruitless **→** ==adj. 不成功的，徒劳的；不结果实的==
+- absorption **→** ==n. (液体、气体等的)吸收；吸纳，**同化**；专注，着迷；（液体、气体等的）吸收==
+- fruitless **→** ==adj. 不成功的，徒劳的；不结果实的==
 
 ---
 

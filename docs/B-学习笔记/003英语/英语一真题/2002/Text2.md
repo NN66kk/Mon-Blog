@@ -8,19 +8,19 @@ Since the **dawn** of human **ingenuity**, people have devised ever more **cunni
 
 ---
 
-- [x] dawn **→** ==开端，萌芽==
-- [x] ingenuity **→** ==创造力==
-- [x] cunning **→** ==巧妙的==
-- [x] burdensome  **→** ==adj. 负担沉重的，繁重的==
-- [x] plain **→** ==adv. 完全地，简直==
-- [x] nasty **→** ==令人讨厌的==
-- [x] compulsion **→** ==强烈的欲望，冲动；强迫==
-- [x] result in **→** ==导致，结果是==
+- dawn **→** ==开端，萌芽==
+- ingenuity **→** ==创造力==
+- cunning **→** ==巧妙的==
+- burdensome  **→** ==adj. 负担沉重的，繁重的==
+- plain **→** ==adv. 完全地，简直==
+- nasty **→** ==令人讨厌的==
+- compulsion **→** ==强烈的欲望，冲动；强迫==
+- result in **→** ==导致，结果是==
 - result in + 结果；result from + 原因
-- [x] conferring **→** ==授予==
-- [x] if **→** ==表示尽管 ... ，引导的是让步状语从句==
-- [x] have yet to do ...  **→** ==还没做到某事==
-- [x] come close **→** ==接近==
+- conferring **→** ==授予==
+- if **→** ==表示尽管 ... ，引导的是让步状语从句==
+- have yet to do ...  **→** ==还没做到某事==
+- come close **→** ==接近==
 
 ---
 
@@ -30,15 +30,15 @@ As a result, the modern world is increasingly **populated** by intelligent gizmo
 
 ---
 
-- [x] populated **→** ==v. 居住在==
-- [x] removed human labor **→** ==解放人类劳动力==
-- [x] hum **→** ==v. 哼（曲子）；发嗡嗡声；活跃，**繁忙**==
-- [x] assembly **→** ==装配，组装；聚集==
-- [x] teller **→** ==n. （银行）**出纳员**；（尤指议会的）计票人==
-- [x] miniaturization **→** ==n. 小型化，微型化==
-- [x] submillimeter **→** ==n. 亚毫米==
-- [x] precision **→** ==n. 精确（性），准确（性）==
-- [x] physicians **→** ==医生==
+- populated **→** ==v. 居住在==
+- removed human labor **→** ==解放人类劳动力==
+- hum **→** ==v. 哼（曲子）；发嗡嗡声；活跃，**繁忙**==
+- assembly **→** ==装配，组装；聚集==
+- teller **→** ==n. （银行）**出纳员**；（尤指议会的）计票人==
+- miniaturization **→** ==n. 小型化，微型化==
+- submillimeter **→** ==n. 亚毫米==
+- precision **→** ==n. 精确（性），准确（性）==
+- physicians **→** ==医生==
 
 ---
 
@@ -48,12 +48,12 @@ But if robots **are to reach** the next stage of laborsaving utility, they will 
 
 ---
 
-- [x] be to do **→** ==将要去做 ...==
-- [x] operate **→** ==**运行**，操作，管理==
-- [x] supervision **→** ==监管，监控==
-- [x] pose a real challenge **→** ==提出挑战/质疑==
-- [x] specific **→** ==具体的；特定的==
-- [x] common sense **→** ==常识==
+- be to do **→** ==将要去做 ...==
+- operate **→** ==**运行**，操作，管理==
+- supervision **→** ==监管，监控==
+- pose a real challenge **→** ==提出挑战/质疑==
+- specific **→** ==具体的；特定的==
+- common sense **→** ==常识==
 
 ---
 
@@ -63,10 +63,10 @@ Indeed the **quest** for true artificial intelligence has produced very mixed re
 
 ---
 
-- [x] quest **→** ==n. 寻求，探索==
-- [x] spell **→** ==**一段时间**；拼写==
-- [x] extend **→** ==延长==
-- [x] if not **→** ==如果不；不然的话==
+- quest **→** ==n. 寻求，探索==
+- spell **→** ==**一段时间**；拼写==
+- extend **→** ==延长==
+- if not **→** ==如果不；不然的话==
 
 ---
 
@@ -76,17 +76,17 @@ What they found, in attempting to **model** thought, is that the human brain's r
 
 ---
 
-- [x] model **→** ==v. 模仿==
-- [x] perception **→** ==n. 看法，认识；感觉，感知；洞察力==
-- [x] perceptive **→** ==adj. 洞察力强的，敏锐的==
-- [x] previously **→** ==之前，以前==
-- [x] a fraction of **→**  ==... 当中的一小部分==
-- [ ] instantaneously **→** ==adv. 即刻；突如其来地==
-- [x] winding **→** ==adj. 曲折的，弯曲的，蜿蜒的==
-- [x] suspicious **→** ==可疑的，怀疑的，多疑的==
-- [x] advanced **→** ==先进的，高级的==
-- [x] approach **→** ==v. 靠近；接近 n. 方法，态度；靠近，接近==
-- [x] neuroscientists **→** ==n. 神经系统科学家==
+- model **→** ==v. 模仿==
+- perception **→** ==n. 看法，认识；感觉，感知；洞察力==
+- perceptive **→** ==adj. 洞察力强的，敏锐的==
+- previously **→** ==之前，以前==
+- a fraction of **→**  ==... 当中的一小部分==
+- instantaneously **→** ==adv. 即刻；突如其来地==
+- winding **→** ==adj. 曲折的，弯曲的，蜿蜒的==
+- suspicious **→** ==可疑的，怀疑的，多疑的==
+- advanced **→** ==先进的，高级的==
+- approach **→** ==v. 靠近；接近 n. 方法，态度；靠近，接近==
+- neuroscientists **→** ==n. 神经系统科学家==
 
 ---
 
@@ -107,7 +107,7 @@ Human ingenuity was initially demonstrated in
 ---
 
 - initially 是考研陷阱的关键点！这里和原文中的 dawn，相对应，属于同义改写。
-- [ ] invention **→** ==n. 发明物；发明，创造==
+- invention **→** ==n. 发明物；发明，创造==
 1. 与原文不对应，信息不全，时间也对不上。
 2. 与题干不匹配，题干问的一开始，第二段讲的是现代！
 3. 正确答案，同义改写。
@@ -129,7 +129,7 @@ The word “gizmos” (Line 1, Paragraph 2) most probably means
 
 ---
 
-- [x] experts **→** ==n. 专家；人才（expert 的复数）==
+- experts **→** ==n. 专家；人才（expert 的复数）==
 - 根据上下文的例子可以判断出这是一个设备！
 
 ---
@@ -148,7 +148,7 @@ According to the text, what is beyond man’s ability now is to design a robot t
 
 ---
 
-- [x] verbally **→** ==口头上地==
+- verbally **→** ==口头上地==
 - beyond 表示否定的，是重点。
 - 题目的意思是目前的机器人不能干啥？
 1. 原文说的能够实现，与题目不符合。
@@ -194,7 +194,7 @@ The author uses the example of a monkey to argue that robots are
 
 ---
 
-- [x] internal **→** ==内部的==
+- internal **→** ==内部的==
 - 猴子的例子为了说明机器人的什么？
 - 例证题选项里面考察的都是它所服务的主旨，重点关注例子前后的观点。
 1. 文章没说；

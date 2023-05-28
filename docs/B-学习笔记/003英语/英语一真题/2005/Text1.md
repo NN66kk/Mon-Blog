@@ -9,11 +9,11 @@ Everybody loves a fat pay rise. Yet pleasure at your own can vanish if you learn
 
 ---
 
-- [ ] have a reputation for ...  **→** ==以 ... 而出名==
-- [ ] slack **→** ==v. 懈怠，偷懒 adj. 懈怠的，敷衍了事的，懒惰的==
-- [ ] outraged **→** ==adj. 义愤填膺的；愤慨的，气愤的==
-- [x] finely **→** ==adv. 微小地，**细微地**；精致地，精确地；精美地，优雅地；（形势或比赛等）不明朗地，难分伯仲地==
-- [x] grievance **→** ==n. 不满，**不平**；委屈，冤情；投诉==
+- have a reputation for ...  **→** ==以 ... 而出名==
+- slack **→** ==v. 懈怠，偷懒 adj. 懈怠的，敷衍了事的，懒惰的==
+- outraged **→** ==adj. 义愤填膺的；愤慨的，气愤的==
+- finely **→** ==adv. 微小地，**细微地**；精致地，精确地；精美地，优雅地；（形势或比赛等）不明朗地，难分伯仲地==
+- grievance **→** ==n. 不满，**不平**；委屈，冤情；投诉==
 
 ---
 
@@ -23,9 +23,9 @@ The researchers studied the behaviour of female brown capuchin monkeys. They loo
 
 ---
 
-- [x] readily **→** ==adv. 轻而易举地，迅速地；**乐意地**，欣然地==
-- [x]  Above all **→** ==最重要的是，首先==
-- [x] counterpart **→** ==n. 对应的人（或事物）==
+- readily **→** ==adv. 轻而易举地，迅速地；**乐意地**，欣然地==
+-  Above all **→** ==最重要的是，首先==
+- counterpart **→** ==n. 对应的人（或事物）==
 
 ---
 
@@ -35,10 +35,10 @@ Such characteristics make them perfect **candidates** for Dr. Brosnan’s and Dr
 
 ---
 
-- [x] candidates **→** ==n. **候选人**；申请者；应征人员（candidate 的复数）==
-- [ ] pieces **→** ==n. （从某物上拆下、撕下或切下的）块，片，段==
-- [x] in return for ...  **→** ==作为……的报答==
-- [x] markedly **→** ==adv. 显著地，明显地==
+- candidates **→** ==n. **候选人**；申请者；应征人员（candidate 的复数）==
+- pieces **→** ==n. （从某物上拆下、撕下或切下的）块，片，段==
+- in return for ...  **→** ==作为……的报答==
+- markedly **→** ==adv. 显著地，明显地==
 
 ---
 
@@ -48,8 +48,8 @@ In the world of capuchins grapes are luxury goods (and much preferable to cucumb
 
 ---
 
-- [x] reluctant **→** ==adj. 勉强的，**不情愿的**==
-- [ ] chamber **→** ==n. 房间，室；会议厅，会所==
+- reluctant **→** ==adj. 勉强的，**不情愿的**==
+- chamber **→** ==n. 房间，室；会议厅，会所==
 
 ---
 
@@ -59,9 +59,9 @@ The researchers suggest that capuchin monkeys, like humans, are guided by social
 
 ---
 
-- [ ] righteous **→** ==adj. **正直的**，公正的；正义的==
-- [x] indignation **→** ==n. 愤愤不平，**义愤**==
-- [x] lesser **→** ==更少的==
+- righteous **→** ==adj. **正直的**，公正的；正义的==
+- indignation **→** ==n. 愤愤不平，**义愤**==
+- lesser **→** ==更少的==
 
 ---
 
@@ -81,8 +81,8 @@ In the opening paragraph, the author introduces his topic by	.
 
 ---
 
-- [x] contrast **→** ==n. 差异，对比==
-- [x] contrast 和 comparison的区别 **→** ==前者仅表示相反的对比，后者范围更广泛==
+- contrast **→** ==n. 差异，对比==
+- contrast 和 comparison的区别 **→** ==前者仅表示相反的对比，后者范围更广泛==
 
 ---
 
@@ -100,7 +100,7 @@ The statement "it is all too monkey" (Last line, Paragraph l) implies that	.
 
 ---
 
-- [x] other than **→** ==**除了**；不同于==
+- other than **→** ==**除了**；不同于==
 
 ---
 
@@ -118,10 +118,10 @@ Female capuchin  monkeys  were  chosen  for  the research  most  probably becaus
 
 ---
 
-- [x] weigh **→** ==v. 认真考虑，**权衡**==
-- [ ] attentive **→** ==adj. 注意的，专心的；贴心的==
-- [x] instructions **→** ==n. 指令；说明（instruction 的复数形式）==
-- [x] temperament **→** ==n. 气质，**性格**==
+- weigh **→** ==v. 认真考虑，**权衡**==
+- attentive **→** ==adj. 注意的，专心的；贴心的==
+- instructions **→** ==n. 指令；说明（instruction 的复数形式）==
+- temperament **→** ==n. 气质，**性格**==
 - 本题利用排除法更好。
 
 ---

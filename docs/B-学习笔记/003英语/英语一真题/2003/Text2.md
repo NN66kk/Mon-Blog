@@ -12,17 +12,17 @@ To **paraphrase** 18th-century **statesman** Edmund Burke, "all that is needed f
 
 ---
 
-- [x] paraphrase **→** ==v. 改述，转述，解释==
-- [x] statesman **→** ==n. 政治家==
-- [ ] rule out **→** ==阻止，防止发生==
-- [x] advocate **→** ==n. **鼓吹者**；提倡者，支特者 v. 提倡，主张，拥护==
-- [x] thereby **→** ==因此==
-- [x] target **→** ==v. 目标指向，矛头指向 n. 目标；靶子==
-- [x] a few  **→** ==表示有几个（积极）==
-- [x] few **→** ==表示几乎没有（消极）==
-- [ ] allegations **→** ==n. 说法，指控；辩解，陈词==
-- [x] perplexed **→** ==adj. 困惑的，费解的，糊涂的==
-- [x] deliberately **→** ==adv. 故意地，蓄意地==
+- paraphrase **→** ==v. 改述，转述，解释==
+- statesman **→** ==n. 政治家==
+- rule out **→** ==阻止，防止发生==
+- advocate **→** ==n. **鼓吹者**；提倡者，支特者 v. 提倡，主张，拥护==
+- thereby **→** ==因此==
+- target **→** ==v. 目标指向，矛头指向 n. 目标；靶子==
+- a few  **→** ==表示有几个（积极）==
+- few **→** ==表示几乎没有（消极）==
+- allegations **→** ==n. 说法，指控；辩解，陈词==
+- perplexed **→** ==adj. 困惑的，费解的，糊涂的==
+- deliberately **→** ==adv. 故意地，蓄意地==
 
 ---
 
@@ -32,12 +32,12 @@ For example, a grandmotherly woman staffing an animal rights **booth** at a rece
 
 ---
 
-- [x] booth **→** ==n. 展位，货摊，摊位==
-- [x] street fair **→** ==街头集市==
-- [x] brochure **→** ==宣传册，手册==
-- [x] immunizations **→** ==免疫，免疫接种==
-- [x] immune **→** ==adj. 免疫的，有免疫力的；免除的，豁免的；不受影响的==
-- [x] well-meaning **→** ==好心的==
+- booth **→** ==n. 展位，货摊，摊位==
+- street fair **→** ==街头集市==
+- brochure **→** ==宣传册，手册==
+- immunizations **→** ==免疫，免疫接种==
+- immune **→** ==adj. 免疫的，有免疫力的；免除的，豁免的；不受影响的==
+- well-meaning **→** ==好心的==
 
 ---
 
@@ -47,8 +47,8 @@ Scientists must **communicate their message to** the public in a **compassionate
 
 ---
 
-- [x] communicate one's message to ...  **→** ==将某人的信息传递给、告知 ...== 
-- [x] compassionate **→** ==adj. 表示怜阀的，有同情心/同理心的==
+- communicate one's message to ...  **→** ==将某人的信息传递给、告知 ...== 
+- compassionate **→** ==adj. 表示怜阀的，有同情心/同理心的==
 
 ---
 
@@ -58,16 +58,16 @@ Much can be done. Scientists could “**adopt**” middle school classes and **p
 
 ---
 
-- [x] adopt **→** ==v. 领养，收养（文中引申为“**选定**”）；采用，采纳；正式接受，通过==
-- [x] adapt **→** ==v. 改编；适应==
-- [x] present **→** ==v. 呈现，**介绍**；提出==
-- [x] lest **→** ==conj. 免得，以免==
-- [x] ultimate **→** ==adj. 最后的，最终的；基本的，根本的==
-- [x] stakeholder **→** ==n. **权益关系者**；有发言权的人，参与人==
-- [x] uninformed **→** ==adj. 不了解情况的，无知的==
-- [ ] extinguish **→** ==v. 熄灭；消灭，使破灭==
-- [x] embers **→** ==n. 余烬；余火；**小火苗**==
-- [x] progress **→** ==n. 进步，进展；前进，行进；（社会的）进步==
+- adopt **→** ==v. 领养，收养（文中引申为“**选定**”）；采用，采纳；正式接受，通过==
+- adapt **→** ==v. 改编；适应==
+- present **→** ==v. 呈现，**介绍**；提出==
+- lest **→** ==conj. 免得，以免==
+- ultimate **→** ==adj. 最后的，最终的；基本的，根本的==
+- stakeholder **→** ==n. **权益关系者**；有发言权的人，参与人==
+- uninformed **→** ==adj. 不了解情况的，无知的==
+- extinguish **→** ==v. 熄灭；消灭，使破灭==
+- embers **→** ==n. 余烬；余火；**小火苗**==
+- progress **→** ==n. 进步，进展；前进，行进；（社会的）进步==
 - 写作应用:: 表示 ... 事真的有可能 **→** There is a real possibility that an uninformed citizenry will extinguish the precious embers of medical progress.
 
 ---
@@ -110,10 +110,10 @@ Misled people **tend to think** that using an animal in research is	.
 
 ---
 
-- [x] tend to do sth. **→** ==倾向于做某事；往往会做某事==
-- [x] inhuman **→** ==adj. 残忍的；野蛮的；无人性的==
-- [ ] vicious **→** ==adj. 凶险的，会造成伤害的；严厉的，恶毒的==
-- [ ] pointless **→** ==没有意义的==
+- tend to do sth. **→** ==倾向于做某事；往往会做某事==
+- inhuman **→** ==adj. 残忍的；野蛮的；无人性的==
+- vicious **→** ==adj. 凶险的，会造成伤害的；严厉的，恶毒的==
+- pointless **→** ==没有意义的==
 
 ---
 
@@ -131,9 +131,9 @@ The example of the grandmotherly woman is used to show the public’s	.
 
 ---
 
-- [x] discontent **→** ==不满==
-- [x] ignorance **→** ==无知，愚昧==
-- [x] indifference **→** ==漠不关心==
+- discontent **→** ==不满==
+- ignorance **→** ==无知，愚昧==
+- indifference **→** ==漠不关心==
 - 例证题要在例子（本身不是答案）的前后找观点！
 1. 内容本身正确，答非所问！
 2. 正确
@@ -156,8 +156,8 @@ The author believes that, in face of the challenge from animal rights advocates,
 
 ---
 
-- [x] employ **→** ==v. 雇用；**使用，利用**；忙于，从事（be employed in）==
-- [ ] strive **→** ==v. **努力，力争**；斗争，反抗==
+- employ **→** ==v. 雇用；**使用，利用**；忙于，从事（be employed in）==
+- strive **→** ==v. **努力，力争**；斗争，反抗==
 
 ---
 
@@ -175,8 +175,8 @@ From the text we learn that Stephen Cooper is	.
 
 ---
 
-- [x] humanist **→** ==人道主义者==
-- [ ] practitioner **→** ==n. （医学界或法律界的）从业人员，执业者；<正式>从事者，实践者==
+- humanist **→** ==人道主义者==
+- practitioner **→** ==n. （医学界或法律界的）从业人员，执业者；<正式>从事者，实践者==
 
 ---
 

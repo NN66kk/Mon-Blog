@@ -8,9 +8,9 @@ During the past generation, the American middle-class family that once could **c
 
 ---
 
-- [ ] count on **→** ==依靠，指望：指在需要时期望某人或某事物提供帮助或支持==
-- [ ] fair **→** ==adj. 公平的，合理的==
-- [ ] diagnosis **→** ==n. 诊断，判断==
+- count on **→** ==依靠，指望：指在需要时期望某人或某事物提供帮助或支持==
+- fair **→** ==adj. 公平的，合理的==
+- diagnosis **→** ==n. 诊断，判断==
 
 ---
 
@@ -20,13 +20,13 @@ In just one generation, millions of mothers have gone to work,transforming basic
 
 ---
 
-- [ ] stripe **→** ==n. **类型，种类**；条纹，线条==
-- [ ] side effect **→** ==副作用==
-- [ ] parachute **→** ==n. 降落伞（文中表示**保护伞**） v. 跳伞；伞降，空投；紧急任命，临危受命==
-- [ ] back-up **→** ==援助，后备人员==
-- [ ] laid off/get laid off **→** ==解雇/被解雇==
-- [ ] weather **→** ==v. **安全渡过（困难）**，经受住 n. 天气，气候==
-- [ ] disruption **→** ==n. 扰乱，中断==
+- stripe **→** ==n. **类型，种类**；条纹，线条==
+- side effect **→** ==副作用==
+- parachute **→** ==n. 降落伞（文中表示**保护伞**） v. 跳伞；伞降，空投；紧急任命，临危受命==
+- back-up **→** ==援助，后备人员==
+- laid off/get laid off **→** ==解雇/被解雇==
+- weather **→** ==v. **安全渡过（困难）**，经受住 n. 天气，气候==
+- disruption **→** ==n. 扰乱，中断==
 
 ---
 
@@ -36,17 +36,17 @@ During the same period, families have been asked to **absorb** much more **risk*
 
 ---
 
-- [ ] absorb the risk **→** ==**承担**风险==
-- [ ] harsh **→** ==adj. （环境）恶劣的，艰苦的；**严厉的，残酷的**；刺耳的，难听的；刺眼的，耀眼的；丑陋的；刺激性强的，太强力的==
-- [ ] outlive **→** ==v. 比 ... 活得长；渡过 ... 而继续存在==
-- [ ] retiree **→** ==n. （美）退休人员；歇业者==
-- [ ] picture **→** ==n. **情况**，高面；图片，照片==
-- [ ] absolute **→** ==adj. 绝对的，完全的==
-- [ ] borne **→** ==v. 忍受；负荷；结果实；生子女（**bear 的过去分词**）==
-- [ ] work against **→** ==对 … 不利，违背 ...==
-- [ ] odds **→** ==n. 概率；（事物发生的）可能性==
-- [ ] attendant **→** ==adj. **随之而来的**，伴随的 n. 服务员，侍者；参与者==
-- [ ] eightfold **→** ==adj. 八倍的 adv. 八倍地==
+- absorb the risk **→** ==**承担**风险==
+- harsh **→** ==adj. （环境）恶劣的，艰苦的；**严厉的，残酷的**；刺耳的，难听的；刺眼的，耀眼的；丑陋的；刺激性强的，太强力的==
+- outlive **→** ==v. 比 ... 活得长；渡过 ... 而继续存在==
+- retiree **→** ==n. （美）退休人员；歇业者==
+- picture **→** ==n. **情况**，高面；图片，照片==
+- absolute **→** ==adj. 绝对的，完全的==
+- borne **→** ==v. 忍受；负荷；结果实；生子女（**bear 的过去分词**）==
+- work against **→** ==对 … 不利，违背 ...==
+- odds **→** ==n. 概率；（事物发生的）可能性==
+- attendant **→** ==adj. **随之而来的**，伴随的 n. 服务员，侍者；参与者==
+- eightfold **→** ==adj. 八倍的 adv. 八倍地==
 
 ---
 
@@ -56,11 +56,11 @@ During the same period, families have been asked to **absorb** much more **risk*
 
 ---
 
-- [ ] from ... perspective **→** ==从.....角度==
-- [ ] look far less like ..., and a good deal more like ... **→** ==看起来远不像...，而更像 ...==
-- [ ] wholesale **→** ==adj. 大规模的，大批的 n. 批发==
-- [ ] overburdened **→** ==adj. 不堪重负的==
-- [ ] fallout **→** ==n. 不良影响，后果，余波==
+- from ... perspective **→** ==从.....角度==
+- look far less like ..., and a good deal more like ... **→** ==看起来远不像...，而更像 ...==
+- wholesale **→** ==adj. 大规模的，大批的 n. 批发==
+- overburdened **→** ==adj. 不堪重负的==
+- fallout **→** ==n. 不良影响，后果，余波==
 
 ---
 
@@ -80,7 +80,7 @@ Today’s double-income families are at greater financial risk in that
 
 ---
 
-- [ ]  are deprived of **→** ==被剥夺了==
+-  are deprived of **→** ==被剥夺了==
 
 ---
 
@@ -122,7 +122,7 @@ It can be inferred from the last paragraph that
 
 ---
 
-- [ ] outweigh **→** ==vt. (在重要性或意义上) 超过；比 (某人) 重==
+- outweigh **→** ==vt. (在重要性或意义上) 超过；比 (某人) 重==
 
 ---
 

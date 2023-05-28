@@ -8,10 +8,10 @@ If you were to examine the birth certificates of every soccer player in 2006’s
 
 ---
 
-- [ ] tournament **→** ==n. 锦标赛，联赛==
-- [ ] noteworthy **→** ==adj. 值得注意的，显著的==
-- [ ] quirk **→** ==n. 怪癖， 怪异的性格（或行为）；（偶然发生的）**怪事，奇事**==
-- [ ] pronounced **→** ==adj. 明显的，显著的；讲出来的==
+- tournament **→** ==n. 锦标赛，联赛==
+- noteworthy **→** ==adj. 值得注意的，显著的==
+- quirk **→** ==n. 怪癖， 怪异的性格（或行为）；（偶然发生的）**怪事，奇事**==
+- pronounced **→** ==adj. 明显的，显著的；讲出来的==
 
 ---
 
@@ -21,15 +21,15 @@ What might **account for** this strange phenomenon? Here are a few guesses: a) c
 
 ---
 
-- [ ] account for **→** ==**解释，说明**；占据（一定比例）；对 ... 负有责任==
-- [ ] astrological **→** ==adj. 占星的；占星学的，占星术的==
-- [ ] confer **→** ==v. 授予，赋予；商讨，交换意见==
-- [ ] superior **→** ==n. 优越，优势；优越性==
-- [ ] capacity **→** ==n. **容量**，能力==
-- [ ] stamina **→** ==n. 耐力，持久力，毅力==
-- [ ] mad **→** ==adj. 生气的，气愤的；狂热的，着迷的==
-- [ ] annual **→** ==adj. 一年一度的；年度的；（植物）一年生的==
-- [ ] peak **→** ==n. 巅峰，顶点==
+- account for **→** ==**解释，说明**；占据（一定比例）；对 ... 负有责任==
+- astrological **→** ==adj. 占星的；占星学的，占星术的==
+- confer **→** ==v. 授予，赋予；商讨，交换意见==
+- superior **→** ==n. 优越，优势；优越性==
+- capacity **→** ==n. **容量**，能力==
+- stamina **→** ==n. 耐力，持久力，毅力==
+- mad **→** ==adj. 生气的，气愤的；狂热的，着迷的==
+- annual **→** ==adj. 一年一度的；年度的；（植物）一年生的==
+- peak **→** ==n. 巅峰，顶点==
 
 ---
 
@@ -39,9 +39,9 @@ Anders Ericsson, a 58-year-old **psychology** professor at Florida State Univers
 
 ---
 
-- [ ] psychology **→** ==n. **心理学**；心理特点，心理状态==
-- [ ] subject **→** ==n. 实验对象；主语；主题；科目==
-- [ ] span **→** ==n. 跨度；范围==
+- psychology **→** ==n. **心理学**；心理特点，心理状态==
+- subject **→** ==n. 实验对象；主语；主题；科目==
+- span **→** ==n. 跨度；范围==
 
 ---
 
@@ -51,14 +51,14 @@ This success, **coupled with** later research showing that memory itself is not 
 
 ---
 
-- [ ] coupled with **→** ==与......相结合：表示两个或多个事物相互关联或同时发生，通常用于强调它们共同产生的影响或结果。==
-- [ ] cognitive **→** ==adj. 认识的，认知的==
-- [ ] intuitive **→** ==adj. 直觉的；有直觉力的；易懂的，使用简便的==
-- [ ] swamp **→** ==vt. 淹没，浸没；掩盖==
-- [ ] meaningfully **→** ==adv. **有用意地**，有目的地，意味深长地==
-- [ ] deliberate practice **→** ==刻意练习：一种有目的、有计划的练习方法，旨在通过重复、反馈和修正来提高技能水平。==
-- [ ] entail **→** ==v. 使必要，需要；使人承担==
-- [ ] Rather **→** ==adv. 颇，相当；宁愿，最好（would rather）；而不是；**更确切地说**==
+- coupled with **→** ==与......相结合：表示两个或多个事物相互关联或同时发生，通常用于强调它们共同产生的影响或结果。==
+- cognitive **→** ==adj. 认识的，认知的==
+- intuitive **→** ==adj. 直觉的；有直觉力的；易懂的，使用简便的==
+- swamp **→** ==vt. 淹没，浸没；掩盖==
+- meaningfully **→** ==adv. **有用意地**，有目的地，意味深长地==
+- deliberate practice **→** ==刻意练习：一种有目的、有计划的练习方法，旨在通过重复、反馈和修正来提高技能水平。==
+- entail **→** ==v. 使必要，需要；使人承担==
+- Rather **→** ==adv. 颇，相当；宁愿，最好（would rather）；而不是；**更确切地说**==
 
 ---
 
@@ -68,11 +68,11 @@ Ericsson and his colleagues have thus **taken to studying** expert performers in
 
 ---
 
-- [ ] take to sth./doing sth **→** ==开始从事某事／做某事；喜欢某事／做某事==
-- [ ] startling **→** ==adj. 令人吃惊的，不寻常的；极鲜亮的==
-- [ ] assertion **→** ==n. 断言，明确肯定；使用，主张==
-- [ ] trait **→** ==n. （人的个性的）特征，特点；遗传特征==
-- [ ] ballet **→** ==n. 芭蕾舞剧；芭蕾舞团；芭蕾舞；芭蕾舞曲==
+- take to sth./doing sth **→** ==开始从事某事／做某事；喜欢某事／做某事==
+- startling **→** ==adj. 令人吃惊的，不寻常的；极鲜亮的==
+- assertion **→** ==n. 断言，明确肯定；使用，主张==
+- trait **→** ==n. （人的个性的）特征，特点；遗传特征==
+- ballet **→** ==n. 芭蕾舞剧；芭蕾舞团；芭蕾舞；芭蕾舞曲==
 
 ---
 
@@ -104,7 +104,7 @@ The word "mania" (Line 4, Paragraph 2) most probably means
 
 ---
 
-- [ ] hysteria **→** ==n. 歇斯底里；（众人的）狂热情绪的爆发；癔症==
+- hysteria **→** ==n. 歇斯底里；（众人的）狂热情绪的爆发；癔症==
 
 ---
 
@@ -134,7 +134,7 @@ Ericsson and his colleagues believe that
 
 ---
 
-- [ ] nurture **→** ==v. 培养，促进；养育，培育==
+- nurture **→** ==v. 培养，促进；养育，培育==
 
 ---
 

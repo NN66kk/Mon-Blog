@@ -8,15 +8,15 @@ If you intend using humor in your talk to make people smile, you must know how t
 
 ---
 
-- [x] shared **→** ==**共有的**，共享的==
-- [x] sympathy  **→** ==同情；**赞同**==
-- [x] in sympathy with sb./sth **→** ==同情，赞同或支持某人/某事==
-- [x] one's point of view **→** ==某人的观点==
-- [x] addressing **→** ==**对 ... 讲话**；解决==
-- [x] refer to **→** ==谈到，提及；指的是，适用于==
-- [x] disorganized **→** ==adj. 杂乱无章的，无计划的；（人）**无条理的**==
-- [x] secretaries **→** ==n. 秘书==
-- [x] alternatively **→** ==或者==
+- shared **→** ==**共有的**，共享的==
+- sympathy  **→** ==同情；**赞同**==
+- in sympathy with sb./sth **→** ==同情，赞同或支持某人/某事==
+- one's point of view **→** ==某人的观点==
+- addressing **→** ==**对 ... 讲话**；解决==
+- refer to **→** ==谈到，提及；指的是，适用于==
+- disorganized **→** ==adj. 杂乱无章的，无计划的；（人）**无条理的**==
+- secretaries **→** ==n. 秘书==
+- alternatively **→** ==或者==
 
 ---
 
@@ -26,12 +26,12 @@ Here is an example, which I heard at a nurses’ **convention**, of a story whic
 
 ---
 
-- [x] convention **→** ==**大会，会议**；习俗，惯例==
-- [x] work well **→** ==有效，效果好（考研英语中 work 常用的意思是**起效果**）==
-- [x] show sb. around **→** ==带某人参观、到处转转==
-- [x] sb. be shown around **→** ==某人被带着到处转转==
-- [x] grab **→** ==v. 夺（得），抓（住）==
-- [x] stomp **→** ==v. 跺脚，重踩==
+- convention **→** ==**大会，会议**；习俗，惯例==
+- work well **→** ==有效，效果好（考研英语中 work 常用的意思是**起效果**）==
+- show sb. around **→** ==带某人参观、到处转转==
+- sb. be shown around **→** ==某人被带着到处转转==
+- grab **→** ==v. 夺（得），抓（住）==
+- stomp **→** ==v. 跺脚，重踩==
 - But 后面是重点！
 - until, waiting in a line for lunch, the new arrival is suddenly pushed aside by a man in a white coat **→** 是由 until 引导的时间状语从句。
 
@@ -43,17 +43,17 @@ If you are part of the group which you are addressing, you will **be in a positi
 
 ---
 
-- [x] be in a position to do sth. → ==有资格、有能力做某事==
-- [x] make a passing remark about ...  **→** ==顺便评价关于 ...== 
-- [x] inedible **→** ==不能吃的==
-- [x] cut in **→** ==插嘴，打断；插进来==
-- [x] as **→** ==因为==
-- [x] resent **→** ==v. 厌恶，愤恨==
-- [x] outsider **→** ==局外人==
-- [x] disparaging **→** ==adj. **诋毁的**，轻蔑的==
-- [x] be on safer ground **→** ==处于更安全的境地==
-- [x] stick to **→** ==坚持==
-- [x] scapegoat **→** ==替罪羊==
+- be in a position to do sth. → ==有资格、有能力做某事==
+- make a passing remark about ...  **→** ==顺便评价关于 ...== 
+- inedible **→** ==不能吃的==
+- cut in **→** ==插嘴，打断；插进来==
+- as **→** ==因为==
+- resent **→** ==v. 厌恶，愤恨==
+- outsider **→** ==局外人==
+- disparaging **→** ==adj. **诋毁的**，轻蔑的==
+- be on safer ground **→** ==处于更安全的境地==
+- stick to **→** ==坚持==
+- scapegoat **→** ==替罪羊==
 
 ---
 
@@ -63,14 +63,14 @@ If you feel **awkward** being humorous, you must practice so that it becomes mor
 
 ---
 
-- [x] awkward **→** ==adj. 令人尴尬的，使人难堪的==
-- [x] casual **→** ==非正式的；漫不经心的，随意的==
-- [x] off-the-cuff **→** ==adj. 即兴的，即席的==
-- [x] manner **→** ==n. 态度，举止；礼貌；**方式**==
-- [x] deliver **→** ==v. 发表（讲话）；传递，传达==
-- [x] delivery **→** ==演讲风格，**讲话方式**；投递，送交；发送的货物==
-- [x] unbelieving look **→** ==难以置信的表情==
-- [x] light-hearted **→** ==轻松的==
+- awkward **→** ==adj. 令人尴尬的，使人难堪的==
+- casual **→** ==非正式的；漫不经心的，随意的==
+- off-the-cuff **→** ==adj. 即兴的，即席的==
+- manner **→** ==n. 态度，举止；礼貌；**方式**==
+- deliver **→** ==v. 发表（讲话）；传递，传达==
+- delivery **→** ==演讲风格，**讲话方式**；投递，送交；发送的货物==
+- unbelieving look **→** ==难以置信的表情==
+- light-hearted **→** ==轻松的==
 
 ---
 
@@ -80,13 +80,13 @@ Look for the humor. It often comes from the **unexpected**. A **twist** on a fam
 
 ---
 
-- [x] unexpected **→** ==想不到的，意外的==
-- [x] twist **→** ==曲解，歪曲，**转变**==
-- [x] quote **→** ==引语，引用==
-- [x] exaggeration **→** ==夸张==
-- [ ] understatement **→** ==轻描淡写，低调陈述==
-- [x] pick out **→** ==挑选出==
-- [x] turn about **→** ==**反复思考**；转身，转变==
+- unexpected **→** ==想不到的，意外的==
+- twist **→** ==曲解，歪曲，**转变**==
+- quote **→** ==引语，引用==
+- exaggeration **→** ==夸张==
+- understatement **→** ==轻描淡写，低调陈述==
+- pick out **→** ==挑选出==
+- turn about **→** ==**反复思考**；转身，转变==
 
 ---
 
@@ -106,7 +106,7 @@ To make your humor work, you should
 
 ---
 
-- [x] take advantage of **→** ==利用==
+- take advantage of **→** ==利用==
 - 审题的时候只看题干不看选项！看四个定位点 **→** 名词、数字、引号、否定。
 - 不凭借印象，仔细比对信息做题！ **→** 有否？全否？匹配否（答非所问）？
 - 本题是题干的同义改写
@@ -131,9 +131,9 @@ The **joke** about doctors implies that, in the eyes of nurses, they are
 
 ---
 
-- [x] joke **→** ==笑话，玩笑==
-- [x] conscious **→** ==意识到的，有知觉的；刻意的，慎重的，**在乎**==
-- [x] privilege **→** ==特权，特殊待遇==
+- joke **→** ==笑话，玩笑==
+- conscious **→** ==意识到的，有知觉的；刻意的，慎重的，**在乎**==
+- privilege **→** ==特权，特殊待遇==
 - 主旨把握方向
 1. 与主旨无关
 2. 只有它与主旨契合！
@@ -156,7 +156,7 @@ It can be inferred from the text that public services
 
 ---
 
-- [x] focus **→** ==n. 重点，中心点，**焦点** v. 关注；聚焦==
+- focus **→** ==n. 重点，中心点，**焦点** v. 关注；聚焦==
 - 最后一句邮局和电话系统代表的就是公共服务！
 - 选项看起来对，文章中没有的话就是错的，不要无中生有！
 - 答案选择相对正确的！
@@ -177,7 +177,7 @@ To achieve the desired result, humorous stories should be delivered
 
 ---
 
-- [x] well-worded **→** ==有文采的，精心措辞的，动听的==
+- well-worded **→** ==有文采的，精心措辞的，动听的==
 - 问你用什么样的方式表达！
 
 ---
@@ -196,7 +196,7 @@ The best title for the text may be
 
 ---
 
-- [x] Speech **→** ==n. **演说**，发言，谈话==
+- Speech **→** ==n. **演说**，发言，谈话==
 - 主旨题解题策略
 	1. 有主题词（全文反复出现）
 	2. 内容方向

@@ -7,16 +7,16 @@ Wild Bill Donovan **would have loved** the Internet. The American **spymaster** 
 
 ---
 
-- [x] would have done **→** ==本来将会做某事，但是实际上并没有！（常识：二战时期没有互联网）==
-- [x] spymaster **→** ==间谍大师==
-- [x] laid **→** ==vt. 放；**铺设；安排**（lay 的过去分词）==
-- [x] roots **→** ==根，根源==
-- [x] lay the roots for ...  **→** ==为 ... 打下基础==
-- [x] fascinated with ...  **→** ==对 ... 着迷==
-- [x] come to hand **→** ==在手，到手==
-- [ ] espionage **→** ==间谍活动==
-- [x] pastimes **→** ==n. 消遣，娱乐==
-- [x] vocation **→** ==n. 职业，行业==
+- would have done **→** ==本来将会做某事，但是实际上并没有！（常识：二战时期没有互联网）==
+- spymaster **→** ==间谍大师==
+- laid **→** ==vt. 放；**铺设；安排**（lay 的过去分词）==
+- roots **→** ==根，根源==
+- lay the roots for ...  **→** ==为 ... 打下基础==
+- fascinated with ...  **→** ==对 ... 着迷==
+- come to hand **→** ==在手，到手==
+- espionage **→** ==间谍活动==
+- pastimes **→** ==n. 消遣，娱乐==
+- vocation **→** ==n. 职业，行业==
 
 ---
 
@@ -26,10 +26,10 @@ The latest revolution isn’t simply a matter of gentlemen reading other gentlem
 
 ---
 
-- [x] spying **→** ==间谍活动==
-- [x] spooks **→** ==n. 间谍，行踪秘密的人；幽灵==
-- [x] compile **→** ==v. 汇编，汇集，收集==
-- [x] margin **→** ==n. 幅度，差额==
+- spying **→** ==间谍活动==
+- spooks **→** ==n. 间谍，行踪秘密的人；幽灵==
+- compile **→** ==v. 汇编，汇集，收集==
+- margin **→** ==n. 幅度，差额==
 
 ---
 
@@ -39,7 +39,7 @@ Among the firms making the biggest splash in the new world is Straitford, Inc., 
 
 ---
 
-- [x] corporations **→** ==n. 公司，企业（corporation 的复数）==
+- corporations **→** ==n. 公司，企业（corporation 的复数）==
 
 ---
 
@@ -49,13 +49,13 @@ Straiford president George Friedman says he sees the online world as a kind of *
 
 ---
 
-- [ ] mutually **→** ==adv. 相互地，双方地==
-- [x] reinforce **→** ==v. 加固，加强；增强==
-- [ ] vacuum **→** ==v. 用真空吸尘器吸（文中指“把信息像用吸尘器吸过来一样地收集起来”）==
-- [x] former **→** ==以前的，之前的==
-- [x] tell ... from ...  **→** ==将 ... 和 ... 区别开==
-- [x] earns one's keep **→** ==谋生==
-- [ ] keep **→** ==n. 生活费用，生活必需品==
+- mutually **→** ==adv. 相互地，双方地==
+- reinforce **→** ==v. 加固，加强；增强==
+- vacuum **→** ==v. 用真空吸尘器吸（文中指“把信息像用吸尘器吸过来一样地收集起来”）==
+- former **→** ==以前的，之前的==
+- tell ... from ...  **→** ==将 ... 和 ... 区别开==
+- earns one's keep **→** ==谋生==
+- keep **→** ==n. 生活费用，生活必需品==
 
 ---
 
@@ -65,11 +65,11 @@ Friedman relies on a **lean** staff of 20 in Austin. Several of his staff member
 
 ---
 
-- [x] lean **→** ==精简的，效率高的==
-- [x] see A as B **→** ==把 A 看成 B==
-- [x] brief **→** ==n. 简报，摘要==
-- [x] back-and-forthing **→** ==来回，闪烁其词==
-- [x] dramatic **→** ==adj. 惹人注意的，**给人深刻印象的**；戏剧性的；巨大的，急剧的==
+- lean **→** ==精简的，效率高的==
+- see A as B **→** ==把 A 看成 B==
+- brief **→** ==n. 简报，摘要==
+- back-and-forthing **→** ==来回，闪烁其词==
+- dramatic **→** ==adj. 惹人注意的，**给人深刻印象的**；戏剧性的；巨大的，急剧的==
 
 ---
 
@@ -87,9 +87,9 @@ The **emergence** of the Net has
 
 ---
 
-- [x] emergence **→** ==n. **出现**，显现；崭露头角；摆脱困境==
-- [x] restored **→** ==v. **修复**；恢复健康（restore 的过去式与过去分词）==
-- [x] revived **→** ==v. 使复活，使恢复；**重新振兴**（revive 的过去式）==
+- emergence **→** ==n. **出现**，显现；崭露头角；摆脱困境==
+- restored **→** ==v. **修复**；恢复健康（restore 的过去式与过去分词）==
+- revived **→** ==v. 使复活，使恢复；**重新振兴**（revive 的过去式）==
 1. 原文中是虚拟的表达，混淆真假
 2. 同义改写
 3. 修改了原文的单词，偷换概念
@@ -111,8 +111,8 @@ Donovan’s story is mentioned in the text to	.
 
 ---
 
-- [x] fought **→** ==v. 战斗；打架（fight 的过去分词）==
-- [x] episode **→** ==n. 一段经历，**一段时期**；（电视剧或广播剧的）集，一集==
+- fought **→** ==v. 战斗；打架（fight 的过去分词）==
+- episode **→** ==n. 一段经历，**一段时期**；（电视剧或广播剧的）集，一集==
 
 ---
 
@@ -142,7 +142,7 @@ It can be learned from Paragraph 4 that
 
 ---
 
-- [ ] fairly **→** ==adv. 相当地，颇；公平地==
+- fairly **→** ==adv. 相当地，颇；公平地==
 1. 无中生有
 2. 绝对化的词，过度推理
 3. 混淆概念
@@ -165,7 +165,7 @@ Straitford is most proud of its
 ---
 
 - 本题不认识单词只能用排除法
-- [x] nonconformist **→** ==adj. 不墨守成规的，不遵循主流思想的==
+- nonconformist **→** ==adj. 不墨守成规的，不遵循主流思想的==
 1. 错误
 2. 正确答案
 3. 不匹配，答非所问

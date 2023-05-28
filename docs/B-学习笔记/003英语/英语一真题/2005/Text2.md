@@ -9,11 +9,11 @@ Do you remember all those years when scientists argued that smoking would kill u
 
 ---
 
-- [x] lobby **→** ==v. 游说（政治家或政府）n. 游说团体==
-- [x] stay out of the way **→** ==置身事外==
-- [ ] buy **→** ==v. 相信，承认，接受；买==
-- [x] nonsense **→** ==n. 荒谬的想法（看法），胡说==
-- [ ] graves **→** ==n. 坟墓，（废旧机器等）堆积处（grave的复数）==
+- lobby **→** ==v. 游说（政治家或政府）n. 游说团体==
+- stay out of the way **→** ==置身事外==
+- buy **→** ==v. 相信，承认，接受；买==
+- nonsense **→** ==n. 荒谬的想法（看法），胡说==
+- graves **→** ==n. 坟墓，（废旧机器等）堆积处（grave的复数）==
 
 ---
 
@@ -23,11 +23,11 @@ There are upsetting **parallels** today, as scientists in one wave after another
 
 ---
 
-- [x] parallel **→** ==n. 类似事情；平行==
-- [x] awaken **→** ==vt. 唤醒；唤起；使……意识到==
-- [x] enlisted **→** ==v. 谋求（某人的帮助）；**征募**，参军（enlist 的过去式和过去分词）==
-- [ ] definitely **→** ==adv. 肯定地，当然；明确地，确定地==
-- [x] preface **→** ==n. （书的）前言，（演讲的）开场白；开端，序幕==
+- parallel **→** ==n. 类似事情；平行==
+- awaken **→** ==vt. 唤醒；唤起；使……意识到==
+- enlisted **→** ==v. 谋求（某人的帮助）；**征募**，参军（enlist 的过去式和过去分词）==
+- definitely **→** ==adv. 肯定地，当然；明确地，确定地==
+- preface **→** ==n. （书的）前言，（演讲的）开场白；开端，序幕==
 
 ---
 
@@ -37,11 +37,11 @@ Just as on smoking, voices now come from many quarters insisting that the scienc
 
 ---
 
-- [x] pouring **→** ==v. 倾泻；倾诉（pour 的 ing 形式）==
-- [x] fumes **→** ==n. 烟气（fume 的复数）==
-- [ ] prudent **→** ==adj. 谨慎的，慎重的；节俭的==
-- [ ] take out **→** ==v. **取出**；去掉；出发；发泄；把…带出去==
-- [x] take out an insurance policy **→** ==投保，引申为“采取防范措施”==
+- pouring **→** ==v. 倾泻；倾诉（pour 的 ing 形式）==
+- fumes **→** ==n. 烟气（fume 的复数）==
+- prudent **→** ==adj. 谨慎的，慎重的；节俭的==
+- take out **→** ==v. **取出**；去掉；出发；发泄；把…带出去==
+- take out an insurance policy **→** ==投保，引申为“采取防范措施”==
 
 ---
 
@@ -51,10 +51,10 @@ Fortunately, the White House is starting to pay attention. But it’s obvious th
 
 ---
 
-- [ ] advisers **→** ==n. 顾问（adviser 的复数）==
-- [x] Instead of **→** ==代替；**而不是…**==
-- [x] press for sth. **→** ==不断要求某事==
-- [x] paralysis **→** ==n. 瘫痪（症），麻痹（症）；（行动、决策、运行等的）瘫痪，停顿==
+- advisers **→** ==n. 顾问（adviser 的复数）==
+- Instead of **→** ==代替；**而不是…**==
+- press for sth. **→** ==不断要求某事==
+- paralysis **→** ==n. 瘫痪（症），麻痹（症）；（行动、决策、运行等的）瘫痪，停顿==
 
 ---
 
@@ -64,12 +64,12 @@ To serve as responsible **stewards** of the planet, we must press forward on dee
 
 ---
 
-- [x] stewards **→** ==n. 干事；管理员；服务员==
-- [ ] conservation **→** ==n. 保护，保存；节约，防止浪费；守恒定律==
-- [x] incentives **→** ==n. 激励；奖励；诱因；奖励措施（incentive 的复数）==
-- [x] promising **→** ==adj. 有希望的，有前途的==
-- [x] meet needs **→** ==满足需求==
-- [ ] sound **→** ==adj. 无损伤的，健康的==
+- stewards **→** ==n. 干事；管理员；服务员==
+- conservation **→** ==n. 保护，保存；节约，防止浪费；守恒定律==
+- incentives **→** ==n. 激励；奖励；诱因；奖励措施（incentive 的复数）==
+- promising **→** ==adj. 有希望的，有前途的==
+- meet needs **→** ==满足需求==
+- sound **→** ==adj. 无损伤的，健康的==
 
 ---
 
@@ -89,7 +89,7 @@ An argument made by supporters of smoking was that	.
 
 ---
 
-- [ ] insignificant **→** ==adj. 微不足道的，无足轻重的；（人）无权无势的；无意义的==
+- insignificant **→** ==adj. 微不足道的，无足轻重的；（人）无权无势的；无意义的==
 
 ---
 
@@ -143,8 +143,8 @@ The author associates the issue of global warming with that of smoking because	.
 
 ---
 
-- [ ] applicable **→** ==adj. 适用的，适当的==
-- [x] aggravate **→** ==v. 使加重，使恶化；惹怒，激怒==
+- applicable **→** ==adj. 适用的，适当的==
+- aggravate **→** ==v. 使加重，使恶化；惹怒，激怒==
 
 ---
 

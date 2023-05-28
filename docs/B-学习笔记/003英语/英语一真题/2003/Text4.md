@@ -9,17 +9,17 @@
 
 ---
 
-- [x] It is said that ...  **→** ==据说 ...==
-- [x] Small wonder **→** ==不足为奇；不值得惊奇==
-- [x] expectancy **→** ==n. 期待，**期望**==
-- [x] Failing **→** ==adj. **出故障的**；失败的==
-- [x] clinical **→** ==adj. 临床的==
-- [x] depression **→** ==抑郁==
-- [x] surgical **→** ==adj. 外科的，**外科手术的**==
-- [x] cataracts **→** ==n. （眼科）白内障；（文）大瀑布，洪水（cataract 的复数）==
-- [x] aging population **→** ==老年人口；老化人口==
-- [x] confront **→** ==v. **面对**，面临；正视，处理；对峙，对抗；对质，当面对证==
-- [x] greatness **→** ==n. 伟大；巨大==
+- It is said that ...  **→** ==据说 ...==
+- Small wonder **→** ==不足为奇；不值得惊奇==
+- expectancy **→** ==n. 期待，**期望**==
+- Failing **→** ==adj. **出故障的**；失败的==
+- clinical **→** ==adj. 临床的==
+- depression **→** ==抑郁==
+- surgical **→** ==adj. 外科的，**外科手术的**==
+- cataracts **→** ==n. （眼科）白内障；（文）大瀑布，洪水（cataract 的复数）==
+- aging population **→** ==老年人口；老化人口==
+- confront **→** ==v. **面对**，面临；正视，处理；对峙，对抗；对质，当面对证==
+- greatness **→** ==n. 伟大；巨大==
 
 ---
 
@@ -29,15 +29,15 @@ Death is **normal**; we **are** genetically **programmed** **to** **disintegrate
 
 ---
 
-- [x] normal **→** ==adj. 正常的，标准的==
-- [x] be programmed to do sth. **→** ==被设定去做某事==
-- [x] disintegrate **→** ==v. 崩溃，瓦解；破裂==
-- [x] integrate **→** ==v. 使结合为整体==
-- [ ] perish **→** ==v. 死亡，灭亡==
-- [ ] at some level **→** ==在某种程度上==
-- [x] shield **→** ==v. 保护，防护，防御==
-- [x] late-stage **→** ==末期；后期；晚期==
-- [x] frustrate **→** ==v. 使懊恼，使沮丧==
+- normal **→** ==adj. 正常的，标准的==
+- be programmed to do sth. **→** ==被设定去做某事==
+- disintegrate **→** ==v. 崩溃，瓦解；破裂==
+- integrate **→** ==v. 使结合为整体==
+- perish **→** ==v. 死亡，灭亡==
+- at some level **→** ==在某种程度上==
+- shield **→** ==v. 保护，防护，防御==
+- late-stage **→** ==末期；后期；晚期==
+- frustrate **→** ==v. 使懊恼，使沮丧==
 
 ---
 
@@ -47,12 +47,12 @@ In 1950, the US spent $12.7 billion on health care. In 2002, the cost will be $1
 
 ---
 
-- [x] unsustainable **→** ==adj. 无法持续的；（生态）破坏生态平衡的，**不可持续的**==
-- [ ] reverse **→** ==v. 反转，颠倒，逆转==
-- [x] finite **→** ==adj. 有限的==
-- [x] infinite **→** ==adj.无限的，无穷的；无数的==
-- [x] sustain **→** ==v. 维持，保持，使继续；承受，支撑==
-- [ ] infirm **→** ==adj. 病弱的，体弱的==
+- unsustainable **→** ==adj. 无法持续的；（生态）破坏生态平衡的，**不可持续的**==
+- reverse **→** ==v. 反转，颠倒，逆转==
+- finite **→** ==adj. 有限的==
+- infinite **→** ==adj.无限的，无穷的；无数的==
+- sustain **→** ==v. 维持，保持，使继续；承受，支撑==
+- infirm **→** ==adj. 病弱的，体弱的==
 
 ---
 
@@ -62,10 +62,10 @@ In 1950, the US spent $12.7 billion on health care. In 2002, the cost will be $1
 
 ---
 
-- [x] I would not go that far **→** ==我不会走那么远（本文的意思是作者的观点不会那么极端）==
-- [x] Energetic **→** ==adj. 精力充沛的，充满活力的==
-- [ ] dazzlingly **→** ==adv. 耀眼地，炫目地；令人赞叹地，给人深刻印象地==
-- [x] productive **→** ==adj. 多产的，丰饶的；有效益的，富有成效的==
+- I would not go that far **→** ==我不会走那么远（本文的意思是作者的观点不会那么极端）==
+- Energetic **→** ==adj. 精力充沛的，充满活力的==
+- dazzlingly **→** ==adv. 耀眼地，炫目地；令人赞叹地，给人深刻印象地==
+- productive **→** ==adj. 多产的，丰饶的；有效益的，富有成效的==
 - These leaders are living proof that prevention works 中的 works 是动词，指的是有效果！
 
 ---
@@ -76,11 +76,11 @@ Yet there are limits to what a society can spend in this pursuit. As a physician
 
 ---
 
-- [x] overfund **→** ==v. 对 ... 提供资金过多==
-- [x] unlikely **→** ==adj. **不大可能发生的**；未必真实的==
-- [x] underfund **→** ==v. 对 ... 提供资金不足==
-- [x] fund **→** ==n. 基金，专款；资金，钱款；基金会；储备量 v. 资助，为……提供资金==
-- [x] humble **→** ==adj. 谦虚的，简单而使用的，平常的==
+- overfund **→** ==v. 对 ... 提供资金过多==
+- unlikely **→** ==adj. **不大可能发生的**；未必真实的==
+- underfund **→** ==v. 对 ... 提供资金不足==
+- fund **→** ==n. 基金，专款；资金，钱款；基金会；储备量 v. 资助，为……提供资金==
+- humble **→** ==adj. 谦虚的，简单而使用的，平常的==
 - while 在这里表示的是前后对比。
 
 ---
@@ -123,7 +123,7 @@ The author uses the example of cancer patients to show that	.
 
 ---
 
-- [x] unaffordable **→** ==adj. （普通人）付不起的；高价的==
+- unaffordable **→** ==adj. （普通人）付不起的；高价的==
 - 在例子的前后找观点。
 1. 正确；
 2. 例证题例子本身往往为混淆项；
@@ -146,9 +146,9 @@ The author’s attitude toward Richard Lamm’s remark is one of	.
 
 ---
 
-- [x] reserved **→** ==adj. 寡言少语的，内敛的；**保留的**==
-- [x] consent **→** ==n. 许可，允许；同意，**赞同**==
-- [x] contempt **→** ==n. 轻视，蔑视==
+- reserved **→** ==adj. 寡言少语的，内敛的；**保留的**==
+- consent **→** ==n. 许可，允许；同意，**赞同**==
+- contempt **→** ==n. 轻视，蔑视==
 
 ---
 
@@ -166,8 +166,8 @@ The author’s attitude toward Richard Lamm’s remark is one of	.
 
 ---
 
-- [x] In contrast to ...  **→** ==与 ... 相对比==
-- [x] extravagantly **→** ==adv. 挥霍无度地==
+- In contrast to ...  **→** ==与 ... 相对比==
+- extravagantly **→** ==adv. 挥霍无度地==
 
 ---
 

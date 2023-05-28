@@ -9,14 +9,14 @@ Americans no longer expect public **figures**, whether in speech or in writing, 
 
 ---
 
-- [x] figures **→** ==n. 数字；**人物**；图形；价格；（人的）体形；画像==
-- [x] command **→** ==v. 命令，下令；控制，掌管，**驾驭**==
-- [ ] Nor **→** ==也不==
-- [x] aspire **→** ==v. 渴望，有志于==
-- [ ] Degradation **→** ==n. 丢脸，落魄，侮辱；损害==
-- [ ] controversialist **→** ==n. 争论者==
-- [ ] counter **→** ==v. 反驳，驳斥；抵制，抵消==
-- [ ] formal **→** ==adj. 庄重的，合乎礼仪的；（语言）**正式的，规范的**；合法的==
+- figures **→** ==n. 数字；**人物**；图形；价格；（人的）体形；画像==
+- command **→** ==v. 命令，下令；控制，掌管，**驾驭**==
+- Nor **→** ==也不==
+- aspire **→** ==v. 渴望，有志于==
+- Degradation **→** ==n. 丢脸，落魄，侮辱；损害==
+- controversialist **→** ==n. 争论者==
+- counter **→** ==v. 反驳，驳斥；抵制，抵消==
+- formal **→** ==adj. 庄重的，合乎礼仪的；（语言）**正式的，规范的**；合法的==
 
 ---
 
@@ -26,9 +26,9 @@ Blaming the **permissive** 1960s is nothing new, but this is not yet another cri
 
 ---
 
-- [ ] permissive **→** ==adj. 放任的，纵容的==
-- [x] permission **→** ==n. 同意，许可；许可证，书面许可==
-- [ ] speciality **→** ==n. 专业，专长==
+- permissive **→** ==adj. 放任的，纵容的==
+- permission **→** ==n. 同意，许可；许可证，书面许可==
+- speciality **→** ==n. 专业，专长==
 
 ---
 
@@ -38,16 +38,16 @@ But the **cult** of the **authentic** and the personal, "doing our own thing", h
 
 ---
 
-- [ ] cult **→** ==adj. 受崇拜的，热门的 n. **狂热信徒**==
-- [ ] authentic **→** ==adj. 真实的，可靠的==
-- [ ] spell **→** ==v. 招致，带来==
-- [ ] spell the death of ...  **→** ==导致 ... 的消亡==
-- [ ] modestly **→** ==adv. 谦逊地，谦虚地；**在很小的程度上**==
-- [ ] sought **→** ==v. 寻找（seek 的过去式和过去分词）==
-- [ ] an elevated tone **→** ==一种高格调==
-- [ ] well regarded **→** ==受到好评的==
-- [ ] claim **→** ==v. 获得，取得；声称，主张==
-- [ ] spontaneity **→** ==n. 自发性，自然；自发行为；**即兴**==
+- cult **→** ==adj. 受崇拜的，热门的 n. **狂热信徒**==
+- authentic **→** ==adj. 真实的，可靠的==
+- spell **→** ==v. 招致，带来==
+- spell the death of ...  **→** ==导致 ... 的消亡==
+- modestly **→** ==adv. 谦逊地，谦虚地；**在很小的程度上**==
+- sought **→** ==v. 寻找（seek 的过去式和过去分词）==
+- an elevated tone **→** ==一种高格调==
+- well regarded **→** ==受到好评的==
+- claim **→** ==v. 获得，取得；声称，主张==
+- spontaneity **→** ==n. 自发性，自然；自发行为；**即兴**==
 
 ---
 
@@ -57,9 +57,9 @@ Illustrated with **an** entertaining **array of** examples from both high and lo
 
 ---
 
-- [ ] an array of **→** ==一系列的==
-- [x] document **→** ==n. 文件，公文，文献 v. 记录，**记载**（详情）==
-- [ ] straight **→** ==adv. **正确地**，清楚地；直地，直率地==
+- an array of **→** ==一系列的==
+- document **→** ==n. 文件，公文，文献 v. 记录，**记载**（详情）==
+- straight **→** ==adv. **正确地**，清楚地；直地，直率地==
 
 ---
 
@@ -69,14 +69,14 @@ Russians have a deep love for their own language and carry large **chunks** of m
 
 ---
 
-- [ ] chunk **→** ==n. 大块，厚块==
-- [ ] elaborate **→** ==adj. 复杂的，详尽的；精心制作的 v. 详细说明，详尽阐述；精心制作==
-- [x] propose **→** ==v. **建议**；打算，计划==
-- [ ] radical **→** ==adj. 根本的，**彻底的**==
-- [ ] grieve **→** ==v. （尤指因某人亡故而）感到悲痛；使伤心==
-- [ ] grieve over ...  **→** ==为 ... 哀叹/悲伤==
-- [ ] plate **→** ==盘子==
-- [ ] A instead of B **→** ==是 A 而不是 B==
+- chunk **→** ==n. 大块，厚块==
+- elaborate **→** ==adj. 复杂的，详尽的；精心制作的 v. 详细说明，详尽阐述；精心制作==
+- propose **→** ==v. **建议**；打算，计划==
+- radical **→** ==adj. 根本的，**彻底的**==
+- grieve **→** ==v. （尤指因某人亡故而）感到悲痛；使伤心==
+- grieve over ...  **→** ==为 ... 哀叹/悲伤==
+- plate **→** ==盘子==
+- A instead of B **→** ==是 A 而不是 B==
 
 ---
 
@@ -96,7 +96,7 @@ According to McWhorter, the decline of formal English	.
 
 ---
 
-- [ ] brought about **→** ==带来==
+- brought about **→** ==带来==
 
 ---
 
@@ -114,9 +114,9 @@ The word "talking" (Line 6, Paragraph 3) **denotes**	.
 
 ---
 
-- [ ] denotes **→** ==为……的符号，**表示，指示**（denote 的第三人称单数）==
-- [ ] liveliness **→** ==n. 活泼；热烈；鲜明==
-- [ ] informality **→** ==n. 非正式；不拘礼节==
+- denotes **→** ==为……的符号，**表示，指示**（denote 的第三人称单数）==
+- liveliness **→** ==n. 活泼；热烈；鲜明==
+- informality **→** ==n. 非正式；不拘礼节==
 
 ---
 
@@ -146,7 +146,7 @@ The description of Russians’ love of memorizing poetry shows the author’s	.
 
 ---
 
-- [ ] contempt **→** ==n. 轻视，蔑视；忽视，不顾；藐视法庭==
+- contempt **→** ==n. 轻视，蔑视；忽视，不顾；藐视法庭==
 
 ---
 
@@ -164,8 +164,8 @@ According to the last paragraph, "paper plates" is to "china" as	.
 
 ---
 
-- [x] humble **→** ==adj. 谦虚的，谦卑的==
-- [x] noble **→** ==adj. 崇高的，高尚的；宏伟的，卓越的==
+- humble **→** ==adj. 谦虚的，谦卑的==
+- noble **→** ==adj. 崇高的，高尚的；宏伟的，卓越的==
 
 ---
 

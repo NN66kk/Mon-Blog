@@ -9,10 +9,10 @@ Over the past century, all kinds of unfairness and discrimination have been **co
 
 ---
 
-- [x] condemn **→** ==v. 谴责，严厉指责==
-- [x] insidious **→** ==adj. <正式>潜伏的，隐袭的；阴险的，狡猾的==
-- [x] as yet **→** ==迄今为止==
-- [x] refer **→** ==v. 提到，谈及==
+- condemn **→** ==v. 谴责，严厉指责==
+- insidious **→** ==adj. <正式>潜伏的，隐袭的；阴险的，狡猾的==
+- as yet **→** ==迄今为止==
+- refer **→** ==v. 提到，谈及==
 
 ---
 
@@ -22,12 +22,12 @@ Over the past century, all kinds of unfairness and discrimination have been **co
 
 ---
 
-- [x] It has long been known that ...  **→** ==人们早就知道 ...==
-- [ ] have a big advantage over ...  **→** ==比 ... 更有优势==
-- [x] thumb **→** ==v. 竖起大拇指请求搭便车；用拇指摸；**用拇指翻动**，翻阅==
-- [x] directories **→** ==n. [计]目录，名录；指南；计算机文件或程序的目录（directory 的复数）==
-- [x] evenly spread **→** ==均匀地分布==
-- [x] halves **→** ==n. 一学期；两等份（half 的复数形式）==
+- It has long been known that ...  **→** ==人们早就知道 ...==
+- have a big advantage over ...  **→** ==比 ... 更有优势==
+- thumb **→** ==v. 竖起大拇指请求搭便车；用拇指摸；**用拇指翻动**，翻阅==
+- directories **→** ==n. [计]目录，名录；指南；计算机文件或程序的目录（directory 的复数）==
+- evenly spread **→** ==均匀地分布==
+- halves **→** ==n. 一学期；两等份（half 的复数形式）==
 - 人们早就知道 ... **→** It has long been known that ... 
 
 ---
@@ -38,9 +38,9 @@ Thus the American president and vice-president have surnames starting with B and
 
 ---
 
-- [x] respectively **→** ==adv. 分别地，各自地==
-- [ ] striking **→** ==adj. 惊人的，异常的；引人瞩目的==
-- [x] richest **→** ==富裕的，强烈的（rich 的最高级）==
+- respectively **→** ==adv. 分别地，各自地==
+- striking **→** ==adj. 惊人的，异常的；引人瞩目的==
+- richest **→** ==富裕的，强烈的（rich 的最高级）==
 
 ---
 
@@ -50,12 +50,12 @@ Can this merely be **coincidence**? One theory, **dreamt up** in all the spare t
 
 ---
 
-- [x] coincidence **→** ==n. 巧合，同时发生；相符，一致；符合==
-- [x] dream up **→** ==虚构==
-- [x] the rot sets in **→** ==事情开始走下坡==
-- [x] infant school **→** ==幼儿园，幼儿学校==
-- [x] short-sighted **→** ==adj. 目光短浅的；近视的==
-- [x] a lucky escape **→** ==侥幸脱险==
+- coincidence **→** ==n. 巧合，同时发生；相符，一致；符合==
+- dream up **→** ==虚构==
+- the rot sets in **→** ==事情开始走下坡==
+- infant school **→** ==幼儿园，幼儿学校==
+- short-sighted **→** ==adj. 目光短浅的；近视的==
+- a lucky escape **→** ==侥幸脱险==
 
 ---
 
@@ -65,15 +65,15 @@ The **humiliation** continues. At university graduation ceremonies, the ABCs pro
 
 ---
 
-- [x] humiliation **→** ==n. 耻辱，蒙羞；丢脸的事，尴尬的场合==
-- [ ] by the time **→** ==等到；到…的时候；在……以前==
-- [x] literally **→** ==adv. **按照字面意义地**，逐字地；真正地，确实地；（用于夸张地强调）简直==
-- [ ] Shortlist **→** ==n. 最终候选名单，决选名单==
-- [ ] ballot **→** ==n. （无记名）投票选举，投票表决==
-- [ ] conference **→** ==n. （大型、正式的）会议，研讨会==
-- [x] drawn up **→** ==草拟，**起草**；停住；使靠近==
-- [ ] plough through **→** ==乘风破浪，破浪前进；吃力地钻研；费力地阅读；费力地通过==
-- [ ] plough **→** ==v. 耕，犁；奋力前进==
+- humiliation **→** ==n. 耻辱，蒙羞；丢脸的事，尴尬的场合==
+- by the time **→** ==等到；到…的时候；在……以前==
+- literally **→** ==adv. **按照字面意义地**，逐字地；真正地，确实地；（用于夸张地强调）简直==
+- Shortlist **→** ==n. 最终候选名单，决选名单==
+- ballot **→** ==n. （无记名）投票选举，投票表决==
+- conference **→** ==n. （大型、正式的）会议，研讨会==
+- drawn up **→** ==草拟，**起草**；停住；使靠近==
+- plough through **→** ==乘风破浪，破浪前进；吃力地钻研；费力地阅读；费力地通过==
+- plough **→** ==v. 耕，犁；奋力前进==
 
 ---
 
@@ -93,7 +93,7 @@ What does the author intend to illustrate with AAAA cars and Zodiac cars?
 
 ---
 
-- [ ] conspicuous **→** ==adj. 出色的，引人注目的；**显眼的**，明显的==
+- conspicuous **→** ==adj. 出色的，引人注目的；**显眼的**，明显的==
 
 ---
 
@@ -111,7 +111,7 @@ What can we infer from the first three paragraphs?
 
 ---
 
-- [ ] essential **→** ==adj. 必不可少的，非常重要的==
+- essential **→** ==adj. 必不可少的，非常重要的==
 
 ---
 
@@ -141,7 +141,7 @@ What does the author mean by "most people are literally having a ZZZ" (Lines 2-3
 
 ---
 
-- [ ] dozing off **→** ==打瞌睡（dozing 是 doze 的现在分词）==
+- dozing off **→** ==打瞌睡（dozing 是 doze 的现在分词）==
 
 ---
 

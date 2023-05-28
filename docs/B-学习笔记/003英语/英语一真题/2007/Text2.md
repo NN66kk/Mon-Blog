@@ -8,21 +8,21 @@ For the past several years, the Sunday newspaper supplement _Parade_ has featu
 
 ---
 
-- [ ] column **→** ==n. 圆柱，纪念柱；柱状物；纵队，纵行（列）；**（报纸、杂志上的）栏；（报纸或杂志的）专栏（文章）**==
-- [ ] query **→** ==n. 疑问，询问；问号v. 质疑，对……表示疑问；**询问，提问**==
-- [ ] analogy **→** ==n. 类比，比拟；类似==
-- [ ] analogy **→** ==adj. 相似的；类推的==
-- [ ] envision **→** ==v. 想象，预想==
-- [ ] deduce **→** ==v. 推断，演绎==
-- [ ] confusing vs confused **→** ==前者是令别人感到困惑/混乱的，后者是自己感到困惑/混乱的==
-- [ ] field **→** ==v. **应付（问题或意见），处理** n. 领域；场地；田地==
-- [ ] average Joe **→** ==普通人：指一般的、普通的人，没有特殊地位或特殊才能的人。==
-- [ ] deductive **→** ==v. 推理，推断；演绎==
-- [ ] fondness **→** ==n. 爱好；喜爱==
-- [ ] coincidence **→** ==n. **巧合**，同时发生；相符，一致；符合==
-- [ ] visualize **→** ==v. 想象，使形象化；使可见，使显现==
-- [ ] object **→** ==n. **物体**，实物；目的，目标；宾语；（引发某种情感或行为的）对象；客体；（计算机）对象  v. 反对；反对说，反对的理由是==
-- [ ] eluded **→** ==vt. （巧妙地）逃开，躲避 ；使无法得到；使不记得，**使不理解**（elude 的过去式和过去分词）==
+- column **→** ==n. 圆柱，纪念柱；柱状物；纵队，纵行（列）；**（报纸、杂志上的）栏；（报纸或杂志的）专栏（文章）**==
+- query **→** ==n. 疑问，询问；问号v. 质疑，对……表示疑问；**询问，提问**==
+- analogy **→** ==n. 类比，比拟；类似==
+- analogy **→** ==adj. 相似的；类推的==
+- envision **→** ==v. 想象，预想==
+- deduce **→** ==v. 推断，演绎==
+- confusing vs confused **→** ==前者是令别人感到困惑/混乱的，后者是自己感到困惑/混乱的==
+- field **→** ==v. **应付（问题或意见），处理** n. 领域；场地；田地==
+- average Joe **→** ==普通人：指一般的、普通的人，没有特殊地位或特殊才能的人。==
+- deductive **→** ==v. 推理，推断；演绎==
+- fondness **→** ==n. 爱好；喜爱==
+- coincidence **→** ==n. **巧合**，同时发生；相符，一致；符合==
+- visualize **→** ==v. 想象，使形象化；使可见，使显现==
+- object **→** ==n. **物体**，实物；目的，目标；宾语；（引发某种情感或行为的）对象；客体；（计算机）对象  v. 反对；反对说，反对的理由是==
+- eluded **→** ==vt. （巧妙地）逃开，躲避 ；使无法得到；使不记得，**使不理解**（elude 的过去式和过去分词）==
 
 ---
 
@@ -32,8 +32,8 @@ Clearly, intelligence encompasses more than a score on a test. Just what does it
 
 ---
 
-- [ ] specify **→** ==v. 明确，详细说明；指定，列举==
-- [ ] specific **→** ==adj. 明确的，详细的；特殊的，特定的==
+- specify **→** ==v. 明确，详细说明；指定，列举==
+- specific **→** ==adj. 明确的，详细的；特殊的，特定的==
 
 ---
 
@@ -43,18 +43,18 @@ The defining **term** of intelligence in humans still seems to be the IQ score, 
 
 ---
 
-- [ ] term **→** ==n. 学期，**术语**==
-- [ ] primarily **→** ==adv. 主要地，根本上首先==
-- [ ] primary **→** ==adj. 主要的，基本的；初级的==
-- [ ] variation **→** ==n. 变化，变动，变体；变异（本文指“**改编版本**”）==
-- [ ] populate **→** ==v. 占据；居住于==
-- [ ] distribution **→** ==n. 分布；分配==
-- [ ] divide...by.. **→** ==用.....除以...==
-- [ ] mental age **→** ==智力年龄，心理年龄==
-- [ ] chronoloqical age **→** ==生理年龄，实际年龄==
-- [ ] multiply by... **→** ==乘以......==
-- [ ] capture **→** ==v. 充分体现；描述，表达==
-- [ ] aspect **→** ==n. 特点；方面==
+- term **→** ==n. 学期，**术语**==
+- primarily **→** ==adv. 主要地，根本上首先==
+- primary **→** ==adj. 主要的，基本的；初级的==
+- variation **→** ==n. 变化，变动，变体；变异（本文指“**改编版本**”）==
+- populate **→** ==v. 占据；居住于==
+- distribution **→** ==n. 分布；分配==
+- divide...by.. **→** ==用.....除以...==
+- mental age **→** ==智力年龄，心理年龄==
+- chronoloqical age **→** ==生理年龄，实际年龄==
+- multiply by... **→** ==乘以......==
+- capture **→** ==v. 充分体现；描述，表达==
+- aspect **→** ==n. 特点；方面==
 
 ---
 
@@ -64,14 +64,14 @@ Such standardized tests may not assess all the important **elements** necessary 
 
 ---
 
-- [ ] elements **→** ==n. 因素==
-- [ ] note **→** ==v. 留意，注意；**指出，表明**==
-- [ ] analytical **→** ==adj. 分析的，解析的；善于分析的==
-- [ ] moreover **→** ==adv. 此外，而且==
-- [ ] leadership **→** ==n. 领导，领导地位；**领导才能**；领导人员，领导层；领先地位==
-- [ ] be correlated with... **→** ==与....相关==
-- [ ] toil **→** ==v. 辛苦劳作==
-- [ ] toil through sth. **→** ==历尽辛苦做某事==
+- elements **→** ==n. 因素==
+- note **→** ==v. 留意，注意；**指出，表明**==
+- analytical **→** ==adj. 分析的，解析的；善于分析的==
+- moreover **→** ==adv. 此外，而且==
+- leadership **→** ==n. 领导，领导地位；**领导才能**；领导人员，领导层；领先地位==
+- be correlated with... **→** ==与....相关==
+- toil **→** ==v. 辛苦劳作==
+- toil through sth. **→** ==历尽辛苦做某事==
 
 ---
 
@@ -115,7 +115,7 @@ People nowadays can no longer achieve IQ scores as high as vos Savant’s becaus
 
 ---
 
-- [ ] computational **→** ==adj. 计算的==
+- computational **→** ==adj. 计算的==
 
 ---
 
@@ -133,7 +133,7 @@ We can conclude from the last paragraph that
 
 ---
 
-- [ ] indicator **→** ==n. 标志，迹象；**方向灯**，转向指示灯==
+- indicator **→** ==n. 标志，迹象；**方向灯**，转向指示灯==
 
 ---
 ### 30

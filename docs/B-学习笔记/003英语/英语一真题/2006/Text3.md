@@ -12,18 +12,18 @@ That the seas are being overfished has been known for years. What researchers su
 
 ---
 
-- [x] fisheries **→** ==n. 渔业；渔场（fishery 的复数）；捕鱼术；渔业公司==
-- [ ] biomass **→** ==n. 生物量；生物质能燃料==
-- [ ] matter **→** ==n. 物质；事件 v. 有关系，要紧==
-- [ ] predator **→** ==n. **捕食性动物**； 掠夺者，掠夺成性的人（或组织）==
+- fisheries **→** ==n. 渔业；渔场（fishery 的复数）；捕鱼术；渔业公司==
+- biomass **→** ==n. 生物量；生物质能燃料==
+- matter **→** ==n. 物质；事件 v. 有关系，要紧==
+- predator **→** ==n. **捕食性动物**； 掠夺者，掠夺成性的人（或组织）==
 - by
 	1. 被动语态 + by 表示动作的发出者
 	2. 表示方式方法 **→** by bus
 	3. 在旁边 **→** You are standing by me.
 	4. by + 时间 **→** 截止到 ... 时间
 	5. 前面接变化的动作表示差额/变化的幅度
-- [ ] exploitation **→** ==n. 剥削，压榨；开发，开采；（出于私利、不公正的）利用==
-- [ ] halved **→** ==v. （使）减半；对半分（halve 的过去式和过去分词）==
+- exploitation **→** ==n. 剥削，压榨；开发，开采；（出于私利、不公正的）利用==
+- halved **→** ==v. （使）减半；对半分（halve 的过去式和过去分词）==
 
 ---
 
@@ -33,14 +33,14 @@ Dr. Worm acknowledges that these figures are conservative. One reason for this i
 
 ---
 
-- [ ] prey **→** ==n. **猎物**，捕获物；受害者，受骗者；<古>掠夺品 v. 捕食；欺凌，坑害（尤指弱者）；不断困扰，折磨==
-- [ ] ago **→** ==adv. 以前，从前 adj. 以前的==
-- [x] catch size **→** ==捕获量==
-- [ ] longline **→** ==n. 多钩长线==
-- [ ] saturated **→** ==adj. 充满的，饱和的==
-- [ ] be saturated with ...  **→** ==被 ... 充满（处于饱和状态）==
-- [ ] bait **→** ==v. 放饵于某物之上或之内（以捕鱼、兽等） n.（钓鱼等用的）饵，诱饵==
-- [ ] Furthermore **→** ==adv. 此外，而且==
+- prey **→** ==n. **猎物**，捕获物；受害者，受骗者；<古>掠夺品 v. 捕食；欺凌，坑害（尤指弱者）；不断困扰，折磨==
+- ago **→** ==adv. 以前，从前 adj. 以前的==
+- catch size **→** ==捕获量==
+- longline **→** ==n. 多钩长线==
+- saturated **→** ==adj. 充满的，饱和的==
+- be saturated with ...  **→** ==被 ... 充满（处于饱和状态）==
+- bait **→** ==v. 放饵于某物之上或之内（以捕鱼、兽等） n.（钓鱼等用的）饵，诱饵==
+- Furthermore **→** ==adv. 此外，而且==
 
 ---
 
@@ -50,12 +50,12 @@ Dr. Myers and Dr. Worm argue that their work gives a correct **baseline**, which
 
 ---
 
-- [x] baseline **→** ==n. 基线，基准==
-- [x] take ... into account **→** ==将 ... 考虑在内==
-- [ ] marine **→** ==adj. 海洋的，海产的==
-- [x] shifting **→** ==adj. 不断移动的，不断变化的；动态的==
-- [ ] massive **→** ==adj. 巨大的；大而重的==
-- [ ] relatively **→** ==adv. 相当地；相对地，比较地==
+- baseline **→** ==n. 基线，基准==
+- take ... into account **→** ==将 ... 考虑在内==
+- marine **→** ==adj. 海洋的，海产的==
+- shifting **→** ==adj. 不断移动的，不断变化的；动态的==
+- massive **→** ==adj. 巨大的；大而重的==
+- relatively **→** ==adv. 相当地；相对地，比较地==
 
 ---
 
@@ -75,7 +75,7 @@ The extinction of large prehistoric animals is noted to suggest that	.
 
 ---
 
-- [ ] outlive **→** ==v. 比……活得长，比……活得久；比……经久==
+- outlive **→** ==v. 比……活得长，比……活得久；比……经久==
 
 ---
 
@@ -93,7 +93,7 @@ We can infer from Dr. Myers and Dr. Worm’s paper that	.
 
 ---
 
-- [x] stock **→** ==库存，存量==
+- stock **→** ==库存，存量==
 - catch sizes 在这里表示的是捕捞量
 
 ---
@@ -136,7 +136,7 @@ The author seems to be mainly concerned with most fisheries’	.
 
 ---
 
-- [x] application **→** ==应用==
+- application **→** ==应用==
 
 ---
 
