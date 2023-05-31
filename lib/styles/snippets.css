@@ -1,0 +1,1012 @@
+
+/* --- TableStyles.css --- */  
+ /**圆角图片**/
+
+body:not(.obsidian-default-image) .view-content img:not([class*="emoji"]):not(.banner-image.full-width) {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+/**公式居左**/
+
+mjx-container[jax="CHTML"][display="true"] {
+    text-align: left !important;
+}
+
+/**task位置对齐**/
+
+.markdown-preview-view.is-readable-line-width .block-language-dataview h4, .markdown-preview-view.is-readable-line-width .block-language-dataview>h4, .markdown-preview-view.is-readable-line-width .block-language-dataviewjs h4, .markdown-preview-view.is-readable-line-width .block-language-dataviewjs>h1, .markdown-preview-view.is-readable-line-width .block-language-dataviewjs>h2, .markdown-preview-view.is-readable-line-width .block-language-dataviewjs>h3, .markdown-preview-view.is-readable-line-width .block-language-dataviewjs>h4, .markdown-preview-view.is-readable-line-width .block-language-dataviewjs>p, .markdown-preview-view.is-readable-line-width .dataview .contains-task-list, .markdown-preview-view.is-readable-line-width .dataview.dataview-error, .markdown-preview-view.is-readable-line-width .dataview.list-view-ul, .markdown-preview-view.is-readable-line-width .dataview.result-group {
+    --folding-offset: 10px;
+    margin-left: 0px;
+}
+
+.markdown-preview-view .task-list-item-checkbox {
+    /*left: -2.5px;*/
+}
+
+/* ====== title style ====== */
+body {
+    /* Inline title */
+    --inline-title-color: var(--h1-color);
+    --inline-title-font: var(--h1-font);
+    --inline-title-line-height: var(--h1-line-height);
+    --inline-title-size: var(--h1-size);
+    --inline-title-style: var(--h1-style);
+    --inline-title-variant: var(--h1-variant);
+    --inline-title-weight: var(--h1-weight);
+    /* Headings */
+    --heading-formatting: var(--text-faint);
+    --h1-color: inherit;
+    --h2-color: inherit;
+    --h3-color: inherit;
+    --h4-color: inherit;
+    --h5-color: inherit;
+    --h6-color: inherit;
+    --h1-indicator-color: var(--color-red);
+    --h2-indicator-color: var(--color-orange);
+    --h3-indicator-color: var(--color-yellow);
+    --h4-indicator-color: var(--color-green);
+    --h5-indicator-color: var(--color-blue);
+    --h6-indicator-color: var(--color-purple);
+    --h1-font: inherit;
+    --h2-font: inherit;
+    --h3-font: inherit;
+    --h4-font: inherit;
+    --h5-font: inherit;
+    --h6-font: inherit;
+    --h1-line-height: 1.2;
+    --h2-line-height: 1.2;
+    --h3-line-height: 1.3;
+    --h4-line-height: 1.4;
+    --h5-line-height: var(--line-height-normal);
+    --h6-line-height: var(--line-height-normal);
+    --h1-size: 1.5em;
+    --h2-size: 1.425em;
+    --h3-size: 1.35em;
+    --h4-size: 1.275em;
+    --h5-size: 1.2em;
+    --h6-size: 1.125em;
+    --h1-style: normal;
+    --h2-style: normal;
+    --h3-style: normal;
+    --h4-style: normal;
+    --h5-style: normal;
+    --h6-style: normal;
+    --h1-variant: normal;
+    --h2-variant: normal;
+    --h3-variant: normal;
+    --h4-variant: normal;
+    --h5-variant: normal;
+    --h6-variant: normal;
+    --h1-weight: 700;
+    --h2-weight: 675;
+    --h3-weight: 650;
+    --h4-weight: 625;
+    --h5-weight: 600;
+    --h6-weight: 575;
+}
+
+.inline-title-color-default {
+    --inline-title-color: var(--text-normal) !important;
+}
+
+.inline-title-color-designated {
+    --inline-title-color: var(--color-accent) !important;
+}
+
+
+body:not(.inline-title-divider-remove) .inline-title {
+    border-bottom: 1px solid var(--divider-color);
+    padding-bottom: var(--size-4-3);
+    margin-bottom: var(--size-4-3);
+}
+
+body:not(.inline-title-divider-remove) .mk-folder-header .inline-title,
+body:not(.inline-title-divider-remove) .mk-file-icon+.inline-title {
+    border-bottom: unset;
+    margin-bottom: unset;
+}
+
+.embedded-backlinks {
+    border-top: 1px solid var(--divider-color);
+}
+
+/* h1 */
+
+.h1-color-default {
+    --h1-color: var(--text-normal) !important;
+    --h1-indicator-color: var(--color-red) !important;
+}
+
+.h1-color-designated {
+    --h1-color: var(--color-red) !important;
+    --h1-indicator-color: var(--h1-color);
+}
+
+.h1-color-customized {
+    --h1-indicator-color: var(--h1-color);
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-1 {
+    padding-left: 6px;
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-1::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    position: relative;
+    top: 4px;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.2em - 8px);
+    border-radius: var(--radius-m);
+    background-color: var(--h1-indicator-color);
+}
+
+.markdown-rendered h1,
+.markdown-preview-view h1 {
+    position: relative;
+}
+
+body:not(.heading-indicator-off) .markdown-rendered h1::before,
+body:not(.heading-indicator-off) .markdown-preview-view h1::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 6px;
+    position: relative;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.2em - 8px);
+    top: 4px;
+    border-radius: var(--radius-m);
+    background-color: var(--h1-indicator-color);
+}
+
+
+body.h1-divider-on :is(.markdown-preview-view h1, .markdown-rendered h1, .HyperMD-header-1)::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    right: 0px;
+    opacity: 0.5;
+    bottom: calc(var(--font-text-size) * var(--line-height-normal) * 0.2 - var(--size-2-1));
+    background-image: linear-gradient(to left, var(--h1-indicator-color) 30%, transparent 70%);
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-1 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.18v3.43H3.53V1h1.18V9h-1.18v-3.43H1.18v3.43H0V1ZM6.47,9v-1.14h1.18V2.32l-1.47,.82V1.82l1.47-.82h1.18V7.86h1.18v1.14h-3.53Z"/></svg>')
+}
+
+
+body:not(.collapse-icon-restore) .markdown-rendered h1 .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h1 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.18v3.43H3.53V1h1.18V9h-1.18v-3.43H1.18v3.43H0V1ZM6.47,9v-1.14h1.18V2.32l-1.47,.82V1.82l1.47-.82h1.18V7.86h1.18v1.14h-3.53Z"/></svg>')
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-1 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-rendered h1 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h1 .is-collapsed .collapse-indicator.collapse-icon svg {
+    background-color: var(--h1-indicator-color);
+    color: var(--h1-indicator-color);
+}
+
+.h2-color-default {
+    --h2-color: var(--text-normal) !important;
+    --h2-indicator-color: var(--color-orange) !important;
+}
+
+.h2-color-designated {
+    --h2-color: var(--color-orange) !important;
+    --h2-indicator-color: var(--h2-color);
+}
+
+.h2-color-customized {
+    --h2-indicator-color: var(--h2-color);
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-2 {
+    padding-left: 6px;
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-2::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    position: relative;
+    top: 4px;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.2em - 8px);
+    border-radius: var(--radius-m);
+    background-color: var(--h2-indicator-color);
+}
+
+.markdown-rendered h2,
+.markdown-preview-view h2 {
+    position: relative;
+}
+
+body:not(.heading-indicator-off) .markdown-rendered h2::before,
+body:not(.heading-indicator-off) .markdown-preview-view h2::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 6px;
+    position: relative;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.2em - 8px);
+    top: 4px;
+    border-radius: var(--radius-m);
+    background-color: var(--h2-indicator-color);
+}
+
+
+body.h2-divider-on :is(.markdown-preview-view h2, .markdown-rendered h2, .HyperMD-header-2)::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    right: 0px;
+    opacity: 0.5;
+    bottom: calc(var(--font-text-size) * var(--line-height-normal) * 0.2 - var(--size-2-1));
+    background-image: linear-gradient(to left, var(--h2-indicator-color) 30%, transparent 70%);
+}
+
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-2 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1ZM10,9h-3.33c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81s.11-.57,.3-.78l2.71-2.99c.21-.21,.33-.49,.33-.81s-.12-.59-.33-.81c-.21-.21-.49-.33-.79-.33s-.58,.12-.79,.33c-.21,.21-.33,.51-.33,.81h-1.11c0-.61,.23-1.19,.65-1.62,.42-.43,.98-.67,1.57-.67s1.15,.24,1.57,.67c.42,.43,.65,1.01,.65,1.62s-.25,1.2-.65,1.62l-2.68,2.95h3.33v1.14Z"/></svg>')
+}
+
+
+body:not(.collapse-icon-restore) .markdown-rendered h2 .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h2 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1ZM10,9h-3.33c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81s.11-.57,.3-.78l2.71-2.99c.21-.21,.33-.49,.33-.81s-.12-.59-.33-.81c-.21-.21-.49-.33-.79-.33s-.58,.12-.79,.33c-.21,.21-.33,.51-.33,.81h-1.11c0-.61,.23-1.19,.65-1.62,.42-.43,.98-.67,1.57-.67s1.15,.24,1.57,.67c.42,.43,.65,1.01,.65,1.62s-.25,1.2-.65,1.62l-2.68,2.95h3.33v1.14Z"/></svg>')
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-2 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-rendered h2 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h2 .is-collapsed .collapse-indicator.collapse-icon svg {
+    background-color: var(--h2-indicator-color);
+    color: var(--h2-indicator-color);
+}
+
+.h3-color-default {
+    --h3-color: var(--text-normal) !important;
+    --h3-indicator-color: var(--color-yellow) !important;
+}
+
+.h3-color-designated {
+    --h3-color: var(--color-yellow) !important;
+    --h3-indicator-color: var(--h3-color);
+}
+
+.h3-color-customized {
+    --h3-indicator-color: var(--h3-color);
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-3 {
+    padding-left: 6px;
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-3::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    position: relative;
+    top: 4px;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.3em - 8px);
+    border-radius: var(--radius-m);
+    background-color: var(--h3-indicator-color);
+}
+
+.markdown-rendered h3,
+.markdown-preview-view h3 {
+    position: relative;
+}
+
+body:not(.heading-indicator-off) .markdown-rendered h3::before,
+body:not(.heading-indicator-off) .markdown-preview-view h3::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 6px;
+    position: relative;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.3em - 8px);
+    top: 4px;
+    border-radius: var(--radius-m);
+    background-color: var(--h3-indicator-color);
+}
+
+body.h3-divider-on :is(.markdown-preview-view h3, .markdown-rendered h3, .HyperMD-header-3)::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    right: 0px;
+    opacity: 0.5;
+    bottom: calc(var(--font-text-size) * var(--line-height-normal) * 0.2 - var(--size-2-1));
+    background-image: linear-gradient(to left, var(--h3-indicator-color) 30%, transparent 70%);
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-3 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1Zm6.67,0h2.22c.29,0,.58,.12,.79,.33,.21,.21,.33,.51,.33,.81V7.86c0,.3-.12,.59-.33,.81-.21,.21-.49,.33-.79,.33h-2.22c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81v-.57h1.11v.57h2.22v-2.29h-2.22v-1.14h2.22V2.14h-2.22v.57h-1.11v-.57c0-.3,.12-.59,.33-.81,.21-.21,.49-.33,.79-.33Z"/></svg>')
+}
+
+
+body:not(.collapse-icon-restore) .markdown-rendered h3 .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h3 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1Zm6.67,0h2.22c.29,0,.58,.12,.79,.33,.21,.21,.33,.51,.33,.81V7.86c0,.3-.12,.59-.33,.81-.21,.21-.49,.33-.79,.33h-2.22c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81v-.57h1.11v.57h2.22v-2.29h-2.22v-1.14h2.22V2.14h-2.22v.57h-1.11v-.57c0-.3,.12-.59,.33-.81,.21-.21,.49-.33,.79-.33Z"/></svg>')
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-3 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-rendered h3 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h3 .is-collapsed .collapse-indicator.collapse-icon svg {
+    background-color: var(--h3-indicator-color);
+    color: var(--h3-indicator-color);
+}
+
+.h4-color-default {
+    --h4-color: var(--text-normal) !important;
+    --h4-indicator-color: var(--color-green) !important;
+}
+
+.h4-color-designated {
+    --h4-color: var(--color-green) !important;
+    --h4-indicator-color: var(--h4-color);
+}
+
+.h4-color-customized {
+    --h4-indicator-color: var(--h4-color);
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-4 {
+    padding-left: 6px;
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-4::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    position: relative;
+    top: 4px;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.4em - 8px);
+    border-radius: var(--radius-m);
+    background-color: var(--h4-indicator-color);
+}
+
+.markdown-rendered h4,
+.markdown-preview-view h4 {
+    position: relative;
+}
+
+body:not(.heading-indicator-off) .markdown-rendered h4::before,
+body:not(.heading-indicator-off) .markdown-preview-view h4::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 6px;
+    position: relative;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.4em - 8px);
+    top: 4px;
+    border-radius: var(--radius-m);
+    background-color: var(--h4-indicator-color);
+}
+
+
+body.h4-divider-on :is(.markdown-rendered h4, .markdown-preview-view h4, .HyperMD-header-4)::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    right: 0px;
+    opacity: 0.5;
+    bottom: calc(var(--font-text-size) * var(--line-height-normal) * 0.2 - var(--size-2-1));
+    background-image: linear-gradient(to left, var(--h4-indicator-color) 30%, transparent 70%);
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-4 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1ZM8.33,9v-2.86h-2.78v-1.14L8.33,1h1.11V5h.56v1.14h-.56v2.86h-1.11Zm0-4V2.95l-1.42,2.05h1.42Z"/></svg>')
+}
+
+
+body:not(.collapse-icon-restore) .markdown-rendered h4 .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h4 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1ZM8.33,9v-2.86h-2.78v-1.14L8.33,1h1.11V5h.56v1.14h-.56v2.86h-1.11Zm0-4V2.95l-1.42,2.05h1.42Z"/></svg>')
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-4 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-rendered h4 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h4 .is-collapsed .collapse-indicator.collapse-icon svg {
+    background-color: var(--h4-indicator-color);
+    color: var(--h4-indicator-color);
+}
+
+.h5-color-default {
+    --h5-color: var(--text-normal) !important;
+    --h5-indicator-color: var(--color-blue) !important;
+}
+
+.h5-color-designated {
+    --h5-color: var(--color-blue) !important;
+    --h5-indicator-color: var(--h5-color);
+}
+
+.h5-color-customized {
+    --h5-indicator-color: var(--h5-color);
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-5 {
+    padding-left: 6px;
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-5::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    position: relative;
+    top: 4px;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.5em - 8px);
+    border-radius: var(--radius-m);
+    background-color: var(--h5-indicator-color);
+}
+
+
+.markdown-rendered h5,
+.markdown-preview-view h5 {
+    position: relative;
+}
+
+body:not(.heading-indicator-off) .markdown-rendered h5::before,
+body:not(.heading-indicator-off) .markdown-preview-view h5::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 6px;
+    position: relative;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.5em - 8px);
+    top: 4px;
+    border-radius: var(--radius-m);
+    background-color: var(--h5-indicator-color);
+}
+
+
+body.h5-divider-on :is(.markdown-rendered h5, .markdown-preview-view h5, .HyperMD-header-5)::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    right: 0px;
+    opacity: 0.5;
+    bottom: calc(var(--font-text-size) * var(--line-height-normal) * 0.2 - var(--size-2-1));
+    background-image: linear-gradient(to left, var(--h5-indicator-color) 30%, transparent 70%);
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-5 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1Zm6.67,0h2.78v1.14h-2.78v2.29h1.11c.59,0,1.15,.24,1.57,.67,.42,.43,.65,1.01,.65,1.62s-.23,1.19-.65,1.62c-.42,.43-.98,.67-1.57,.67h-1.11c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81v-.57h1.11v.57h1.11c.29,0,.58-.12,.79-.33,.21-.21,.33-.51,.33-.81s-.12-.59-.33-.81c-.21-.21-.49-.33-.79-.33h-1.11c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81V2.14c0-.3,.12-.59,.33-.81,.21-.21,.49-.33,.79-.33Z"/></svg>')
+}
+
+
+body:not(.collapse-icon-restore) .markdown-rendered h5 .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h5 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1Zm6.67,0h2.78v1.14h-2.78v2.29h1.11c.59,0,1.15,.24,1.57,.67,.42,.43,.65,1.01,.65,1.62s-.23,1.19-.65,1.62c-.42,.43-.98,.67-1.57,.67h-1.11c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81v-.57h1.11v.57h1.11c.29,0,.58-.12,.79-.33,.21-.21,.33-.51,.33-.81s-.12-.59-.33-.81c-.21-.21-.49-.33-.79-.33h-1.11c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81V2.14c0-.3,.12-.59,.33-.81,.21-.21,.49-.33,.79-.33Z"/></svg>')
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-5 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-rendered h5 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h5 .is-collapsed .collapse-indicator.collapse-icon svg {
+    background-color: var(--h5-indicator-color);
+    color: var(--h5-indicator-color);
+}
+
+
+.h6-color-default {
+    --h6-color: var(--text-normal) !important;
+    --h6-indicator-color: var(--color-purple) !important;
+}
+
+.h6-color-designated {
+    --h6-color: var(--color-purple) !important;
+    --h6-indicator-color: var(--h6-color);
+}
+
+.h6-color-customized {
+    --h6-indicator-color: var(--h6-color);
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header .cm-header.cm-header-6 {
+    padding-left: 6px;
+}
+
+body:not(.heading-indicator-off) .is-live-preview .HyperMD-header-6::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    position: relative;
+    top: 4px;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.5em - 8px);
+    border-radius: var(--radius-m);
+    background-color: var(--h6-indicator-color);
+}
+
+.markdown-rendered h6,
+.markdown-preview-view h6 {
+    position: relative;
+}
+
+body:not(.heading-indicator-off) .markdown-rendered h6::before,
+body:not(.heading-indicator-off) .markdown-preview-view h6::before {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 6px;
+    position: relative;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    height: calc(1.5em - 8px);
+    top: 4px;
+    border-radius: var(--radius-m);
+    background-color: var(--h6-indicator-color);
+}
+
+
+body.h6-divider-on :is(.markdown-rendered h6, .markdown-preview-view h6, .HyperMD-header-6)::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    right: 0px;
+    opacity: 0.5;
+    bottom: calc(var(--font-text-size) * var(--line-height-normal) * 0.2 - var(--size-2-1));
+    background-image: linear-gradient(to left, var(--h6-indicator-color) 30%, transparent 70%);
+}
+
+
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-6 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1Zm6.67,0h2.22c.29,0,.58,.12,.79,.33,.21,.21,.33,.51,.33,.81v.57h-1.11v-.57h-2.22v2.29h2.22c.29,0,.58,.12,.79,.33,.21,.21,.33,.51,.33,.81v2.29c0,.3-.12,.59-.33,.81-.21,.21-.49,.33-.79,.33h-2.22c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81V2.14c0-.3,.12-.59,.33-.81,.21-.21,.49-.33,.79-.33Zm0,4.57v2.29h2.22v-2.29h-2.22Z"/></svg>')
+}
+
+
+body:not(.collapse-icon-restore) .markdown-rendered h6 .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h6 .collapse-indicator.collapse-icon svg {
+    transform: translateX(0px);
+    background-color: currentColor;
+    -webkit-mask-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8"?><svg id="svg0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><defs><style>.cls-1{fill:none;}</style></defs><rect class="cls-1" width="10" height="10"/><path d="M0,1H1.11v3.43H3.33V1h1.11V9h-1.11v-3.43H1.11v3.43H0V1Zm6.67,0h2.22c.29,0,.58,.12,.79,.33,.21,.21,.33,.51,.33,.81v.57h-1.11v-.57h-2.22v2.29h2.22c.29,0,.58,.12,.79,.33,.21,.21,.33,.51,.33,.81v2.29c0,.3-.12,.59-.33,.81-.21,.21-.49,.33-.79,.33h-2.22c-.29,0-.58-.12-.79-.33-.21-.21-.33-.51-.33-.81V2.14c0-.3,.12-.59,.33-.81,.21-.21,.49-.33,.79-.33Zm0,4.57v2.29h2.22v-2.29h-2.22Z"/></svg>')
+}
+
+body:not(.collapse-icon-restore) .is-live-preview .HyperMD-header-6 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-rendered h6 .is-collapsed .collapse-indicator.collapse-icon svg,
+body:not(.collapse-icon-restore) .markdown-preview-view h6 .is-collapsed .collapse-indicator.collapse-icon svg {
+    background-color: var(--h6-indicator-color);
+    color: var(--h6-indicator-color);
+}
+
+/**引用框**/
+
+.markdown-preview-view blockquote {
+    border: 3px solid var(--hr-color);
+    background-color: transparent;
+    border-radius: 0.4375em;
+    padding: 5px 15px;
+}
+
+/**高亮样式**/
+
+mark, .markdown-rendered mark {
+    color: inherit;
+    background: none;
+    border-radius: 4px;
+    border-bottom: 2px solid;
+    border-bottom-color: var(--text-normal);
+    -webkit-box-decoration-break: clone;
+}
+
+/**卡片盒行间距**/
+
+.cards .dataview.table-view-table>tbody>tr>td, .cards table.dataview tbody>tr>td {
+    line-height: 1.5;
+}  
+
+
+/* --- Minimal.css --- */  
+ 
+/* Plugin: Admonition - Style Adjust */
+    .admonition {
+        border-radius: .8rem !important;
+        border-left: none !important;
+    }
+
+    /* For styling nested Admonitions differently */
+    .admonition-content-holder .admonition {
+        background-color: var(--background-primary);
+    }
+
+/* This css snippet is from the original css file of Blue Topaz. Credit to Cuman and 3F for their wonderful work. */
+
+
+/*blank ad分栏
+修改自 https://forum-zh.obsidian.md/t/topic/2081 */
+
+
+.is-live-preview .admonition-col2  .callout-content.admonition-content>div:nth-child(2), 
+.is-live-preview .admonition-col3  .callout-content.admonition-content>div:nth-child(2), 
+.is-live-preview .admonition-col4  .callout-content.admonition-content>div:nth-child(2) {
+  margin-top: -1.5em;
+}
+.admonition-kanban .admonition-title-icon, 
+.admonition-flex .admonition-title-icon, 
+.admonition-col2 .admonition-title-icon, 
+.admonition-col3 .admonition-title-icon,
+.admonition-col4 .admonition-title-icon {
+  display: none;
+}
+.is-live-preview  :is(.admonition-col2, .admonition-col3, .admonition-col4, .admonition-flex) .admonition-content  blockquote {
+padding:0;
+margin:0;
+line-height:1em;
+  }
+   :is(.admonition-col2, .admonition-col3, .admonition-col4, .admonition-flex) .admonition-content  blockquote {
+  flex: 100%;
+  border-left: none;
+  padding-left: 0;
+  padding-right: 0;
+  margin-block-start: 0;
+  margin:0;
+  box-shadow:none;
+  background-color: transparent;
+  color: var(--text-muted);
+}
+ :is(.admonition-col2, .admonition-col3, .admonition-col4, .admonition-flex) .admonition-content  blockquote p::before {
+  display: none;
+}
+ :is(.admonition-col2, .admonition-col3, .admonition-col4, .admonition-flex) .admonition-content  blockquote p {
+  margin:0;
+  overflow-wrap: anywhere;
+}
+
+:is(.callout.admonition-col2,.callout.admonition-col3,.callout.admonition-col4,.callout.admonition-flex)>.admonition-content>ul {
+  margin-left: auto;
+}
+.admonition-col2 .admonition-content  ul,
+.admonition-col3 .admonition-content  ul,
+.admonition-col4 .admonition-content  ul,
+.admonition-flex .admonition-content  ul {
+  padding-inline-start: 20px !important;
+  margin-left: -20px;
+}
+.admonition-col2 .admonition-content  ul li .task-list-item-checkbox,
+.admonition-col3 .admonition-content  ul li .task-list-item-checkbox,
+.admonition-col4 .admonition-content  ul li .task-list-item-checkbox,
+.admonition-flex .admonition-content  ul li .task-list-item-checkbox {
+
+  margin-left: auto;
+}
+:is(.admonition-col2,.admonition-col3,.admonition-col4,.admonition-flex) .callout-content ul.dataview.list-view-ul>li:not(.task-list-item) {
+  margin-left: auto;
+}
+
+.admonition-col2 {
+  box-shadow: none!important;
+}
+  
+.admonition-col2 .admonition	{
+  overflow: visible ;
+  margin:0;
+}
+
+.admonition-col2>.admonition-content-holder> .admonition-content {	
+  columns:150px 2;
+  -moz-columns:150px 2;
+  -webkit-columns:150px 2;
+  column-gap: 2vw;
+  overflow: visible ;
+  margin:0;
+  /*分栏的分割线
+  column-rule: 1px solid #d4d2d2; */
+}
+.callout.admonition-col2> .admonition-content {	
+  columns:150px 2;
+  -moz-columns:150px 2;
+  -webkit-columns:150px 2;
+  column-gap: 2vw;
+  overflow: visible ;
+  margin:0;
+  /*分栏的分割线
+  column-rule: 1px solid #d4d2d2; */
+}
+.admonition-col2 .admonition-content ol,
+.admonition-col2 .admonition-content ul {	
+  margin-top: -0.25em;
+  
+}
+:is(.markdown-preview-view,.markdown-rendered) .admonition-col2 .admonition-content :is(h3,h4) {	
+  margin-top: -0.001em!important;
+}
+.admonition-kanban .admonition-col2 .admonition-content ol{	
+  margin: 0;
+  break-inside: avoid;
+}
+
+.admonition-kanban .admonition-col2 .admonition-content ul {	
+  margin: 0;
+  break-inside: avoid;
+}
+
+.admonition-col2 .admonition-content {	
+  overflow: visible ;
+}
+
+.admonition-col2 > .admonition-content-holder {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.admonition-col2 p {
+  text-align: justify;
+  margin-top: 0;
+  padding: 2px;
+ /*  height:100%;
+  overflow: auto; */
+}
+.admonition-col2 p > img{
+  display: block;
+  height: auto;
+}
+
+.admonition-col2-parent .admonition-col2 .admonition > .admonition-title.no-title + .admonition-content-holder {
+  margin-top: 0;
+}
+
+/****col3 三栏*****/
+.admonition-col3 {
+  box-shadow: none !important;
+}
+  
+.admonition-col3 .admonition	{
+  overflow: visible ;
+  margin: 0;
+}
+
+.callout.admonition-col3>.admonition-content {	
+  columns: 100px 3;
+  -moz-columns: 100px 3;
+  -webkit-columns:100px 3;
+  column-gap: 1vw;
+  overflow: visible;
+  margin: 0;
+  break-inside: avoid;
+  column-rule: 1px solid #d4d2d2; 
+}
+.admonition-col3>.admonition-content-holder>.admonition-content {	
+  columns:100px 3;
+  -moz-columns:100px 3;
+  -webkit-columns:100px 3;
+  column-gap: 1vw;
+  overflow: visible ;
+  margin:0;
+  break-inside: avoid;
+  column-rule: 1px solid #d4d2d2; 
+}
+.admonition-col3 .admonition-content ol,
+.admonition-col3 .admonition-content ul {	
+  margin-top: -0.25em;
+}
+.admonition-kanban .admonition-col3 .admonition-content ul {	
+  margin:0;
+  break-inside: avoid;
+}
+.admonition-kanban .admonition-col3 .admonition-content ol {	
+  margin:0;
+  break-inside: avoid;
+}
+.admonition-col3 .admonition-content {	
+  overflow: visible;
+}
+
+.admonition-col3 >.admonition-content-holder {
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+.admonition-col3 p{
+  text-align: justify;
+  margin-top:0;
+  padding: 2px;
+ /*  height:100%;
+  overflow: auto; */
+}
+.admonition-col3 p>img{
+  display: block;
+  height: auto;
+}
+
+.admonition-col3-parent .admonition-col3 .admonition > .admonition-title.no-title + .admonition-content-holder {
+  margin-top: 0;
+}
+
+/****col4 四栏*****/
+.admonition-col4 {
+  box-shadow: none!important;
+}
+  
+.admonition-col4 .admonition	{
+  overflow: visible;
+  margin:0;
+}
+
+.callout.admonition-col4 > .admonition-content {	
+  column-count: 4;
+  column-gap: 1vw;
+  overflow: visible;
+  margin:0;
+  break-inside: avoid;
+}
+.admonition-col4 > .admonition-content-holder>.admonition-content {	
+  column-count: 4;
+  column-gap: 1vw;
+  overflow: visible;
+  margin:0;
+  break-inside: avoid;
+}
+.admonition-col4 .admonition-content {	
+  margin:0;
+  break-inside: avoid;
+}
+
+.admonition-col4 .admonition-content ol,
+.admonition-col4 .admonition-content ul {	
+  margin-top: -0.25em;
+}
+.admonition-kanban .admonition-col4 .admonition-content ul {	
+  margin:0;
+  break-inside: avoid;
+}
+.admonition-kanban .admonition-col4 .admonition-content ol {	
+  margin:0;
+  break-inside: avoid;
+}
+.admonition-col4 > .admonition-content {	
+  overflow: visible;
+}
+
+.admonition-col4 > .admonition-content-holder {
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+.admonition-col4 p {
+  text-align: justify;
+  margin-top:0;
+  padding: 2px;
+}
+.admonition-col4 p>img{
+  display: block;
+  height: auto;
+  -webkit-transition: -webkit-transform .3s ease;
+  -moz-transition: -moz-transform .3s ease;
+  -ms-transition: -ms-transform .3s ease;
+  transition: transform .3s ease;
+}
+
+.admonition-col4 p>img:hover{
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2)
+}
+   
+.admonition-col4-parent .admonition-col4 .admonition > .admonition-title.no-title + .admonition-content-holder {
+  margin-top: 0;
+}
+
+/*自适应分栏*/
+.admonition-flex {
+  margin: auto;
+  box-shadow:none;
+  border-left:0px;
+}
+
+.is-live-preview .callout-content.admonition-content >p {
+  margin-top: 0 ; 
+}
+.admonition-flex >.admonition-content-holder {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.admonition-flex .admonition-content {
+  width: 100%;
+  margin: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  border:none; 
+}
+.admonition-flex .admonition-content>div{
+  flex: 1;
+  margin: 0 0.625rem;
+}
+.admonition-flex .admonition-content[data-embed-type="image"] p{
+  align-self: baseline;
+}
+
+.admonition-flex .admonition-content[data-embed-type="image"] {
+justify-content: space-around;
+}
+
+/*ad-table*/
+.admonition-table {
+  overflow: visible;
+  margin: auto;
+  box-shadow:none;
+}
+.admonition-table .admonition-content {
+  width: calc(100% - 5px);
+  margin: 0;
+  overflow-x: auto!important; 
+  white-space: nowrap;
+}
+
+/*blank ad框全透明隐藏*/
+.admonition-blank {
+  overflow: visible;
+  background-color: rgba(255, 255, 255, 0)!important;
+  border-left:0px!important;
+  margin: auto;
+  box-shadow:none;
+}
+.admonition-blank .admonition-content {
+  overflow: visible;
+  margin: 0;
+}
+.callout.admonition-blank .admonition-content {
+  overflow: hidden;
+}  
+
+
+/* --- 标签、链接清楚显示.css --- */  
+ :is(.markdown-preview-view, .markdown-rendered) mark {
+  color: transparent !important;
+}
+
+:is(.markdown-preview-view, .markdown-rendered) mark:hover {
+  color: var(--text-normal) !important;
+}
+  
+
+
