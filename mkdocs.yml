@@ -55,6 +55,11 @@ plugins:
 
 extra_javascript:
   - javascripts/mathjax.js
+- 'assets/scripts/graph_view.js'
+- 'assets/scripts/graph_wasm.js'
+- 'assets/scripts/graph-render-worker.js'
+- 'assets/scripts/tinycolor.js'
+- 'assets/scripts/webpage.js'
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://unpkg.com/mermaid/dist/mermaid.min.js 
