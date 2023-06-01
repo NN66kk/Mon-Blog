@@ -1,9 +1,9 @@
 @font-face {
-    font-family: "江城圆体 500W";
-    src: url("assets/fonts/江城圆体 500W.ttf") format("truetype");
+    font-family: "Quicksand";
+    src: url("Quicksand-Medium.ttf") format("truetype");
 
 body {
-	font-family: 'Quicksand', '江城圆体 500W', PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif !important;
+	font-family: 'Quicksand', 'HarmonyOS Sans SC', PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif !important;
 	font-size: 17px;
 }
 
