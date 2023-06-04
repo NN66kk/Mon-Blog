@@ -1,5 +1,10 @@
+@font-face {
+    font-family: 'Mon';  /* 自定义新名称 */
+    src: url('assets/fonts/荆南麦圆体.ttf') format('truetype');
+}
+
 body {
-	font-family: 'Quicksand', 'HarmonyOS Sans SC', PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif !important;
+	font-family: 'Quicksand', 'Mon', PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif !important;
 	font-size: 17px;
 }
 
