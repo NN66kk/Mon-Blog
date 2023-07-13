@@ -1,0 +1,106 @@
+body {
+	font-family: 'Quicksand', 'HarmonyOS Sans SC', PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif !important;
+	font-size: 17px;
+}
+
+
+/**标题颜色**/
+
+.md-typeset h1 {
+    font-weight: bold;
+}
+
+.md-typeset h2 {
+    font-weight: bold;
+}
+
+.md-typeset h3 {
+    font-weight: bold;
+}
+
+.md-typeset h4 {
+    font-weight: bold;
+}
+
+.md-typeset h5 {
+    font-weight: bold;
+}
+
+/**图片居中和圆角**/
+
+.md-typeset img, .md-typeset svg, .md-typeset video {
+    border-radius: 10px;
+    margin-left: 0
+    margin-right: 0
+    display: block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.md-typeset img, .md-typeset svg, .md-typeset video {
+    max-width: 100%;
+}
+
+/**行高和字符间距**/
+
+.md-typeset {
+    line-height: 1.69;
+    letter-spacing: 1px;
+}
+
+.md-typeset ol li, .md-typeset ul li {
+    margin-bottom: 0.25em;
+}
+
+/**转换挖空**/
+
+.md-typeset mark {
+  color: transparent;
+  background-color: #dff2ea;
+  /*background-image:linear-gradient(to right, #ffafbd,#ffc3a0);*/
+  border-radius: 5px;
+  padding: 1px 2px;
+  margin: 0px 2px;
+}
+
+.md-typeset mark:hover {
+  color: black !important;
+  /*background-image:linear-gradient(to right, #ffafbd,#ffc3a0);*/
+  border-radius: 5px;
+  padding: 1px 2px;
+  margin: 0px 2px;
+}
+
+/**引用框美化**/
+/*
+.md-typeset blockquote {
+    color: #000000;
+    padding: 1px 15px;
+    border-left: 6px solid #546d78!important;
+    background-image: linear-gradient(to right, #d3cce3,#e9e4f0);
+    border-radius: 10px;
+}*/
+.md-typeset blockquote {
+    border: 3px solid #bde4d47a;
+    background-color: transparent;
+    border-radius: 0.4375em;
+}
+
+[dir=ltr] .md-typeset blockquote {
+    border-left: 3px solid #bde4d47a;
+}
+
+/**表格框线**/
+
+.md-typeset table:not([class]) td:not([align]), .md-typeset table:not([class]) th:not([align]) {
+    border: 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+/**背景
+
+body {
+    background-color: #fcf2c7;
+}**/
