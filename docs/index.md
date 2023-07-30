@@ -1,6 +1,6 @@
 # 🏡主页
 
-![[wallhaven-7prmdv.jpg]]
+![430fddb3-a8d0-43e5-859e-a40d03806e3a-7449034.jpg (4083×2296) (mubu.com)](https://api2.mubu.com/v3/document_image/430fddb3-a8d0-43e5-859e-a40d03806e3a-7449034.jpg)
 
 欢迎来到我的博客！这里是我记录生活点滴、分享学习心得和思考的地方。我的博客主要分为以下几个板块：
 
