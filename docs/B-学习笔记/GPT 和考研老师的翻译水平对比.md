@@ -21,4 +21,4 @@ But it’s interesting to wonder if the images we see every week of stress-free,
 
 ### 总结
 
-考研老师翻译的简直是一坨大便，看中文都看不明白，看来等以后 GPT 用起来了，一大批英语老师要失业了！
+翻译讲究一个信达雅，信和达两者应该都是达到了，区别就是“雅”，考研老师翻译的不够通顺，要读好几遍才能理解，GPT 翻译的则很顺畅，想必以后必然会有一大批英语教学工作者失业了！
