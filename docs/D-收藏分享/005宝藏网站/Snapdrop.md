@@ -1,4 +1,4 @@
-# Snapdrop 地表最强电脑 iPad 互传方法
+# Snapdrop
 
 前提是双方在同一个局域网，手机和电脑同时打开 https://snapdrop.net/ ，随后浏览器页面会显示设备。
 
