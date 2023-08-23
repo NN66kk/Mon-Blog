@@ -1,8 +1,6 @@
-@import url('https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css');
-
-* {
-  /* Screen version */
-  font-family: "LXGW WenKai Screen", sans-serif;
+body {
+	font-family: 'Quicksand', 'HarmonyOS Sans SC', PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif !important;
+	font-size: 17px;
 }
 
 /**标题颜色**/
