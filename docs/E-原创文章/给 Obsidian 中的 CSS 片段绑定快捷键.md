@@ -15,13 +15,13 @@
 
 新建一个文件夹用于存放 js 文件，本来库中有存放 js 文件的文件夹这步可以忽略。
 
-![[Pasted image 20230702190307.png]]
+![[pasted-image-20230702190307.png]]
 
 ### 第二步：添加 js 文件
 
 右击文件夹进入资源管理器，在当前文件夹下新建一个文本文档，命名为 `ToggleCssSnippets.js`
 
-![[Pasted image 20230702190516.png]]
+![[pasted-image-20230702190516.png]]
 
 用记事本打开文件将如下代码复制进去，代码第二行改成你需要绑定的 css 片段的名称。
 
@@ -54,33 +54,33 @@ module.exports = async (params) => {
 
 打开 quickadd 插件，点击 `Manage Macros` 按钮
 
-![[Pasted image 20230702191220.png]]
+![[pasted-image-20230702191220.png]]
 
 给新建的宏命名，点击 `Add macro` 按钮
 
-![[Pasted image 20230702191527.png]]
+![[pasted-image-20230702191527.png]]
 
 点击 `Configure` 按钮进入如下界面，选择相应的 js 文件，点击 `add`
 
-![[Pasted image 20230702192252.png]]
+![[pasted-image-20230702192252.png]]
 
 回到 quickadd 初始界面，新建一个命令，注意点亮旁边的小闪电，这是我们绑定快捷键的关键！
 
-![[Pasted image 20230702192052.png]]
+![[pasted-image-20230702192052.png]]
 
-![[Pasted image 20230702192455.png]]
+![[pasted-image-20230702192455.png]]
 
 点击命令旁边的齿轮按钮，进入设置，选择刚才创立的宏文件。
 
-![[Pasted image 20230702192656.png]]
+![[pasted-image-20230702192656.png]]
 
-![[Pasted image 20230702192712.png]]
+![[pasted-image-20230702192712.png]]
 
 ### 第四步：绑定快捷键
 
 进入 ob 设置页面点击快捷键，搜索你刚刚创建的 quickadd 命令的名称，并赋予其一个快捷键，大功告成！
 
-![[Pasted image 20230702192901.png]]
+![[pasted-image-20230702192901.png]]
 
 - 注意：如果第一次使用不成功，可以重启知识库再试一下！
 
