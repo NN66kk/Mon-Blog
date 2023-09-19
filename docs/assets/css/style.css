@@ -72,7 +72,7 @@ body {
 /**引用框美化**/
 
 .md-typeset blockquote {
-    border: 1px solid #adadad;
+    border: 3px solid #bde4d47a;
     background-color: transparent;
     border-radius: 0.4375em;
 }
