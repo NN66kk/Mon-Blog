@@ -70,22 +70,15 @@ body {
 }
 
 /**引用框美化**/
-/*
+
 .md-typeset blockquote {
-    border: 3px solid #bde4d47a;
+    border: 1px solid #adadad;
     background-color: transparent;
     border-radius: 0.4375em;
-}*/
+}
 
-/*[dir=ltr] .md-typeset blockquote {
+[dir=ltr] .md-typeset blockquote {
     border-left: 3px solid #bde4d47a;
-}*/
-
-.md-typeset blockquote {
-    padding: 1px 1px 1px 1px;
-    border-radius: 1em;
-    background-color: #FFFFFF;
-    box-shadow: 0 .2rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 /**表格框线**/
