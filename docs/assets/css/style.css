@@ -96,3 +96,9 @@ table {
 body {
     background-color: #fcf2c7;
 }**/
+
+/**加粗颜色**/
+
+strong {
+    color: mediumvioletred;
+}
