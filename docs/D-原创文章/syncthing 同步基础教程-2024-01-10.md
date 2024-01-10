@@ -59,3 +59,5 @@ obsidian 使用有需要不同步插件配置选项的可以看看 [Syncthing �
 [Syncthing - P2P文件同步工具 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/69267020)
 
 [Syncthing 配置倒腾记录 (pkmer.cn)](https://pkmer.cn/Pkmer-Docs/03-%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%A4%87%E4%BB%BD%E4%B8%8E%E5%90%8C%E6%AD%A5/syncthing%E9%85%8D%E7%BD%AE%E5%80%92%E8%85%BE%E8%AE%B0%E5%BD%95/)
+
+[安卓旧手机+Syncthing搭建一个文件同步盘_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Za411u751/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&vd_source=028202a94fa5d8ef90ee83b8f049c8f8)
