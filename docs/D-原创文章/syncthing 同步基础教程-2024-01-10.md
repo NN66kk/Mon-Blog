@@ -35,10 +35,27 @@ tags: syncthiing 同步 obsidian
 
 建议最少三台设备，电脑端负责编辑，移动端 ① 负责平时的调用、翻阅和轻度编辑，移动端 ② 则需要 24 小时在线，作为一个服务器来使用，旧手机是挺好的选择！
 
+obsidian 使用有需要不同步插件配置选项的可以看看 [Syncthing 配置倒腾记录 (pkmer.cn)](https://pkmer.cn/Pkmer-Docs/03-%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%A4%87%E4%BB%BD%E4%B8%8E%E5%90%8C%E6%AD%A5/syncthing%E9%85%8D%E7%BD%AE%E5%80%92%E8%85%BE%E8%AE%B0%E5%BD%95/) 这篇文章，里面有介绍。
+
+注意：中转设备很重要，如果所有设备都离线在重新连接的话会很慢，有中转设备基本连接上局域网就能秒同步。
+
 ## 总结
 
 ### 优点
 
+- 免费、配置简单、同步速度快。
+- 不止同步 ob，应用广泛，可以用来同步临时文件、音乐库、电影库等等。
+
 ### 缺点
 
-目前 ios 端虽说有一款软件 `mobius` 可以实现 syncthing 的同步但是需要一直保持在软件界面才行，iphone 或者 ipad 网友慎重选择，
+- 目前 ios 端虽说有一款软件 `mobius` 可以实现 syncthing 的同步但是需要一直保持在软件界面才行，iphone 或者 ipad 网友慎重选择，如果有能克服这个缺点的方法还请告知。
+- 必须要在同一局域网才能同步，网上有说不再同一局域网也能用，我测试了没有成功。
+- 需要一台实时在线的中转设备。
+
+---
+
+参考链接：
+
+[Syncthing - P2P文件同步工具 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/69267020)
+
+[Syncthing 配置倒腾记录 (pkmer.cn)](https://pkmer.cn/Pkmer-Docs/03-%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%A4%87%E4%BB%BD%E4%B8%8E%E5%90%8C%E6%AD%A5/syncthing%E9%85%8D%E7%BD%AE%E5%80%92%E8%85%BE%E8%AE%B0%E5%BD%95/)
