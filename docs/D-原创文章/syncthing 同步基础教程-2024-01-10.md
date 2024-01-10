@@ -25,7 +25,11 @@ tags: syncthiing 同步 obsidian
 
 ![](https://api2.mubu.com/v3/document_image/84bf3cf4-6345-4b4f-9860-dbf46cc08019-7449034.jpg)
 
-点击选项按钮：
+点击选项按钮：依次点击我圈住的部分进行设置，设备名可以随意命名，其余按照图中配置即可。
+
+![](https://api2.mubu.com/v3/document_image/0bf30ef1-0cd2-47c2-9dd8-cb1b6a5e5ffc-7449034.jpg)
+
+![](https://api2.mubu.com/v3/document_image/e1efc535-d580-4289-b1a1-9025c3a4e4b7-7449034.jpg)
 
 
 
