@@ -1,0 +1,40 @@
+<pre class="frontmatter language-yaml" style="display: none;" tabindex="0"><code class="language-yaml is-loaded"><span class="token key atrule">cdate</span><span class="token punctuation">:</span> 2024<span class="token punctuation">-</span>01<span class="token punctuation">-</span>10 08<span class="token punctuation">:</span><span class="token number">36</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span> syncthiing 同步 obsidian </code><button class="copy-code-button">复制</button></pre><div class="frontmatter-container"><div class="frontmatter-container-header"><div class="frontmatter-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Metadata</div><div class="frontmatter-section mod-tags"><span class="frontmatter-section-label">Tags</span><div class="frontmatter-section-data frontmatter-section-tags"><a class="tag" target="_blank" rel="noopener" href="#syncthiing">#syncthiing</a><a class="tag" target="_blank" rel="noopener" href="#同步">#同步</a><a class="tag" target="_blank" rel="noopener" href="#obsidian">#obsidian</a></div></div><div class="frontmatter-section"><span class="frontmatter-section-label">cdate</span><div class="frontmatter-section-data"><span class="frontmatter-section-data-item">2024-01-10 08:36</span></div></div></div>
+<h1 data-heading="syncthing 同步基础教程">syncthing 同步基础教程</h1>
+<h2 data-heading="1 前言">1 前言</h2>
+<p>不少人深入使用 ob 之后都会有同步的需求，本人分别用 webdav、icloud、Onedrive、阿里云 oss 同步过，在我还没有了解过 syncthing 的时候后一直用的是 webdav 同步，其缺点是同步缓慢，需要借助 ob 中的插件，并且还出现过丢失重要文件的 BUG，经过群友的推荐我了解到了 syncthing——开源免费并且配置简单，小白同学很容易上手，最重要的是它是实时同步的！就像滴答清单那样，你在电脑端添加个任务两秒后移动端的任务就出现了，简直不要太方便（注意：ios 有点小缺点，后面会说），往下看之前可以先看看 <a data-tooltip-position="top" aria-label="https://zhuanlan.zhihu.com/p/69267020" rel="noopener" class="external-link" href="https://zhuanlan.zhihu.com/p/69267020" target="_blank">Syncthing - P2P文件同步工具 - 知乎 (zhihu.com)</a>，写的很详细。</p>
+<h2 data-heading="2 配置">2 配置</h2>
+<p>首先我们需要在电脑端打开 syncthing 这款软件进入其图形操作界面（关于软件安装自行百度，有很多文章介绍），在左侧会有一个默认文件夹，没啥用删除就行，然后点击新建文件夹，出现如下界面：</p>
+<p></p><div src="attachment/77370b7fe797c3ab6b6b4f092a33edc0.png" class="internal-embed"></div><p></p>
+<ul>
+<li>文件夹标签：就是你在图形界面左侧显示的文件夹名称，它是可以随意命名的，可以叫知识库、摄影文件、工程文件等等。</li>
+<li>文件夹 ID：这个是唯一的，系统会给你默认搞一个当然你也可以自己设置（拷贝到剪贴板，后面会用到）。</li>
+<li>文件夹路径：就是你需要同步的文件夹路径。</li>
+</ul>
+<p>移动端下载好软件之后在电脑端的右上角点击 <code>操作→显示 ID</code>，用手机扫码即可添加设备，稍微等一会电脑端也会弹出添加设备的请求（注意一定要两边互相添加设备，这个提示有的快有的慢，耐心等待一下），以我的华为中转设备为例，互相添加设备之后电脑端右下角会出现新添加的设备</p>
+<p></p><div src="attachment/94a1df9202a0fbbb833c676a647519ec.png" class="internal-embed"></div><p></p>
+<p>点击选项按钮：依次点击我圈住的部分进行设置，设备名可以随意命名，其余按照图中配置即可（注意共享页面之后只有中转设备才需要钩 <code>作为中介</code>。）。</p>
+<p></p><div src="attachment/c4dbc0e0ce44477701d024068d303943.png" class="internal-embed"></div><p></p>
+<p></p><div src="attachment/ebae0d4461d41f978b1ab115db51f383.png" class="internal-embed"></div><p></p>
+<p>然后在移动端添加文件夹，文件夹 ID 就设为前面你保存的那个，其余设置参考上面的讲述。然后两者就可以共享文件了，点击 <code>设备→选项→共享</code> 两台设备分别给需要共享的文件夹或者设备打钩即可。其余设备添加雷同，这里不再介绍，不太理解的可以看看我前面推荐的文章。</p>
+<h2 data-heading="3 用法分享">3 用法分享</h2>
+<p>建议最少三台设备，电脑端负责编辑，移动端 ① 负责平时的调用、翻阅和轻度编辑，移动端 ② 则需要 24 小时在线，作为一个服务器来使用，旧手机是挺好的选择！</p>
+<p>obsidian 使用有需要不同步插件配置选项的可以看看 <a data-tooltip-position="top" aria-label="https://pkmer.cn/Pkmer-Docs/03-%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%A4%87%E4%BB%BD%E4%B8%8E%E5%90%8C%E6%AD%A5/syncthing%E9%85%8D%E7%BD%AE%E5%80%92%E8%85%BE%E8%AE%B0%E5%BD%95/" rel="noopener" class="external-link" href="https://pkmer.cn/Pkmer-Docs/03-%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%A4%87%E4%BB%BD%E4%B8%8E%E5%90%8C%E6%AD%A5/syncthing%E9%85%8D%E7%BD%AE%E5%80%92%E8%85%BE%E8%AE%B0%E5%BD%95/" target="_blank">Syncthing 配置倒腾记录 (pkmer.cn)</a> 这篇文章，里面有介绍。</p>
+<p>注意：中转设备很重要，如果所有设备都离线在重新连接的话会很慢，有中转设备基本连接上局域网就能秒同步。</p>
+<h2 data-heading="4 总结">4 总结</h2>
+<h3 data-heading="4.1 优点">4.1 优点</h3>
+<ul>
+<li>免费、配置简单、同步速度快。</li>
+<li>不止同步 ob，应用广泛，可以用来同步临时文件、音乐库、电影库等等。</li>
+</ul>
+<h3 data-heading="4.2 缺点">4.2 缺点</h3>
+<ul>
+<li>目前 ios 端虽说有一款软件 <code>mobius</code> 可以实现 syncthing 的同步但是需要一直保持在软件界面才行，iphone 或者 ipad 网友慎重选择，如果有能克服这个缺点的方法还请告知。</li>
+<li>必须要在同一局域网才能同步，网上有说不再同一局域网也能用，我测试了没有成功。</li>
+<li>需要一台实时在线的中转设备。</li>
+</ul>
+<hr>
+<p>参考链接：</p>
+<p><a data-tooltip-position="top" aria-label="https://zhuanlan.zhihu.com/p/69267020" rel="noopener" class="external-link" href="https://zhuanlan.zhihu.com/p/69267020" target="_blank">Syncthing - P2P文件同步工具 - 知乎 (zhihu.com)</a></p>
+<p><a data-tooltip-position="top" aria-label="https://pkmer.cn/Pkmer-Docs/03-%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%A4%87%E4%BB%BD%E4%B8%8E%E5%90%8C%E6%AD%A5/syncthing%E9%85%8D%E7%BD%AE%E5%80%92%E8%85%BE%E8%AE%B0%E5%BD%95/" rel="noopener" class="external-link" href="https://pkmer.cn/Pkmer-Docs/03-%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%A4%87%E4%BB%BD%E4%B8%8E%E5%90%8C%E6%AD%A5/syncthing%E9%85%8D%E7%BD%AE%E5%80%92%E8%85%BE%E8%AE%B0%E5%BD%95/" target="_blank">Syncthing 配置倒腾记录 (pkmer.cn)</a></p>
+<p><a data-tooltip-position="top" aria-label="https://www.bilibili.com/video/BV1Za411u751/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&amp;vd_source=028202a94fa5d8ef90ee83b8f049c8f8" rel="noopener" class="external-link" href="https://www.bilibili.com/video/BV1Za411u751/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&amp;vd_source=028202a94fa5d8ef90ee83b8f049c8f8" target="_blank">安卓旧手机+Syncthing搭建一个文件同步盘_哔哩哔哩_bilibili</a></p>
