@@ -12,4 +12,4 @@
 
 [[00原创文章|原创文章]] 
 
-本开源笔记灵感来自：https://newzone.top，
+本开源笔记灵感来自：[LearnData 开源笔记](https://newzone.top)，希望能借此提升自己的写作能力！
