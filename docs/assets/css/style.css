@@ -7,6 +7,7 @@ body {
 
 .md-typeset h1 {
     font-weight: bold;
+    text-align: center;
 }
 
 .md-typeset h2 {
