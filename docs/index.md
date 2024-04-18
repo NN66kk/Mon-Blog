@@ -4,12 +4,8 @@
 
 `3109578741@qq.com`。
 
-[生活专栏](%E7%94%9F%E6%B4%BB%E4%B8%93%E6%A0%8F.md) 
+[生活专栏](%E7%94%9F%E6%B4%BB%E4%B8%93%E6%A0%8F.md) | [学习笔记](%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md) | [个人收藏](%E4%BC%98%E8%B4%A8%E5%86%85%E5%AE%B9.md) | [[00原创文章|原创文章]] 
 
-[学习笔记](%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md) 
-
-[优质内容](%E4%BC%98%E8%B4%A8%E5%86%85%E5%AE%B9.md) 
-
-[[00原创文章|原创文章]] 
+![封面图](https://api2.mubu.com/v3/document_image/430fddb3-a8d0-43e5-859e-a40d03806e3a-7449034.jpg) 
 
 本开源笔记灵感来自：[LearnData 开源笔记](https://newzone.top)，希望能借此提升自己的写作能力！
