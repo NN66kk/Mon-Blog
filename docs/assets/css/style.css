@@ -1,6 +1,8 @@
-body {
-	font-family: 'Quicksand', 'HarmonyOS Sans SC', PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif !important;
-	font-size: 17px;
+@import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@500;700&display=swap');
+
+* {
+  /* Screen version */
+  font-family: "Noto Serif SC", sans-serif;
 }
 
 /**标题颜色**/
