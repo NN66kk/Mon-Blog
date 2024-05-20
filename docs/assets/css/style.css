@@ -62,6 +62,7 @@
   border-radius: 5px;
   padding: 1px 2px;
   margin: 0px 2px;
+  -webkit-box-decoration-break: clone;
 }
 
 .md-typeset u:hover {
@@ -70,6 +71,7 @@
   border-radius: 5px;
   padding: 1px 2px;
   margin: 0px 2px;
+  -webkit-box-decoration-break: clone;
 }
 
 /**引用框美化**/
