@@ -55,7 +55,7 @@
 
 /**转换挖空**/
 
-.md-typeset mark {
+.md-typeset u {
   color: transparent;
   background-color: #dff2ea;
   /*background-image:linear-gradient(to right, #ffafbd,#ffc3a0);*/
@@ -64,7 +64,7 @@
   margin: 0px 2px;
 }
 
-.md-typeset mark:hover {
+.md-typeset u:hover {
   color: black !important;
   /*background-image:linear-gradient(to right, #ffafbd,#ffc3a0);*/
   border-radius: 5px;
