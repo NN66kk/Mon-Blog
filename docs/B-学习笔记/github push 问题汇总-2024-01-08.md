@@ -5,7 +5,7 @@ tags: 博客 push github
 
 # github push 问题汇总
 
-## 问题一
+## 1 问题一
 
 报错： `fatal:unbale to access xxx:The requested URL returned error:502`
 
@@ -20,7 +20,7 @@ unset http_proxy
 unset https_proxy
 ```
 
-## 问题二
+## 2 问题二
 
 报错：Failed to connect to github.com port 443 after 21090 ms: Couldn‘t connect to server
 
