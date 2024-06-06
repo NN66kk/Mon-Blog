@@ -92,10 +92,10 @@
 }
 
 [dir=ltr] .md-typeset blockquote {
-    border-left: 3px solid #bde4d47a;
+    border-left: 1px solid #bde4d47a;
 }
 
-.md-typeset blockquote:before {
+[dir=ltr] .md-typeset blockquote:before {
     content: '';
     position: absolute;
     left: 5px;
