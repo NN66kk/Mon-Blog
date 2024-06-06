@@ -131,3 +131,38 @@ strong {
 .md-typeset pre>code {
     margin: 10px;
 }
+
+/**缩进参考线**/
+
+ul {
+    list-style: none;
+    padding-left: 20px;
+    position: relative;
+}
+
+ul:before {
+    content: '';
+    border-left: 2px solid #000; /* 竖线的颜色和宽度 */
+    position: absolute;
+    height: 100%;
+    left: 10px;
+    top: 0;
+}
+
+ul li {
+    position: relative;
+}
+
+ul li:before {
+    content: '';
+    border-top: 2px solid #000; /* 横线的颜色和宽度 */
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 10px;
+    transform: translateY(-50%);
+}
+
+ul li:last-child:before {
+    border-left: 2px solid transparent; /* 移除最后一个元素的竖线 */
+}
