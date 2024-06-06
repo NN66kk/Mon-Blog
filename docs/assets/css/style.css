@@ -124,7 +124,6 @@ strong {
     word-wrap: break-word;
     position: relative; /* 确保按钮定位正确 */
     padding: 1px 5px 1px;
-    background-color: #f5f5f5;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: auto;
