@@ -115,3 +115,16 @@ body {
 strong {
     color: mediumvioletred;
 }
+
+/**代码块优化**/
+
+.md-typeset code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: relative; /* 确保按钮定位正确 */
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: auto;
+}
