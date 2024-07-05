@@ -15,14 +15,14 @@ tags: 博客 push github
 
 在博客根文件夹当中 `bash`，然后将下面的代码复制进去然后回车就可以正常 `push` 了！
 
-```js
+```git
 unset http_proxy
 unset https_proxy
 ```
 
 ## 2 问题二
 
-报错：Failed to connect to github.com port 443 after 21090 ms: Couldn‘t connect to server
+报错：`Failed to connect to github.com port 443 after 21090 ms: Couldn‘t connect to server`
 
 原因：VPN 调整导致的端口更改
 
@@ -30,7 +30,7 @@ unset https_proxy
 
 设置中找到代理端口，然后任意位置 bash 电脑中的 git，再输入一下代码即可解决。（后面那一串数字就是前面你查到的端口值）
 
-```js
+```git
 git config--global http.proxy 127.0.0.1:10345
 git config--global https.proxy 127.0.0.1:10345
 ```
