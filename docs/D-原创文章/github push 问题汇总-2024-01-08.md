@@ -1,6 +1,6 @@
 ---
 cdate: 2024-01-08 23:06
-tags: 博客 push github
+tags: 博客 push github 原创文章 
 ---
 
 # github push 问题汇总
