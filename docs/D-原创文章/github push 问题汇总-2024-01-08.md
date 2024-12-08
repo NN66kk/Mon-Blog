@@ -3,7 +3,7 @@ cdate: 2024-01-08 23:06
 tags: 博客 push github 原创文章 
 ---
 
-# github push 问题汇总
+# 博客提交问题汇总
 
 ## 1 问题一
 
@@ -33,4 +33,30 @@ unset https_proxy
 ```git
 git config--global http.proxy 127.0.0.1:10345
 git config--global https.proxy 127.0.0.1:10345
+```
+
+## 问题三
+
+报错：
+
+```
+error:bad ref for .git/logs/refs/remotes/origin/xxx
+fatal:bad object refs/remotes/origin/xxx
+```
+
+解决方法：
+
+1. 到项目的.git 目录下
+2. 进入refs/remotes/origin/
+3. 删除所有内容
+4. 重新拉取，成功
+
+---
+
+```
+
+参考链接：
+
+https://www.cnblogs.com/along007/p/17335825.html
+
 ```
