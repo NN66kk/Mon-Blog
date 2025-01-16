@@ -51,6 +51,10 @@ fatal:bad object refs/remotes/origin/xxx
 3. 删除所有内容
 4. 重新拉取，成功
 
+## 问题四
+
+使用新设备拉取 Git 并推送的时候会提示让我们输入 `username` 和 `passport`。前者就是你的 GitHub 账号名称，后者就是你当时申请的 Key。
+
 ---
 
 ```
