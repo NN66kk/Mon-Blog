@@ -75,12 +75,6 @@ pre, code {
   padding: 1px 2px;
   margin: 0px 2px;
   -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-
-.md-typeset u.active {
-  color: inherit !important;
-  background-color: transparent !important;
 }
 
 .md-typeset u:hover {
@@ -90,7 +84,6 @@ pre, code {
   padding: 1px 2px;
   margin: 0px 2px;
   -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 /**引用框美化**/
