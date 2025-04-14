@@ -4,10 +4,12 @@
 
 # 2025 年四月份博客文章
 
-> 最近想分享一些优质效率工具和热播的电视剧和动漫资源，大家有什么想看的欢迎通过公众号告诉我，我空闲的时候尽量帮大家找找，如果有好的资源也欢迎投稿哦~
+> 最近主要更新[[翻译学习 Entity Framework Tutorial_2025041408136|翻译学习 Entity Framework Tutorial]]和[[金铲铲从入门到精通_20250414083941|金铲铲从入门到精通]]这两个项目，如果有补充内容欢迎找我投稿哦～
 
 - 📌[[降压减脂菜谱|降压减脂菜谱]] 
-- 📌[[翻译学习 Entity Framework Tutorial_2025041408136|翻译学习 Entity Framework Tutorial]]
+- 📌[[翻译学习 Entity Framework Tutorial_2025041408136|翻译学习 Entity Framework Tutorial]] 
+- 📌[[金铲铲从入门到精通_20250414083941|金铲铲从入门到精通]] 
+- 04-14：Entity Framework Tutorial：[[创建实体_20250414081656|创建实体]] 
 - 04-07：[[LocalSend_20250407082622|LocalSend]]
 
 ## 三月份
