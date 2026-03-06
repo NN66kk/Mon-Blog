@@ -2,7 +2,7 @@
 template: posts_list.html
 ---
 
-# 哞哞的数字花园
+# Mon's Digital Garden
 
 这是我的数字花园。
 
