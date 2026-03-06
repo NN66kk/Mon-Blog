@@ -5,7 +5,7 @@
 
   {% set ns = namespace(entries=[]) %}
   {% for post in nav.pages %}
-    {% if post.file and post.file.src_uri.startswith("D-") %}
+    {% if post.file and post.file.src_uri[:1] in ["A", "B", "C", "D"] %}
       {% set base = post.file.src_uri.rsplit("/", 1)[-1].rsplit(".", 1)[0] %}
       {% set date_key = "00000000" %}
       {% set date_label = "-" %}
