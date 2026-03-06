@@ -6,7 +6,7 @@ edit_uri: edit/main/docs/
 
 theme:
   name: material
-  custom_dir: docs\templates
+  custom_dir: docs/templates
   language: zh
   icon:
     repo: fontawesome/brands/github
@@ -79,5 +79,4 @@ extra_javascript:
   - https://unpkg.com/mermaid/dist/mermaid.min.js
 
 extra_css:
-  - https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css
   - css/custom.css

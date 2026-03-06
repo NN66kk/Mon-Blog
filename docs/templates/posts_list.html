@@ -5,7 +5,7 @@
 
   {% set ns = namespace(entries=[]) %}
   {% for post in nav.pages %}
-    {% if post.file and post.file.src_uri[:2] == "D-" %}
+    {% if post.file and post.file.src_uri.startswith("D-") %}
       {% set base = post.file.src_uri.rsplit("/", 1)[-1].rsplit(".", 1)[0] %}
       {% set date_key = "00000000" %}
       {% set date_label = "-" %}
@@ -14,28 +14,20 @@
         {% set date_key = post.meta.date.strftime("%Y%m%d") %}
         {% set date_label = post.meta.date.strftime("%Y-%m-%d") %}
       {% else %}
-        {% set raw = base %}
-        {% if "_" in base %}
-          {% set raw = base.rsplit("_", 1)[-1] %}
-        {% endif %}
-        {% set compact = raw|replace("-", "")|replace("_", "")|replace(" ", "")|replace(":", "") %}
-        {% if compact|length >= 8 and compact[:8].isdigit() %}
-          {% set year = compact[:4]|int %}
-          {% set month = compact[4:6]|int %}
-          {% set day = compact[6:8]|int %}
-          {% if year >= 1900 and month >= 1 and month <= 12 and day >= 1 and day <= 31 %}
+        {% set tail10 = base[-10:] %}
+        {% set tail10_compact = tail10|replace("-", "") %}
+        {% if tail10|length == 10 and tail10[4:5] == "-" and tail10[7:8] == "-" and tail10_compact.isdigit() %}
+          {% set date_key = tail10_compact %}
+          {% set date_label = tail10 %}
+        {% else %}
+          {% set raw = "" %}
+          {% if "_" in base %}
+            {% set raw = base.rsplit("_", 1)[-1] %}
+          {% endif %}
+          {% set compact = raw|replace("-", "")|replace("_", "")|replace(" ", "")|replace(":", "") %}
+          {% if compact|length >= 8 and compact[:8].isdigit() %}
             {% set date_key = compact[:8] %}
             {% set date_label = compact[:4] ~ "-" ~ compact[4:6] ~ "-" ~ compact[6:8] %}
-          {% endif %}
-        {% else %}
-          {% set tail10 = base[-10:] %}
-          {% if tail10[0:4].isdigit() and tail10[4:5] == "-" and tail10[5:7].isdigit() and tail10[7:8] == "-" and tail10[8:10].isdigit() %}
-            {% set month = tail10[5:7]|int %}
-            {% set day = tail10[8:10]|int %}
-            {% if month >= 1 and month <= 12 and day >= 1 and day <= 31 %}
-              {% set date_key = tail10|replace("-", "") %}
-              {% set date_label = tail10 %}
-            {% endif %}
           {% endif %}
         {% endif %}
       {% endif %}
@@ -46,12 +38,13 @@
 
   {% for entry in ns.entries|sort(attribute="date_key", reverse=true) %}
     {% set post = entry.page %}
-    {% set excerpt_html = post.content|default("", true) %}
-
-    {% if "</h1>" in excerpt_html %}
-      {% set excerpt_html = excerpt_html.split("</h1>", 1)[1] %}
-    {% elif "</h2>" in excerpt_html %}
-      {% set excerpt_html = excerpt_html.split("</h2>", 1)[1] %}
+    {% set excerpt_html = post.content %}
+    {% set stripped = excerpt_html.lstrip() %}
+    {% if stripped.startswith("<h") and "</h" in stripped %}
+      {% set excerpt_html = stripped.split("</h", 1)[1] %}
+      {% if ">" in excerpt_html %}
+        {% set excerpt_html = excerpt_html.split(">", 1)[1] %}
+      {% endif %}
     {% endif %}
 
     <hr>
@@ -64,10 +57,10 @@
       {% elif "</p>" in excerpt_html %}
         {{ (excerpt_html.split("</p>", 1)[0] ~ "</p>")|safe }}
       {% else %}
-        <p>{{ post.meta.description if post.meta and post.meta.description else "Read the full post." }}</p>
+        <p>{{ post.meta.description if post.meta and post.meta.description else "暂无摘要，点击阅读全文。" }}</p>
       {% endif %}
 
-      <p><a class="post-read-more" href="{{ post.url|url }}">Read more</a></p>
+      <p><a class="post-read-more" href="{{ post.url|url }}">阅读全文</a></p>
     </article>
   {% endfor %}
 {% endblock %}

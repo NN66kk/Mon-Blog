@@ -1,24 +1,3 @@
-:root {
-  --md-text-font: "LXGW WenKai Screen", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-  --md-code-font: "LXGW WenKai Screen", "Cascadia Code", "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-}
-
-html,
-body,
-input,
-button,
-textarea,
-select {
-  font-family: var(--md-text-font);
-}
-
-code,
-kbd,
-pre,
-samp {
-  font-family: var(--md-code-font);
-}
-
 .post-title {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
