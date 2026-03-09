@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+
+{% block content %}
+  <h1>{{ page.title }}</h1>
+  {% if page.meta and page.meta.date %}
+    <p class="post-meta">Published {{ page.meta.date.strftime("%Y-%m-%d") }}</p>
+  {% endif %}
+  {% if page.meta and page.meta.image and page.meta.image.add_to_post and page.meta.image.src %}
+    <div class="{{ page.meta.image.class|default('') }}"><img src="{{ page.meta.image.src }}" alt="{{ page.title }}"/></div>
+  {% endif %}
+  {{ page.content }}
+{% endblock %}
