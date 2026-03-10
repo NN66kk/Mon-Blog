@@ -1,0 +1,362 @@
+---
+title: "在 Android 手机上用 Termux + Git 同步 Obsidian 笔记的一种更稳定的实践方案"
+date: 2026-03-10T15:40:51+08:00
+tags: 原创文章 
+---
+
+# 在 Android 手机上用 Termux + Git 同步 Obsidian 笔记的一种更稳定的实践方案
+
+很多人在手机上使用 Obsidian 时，希望把笔记仓库放到 GitHub 上进行版本管理。但如果直接在手机目录中初始化 Git 仓库，很容易遇到一个问题：仓库突然损坏，甚至无法恢复。
+
+原因在于 Git 仓库的核心数据存放在 `.git` 目录中，而 Android 系统中的多个应用（例如 Obsidian、本地文件管理器、同步软件等）都会同时读写同一目录。这些程序并不理解 Git 的内部结构，一旦对 `.git` 目录进行了错误修改，仓库就可能被破坏。
+
+一种更稳定的方案是：**在手机上维护两个目录**。
+
+其中一个目录放在 **Termux 的私有环境中**，只用于 Git 操作；另一个目录放在 **手机共享存储中**，供 Obsidian 编辑使用。两个目录之间通过同步脚本交换文件。
+
+整体结构可以理解为：
+
+```
+GitHub
+   ↑
+Termux 中的 Git 仓库
+   ↑ ↓ 同步脚本
+手机中的 Obsidian 编辑目录
+```
+
+在这种结构下：
+
+-   Git 只运行在 Termux 环境
+    
+-   Obsidian 只操作普通文件目录
+    
+-   `.git` 永远不会被其他应用接触
+    
+
+这会显著提高仓库的稳定性。
+
+下面从克隆仓库开始，完整介绍这种方案的实现过程。
+
+---
+
+## 1 环境准备
+
+首先需要安装两个应用：
+
+-   Termux
+    
+-   Obsidian
+    
+
+Termux 是一个 Android 上的 Linux 终端环境，可以运行 Git、rsync 等工具。
+
+进入 Termux 后，先安装必要的软件：
+
+```bash
+pkg update
+pkg install git rsync
+```
+
+其中 Git 用于管理仓库版本，`rsync` 用于同步两个目录的文件。
+
+---
+
+## 2 克隆 GitHub 仓库
+
+接下来在 Termux 中创建一个用于存放仓库的目录：
+
+```bash
+mkdir -p ~/vaults
+cd ~/vaults
+```
+
+然后从 GitHub 克隆仓库，例如：
+
+```bash
+git clone https://github.com/yourname/knowledge-vault.git
+```
+
+克隆完成后，Termux 中会出现一个仓库目录，例如：
+
+```
+~/vaults/knowledge-vault
+```
+
+这个目录将作为 **Git 仓库目录**，之后所有 Git 操作都会在这里完成。
+
+需要注意的是，这个目录最好只在 Termux 中使用，不要在手机文件管理器中随意修改。
+
+---
+
+## 3 创建 Obsidian 工作目录
+
+接下来需要在手机共享存储中创建一个目录，用来作为 Obsidian 的工作区。
+
+例如：
+
+```
+Documents/obsidian/knowledge-vault
+```
+
+对应的完整路径为：
+
+```
+~/storage/shared/Documents/obsidian/knowledge-vault
+```
+
+之后在 Obsidian 中打开这个目录即可。
+
+从此以后：
+
+-   Obsidian 只编辑这里的文件
+    
+-   Git 只管理 Termux 中的仓库
+    
+
+两个环境通过脚本进行同步。
+
+---
+
+## 4 控制同步范围
+
+如果把整个笔记仓库完整同步到 GitHub，往往会遇到两个问题：
+
+第一是仓库体积会越来越大，因为插件、缓存、附件等内容都会被提交。  
+第二是同步冲突的概率会上升，因为很多文件属于临时数据。
+
+因此实际使用时，通常只同步**核心笔记内容**。例如，一个典型的知识库可能包含如下结构：
+
+```
+01-notes
+02-learning
+03-projects
+04-archive
+Templates
+Index.md
+```
+
+这些目录通常包含：
+
+-   日常记录
+    
+-   学习笔记
+    
+-   项目资料
+    
+-   历史归档
+    
+-   模板文件
+    
+-   知识库首页
+    
+
+它们是最值得进行版本管理的内容。
+
+而另一些目录通常不会进入 Git，例如：
+
+```
+.obsidian
+plugins
+cache
+attachments
+```
+
+这些文件通常是：
+
+-   编辑器配置
+    
+-   插件运行数据
+    
+-   临时缓存
+    
+-   大体积附件
+    
+
+这些内容即使不同步，也不会影响笔记本身的使用。
+
+因此在同步脚本中，我们只会允许特定目录进入同步，其余内容全部忽略。
+
+---
+
+## 5 创建 Git → 手机同步脚本
+
+首先创建一个脚本，用来把 Git 仓库内容同步到手机目录。
+
+在 Termux 中输入：
+
+```bash
+cat > ~/vaultfromgit <<'EOF'
+#!/data/data/com.termux/files/usr/bin/bash
+
+cd ~/vaults/knowledge-vault || exit
+git pull
+
+rsync -avm --delete \
+  --exclude "/.git/" \
+  --include "/01-notes/***" \
+  --include "/02-learning/***" \
+  --include "/03-projects/***" \
+  --include "/04-archive/***" \
+  --include "/Templates/***" \
+  --include "/Index.md" \
+  --include "*/" \
+  --exclude "*" \
+  ~/vaults/knowledge-vault/ \
+  ~/storage/shared/Documents/obsidian/knowledge-vault/
+
+EOF
+```
+
+这个脚本名为 `vaultfromgit`。
+
+它执行三个步骤：
+
+首先进入 Git 仓库目录：
+
+```
+cd ~/vaults/knowledge-vault
+```
+
+然后从 GitHub 获取最新版本：
+
+```
+git pull
+```
+
+最后使用 `rsync` 同步文件。
+
+`rsync` 是 Linux 中常见的文件同步工具，它可以只同步发生变化的文件，并保持两个目录内容一致。
+
+脚本中使用的参数：
+
+```
+rsync -avm --delete
+```
+
+含义如下：
+
+-   `-a` 保留文件属性
+    
+-   `-v` 显示同步过程
+    
+-   `-m` 自动清理空目录
+    
+-   `--delete` 删除目标目录中多余的文件
+    
+
+后面的 `--include` 用于指定允许同步的目录，而最后一行：
+
+```
+--exclude "*"
+```
+
+表示除了允许的内容，其余全部忽略。
+
+---
+
+## 6 创建 手机 → Git 同步脚本
+
+接下来创建第二个脚本，用于把手机修改提交到 GitHub。
+
+输入：
+
+```bash
+cat > ~/vaulttogit <<'EOF'
+#!/data/data/com.termux/files/usr/bin/bash
+
+rsync -avm --delete \
+  --exclude "/.obsidian/" \
+  --include "/01-notes/***" \
+  --include "/02-learning/***" \
+  --include "/03-projects/***" \
+  --include "/04-archive/***" \
+  --include "/Templates/***" \
+  --include "/Index.md" \
+  --include "*/" \
+  --exclude "*" \
+  ~/storage/shared/Documents/obsidian/knowledge-vault/ \
+  ~/vaults/knowledge-vault/
+
+cd ~/vaults/knowledge-vault || exit
+
+git add .
+git commit -m "update from phone" || true
+git push
+
+EOF
+```
+
+这个脚本名为 `vaulttogit`。
+
+它首先使用 `rsync` 将手机目录同步回 Git 仓库，然后执行 Git 提交：
+
+```
+git add .
+git commit
+git push
+```
+
+其中：
+
+```
+|| true
+```
+
+用于避免在没有文件变化时产生报错。
+
+---
+
+## 7 赋予脚本执行权限
+
+创建脚本后，需要为其添加执行权限：
+
+```bash
+chmod +x ~/vaultfromgit
+chmod +x ~/vaulttogit
+```
+
+否则系统不会允许脚本运行。
+
+---
+
+## 8 日常同步流程
+
+之后的使用方式非常简单。
+
+从 GitHub 更新笔记：
+
+```bash
+vaultfromgit
+```
+
+把手机修改提交到 GitHub：
+
+```bash
+vaulttogit
+```
+
+一个典型的使用流程如下：
+
+1 打开 Termux  
+2 运行 `vaultfromgit` 更新笔记  
+3 在 Obsidian 中编辑内容  
+4 编辑完成后运行 `vaulttogit` 提交修改
+
+整个过程只需要两条命令。
+
+---
+
+## 9 总结
+
+在 Android 手机上使用 Git 管理 Obsidian 笔记时，直接把仓库放在手机目录中往往并不稳定。通过在 Termux 中维护一个独立的 Git 仓库，并使用脚本与 Obsidian 工作目录同步，可以有效避免 `.git` 被其他应用破坏。
+
+这种方案的特点是：
+
+-   Git 仓库完全隔离
+    
+-   同步过程可控
+    
+-   仓库结构更加干净
+    
+
+对于经常在手机上记录笔记，同时又希望使用 Git 进行版本管理的人来说，这是一个兼顾稳定性和可维护性的实践方式。
