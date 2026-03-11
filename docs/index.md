@@ -4,6 +4,8 @@ template: posts_list.html
 
 # Mon's Digital Garden
 
+同步测试效果
+
 这是我的数字花园。
 
 我在这里记录学习过程中的思考、技术笔记，以及一些尚未完全成型的想法。
