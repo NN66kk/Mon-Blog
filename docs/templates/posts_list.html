@@ -34,26 +34,35 @@
 
   {% for entry in ns.entries|sort(attribute="date_key", reverse=true) %}
     {% set post = entry.page %}
-    {% set excerpt_html = post.content %}
-    {% set stripped = excerpt_html.lstrip() %}
+    {% set body_html = post.content %}
+    {% set stripped = body_html.lstrip() %}
     {% if stripped.startswith("<h") and "</h" in stripped %}
-      {% set excerpt_html = stripped.split("</h", 1)[1] %}
-      {% if ">" in excerpt_html %}
-        {% set excerpt_html = excerpt_html.split(">", 1)[1] %}
+      {% set body_html = stripped.split("</h", 1)[1] %}
+      {% if ">" in body_html %}
+        {% set body_html = body_html.split(">", 1)[1] %}
       {% endif %}
     {% endif %}
+    {% set marker_excerpt = "" %}
+    {% if "<!--more-->" in body_html %}
+      {% set marker_excerpt = body_html.split("<!--more-->", 1)[0]|striptags|trim %}
+    {% endif %}
+    {% set auto_excerpt = body_html|striptags|trim|truncate(120) %}
 
     <hr>
     <article class="post-entry">
       <h2 class="post-title"><a href="{{ post.url|url }}">{{ post.title }}</a></h2>
       <span class="post-date">{{ entry.date_label }}</span>
 
-      {% if "<!--more-->" in excerpt_html %}
-        {{ excerpt_html.split("<!--more-->", 1)[0] }}
-      {% elif "</p>" in excerpt_html %}
-        {{ (excerpt_html.split("</p>", 1)[0] ~ "</p>")|safe }}
+      {% if post.meta and post.meta.description %}
+        <p class="post-excerpt">{{ post.meta.description }}</p>
+      {% elif post.meta and post.meta.excerpt %}
+        <p class="post-excerpt">{{ post.meta.excerpt }}</p>
+      {% elif marker_excerpt %}
+        <p class="post-excerpt">{{ marker_excerpt }}</p>
+      {% elif auto_excerpt %}
+        <p class="post-excerpt">{{ auto_excerpt }}</p>
       {% else %}
-        <p>{{ post.meta.description if post.meta and post.meta.description else "暂无摘要，点击阅读全文。" }}</p>
+        <p class="post-excerpt">暂无摘要，点击阅读全文。</p>
       {% endif %}
 
       <p><a class="post-read-more" href="{{ post.url|url }}">阅读全文</a></p>
