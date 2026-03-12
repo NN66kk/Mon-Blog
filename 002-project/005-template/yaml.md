@@ -5,6 +5,7 @@ tR += `---
 title: "${tp.file.cursor(1)}"
 date: ${date}
 tags: ${tp.file.cursor(0)}
+description: ${tp.file.cursor(3)}
 ---
 
 # ${tp.file.cursor(1)}
