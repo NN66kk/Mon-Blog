@@ -35,6 +35,22 @@
   {% for entry in ns.entries|sort(attribute="date_key", reverse=true) %}
     {% set post = entry.page %}
     {% set body_html = post.content %}
+    {% set description = post.blog_description_text|default("", true) %}
+    {% set excerpt = post.blog_excerpt_text|default("", true) %}
+    {% if not description and post.meta and post.meta.description %}
+      {% set description = post.meta.description %}
+    {% endif %}
+    {% if not excerpt and post.meta and post.meta.excerpt %}
+      {% set excerpt = post.meta.excerpt %}
+    {% endif %}
+    {% if description is iterable and description is not string %}
+      {% set description = description|join(" ") %}
+    {% endif %}
+    {% if excerpt is iterable and excerpt is not string %}
+      {% set excerpt = excerpt|join(" ") %}
+    {% endif %}
+    {% set description = description|striptags|trim %}
+    {% set excerpt = excerpt|striptags|trim %}
     {% set stripped = body_html.lstrip() %}
     {% if stripped.startswith("<h") and "</h" in stripped %}
       {% set body_html = stripped.split("</h", 1)[1] %}
@@ -53,10 +69,10 @@
       <h2 class="post-title"><a href="{{ post.url|url }}">{{ post.title }}</a></h2>
       <span class="post-date">{{ entry.date_label }}</span>
 
-      {% if post.meta and post.meta.description %}
-        <p class="post-excerpt">{{ post.meta.description }}</p>
-      {% elif post.meta and post.meta.excerpt %}
-        <p class="post-excerpt">{{ post.meta.excerpt }}</p>
+      {% if description %}
+        <p class="post-excerpt">{{ description }}</p>
+      {% elif excerpt %}
+        <p class="post-excerpt">{{ excerpt }}</p>
       {% elif marker_excerpt %}
         <p class="post-excerpt">{{ marker_excerpt }}</p>
       {% elif auto_excerpt %}
