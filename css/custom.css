@@ -1,0 +1,122 @@
+@import url('https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css');
+
+* {
+  /* Screen version */
+  font-family: 'LXGW WenKai Screen', sans-serif;
+}
+
+.post-title {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  line-height: 1.25;
+}
+
+.post-date {
+  display: inline-block;
+  margin: 0.12rem 0 0.35rem;
+  font-size: 0.8em;
+  text-decoration: underline;
+}
+
+.post-meta {
+  font-size: 0.8em;
+  text-decoration: underline;
+  text-align: right;
+}
+
+.post-entry p {
+  margin: 0.28rem 0 !important;
+  line-height: 1.55;
+}
+
+.post-excerpt {
+  display: block;
+}
+
+.post-entry {
+  margin: 0.2rem 0 0.4rem;
+}
+
+.md-typeset hr {
+  margin: 0.8rem 0;
+}
+
+.post-entry img,
+.post-entry figure,
+.post-excerpt-image {
+  display: none !important;
+}
+
+.post-read-more {
+  font-weight: 600;
+}
+
+/* More space at the bottom of the page */
+.md-main__inner {
+  margin-bottom: 1.5rem;
+}
+
+/***解决公式显示异常问题***/
+/* 数学公式整体颜色跟正文一致 */
+.katex,
+.katex-display,
+mjx-container {
+  color: var(--md-default-fg-color);
+}
+
+/* 行内公式：略微放大即可 */
+.katex {
+  font-size: 1.02em;
+  line-height: 1.4;
+}
+
+/* 块级公式容器：允许横向滚动，避免被裁切 */
+.katex-display,
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  margin: 1em 0;
+  padding: 0.25em 0 0.45em;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+/* 块级公式本体：不要再放大 */
+.katex-display > .katex {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1.5;
+  white-space: nowrap;
+  max-width: none;
+}
+
+/* MathJax 兼容 */
+mjx-container {
+  font-size: 1.02em !important;
+  line-height: 1.4 !important;
+}
+
+mjx-container[display="true"] {
+  font-size: 1em !important;
+}
+
+/* 手机端进一步缩一点，优先保证完整显示 */
+@media screen and (max-width: 768px) {
+  .katex {
+    font-size: 1em;
+  }
+
+  .katex-display > .katex,
+  mjx-container[display="true"] {
+    font-size: 0.92em !important;
+  }
+
+  .katex-display,
+  mjx-container[display="true"] {
+    margin: 0.9em 0;
+    padding: 0.2em 0 0.5em;
+  }
+}
