@@ -46,9 +46,9 @@ function bindShareLinkButtons(root) {
     button.dataset.shareLinkBound = "true";
 
     button.addEventListener("click", async () => {
-      const defaultText = button.dataset.shareLinkDefaultText || "分享链接";
-      const successText = button.dataset.shareLinkSuccessText || "链接已复制";
-      const errorText = button.dataset.shareLinkErrorText || "复制失败，请手动复制";
+      const defaultText = button.dataset.shareLinkDefaultText || "分享";
+      const successText = button.dataset.shareLinkSuccessText || "已复制";
+      const errorText = button.dataset.shareLinkErrorText || "复制失败";
 
       button.disabled = true;
 

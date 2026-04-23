@@ -50,43 +50,46 @@
 
 .post-share-button {
   appearance: none;
-  border: 1px solid rgba(199, 21, 133, 0.18);
-  padding: 0.42rem 0.88rem;
-  background: linear-gradient(180deg, rgba(199, 21, 133, 0.12), rgba(199, 21, 133, 0.05));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18rem;
+  border: none;
+  padding: 0.08rem 0;
+  background: transparent;
   color: mediumvioletred;
   font: inherit;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
   white-space: nowrap;
-  border-radius: 999px;
   cursor: pointer;
-  box-shadow: 0 0.3rem 0.9rem rgba(199, 21, 133, 0.08);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+
+.post-share-button::before {
+  content: "";
+  width: 0.9rem;
+  height: 0.9rem;
+  flex: 0 0 0.9rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c71585' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='5' r='2.4'/%3E%3Ccircle cx='6' cy='12' r='2.4'/%3E%3Ccircle cx='18' cy='19' r='2.4'/%3E%3Cpath d='M8.1 11l7.7-4.4M8.1 13l7.7 4.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .post-share-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0.45rem 1rem rgba(199, 21, 133, 0.14);
-  background: linear-gradient(180deg, rgba(199, 21, 133, 0.16), rgba(199, 21, 133, 0.08));
-}
-
-.post-share-button:active {
-  transform: translateY(0);
-  box-shadow: 0 0.2rem 0.5rem rgba(199, 21, 133, 0.1);
+  color: #ab156f;
+  opacity: 0.88;
 }
 
 .post-share-button:focus-visible {
   outline: 2px solid rgba(199, 21, 133, 0.34);
   outline-offset: 2px;
-  border-radius: 999px;
+  border-radius: 0.35rem;
 }
 
 .post-share-button[disabled] {
   cursor: default;
-  color: #fff;
-  border-color: mediumvioletred;
-  background: mediumvioletred;
-  box-shadow: 0 0.35rem 0.85rem rgba(199, 21, 133, 0.16);
+  opacity: 0.7;
 }
 
 .post-entry p {
