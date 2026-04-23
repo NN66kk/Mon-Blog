@@ -9,23 +9,23 @@
 
   <header class="post-header">
     <h1 class="post-header-title">{{ page.title }}</h1>
-    <div class="post-header-meta">
-      {% if page.blog_publish_label %}
+    {% if page.blog_publish_label %}
+      <div class="post-header-meta">
         <time class="post-header-date" datetime="{{ page.blog_publish_iso }}">
           发布时间：{{ page.blog_publish_label }}
         </time>
-      {% endif %}
-      <button
-        type="button"
-        class="post-share-button"
-        data-share-link-button
-        data-share-link-default-text="分享链接"
-        data-share-link-success-text="链接已复制"
-        data-share-link-error-text="复制失败，请手动复制"
-      >
-        分享链接
-      </button>
-    </div>
+        <button
+          type="button"
+          class="post-share-button"
+          data-share-link-button
+          data-share-link-default-text="分享链接"
+          data-share-link-success-text="链接已复制"
+          data-share-link-error-text="复制失败，请手动复制"
+        >
+          分享链接
+        </button>
+      </div>
+    {% endif %}
   </header>
 
   {% if page.meta and page.meta.image and page.meta.image.add_to_post and page.meta.image.src %}

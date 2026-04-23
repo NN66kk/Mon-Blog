@@ -8,7 +8,6 @@ from typing import Any
 import yaml
 
 FRONT_MATTER_RE = re.compile(r"\A---\s*\r?\n(.*?)\r?\n---\s*(?:\r?\n|$)", re.DOTALL)
-POST_SECTION_PREFIXES = ("A", "B", "C", "D")
 
 
 def _normalize_text(value: Any) -> str:
@@ -229,12 +228,5 @@ def on_nav(nav, config, files):
         page.blog_excerpt_text = _normalize_text(
             meta.get("excerpt") or front_matter.get("excerpt")
         )
-
-        if (
-            not meta.get("template")
-            and src_uri[:1] in POST_SECTION_PREFIXES
-            and page.blog_publish_label
-        ):
-            meta["template"] = "post.html"
 
     return nav
