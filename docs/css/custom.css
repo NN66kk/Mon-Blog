@@ -50,29 +50,43 @@
 
 .post-share-button {
   appearance: none;
-  border: none;
-  padding: 0;
-  background: transparent;
+  border: 1px solid rgba(199, 21, 133, 0.18);
+  padding: 0.42rem 0.88rem;
+  background: linear-gradient(180deg, rgba(199, 21, 133, 0.12), rgba(199, 21, 133, 0.05));
   color: mediumvioletred;
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 999px;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  box-shadow: 0 0.3rem 0.9rem rgba(199, 21, 133, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
 .post-share-button:hover {
-  opacity: 0.78;
+  transform: translateY(-1px);
+  box-shadow: 0 0.45rem 1rem rgba(199, 21, 133, 0.14);
+  background: linear-gradient(180deg, rgba(199, 21, 133, 0.16), rgba(199, 21, 133, 0.08));
+}
+
+.post-share-button:active {
+  transform: translateY(0);
+  box-shadow: 0 0.2rem 0.5rem rgba(199, 21, 133, 0.1);
 }
 
 .post-share-button:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 0.2rem;
+  outline: 2px solid rgba(199, 21, 133, 0.34);
+  outline-offset: 2px;
   border-radius: 999px;
 }
 
 .post-share-button[disabled] {
   cursor: default;
-  opacity: 0.72;
+  color: #fff;
+  border-color: mediumvioletred;
+  background: mediumvioletred;
+  box-shadow: 0 0.35rem 0.85rem rgba(199, 21, 133, 0.16);
 }
 
 .post-entry p {
