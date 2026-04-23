@@ -24,6 +24,57 @@
   text-align: right;
 }
 
+.post-header {
+  margin: 0 0 1rem;
+}
+
+.post-header-title {
+  margin: 0 0 0.3rem;
+  line-height: 1.18;
+}
+
+.post-header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.9rem;
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.post-header-date {
+  color: inherit;
+  white-space: nowrap;
+}
+
+.post-share-button {
+  appearance: none;
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: mediumvioletred;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.post-share-button:hover {
+  opacity: 0.78;
+}
+
+.post-share-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 0.2rem;
+  border-radius: 999px;
+}
+
+.post-share-button[disabled] {
+  cursor: default;
+  opacity: 0.72;
+}
+
 .post-entry p {
   margin: 0.28rem 0 !important;
   line-height: 1.55;
@@ -105,6 +156,15 @@ mjx-container[display="true"] {
 
 /* 手机端进一步缩一点，优先保证完整显示 */
 @media screen and (max-width: 768px) {
+  .post-header {
+    margin-bottom: 0.9rem;
+  }
+
+  .post-header-meta {
+    font-size: 0.78rem;
+    gap: 0.25rem 0.75rem;
+  }
+
   .katex {
     font-size: 1em;
   }
