@@ -1,8 +1,22 @@
 @import url('https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css');
 
+:root {
+  --md-text-font: 'LXGW WenKai Screen';
+  --md-code-font: 'LXGW WenKai Screen';
+}
+
 * {
   /* Screen version */
   font-family: 'LXGW WenKai Screen', sans-serif;
+}
+
+.md-typeset code,
+.md-typeset pre,
+.md-typeset kbd,
+.highlight,
+.highlight code,
+.highlight pre {
+  font-family: 'LXGW WenKai Screen', sans-serif !important;
 }
 
 .post-title {
