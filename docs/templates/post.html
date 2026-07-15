@@ -32,4 +32,40 @@
     <div class="{{ page.meta.image.class|default('') }}"><img src="{{ page.meta.image.src }}" alt="{{ page.title }}"/></div>
   {% endif %}
   {{ body_html|safe }}
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="article-toc-title"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <button
+          type="button"
+          class="article-toc-close"
+          data-article-toc-close
+          aria-label="关闭本文目录"
+        ></button>
+      </header>
+      <nav class="article-toc-content" data-article-toc-content aria-label="本文目录"></nav>
+    </section>
+  </div>
 {% endblock %}
