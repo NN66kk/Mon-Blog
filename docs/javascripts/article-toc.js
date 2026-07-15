@@ -17,6 +17,56 @@ function isSamePageAnchor(link, currentLocation = window.location) {
   }
 }
 
+function normalizeTocSearchText(value) {
+  return String(value || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLocaleLowerCase();
+}
+
+function tocTextMatchesQuery(text, query) {
+  return normalizeTocSearchText(text).includes(
+    normalizeTocSearchText(query),
+  );
+}
+
+function filterTocList(list, query) {
+  let matchCount = 0;
+  let hasVisibleItems = false;
+
+  Array.from(list.children).forEach((item) => {
+    if (!item.matches(".md-nav__item")) {
+      return;
+    }
+
+    const link = Array.from(item.children)
+      .find((child) => child.matches("a[href]"));
+    const childNav = Array.from(item.children)
+      .find((child) => child.matches("nav.md-nav"));
+    const childList = childNav
+      ? Array.from(childNav.children)
+        .find((child) => child.matches(".md-nav__list"))
+      : null;
+    const childResult = childList
+      ? filterTocList(childList, query)
+      : { matchCount: 0, hasVisibleItems: false };
+    const selfMatches = Boolean(link)
+      && tocTextMatchesQuery(link.textContent, query);
+    const isVisible = selfMatches || childResult.hasVisibleItems;
+
+    item.hidden = !isVisible;
+
+    if (childNav) {
+      childNav.hidden = !childResult.hasVisibleItems;
+    }
+
+    matchCount += childResult.matchCount + (selfMatches ? 1 : 0);
+    hasVisibleItems = hasVisibleItems || isVisible;
+  });
+
+  return { matchCount, hasVisibleItems };
+}
+
 function initializeArticleToc(root = document) {
   const widget = root.querySelector("[data-article-toc]");
   const source = root.querySelector(".md-sidebar--secondary .md-nav__list");
@@ -37,16 +87,29 @@ function initializeArticleToc(root = document) {
   const button = widget.querySelector("[data-article-toc-button]");
   const sheet = widget.querySelector(".article-toc-sheet");
   const closeButton = widget.querySelector(".article-toc-close");
+  const searchInput = widget.querySelector("[data-article-toc-search]");
+  const searchStatus = widget.querySelector("[data-article-toc-search-status]");
   const content = widget.querySelector("[data-article-toc-content]");
+  const emptyState = widget.querySelector("[data-article-toc-empty]");
   const clonedList = source.cloneNode(true);
 
   clonedList.querySelectorAll("[id]").forEach((element) => {
     element.removeAttribute("id");
   });
 
-  content.replaceChildren(clonedList);
+  content.replaceChildren(clonedList, emptyState);
   widget.hidden = false;
   widget.dataset.articleTocBound = "true";
+
+  function updateSearchResults() {
+    const query = normalizeTocSearchText(searchInput.value);
+    const result = filterTocList(clonedList, query);
+
+    searchStatus.value = query
+      ? `${result.matchCount} 项`
+      : `共 ${sourceLinks.length} 项`;
+    emptyState.hidden = result.hasVisibleItems;
+  }
 
   function openToc() {
     widget.dataset.open = "true";
@@ -54,7 +117,10 @@ function initializeArticleToc(root = document) {
     sheet.setAttribute("aria-hidden", "false");
     sheet.inert = false;
     document.body.classList.add("article-toc-open");
-    closeButton.focus();
+    searchInput.value = "";
+    content.scrollTop = 0;
+    updateSearchResults();
+    searchInput.focus();
   }
 
   function closeToc(restoreFocus = true) {
@@ -70,6 +136,8 @@ function initializeArticleToc(root = document) {
   }
 
   button.addEventListener("click", openToc);
+  searchInput.addEventListener("input", updateSearchResults);
+  searchInput.addEventListener("search", updateSearchResults);
 
   widget.querySelectorAll("[data-article-toc-close]").forEach((element) => {
     element.addEventListener("click", () => closeToc());
@@ -89,6 +157,8 @@ function initializeArticleToc(root = document) {
       closeToc();
     }
   });
+
+  updateSearchResults();
 }
 
 if (typeof document !== "undefined") {
@@ -104,5 +174,9 @@ if (typeof document !== "undefined") {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { isSamePageAnchor };
+  module.exports = {
+    isSamePageAnchor,
+    normalizeTocSearchText,
+    tocTextMatchesQuery,
+  };
 }

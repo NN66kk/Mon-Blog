@@ -65,7 +65,34 @@
           aria-label="关闭本文目录"
         ></button>
       </header>
-      <nav class="article-toc-content" data-article-toc-content aria-label="本文目录"></nav>
+      <div class="article-toc-search">
+        <span class="article-toc-search-icon" aria-hidden="true"></span>
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
     </section>
   </div>
 {% endblock %}

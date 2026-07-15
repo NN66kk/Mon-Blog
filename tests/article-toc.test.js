@@ -3,6 +3,8 @@ const test = require("node:test");
 
 const {
   isSamePageAnchor,
+  normalizeTocSearchText,
+  tocTextMatchesQuery,
 } = require("../docs/javascripts/article-toc.js");
 
 const currentLocation = new URL(
@@ -44,4 +46,16 @@ test("rejects links to another page", () => {
     ),
     false,
   );
+});
+
+test("normalizes case and repeated whitespace for searching", () => {
+  assert.equal(
+    normalizeTocSearchText("  Where   Did U Go  "),
+    "where did u go",
+  );
+});
+
+test("matches Chinese directory text by substring", () => {
+  assert.equal(tocTextMatchesQuery("创作背景故事", "背景"), true);
+  assert.equal(tocTextMatchesQuery("歌词", "背景"), false);
 });
