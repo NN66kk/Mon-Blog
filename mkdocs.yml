@@ -45,6 +45,8 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - meta
+  # Preserve intentional single line breaks in lyrics and other prose.
+  - nl2br
   - footnotes
   - def_list
   - toc:

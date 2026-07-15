@@ -3,6 +3,13 @@
 :root {
   --md-text-font: 'LXGW WenKai Screen';
   --md-code-font: 'LXGW WenKai Screen';
+  --post-section-color: #c76600;
+  --post-subsection-color: #079321;
+}
+
+[data-md-color-scheme="slate"] {
+  --post-section-color: #f0a24a;
+  --post-subsection-color: #63c878;
 }
 
 * {
@@ -135,6 +142,32 @@
 /* More space at the bottom of the page */
 .md-main__inner {
   margin-bottom: 1.5rem;
+}
+
+/* Article typography: clear song/section hierarchy and relaxed lyric rhythm. */
+.md-typeset h2 {
+  color: var(--post-section-color);
+  font-size: 1.65em;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.8em 0 0.8em;
+}
+
+.md-typeset h3 {
+  color: var(--post-subsection-color);
+  font-size: 1.35em;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1.5em 0 0.75em;
+}
+
+.md-typeset p,
+.md-typeset blockquote {
+  line-height: 1.65;
+}
+
+.md-typeset p {
+  margin: 1.35em 0;
 }
 
 /***解决公式显示异常问题***/
