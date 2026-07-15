@@ -17,6 +17,66 @@ function isSamePageAnchor(link, currentLocation = window.location) {
   }
 }
 
+function getTocLinkHash(link, currentLocation = window.location) {
+  const href = link.getAttribute("href");
+
+  if (!href) {
+    return "";
+  }
+
+  try {
+    return new URL(href, currentLocation.href).hash;
+  } catch (error) {
+    return "";
+  }
+}
+
+function findCurrentTocLink(
+  links,
+  root = document,
+  currentLocation = window.location,
+) {
+  if (!links.length) {
+    return null;
+  }
+
+  const header = root.querySelector(".md-header");
+  const readingLine = header
+    ? header.getBoundingClientRect().bottom + 16
+    : 80;
+  let currentLink = links[0];
+
+  for (const link of links) {
+    const hash = getTocLinkHash(link, currentLocation);
+
+    if (!hash) {
+      continue;
+    }
+
+    let headingId;
+
+    try {
+      headingId = decodeURIComponent(hash.slice(1));
+    } catch (error) {
+      headingId = hash.slice(1);
+    }
+
+    const heading = root.getElementById(headingId);
+
+    if (!heading) {
+      continue;
+    }
+
+    if (heading.getBoundingClientRect().top <= readingLine) {
+      currentLink = link;
+    } else {
+      break;
+    }
+  }
+
+  return currentLink;
+}
+
 function normalizeTocSearchText(value) {
   return String(value || "")
     .trim()
@@ -110,6 +170,8 @@ function initializeArticleToc(root = document) {
   const content = widget.querySelector("[data-article-toc-content]");
   const emptyState = widget.querySelector("[data-article-toc-empty]");
   const clonedList = source.cloneNode(true);
+  const clonedLinks = Array.from(clonedList.querySelectorAll("a[href]"))
+    .filter((link) => isSamePageAnchor(link));
 
   clonedList.querySelectorAll("[id]").forEach((element) => {
     element.removeAttribute("id");
@@ -127,6 +189,34 @@ function initializeArticleToc(root = document) {
       ? `${result.matchCount} 项`
       : `共 ${sourceLinks.length} 项`;
     emptyState.hidden = result.hasVisibleItems;
+  }
+
+  function revealCurrentTocEntry(currentHash) {
+    const currentLink = clonedLinks.find(
+      (link) => getTocLinkHash(link) === currentHash,
+    );
+
+    clonedLinks.forEach((link) => {
+      link.classList.remove("md-nav__link--active", "article-toc-current");
+      link.removeAttribute("aria-current");
+    });
+
+    if (!currentLink) {
+      content.scrollTop = 0;
+      return;
+    }
+
+    currentLink.classList.add("article-toc-current");
+    currentLink.setAttribute("aria-current", "location");
+
+    const contentRect = content.getBoundingClientRect();
+    const linkRect = currentLink.getBoundingClientRect();
+    const centeredTop = content.scrollTop
+      + linkRect.top
+      - contentRect.top
+      - (content.clientHeight - linkRect.height) / 2;
+
+    content.scrollTop = Math.max(0, centeredTop);
   }
 
   function closeSearch(restoreFocus = false) {
@@ -157,14 +247,21 @@ function initializeArticleToc(root = document) {
   }
 
   function openToc() {
+    // Capture the reading position before focus and scroll-lock changes can
+    // affect heading geometry in mobile browsers.
+    const currentSourceLink = findCurrentTocLink(sourceLinks);
+    const currentHash = currentSourceLink
+      ? getTocLinkHash(currentSourceLink)
+      : "";
+
     widget.dataset.open = "true";
     button.setAttribute("aria-expanded", "true");
     sheet.setAttribute("aria-hidden", "false");
     sheet.inert = false;
     document.body.classList.add("article-toc-open");
     closeSearch();
-    content.scrollTop = 0;
     closeButton.focus();
+    window.requestAnimationFrame(() => revealCurrentTocEntry(currentHash));
   }
 
   function closeToc(restoreFocus = true) {
@@ -226,6 +323,8 @@ if (typeof document !== "undefined") {
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
+    findCurrentTocLink,
+    getTocLinkHash,
     isSamePageAnchor,
     normalizeTocSearchText,
     tocTextMatchesQuery,

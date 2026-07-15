@@ -492,8 +492,8 @@ body.article-toc-open {
   }
 
   .article-toc-content .md-nav__list .md-nav__list {
-    margin-left: 0.5rem;
-    padding-left: 0.48rem;
+    margin-left: 1.2rem;
+    padding-left: 0.55rem;
   }
 
   .article-toc-content .md-nav__item {
@@ -503,7 +503,7 @@ body.article-toc-open {
   }
 
   .article-toc-content > .md-nav__list > .md-nav__item + .md-nav__item {
-    margin-top: 0.12rem !important;
+    margin-top: 0.32rem !important;
   }
 
   .article-toc-content .md-nav__list .md-nav__list > .md-nav__item {
@@ -514,7 +514,7 @@ body.article-toc-open {
   .article-toc-content .md-nav__list .md-nav__list > .md-nav__item::after {
     content: "";
     position: absolute;
-    left: -0.48rem;
+    left: -0.55rem;
     z-index: 0;
     background: color-mix(in srgb, var(--md-default-fg-color) 14%, transparent);
     pointer-events: none;
@@ -522,7 +522,7 @@ body.article-toc-open {
 
   .article-toc-content .md-nav__list .md-nav__list > .md-nav__item::before {
     top: 50%;
-    width: 0.36rem;
+    width: 0.42rem;
     height: 1px;
   }
 
@@ -547,28 +547,33 @@ body.article-toc-open {
 
   .article-toc-content .md-nav__link {
     display: flex;
-    min-height: 1.8rem;
+    min-height: 2rem;
     align-items: center;
     margin: 0;
     border-radius: 0.4rem;
-    padding: 0.18rem 0.45rem;
+    padding: 0.2rem 0.45rem;
     color: var(--md-default-fg-color--light);
-    font-size: 0.73rem;
+    font-size: 0.75rem;
     line-height: 1.25;
   }
 
   .article-toc-content .md-nav__list .md-nav__list .md-nav__link {
     position: relative;
     z-index: 1;
-    min-height: 1.5rem;
-    padding: 0.08rem 0.3rem;
-    font-size: 0.66rem;
+    min-height: 1.7rem;
+    padding: 0.1rem 0.38rem;
+    font-size: 0.67rem;
   }
 
   .article-toc-content .md-nav__link:hover,
-  .article-toc-content .md-nav__link--active {
+  .article-toc-content .md-nav__link--active,
+  .article-toc-content .article-toc-current {
     background: color-mix(in srgb, var(--md-primary-fg-color) 10%, transparent);
     color: var(--md-primary-fg-color);
+  }
+
+  .article-toc-content .article-toc-current {
+    font-weight: 600;
   }
 
   .article-toc-empty {

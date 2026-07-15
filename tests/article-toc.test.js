@@ -2,6 +2,8 @@ const assert = require("node:assert/strict");
 const test = require("node:test");
 
 const {
+  findCurrentTocLink,
+  getTocLinkHash,
   isSamePageAnchor,
   normalizeTocSearchText,
   tocTextMatchesQuery,
@@ -46,6 +48,41 @@ test("rejects links to another page", () => {
     ),
     false,
   );
+});
+
+test("extracts the hash from Material's absolute TOC URL", () => {
+  assert.equal(
+    getTocLinkHash(
+      linkTo(
+        "https://nn66kk.github.io/Mon-Blog/B-Notes/example/#section",
+      ),
+      currentLocation,
+    ),
+    "#section",
+  );
+});
+
+test("finds the last heading above the reading line", () => {
+  const links = [linkTo("#one"), linkTo("#two"), linkTo("#three")];
+  const headingTops = { one: -120, two: 48, three: 180 };
+  const root = {
+    querySelector() {
+      return {
+        getBoundingClientRect() {
+          return { bottom: 48 };
+        },
+      };
+    },
+    getElementById(id) {
+      return {
+        getBoundingClientRect() {
+          return { top: headingTops[id] };
+        },
+      };
+    },
+  };
+
+  assert.equal(findCurrentTocLink(links, root, currentLocation), links[1]);
 });
 
 test("normalizes case and repeated whitespace for searching", () => {

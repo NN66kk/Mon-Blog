@@ -51,6 +51,7 @@ class MobileArticleTocTests(unittest.TestCase):
         self.assertIn(".article-toc-search-input", css)
         self.assertIn(".article-toc-item--visible-first::after", css)
         self.assertIn(".article-toc-item--visible-last::after", css)
+        self.assertIn(".article-toc-current", css)
         self.assertIn('content: ""', css)
         self.assertIn("list-style: none", css)
         self.assertIn("env(safe-area-inset-bottom", css)
@@ -63,6 +64,8 @@ class MobileArticleTocTests(unittest.TestCase):
 
         self.assertIn('"article-toc-item--visible-first"', script)
         self.assertIn('"article-toc-item--visible-last"', script)
+        self.assertIn("findCurrentTocLink(sourceLinks)", script)
+        self.assertIn("content.scrollTop = Math.max(0, centeredTop)", script)
 
 
 if __name__ == "__main__":
