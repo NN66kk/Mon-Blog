@@ -492,9 +492,8 @@ body.article-toc-open {
   }
 
   .article-toc-content .md-nav__list .md-nav__list {
-    margin-left: 0.45rem;
-    border-left: 1px solid var(--md-default-fg-color--lightest);
-    padding-left: 0.4rem;
+    margin-left: 0.5rem;
+    padding-left: 0.48rem;
   }
 
   .article-toc-content .md-nav__item {
@@ -503,22 +502,67 @@ body.article-toc-open {
     list-style: none;
   }
 
+  .article-toc-content > .md-nav__list > .md-nav__item + .md-nav__item {
+    margin-top: 0.12rem !important;
+  }
+
+  .article-toc-content .md-nav__list .md-nav__list > .md-nav__item {
+    position: relative;
+  }
+
+  .article-toc-content .md-nav__list .md-nav__list > .md-nav__item::before,
+  .article-toc-content .md-nav__list .md-nav__list > .md-nav__item::after {
+    content: "";
+    position: absolute;
+    left: -0.48rem;
+    z-index: 0;
+    background: color-mix(in srgb, var(--md-default-fg-color) 14%, transparent);
+    pointer-events: none;
+  }
+
+  .article-toc-content .md-nav__list .md-nav__list > .md-nav__item::before {
+    top: 50%;
+    width: 0.36rem;
+    height: 1px;
+  }
+
+  .article-toc-content .md-nav__list .md-nav__list > .md-nav__item::after {
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
+
+  .article-toc-content .md-nav__list .md-nav__list > .article-toc-item--visible-first::after {
+    top: 50%;
+  }
+
+  .article-toc-content .md-nav__list .md-nav__list > .article-toc-item--visible-last::after {
+    bottom: 50%;
+  }
+
+  .article-toc-content .md-nav__list .md-nav__list >
+    .article-toc-item--visible-first.article-toc-item--visible-last::after {
+    display: none;
+  }
+
   .article-toc-content .md-nav__link {
     display: flex;
-    min-height: 2rem;
+    min-height: 1.8rem;
     align-items: center;
     margin: 0;
     border-radius: 0.4rem;
-    padding: 0.28rem 0.5rem;
+    padding: 0.18rem 0.45rem;
     color: var(--md-default-fg-color--light);
-    font-size: 0.75rem;
-    line-height: 1.28;
+    font-size: 0.73rem;
+    line-height: 1.25;
   }
 
   .article-toc-content .md-nav__list .md-nav__list .md-nav__link {
-    min-height: 1.8rem;
-    padding-block: 0.2rem;
-    font-size: 0.69rem;
+    position: relative;
+    z-index: 1;
+    min-height: 1.5rem;
+    padding: 0.08rem 0.3rem;
+    font-size: 0.66rem;
   }
 
   .article-toc-content .md-nav__link:hover,

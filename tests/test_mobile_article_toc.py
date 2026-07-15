@@ -49,9 +49,20 @@ class MobileArticleTocTests(unittest.TestCase):
         self.assertIn(".article-toc-search-toggle", css)
         self.assertIn(".article-toc-search[hidden]", css)
         self.assertIn(".article-toc-search-input", css)
+        self.assertIn(".article-toc-item--visible-first::after", css)
+        self.assertIn(".article-toc-item--visible-last::after", css)
+        self.assertIn('content: ""', css)
         self.assertIn("list-style: none", css)
         self.assertIn("env(safe-area-inset-bottom", css)
         self.assertIn("prefers-reduced-motion: reduce", css)
+
+    def test_script_marks_visible_connector_endpoints(self):
+        script = (ROOT / "docs/javascripts/article-toc.js").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn('"article-toc-item--visible-first"', script)
+        self.assertIn('"article-toc-item--visible-last"', script)
 
 
 if __name__ == "__main__":

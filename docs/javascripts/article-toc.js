@@ -33,11 +33,17 @@ function tocTextMatchesQuery(text, query) {
 function filterTocList(list, query) {
   let matchCount = 0;
   let hasVisibleItems = false;
+  const visibleItems = [];
 
   Array.from(list.children).forEach((item) => {
     if (!item.matches(".md-nav__item")) {
       return;
     }
+
+    item.classList.remove(
+      "article-toc-item--visible-first",
+      "article-toc-item--visible-last",
+    );
 
     const link = Array.from(item.children)
       .find((child) => child.matches("a[href]"));
@@ -62,7 +68,17 @@ function filterTocList(list, query) {
 
     matchCount += childResult.matchCount + (selfMatches ? 1 : 0);
     hasVisibleItems = hasVisibleItems || isVisible;
+
+    if (isVisible) {
+      visibleItems.push(item);
+    }
   });
+
+  if (visibleItems.length) {
+    visibleItems[0].classList.add("article-toc-item--visible-first");
+    visibleItems[visibleItems.length - 1]
+      .classList.add("article-toc-item--visible-last");
+  }
 
   return { matchCount, hasVisibleItems };
 }
