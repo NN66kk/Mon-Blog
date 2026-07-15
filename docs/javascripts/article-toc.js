@@ -87,6 +87,8 @@ function initializeArticleToc(root = document) {
   const button = widget.querySelector("[data-article-toc-button]");
   const sheet = widget.querySelector(".article-toc-sheet");
   const closeButton = widget.querySelector(".article-toc-close");
+  const searchToggle = widget.querySelector("[data-article-toc-search-toggle]");
+  const searchPanel = widget.querySelector("[data-article-toc-search-panel]");
   const searchInput = widget.querySelector("[data-article-toc-search]");
   const searchStatus = widget.querySelector("[data-article-toc-search-status]");
   const content = widget.querySelector("[data-article-toc-content]");
@@ -111,20 +113,47 @@ function initializeArticleToc(root = document) {
     emptyState.hidden = result.hasVisibleItems;
   }
 
+  function closeSearch(restoreFocus = false) {
+    delete widget.dataset.searchOpen;
+    searchToggle.setAttribute("aria-expanded", "false");
+    searchPanel.hidden = true;
+    searchInput.value = "";
+    updateSearchResults();
+
+    if (restoreFocus) {
+      searchToggle.focus();
+    }
+  }
+
+  function openSearch() {
+    widget.dataset.searchOpen = "true";
+    searchToggle.setAttribute("aria-expanded", "true");
+    searchPanel.hidden = false;
+    searchInput.focus();
+  }
+
+  function toggleSearch() {
+    if (widget.dataset.searchOpen === "true") {
+      closeSearch(true);
+    } else {
+      openSearch();
+    }
+  }
+
   function openToc() {
     widget.dataset.open = "true";
     button.setAttribute("aria-expanded", "true");
     sheet.setAttribute("aria-hidden", "false");
     sheet.inert = false;
     document.body.classList.add("article-toc-open");
-    searchInput.value = "";
+    closeSearch();
     content.scrollTop = 0;
-    updateSearchResults();
-    searchInput.focus();
+    closeButton.focus();
   }
 
   function closeToc(restoreFocus = true) {
     delete widget.dataset.open;
+    closeSearch();
     button.setAttribute("aria-expanded", "false");
     sheet.setAttribute("aria-hidden", "true");
     sheet.inert = true;
@@ -136,6 +165,7 @@ function initializeArticleToc(root = document) {
   }
 
   button.addEventListener("click", openToc);
+  searchToggle.addEventListener("click", toggleSearch);
   searchInput.addEventListener("input", updateSearchResults);
   searchInput.addEventListener("search", updateSearchResults);
 
@@ -154,7 +184,12 @@ function initializeArticleToc(root = document) {
   sheet.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       event.preventDefault();
-      closeToc();
+
+      if (widget.dataset.searchOpen === "true") {
+        closeSearch(true);
+      } else {
+        closeToc();
+      }
     }
   });
 

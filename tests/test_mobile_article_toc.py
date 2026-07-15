@@ -16,6 +16,9 @@ class MobileArticleTocTests(unittest.TestCase):
             'aria-labelledby="article-toc-title"\n      aria-hidden="true"\n      inert',
             template,
         )
+        self.assertIn("data-article-toc-search-toggle", template)
+        self.assertIn('aria-controls="article-toc-search-panel"', template)
+        self.assertIn("data-article-toc-search-panel", template)
         self.assertIn("data-article-toc-search", template)
         self.assertIn('type="search"', template)
         self.assertIn('aria-controls="article-toc-content"', template)
@@ -43,6 +46,8 @@ class MobileArticleTocTests(unittest.TestCase):
         css = (ROOT / "docs/css/custom.css").read_text(encoding="utf-8")
 
         self.assertIn(".article-toc-fab", css)
+        self.assertIn(".article-toc-search-toggle", css)
+        self.assertIn(".article-toc-search[hidden]", css)
         self.assertIn(".article-toc-search-input", css)
         self.assertIn("list-style: none", css)
         self.assertIn("env(safe-area-inset-bottom", css)

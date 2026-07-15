@@ -58,15 +58,31 @@
     >
       <header class="article-toc-sheet-header">
         <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
-        <button
-          type="button"
-          class="article-toc-close"
-          data-article-toc-close
-          aria-label="关闭本文目录"
-        ></button>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
       </header>
-      <div class="article-toc-search">
-        <span class="article-toc-search-icon" aria-hidden="true"></span>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
         <input
           id="article-toc-search"
           class="article-toc-search-input"
