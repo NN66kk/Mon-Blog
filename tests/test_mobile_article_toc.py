@@ -26,6 +26,14 @@ class MobileArticleTocTests(unittest.TestCase):
         toc_script = config.index("javascripts/article-toc.js")
         self.assertLess(share_script, toc_script)
 
+    def test_script_supports_materials_absolute_toc_links(self):
+        script = (ROOT / "docs/javascripts/article-toc.js").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn('source.querySelectorAll("a[href]")', script)
+        self.assertNotIn('querySelectorAll("a[href^=\'#\']")', script)
+
     def test_mobile_styles_include_safe_area_and_reduced_motion(self):
         css = (ROOT / "docs/css/custom.css").read_text(encoding="utf-8")
 

@@ -1,3 +1,22 @@
+function isSamePageAnchor(link, currentLocation = window.location) {
+  const href = link.getAttribute("href");
+
+  if (!href) {
+    return false;
+  }
+
+  try {
+    const target = new URL(href, currentLocation.href);
+
+    return Boolean(target.hash)
+      && target.origin === currentLocation.origin
+      && target.pathname === currentLocation.pathname
+      && target.search === currentLocation.search;
+  } catch (error) {
+    return false;
+  }
+}
+
 function initializeArticleToc(root = document) {
   const widget = root.querySelector("[data-article-toc]");
   const source = root.querySelector(".md-sidebar--secondary .md-nav__list");
@@ -6,7 +25,10 @@ function initializeArticleToc(root = document) {
     return;
   }
 
-  const sourceLinks = source.querySelectorAll("a[href^='#']");
+  // Material rewrites hash-only TOC links to absolute URLs at runtime, so an
+  // `a[href^='#']` selector works in the generated HTML but fails online.
+  const sourceLinks = Array.from(source.querySelectorAll("a[href]"))
+    .filter((link) => isSamePageAnchor(link));
 
   if (!sourceLinks.length) {
     return;
@@ -54,7 +76,9 @@ function initializeArticleToc(root = document) {
   });
 
   content.addEventListener("click", (event) => {
-    if (event.target.closest("a[href^='#']")) {
+    const link = event.target.closest("a[href]");
+
+    if (link && isSamePageAnchor(link)) {
       closeToc(false);
     }
   });
@@ -67,12 +91,18 @@ function initializeArticleToc(root = document) {
   });
 }
 
-if (typeof document$ !== "undefined" && typeof document$.subscribe === "function") {
-  document$.subscribe(() => {
-    initializeArticleToc();
-  });
-} else {
-  document.addEventListener("DOMContentLoaded", () => {
-    initializeArticleToc();
-  });
+if (typeof document !== "undefined") {
+  // The script is emitted after the page markup, so initialize the first page
+  // immediately. Keep the Material observable for subsequent instant loads.
+  initializeArticleToc();
+
+  if (typeof document$ !== "undefined" && typeof document$.subscribe === "function") {
+    document$.subscribe(() => {
+      initializeArticleToc();
+    });
+  }
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { isSamePageAnchor };
 }
