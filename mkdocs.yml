@@ -70,6 +70,9 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
 
+exclude_docs: |
+  superpowers
+
 plugins:
   - search
   - meta
