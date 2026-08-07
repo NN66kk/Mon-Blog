@@ -3,6 +3,12 @@
 {% block content %}
   {{ page.content }}
 
+  {# 首页默认只显示最近 12 篇；archive.md 通过 front matter 的 posts_limit: 0 显示全部 #}
+  {% set limit = 12 %}
+  {% if page.meta and page.meta.posts_limit is defined and page.meta.posts_limit is not none %}
+    {% set limit = page.meta.posts_limit|int %}
+  {% endif %}
+
   {% set ns = namespace(entries=[]) %}
   {% for post in nav.pages %}
     {% if post.file and post.file.src_uri[:1] in ["A", "B", "C", "D"] %}
@@ -32,7 +38,12 @@
     {% endif %}
   {% endfor %}
 
-  {% for entry in ns.entries|sort(attribute="date_key", reverse=true) %}
+  {% set entries = ns.entries|sort(attribute="date_key", reverse=true) %}
+  {% if limit > 0 %}
+    {% set entries = entries[:limit] %}
+  {% endif %}
+
+  {% for entry in entries %}
     {% set post = entry.page %}
     {% set body_html = post.content %}
     {% set description = post.blog_description_text|default("", true) %}
@@ -84,4 +95,14 @@
       <p><a class="post-read-more" href="{{ post.url|url }}">阅读全文</a></p>
     </article>
   {% endfor %}
+
+  {% if limit > 0 %}
+    {% set archive_url = "archive/" %}
+    {% for candidate in nav.pages %}
+      {% if candidate.file and candidate.file.src_uri == "archive.md" %}
+        {% set archive_url = candidate.url %}
+      {% endif %}
+    {% endfor %}
+    <p class="post-more"><a class="post-read-more" href="{{ archive_url|url }}">查看更多文章 →</a></p>
+  {% endif %}
 {% endblock %}

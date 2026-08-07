@@ -139,6 +139,14 @@
   font-weight: 600;
 }
 
+.post-more {
+  margin-top: 1.2rem;
+}
+
+.post-more .post-read-more {
+  font-size: 1.05em;
+}
+
 /* More space at the bottom of the page */
 .md-main__inner {
   margin-bottom: 1.5rem;
