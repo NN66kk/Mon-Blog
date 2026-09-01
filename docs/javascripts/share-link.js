@@ -49,18 +49,28 @@ function bindShareLinkButtons(root) {
       const defaultText = button.dataset.shareLinkDefaultText || "分享";
       const successText = button.dataset.shareLinkSuccessText || "已复制";
       const errorText = button.dataset.shareLinkErrorText || "复制失败";
+      const defaultAriaLabel = button.getAttribute("aria-label") || defaultText;
 
       button.disabled = true;
+      button.dataset.shareLinkState = "copying";
+      button.setAttribute("aria-busy", "true");
 
       try {
         await copyShareLink(getShareLinkUrl());
         button.textContent = successText;
+        button.dataset.shareLinkState = "copied";
+        button.setAttribute("aria-label", "链接已复制");
       } catch (error) {
         button.textContent = errorText;
+        button.dataset.shareLinkState = "error";
+        button.setAttribute("aria-label", errorText);
       }
 
       window.setTimeout(() => {
         button.textContent = defaultText;
+        delete button.dataset.shareLinkState;
+        button.setAttribute("aria-label", defaultAriaLabel);
+        button.removeAttribute("aria-busy");
         button.disabled = false;
       }, 1600);
     });
