@@ -25,26 +25,26 @@
   <header class="post-header">
     <div class="post-header-topline">
       <span class="post-header-kicker">{{ section_index }} · {{ section_label }}</span>
+      {% if page.blog_publish_label %}
+        <time class="post-header-date" datetime="{{ page.blog_publish_iso|e }}">
+          {{ page.blog_publish_label[:10]|e }}
+        </time>
+      {% else %}
+        <span class="post-header-date">持续更新</span>
+      {% endif %}
+    </div>
+    <h1 class="post-header-title">{{ page.title|striptags|e }}</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
       <span class="post-reading-stats" data-reading-stats>
         <span data-reading-count>正在计算</span>
         <span aria-hidden="true">·</span>
         <span data-reading-minutes>阅读模式</span>
       </span>
-    </div>
-    <h1 class="post-header-title">{{ page.title|striptags|e }}</h1>
-    <div class="post-header-meta">
-      {% if page.blog_publish_label %}
-        <time class="post-header-date" datetime="{{ page.blog_publish_iso|e }}">
-          {{ page.blog_publish_label|e }}
-        </time>
-      {% else %}
-        <span class="post-header-date">持续更新</span>
-      {% endif %}
-      <span class="post-header-dot" aria-hidden="true"></span>
-      <span>Mon's Digital Garden</span>
       <button
         type="button"
         class="post-share-button"
+        aria-label="分享本文"
         data-share-link-button
         data-share-link-default-text="分享"
         data-share-link-success-text="已复制"

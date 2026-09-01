@@ -133,6 +133,22 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn('class="post-body" data-post-body', template)
         self.assertIn("{{ body_html|safe }}", template)
 
+    def test_mobile_layout_prioritizes_posts_and_compacts_article_header(self):
+        css = read_project_file("docs/css/garden-v2.css")
+        template = read_project_file("docs/templates/post.html")
+
+        self.assertIn("/* Reading-first mobile layout: content arrives before decoration. */", css)
+        self.assertIn(".garden-home-v3 .quiet-hero__landscape", css)
+        self.assertIn(".garden-home-v3 .quiet-post-list", css)
+        self.assertIn("order: 1", css)
+        self.assertIn(".garden-home-v3 .quiet-about-note", css)
+        self.assertIn("order: 2", css)
+        self.assertIn(".md-content:has(.post-header) .md-path", css)
+        self.assertIn(".md-content__inner:has(.post-header)", css)
+        self.assertIn("post-header-attribution", template)
+        self.assertIn("page.blog_publish_label[:10]", template)
+        self.assertIn('aria-label="分享本文"', template)
+
     def test_site_ui_labels_code_and_updates_reading_state(self):
         script = read_project_file("docs/javascripts/site-ui.js")
 
