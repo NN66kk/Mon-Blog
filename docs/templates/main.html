@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  {% set is_article = page and page.file and page.file.src_uri[:1] in ["A", "B", "C", "D"] %}
+  {% set social_title = page.title ~ " · " ~ config.site_name if page and page.title and page.title != config.site_name else config.site_name %}
+  {% set social_description = config.site_description %}
+  {% if page and page.meta and page.meta.description %}
+    {% set social_description = page.meta.description|string|striptags|trim %}
+  {% elif page and page.meta and page.meta.excerpt %}
+    {% set social_description = page.meta.excerpt|string|striptags|trim %}
+  {% elif is_article and page.content %}
+    {% set social_description = page.content|striptags|trim|truncate(155) %}
+  {% endif %}
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="{{ 'article' if is_article else 'website' }}">
+  <meta property="og:site_name" content="{{ config.site_name|e }}">
+  <meta property="og:title" content="{{ social_title|striptags|e }}">
+  <meta property="og:description" content="{{ social_description|e }}">
+  {% if page and page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url|e }}">{% endif %}
+  <meta name="twitter:card" content="{{ 'summary' if is_article else 'summary_large_image' }}">
+  <meta name="twitter:title" content="{{ social_title|striptags|e }}">
+  <meta name="twitter:description" content="{{ social_description|e }}">
+  {% if not is_article %}
+    <meta property="og:image" content="{{ (config.site_url ~ 'assets/images/og-garden.png')|e }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Mon's Digital Garden 月光流釉与夜瓷星图品牌封面">
+    <meta name="twitter:image" content="{{ (config.site_url ~ 'assets/images/og-garden.png')|e }}">
+    <meta name="twitter:image:alt" content="Mon's Digital Garden 月光流釉与夜瓷星图品牌封面">
+  {% endif %}
+{% endblock %}

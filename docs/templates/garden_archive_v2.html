@@ -1,0 +1,73 @@
+{% extends "main.html" %}
+
+{% block content %}
+  {% set collections = config.extra.collections %}
+  {% set ns = namespace(entries=[]) %}
+  {% for post in nav.pages %}
+    {% if post.file and post.file.src_uri[:1] in ["A", "B", "C", "D"] %}
+      {% set src_uri = post.file.src_uri %}
+      {% set base = src_uri.rsplit("/", 1)[-1].rsplit(".", 1)[0] %}
+      {% if base[:6] != "000000" %}
+        {% set section = src_uri[:1] %}
+        {% set _ = ns.entries.append({
+          "page": post,
+          "date_key": post.blog_publish_key|default("", true),
+          "date_label": post.blog_publish_label|default("持续更新", true),
+          "publish_iso": post.blog_publish_iso|default("", true),
+          "section": section,
+          "collection": collections.get(section)
+        }) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% set entries = ns.entries|sort(attribute="date_key", reverse=true) %}
+
+  <div class="garden-archive-v2">
+    <header class="garden-archive-v2__hero">
+      <span class="garden-eyebrow-v2"><i aria-hidden="true"></i> ARCHIVE / {{ entries|length }} NOTES</span>
+      <h1>全部文章</h1>
+      <p>沿时间翻阅这座个人花园。思考、行走、阅读与收藏，都在这里留下坐标。</p>
+      <nav class="garden-archive-v2__filters" aria-label="卷目快捷入口">
+        {% for key in ["B", "D", "A", "C"] %}
+          {% set collection = collections.get(key) %}
+          <a href="{{ collection.index|url|e }}"><span>{{ collection.mark }}</span>{{ collection.label }}</a>
+        {% endfor %}
+      </nav>
+    </header>
+
+    <div class="garden-archive-v2__timeline">
+      {% set years = namespace(current="") %}
+      {% for entry in entries %}
+        {% set year = entry.date_label[:4] if entry.date_label[:4].isdigit() else "未定" %}
+        {% if year != years.current %}
+          {% if not loop.first %}</div></section>{% endif %}
+          <section class="garden-year" aria-labelledby="garden-year-{{ year|e }}">
+            <header class="garden-year__header">
+              <h2 id="garden-year-{{ year|e }}">{{ year }}</h2>
+              <span>YEAR</span>
+            </header>
+            <div class="garden-year__posts">
+          {% set years.current = year %}
+        {% endif %}
+
+        {% set post = entry.page %}
+        {% set description = post.blog_description_text|default("", true) or post.blog_excerpt_text|default("", true) %}
+        {% if not description and post.meta and post.meta.description %}{% set description = post.meta.description %}{% endif %}
+        <article class="garden-archive-card garden-card">
+          <time{% if entry.publish_iso %} datetime="{{ entry.publish_iso|e }}"{% endif %}>
+            <b>{{ entry.date_label[5:10]|default("--", true)|e }}</b>
+            <span>{{ entry.collection.label }}</span>
+          </time>
+          <div class="garden-archive-card__copy">
+            <span class="garden-chip">{{ entry.collection.mark }} · {{ entry.collection.label }}</span>
+            <h3><a href="{{ post.url|url|e }}">{{ post.title|striptags|e }}</a></h3>
+            {% if description and "<%" not in description %}<p>{{ description|striptags|trim|truncate(118)|e }}</p>{% endif %}
+          </div>
+          <a class="garden-card-arrow" href="{{ post.url|url|e }}" aria-label="阅读《{{ post.title|striptags|e }}》"><span aria-hidden="true">→</span></a>
+        </article>
+
+        {% if loop.last %}</div></section>{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,7 +1,8 @@
 ---
-template: posts_list.html
+template: garden_archive_v2.html
 title: 全部文章
-posts_limit: 0
+hide:
+  - toc
 ---
 
 # 全部文章

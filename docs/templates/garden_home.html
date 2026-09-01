@@ -1,0 +1,122 @@
+{% extends "main.html" %}
+
+{% block content %}
+  {% set ns = namespace(entries=[], life=0, notes=0, highlights=0, originals=0, pinned=none) %}
+  {% for post in nav.pages %}
+    {% if post.file and post.file.src_uri[:1] in ["A", "B", "C", "D"] %}
+      {% set item = {
+        "page": post,
+        "date_key": post.blog_publish_key|default("", true),
+        "date_label": post.blog_publish_label|default("-", true),
+        "publish_iso": post.blog_publish_iso|default("", true),
+        "section": post.file.src_uri[:1]
+      } %}
+      {% set _ = ns.entries.append(item) %}
+      {% if item.section == "A" %}{% set ns.life = ns.life + 1 %}{% endif %}
+      {% if item.section == "B" %}{% set ns.notes = ns.notes + 1 %}{% endif %}
+      {% if item.section == "C" %}{% set ns.highlights = ns.highlights + 1 %}{% endif %}
+      {% if item.section == "D" %}{% set ns.originals = ns.originals + 1 %}{% endif %}
+      {% if (post.meta and post.meta.featured) or "这一次，我选择助跑冲向深渊" in post.file.src_uri %}{% set ns.pinned = item %}{% endif %}
+    {% endif %}
+  {% endfor %}
+  {% set entries = ns.entries|sort(attribute="date_key", reverse=true) %}
+
+  <div class="garden-home">
+    <section class="garden-hero" aria-labelledby="garden-hero-title">
+      <svg class="garden-hero-map" viewBox="0 0 1200 420" preserveAspectRatio="none" role="img" aria-label="抽象远山、等高线与知识节点">
+        <path class="garden-lattice" d="M84 0V420M284 0V420M484 0V420M684 0V420M884 0V420M1084 0V420M0 76H1200M0 176H1200M0 276H1200M0 376H1200"/>
+        <path class="garden-mountain garden-mountain--back" d="M0 309C106 258 168 143 281 210S456 351 585 232 809 106 932 216s192 59 268-13v217H0Z"/>
+        <path class="garden-mountain garden-mountain--front" d="M0 360c121-76 206-29 312-91 102-60 133-157 244-79s203 151 326 69 218-49 318-2v163H0Z"/>
+        <path class="garden-contour" d="M-50 334C88 174 246 405 414 220S728 377 911 178s274-31 361-97"/>
+        <path class="garden-contour garden-contour--fine" d="M-30 370C107 218 261 438 435 258S746 415 933 218s270-29 351-89"/>
+        <g class="garden-map-nodes"><circle cx="284" cy="176" r="7"/><circle cx="684" cy="276" r="7"/><circle cx="884" cy="176" r="7" class="is-hot"/><circle cx="1084" cy="76" r="4"/></g>
+      </svg>
+
+      <div class="garden-hero-copy">
+        <span class="garden-eyebrow">MON'S DIGITAL GARDEN / 2026</span>
+        <h1 id="garden-hero-title">格物，也格自己。</h1>
+        <p>在代码与山野之间，种一座持续生长的数字花园。</p>
+        <a class="garden-text-link" href="#garden-latest">开始游园 <span aria-hidden="true">→</span></a>
+      </div>
+
+      <dl class="garden-hero-stats" aria-label="数字花园概览">
+        <div><dt>{{ entries|length }}</dt><dd>篇内容</dd></div>
+        <div><dt>04</dt><dd>个卷目</dd></div>
+        <div><dt>{% if entries %}{{ entries[0].date_label[:10]|e }}{% else %}-{% endif %}</dt><dd>最近更新</dd></div>
+      </dl>
+      <span class="garden-vertical-note" aria-hidden="true">月光流釉 · 万物有格</span>
+    </section>
+
+    <div class="garden-home-layout">
+      <aside class="garden-profile" aria-label="作者与卷目">
+        <section class="garden-author-card">
+          <div class="garden-avatar" aria-hidden="true">M</div>
+          <h2>Mon</h2>
+          <p>代码 × 山野 × 独立思考</p>
+          <div class="garden-now"><span aria-hidden="true"></span><small>NOW</small> 正在打磨这座数字花园</div>
+        </section>
+
+        <section class="garden-collections" aria-labelledby="garden-collections-title">
+          <header><h2 id="garden-collections-title">卷目</h2><span>COLLECTIONS</span></header>
+          <div class="garden-collection-grid">
+            <a href="{{ 'B-Notes/000000学习笔记目录/'|url|e }}"><b>技</b><span>格物札记</span><small>{{ ns.notes }}</small></a>
+            <a href="{{ 'D-Orginals/000000原创文章目录/'|url|e }}"><b>思</b><span>原创手记</span><small>{{ ns.originals }}</small></a>
+            <a href="{{ 'A-Life/000000生活专栏目录/'|url|e }}"><b>行</b><span>山野日常</span><small>{{ ns.life }}</small></a>
+            <a href="{{ 'C-Highlights/000000优质内容目录/'|url|e }}"><b>拾</b><span>人间拾遗</span><small>{{ ns.highlights }}</small></a>
+          </div>
+        </section>
+      </aside>
+
+      <section class="garden-feed" id="garden-latest" aria-labelledby="garden-latest-title">
+        <header class="garden-section-heading">
+          <div><h2 id="garden-latest-title">近日所记</h2><span>LATEST NOTES</span></div>
+          <a href="{{ 'archive/'|url|e }}">查看全部 {{ entries|length }} 篇 <span aria-hidden="true">↗</span></a>
+        </header>
+
+        {% if ns.pinned %}
+          {% set featured = ns.pinned.page %}
+          {% set featured_description = featured.blog_description_text|default("", true) or featured.blog_excerpt_text|default("", true) %}
+          {% if not featured_description and featured.meta and featured.meta.description %}{% set featured_description = featured.meta.description %}{% endif %}
+          <article class="garden-featured-post">
+            <a class="garden-featured-art" href="{{ featured.url|url|e }}" aria-label="阅读《{{ featured.title|striptags|e }}》">
+              <span class="garden-art-moon" aria-hidden="true"></span>
+              <span class="garden-art-person" aria-hidden="true"></span>
+              <span class="garden-art-copy" aria-hidden="true">向未知<br>再一步</span>
+            </a>
+            <div class="garden-featured-copy">
+              <span class="garden-post-kicker">[ 思 ] 置顶原创 · {{ ns.pinned.date_label[:10]|e }}</span>
+              <h2><a href="{{ featured.url|url|e }}">{{ featured.title|striptags|e }}</a></h2>
+              <p>{% if featured_description %}{{ featured_description|striptags|trim|truncate(92)|e }}{% else %}从求生走向生活，也学着主动奔向未知。{% endif %}</p>
+              <a class="garden-text-link" href="{{ featured.url|url|e }}">进入文章 <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        {% endif %}
+
+        <div class="garden-post-list">
+          {% set recent = namespace(count=0) %}
+          {% for entry in entries %}
+            {% if recent.count < 5 and (not ns.pinned or entry.page != ns.pinned.page) %}
+              {% set post = entry.page %}
+              {% set description = post.blog_description_text|default("", true) or post.blog_excerpt_text|default("", true) %}
+              {% if not description and post.meta and post.meta.description %}{% set description = post.meta.description %}{% endif %}
+              {% if entry.section == "A" %}{% set index = "行" %}{% set collection = "山野日常" %}
+              {% elif entry.section == "B" %}{% set index = "技" %}{% set collection = "格物札记" %}
+              {% elif entry.section == "C" %}{% set index = "拾" %}{% set collection = "人间拾遗" %}
+              {% else %}{% set index = "思" %}{% set collection = "原创手记" %}{% endif %}
+              <article class="garden-post-row">
+                <span class="garden-post-index" aria-hidden="true">{{ index }}</span>
+                <div>
+                  <div class="garden-post-meta"><time{% if entry.publish_iso %} datetime="{{ entry.publish_iso|e }}"{% endif %}>{{ entry.date_label[:10]|e }}</time><span>{{ collection }}</span></div>
+                  <h3><a href="{{ post.url|url|e }}">{{ post.title|striptags|e }}</a></h3>
+                  {% if description %}<p>{{ description|striptags|trim|truncate(74)|e }}</p>{% endif %}
+                </div>
+                <a class="garden-row-arrow" href="{{ post.url|url|e }}" aria-label="阅读《{{ post.title|striptags|e }}》"><span aria-hidden="true">→</span></a>
+              </article>
+              {% set recent.count = recent.count + 1 %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </div>
+{% endblock %}

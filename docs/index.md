@@ -1,5 +1,8 @@
 ---
-template: posts_list.html
+template: garden_home_v2.html
+hide:
+  - navigation
+  - toc
 ---
 
 # Mon's Digital Garden
@@ -15,11 +18,3 @@ template: posts_list.html
 部分内容同步更新于公众号 **反拖延实验室**。
 
 了解更多请查看 [[2024070515116|关于我]]。
-
-<style>
-@media only screen and (min-width: 1220px) {
-  .md-nav__list {
-    display: none;
-  }
-}
-</style>

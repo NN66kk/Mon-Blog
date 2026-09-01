@@ -1,0 +1,110 @@
+{% extends "main.html" %}
+
+{% block content %}
+  {% set collections = config.extra.collections %}
+  {% set ns = namespace(entries=[], featured=none) %}
+  {% for post in nav.pages %}
+    {% if post.file and post.file.src_uri[:1] in ["A", "B", "C", "D"] %}
+      {% set src_uri = post.file.src_uri %}
+      {% set base = src_uri.rsplit("/", 1)[-1].rsplit(".", 1)[0] %}
+      {% if base[:6] != "000000" %}
+        {% set section = src_uri[:1] %}
+        {% set item = {
+          "page": post,
+          "src_uri": src_uri,
+          "date_key": post.blog_publish_key|default("", true),
+          "date_label": post.blog_publish_label|default("持续更新", true),
+          "publish_iso": post.blog_publish_iso|default("", true),
+          "collection": collections.get(section)
+        } %}
+        {% set _ = ns.entries.append(item) %}
+        {% if src_uri == config.extra.featured_post %}{% set ns.featured = item %}{% endif %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% set entries = ns.entries|sort(attribute="date_key", reverse=true) %}
+  {% if not ns.featured and entries %}{% set ns.featured = entries[0] %}{% endif %}
+
+  <div class="garden-home garden-home-v3">
+    <section class="quiet-hero" aria-labelledby="garden-hero-title">
+      <div class="quiet-hero__copy">
+        <span class="quiet-eyebrow">独处 · 观察 · 前行</span>
+        <h1 id="garden-hero-title">保持清醒，<br>持续前行。</h1>
+        <blockquote class="quiet-hero__quote">
+          永远不要自怜，永远不要嫉妒。
+          <cite>— 查理·芒格</cite>
+        </blockquote>
+        <p class="quiet-hero__intro">来自河南，现于北京读研。用写作整理思考，也在行走、训练与独处中，慢慢认识世界和自己。</p>
+        <div class="quiet-hero__actions">
+          {% if entries %}<a class="quiet-button quiet-button--ink" href="{{ entries[0].page.url|url|e }}">开始阅读 <span aria-hidden="true">→</span></a>{% endif %}
+          <a class="quiet-button" href="{{ 'D-Orginals/2024070515116/'|url|e }}">认识我</a>
+        </div>
+      </div>
+
+      <div class="quiet-hero__landscape" aria-hidden="true">
+        <svg viewBox="0 0 760 520" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="760" height="520" fill="currentColor"></rect>
+          <path class="quiet-ridge quiet-ridge--far" d="M0 220C102 178 159 216 248 166C349 110 411 137 492 93C572 49 669 80 760 40V520H0Z"></path>
+          <path class="quiet-ridge quiet-ridge--mid" d="M0 292C97 228 176 271 270 229C352 192 417 223 500 184C594 140 686 179 760 132V520H0Z"></path>
+          <path class="quiet-ridge quiet-ridge--near" d="M0 365C102 316 179 370 274 323C357 281 431 327 521 278C612 231 680 289 760 244V520H0Z"></path>
+          <path class="quiet-path" d="M109 520C143 454 191 397 255 364C322 328 367 292 421 233C468 182 520 151 555 109"></path>
+          <path class="quiet-path quiet-path--edge" d="M109 520C143 454 191 397 255 364C322 328 367 292 421 233C468 182 520 151 555 109"></path>
+          <g class="quiet-contours">
+            <path d="M-30 96C91 41 191 122 294 63C402 2 510 78 790 14"></path>
+            <path d="M-28 123C95 70 196 147 306 90C410 35 517 100 790 39"></path>
+            <path d="M-20 155C94 108 198 177 317 123C424 74 526 128 790 72"></path>
+            <path d="M-25 387C96 336 191 412 296 362C399 314 520 393 787 331"></path>
+            <path d="M-22 416C104 366 201 442 305 391C410 342 528 420 790 359"></path>
+            <path d="M-20 447C108 398 208 470 319 421C427 371 539 448 790 387"></path>
+          </g>
+          <circle class="quiet-path-dot" cx="555" cy="109" r="6"></circle>
+          <circle class="quiet-path-ring" cx="555" cy="109" r="13"></circle>
+        </svg>
+        <span class="quiet-hero__seal">向前</span>
+      </div>
+    </section>
+
+    <section class="quiet-reading" id="garden-latest" aria-labelledby="garden-latest-title">
+      <header class="quiet-reading__header">
+        <div>
+          <span class="quiet-eyebrow">RECENT NOTES</span>
+          <h2 id="garden-latest-title">近日所记</h2>
+          <p>关于思考、训练、行走，以及抵达答案的路径。</p>
+        </div>
+        <a href="{{ 'archive/'|url|e }}">全部文章 <span aria-hidden="true">→</span></a>
+      </header>
+
+      <div class="quiet-reading__body">
+        {% if ns.featured %}
+          {% set featured = ns.featured.page %}
+          {% set featured_description = featured.blog_description_text|default("", true) or featured.blog_excerpt_text|default("", true) %}
+          {% if not featured_description and featured.meta and featured.meta.description %}{% set featured_description = featured.meta.description %}{% endif %}
+          <aside class="quiet-about-note" aria-label="置顶文章">
+            <span class="quiet-about-note__label">置顶文章</span>
+            <h3><a href="{{ featured.url|url|e }}">{{ featured.title|striptags|e }}</a></h3>
+            <p>{% if featured_description %}{{ featured_description|striptags|trim|truncate(104)|e }}{% else %}关于这座花园，也关于正在慢慢成为的自己。{% endif %}</p>
+            <a class="quiet-text-link" href="{{ featured.url|url|e }}">读一读我的自述 <span aria-hidden="true">→</span></a>
+          </aside>
+        {% endif %}
+
+        <div class="quiet-post-list">
+          {% set recent = namespace(count=0) %}
+          {% for entry in entries %}
+            {% if recent.count < 6 and (not ns.featured or entry.src_uri != ns.featured.src_uri) %}
+              {% set post = entry.page %}
+              <article class="quiet-post-row">
+                <time{% if entry.publish_iso %} datetime="{{ entry.publish_iso|e }}"{% endif %}>{{ entry.date_label[:10]|e }}</time>
+                <div>
+                  <span>{{ entry.collection.mark }} · {{ entry.collection.label }}</span>
+                  <h3><a href="{{ post.url|url|e }}">{{ post.title|striptags|e }}</a></h3>
+                </div>
+                <a class="quiet-post-row__arrow" href="{{ post.url|url|e }}" aria-label="阅读《{{ post.title|striptags|e }}》"><span aria-hidden="true">→</span></a>
+              </article>
+              {% set recent.count = recent.count + 1 %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

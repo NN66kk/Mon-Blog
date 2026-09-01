@@ -7,31 +7,64 @@
     {% set body_html = stripped.split("</h1>", 1)[1] %}
   {% endif %}
 
+  {% set section = page.file.src_uri[:1] if page.file else "" %}
+  {% set collection = config.extra.collections.get(section) if config.extra and config.extra.collections else none %}
+  {% set section_index = collection.mark if collection else "记" %}
+  {% set section_label = collection.label if collection else "数字花园" %}
+
+  <div
+    class="reading-progress"
+    data-reading-progress
+    role="progressbar"
+    aria-label="文章阅读进度"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0"
+  ></div>
+
   <header class="post-header">
-    <h1 class="post-header-title">{{ page.title }}</h1>
-    {% if page.blog_publish_label %}
-      <div class="post-header-meta">
-        <time class="post-header-date" datetime="{{ page.blog_publish_iso }}">
-          发布时间：{{ page.blog_publish_label }}
+    <div class="post-header-topline">
+      <span class="post-header-kicker">{{ section_index }} · {{ section_label }}</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+    </div>
+    <h1 class="post-header-title">{{ page.title|striptags|e }}</h1>
+    <div class="post-header-meta">
+      {% if page.blog_publish_label %}
+        <time class="post-header-date" datetime="{{ page.blog_publish_iso|e }}">
+          {{ page.blog_publish_label|e }}
         </time>
-        <button
-          type="button"
-          class="post-share-button"
-          data-share-link-button
-          data-share-link-default-text="分享"
-          data-share-link-success-text="已复制"
-          data-share-link-error-text="复制失败"
-        >
-          分享
-        </button>
-      </div>
-    {% endif %}
+      {% else %}
+        <span class="post-header-date">持续更新</span>
+      {% endif %}
+      <span class="post-header-dot" aria-hidden="true"></span>
+      <span>Mon's Digital Garden</span>
+      <button
+        type="button"
+        class="post-share-button"
+        data-share-link-button
+        data-share-link-default-text="分享"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      >分享</button>
+    </div>
   </header>
 
   {% if page.meta and page.meta.image and page.meta.image.add_to_post and page.meta.image.src %}
-    <div class="{{ page.meta.image.class|default('') }}"><img src="{{ page.meta.image.src }}" alt="{{ page.title }}"/></div>
+    <div class="{{ page.meta.image.class|default('')|e }}"><img src="{{ page.meta.image.src|e }}" alt="{{ page.title|striptags|e }}"/></div>
   {% endif %}
-  {{ body_html|safe }}
+  <div class="post-body" data-post-body>
+    {{ body_html|safe }}
+  </div>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav><a href="{{ 'archive/'|url|e }}">返回全部文章</a><a href="#">回到顶部 ↑</a></nav>
+  </footer>
 
   <div class="article-toc" data-article-toc hidden>
     <button
@@ -51,7 +84,6 @@
       id="article-toc-sheet"
       class="article-toc-sheet"
       role="dialog"
-      aria-modal="true"
       aria-labelledby="article-toc-title"
       aria-hidden="true"
       inert

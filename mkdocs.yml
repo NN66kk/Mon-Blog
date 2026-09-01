@@ -1,13 +1,37 @@
 site_name: Mon's Digital Garden
+site_description: 在代码与山野之间，种一座持续生长的数字花园。
+site_url: https://nn66kk.github.io/Mon-Blog/
+site_dir: !ENV [MON_BLOG_SITE_DIR, site]
 
 repo_url: https://github.com/NN66kk/Mon-Blog
 repo_name: NN66kk/Mon-Blog
 edit_uri: edit/main/docs/
 
+extra:
+  featured_post: "D-Orginals/2024070515116.md"
+  collections:
+    A:
+      mark: 行
+      label: 山野日常
+      index: "A-Life/000000生活专栏目录/"
+    B:
+      mark: 技
+      label: 格物札记
+      index: "B-Notes/000000学习笔记目录/"
+    C:
+      mark: 拾
+      label: 人间拾遗
+      index: "C-Highlights/000000优质内容目录/"
+    D:
+      mark: 思
+      label: 原创手记
+      index: "D-Orginals/000000原创文章目录/"
+
 theme:
   name: material
   custom_dir: docs/templates
   language: zh
+  font: false
   icon:
     repo: fontawesome/brands/github
   features:
@@ -25,20 +49,18 @@ theme:
     - content.code.copy
     - content.code.annotate
   palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: teal
-      accent: teal
+    - scheme: default
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
-        name: "\u5207\u6362\u5230\u6DF1\u8272\u6A21\u5F0F"
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: teal
-      accent: teal
+        name: "切换到「夜瓷星图」"
+    - scheme: slate
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
-        name: "\u5207\u6362\u5230\u6D45\u8272\u6A21\u5F0F"
+        name: "切换到「月光流釉」"
 
 markdown_extensions:
   - admonition
@@ -63,7 +85,10 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.inlinehilite
   - pymdownx.tabbed
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -85,8 +110,9 @@ extra_javascript:
   - javascripts/mathjax.js
   - javascripts/share-link.js
   - javascripts/article-toc.js
+  - javascripts/site-ui.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://unpkg.com/mermaid/dist/mermaid.min.js
 
 extra_css:
-  - css/custom.css
+  - css/garden-v2.css

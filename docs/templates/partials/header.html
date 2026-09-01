@@ -1,0 +1,55 @@
+{# A quiet editorial header that keeps Material's search, palette and drawer. #}
+{% set src_uri = page.file.src_uri if page and page.file else "" %}
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="{{ lang.t('header') }}">
+    <label class="md-header__button md-icon site-header__menu" for="__drawer" aria-label="打开站点导航">
+      {% set icon = config.theme.icon.menu or "material/menu" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </label>
+
+    <a
+      href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
+      class="site-brand"
+      aria-label="{{ config.site_name }} 首页"
+      data-md-component="logo"
+    >
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a href="{{ nav.homepage.url | url }}"{% if page.is_homepage %} class="is-active" aria-current="page"{% endif %}>首页</a>
+      <a href="{{ 'archive/' | url }}"{% if src_uri == 'archive.md' %} class="is-active" aria-current="page"{% endif %}>文章</a>
+      <a href="{{ 'D-Orginals/2024070515116/' | url }}"{% if '2024070515116' in src_uri %} class="is-active" aria-current="page"{% endif %}>关于我</a>
+      <a href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      {% if "material/search" in config.plugins %}
+        {% set search = config.plugins["material/search"] | attr("config") %}
+        {% if search.enabled %}
+          <label class="md-header__button md-icon site-header__search-trigger" for="__search" aria-label="打开搜索">
+            {% set icon = config.theme.icon.search or "material/magnify" %}
+            {% include ".icons/" ~ icon ~ ".svg" %}
+          </label>
+          {% include "partials/search.html" %}
+        {% endif %}
+      {% endif %}
+
+      {% if config.theme.palette and not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
+      {% endif %}
+
+      <a class="md-header__button md-icon site-header__github" href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看仓库">
+        {% include ".icons/fontawesome/brands/github.svg" %}
+      </a>
+    </div>
+  </nav>
+
+  {% if config.theme.palette and not config.theme.palette is mapping %}
+    {% include "partials/javascripts/palette.html" %}
+  {% endif %}
+</header>

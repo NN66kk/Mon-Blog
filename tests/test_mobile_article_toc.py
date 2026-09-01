@@ -43,14 +43,12 @@ class MobileArticleTocTests(unittest.TestCase):
         self.assertNotIn('querySelectorAll("a[href^=\'#\']")', script)
 
     def test_mobile_styles_include_safe_area_and_reduced_motion(self):
-        css = (ROOT / "docs/css/custom.css").read_text(encoding="utf-8")
+        css = (ROOT / "docs/css/garden-v2.css").read_text(encoding="utf-8")
 
         self.assertIn(".article-toc-fab", css)
         self.assertIn(".article-toc-search-toggle", css)
         self.assertIn(".article-toc-search[hidden]", css)
         self.assertIn(".article-toc-search-input", css)
-        self.assertIn(".article-toc-item--visible-first::after", css)
-        self.assertIn(".article-toc-item--visible-last::after", css)
         self.assertIn(".article-toc-current", css)
         self.assertIn('content: ""', css)
         self.assertIn("list-style: none", css)
