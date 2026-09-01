@@ -1,0 +1,101 @@
+from pathlib import Path
+from types import SimpleNamespace
+from tempfile import TemporaryDirectory
+import importlib.util
+import unittest
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SPEC = importlib.util.spec_from_file_location(
+    "post_metadata", ROOT / "hooks/post_metadata.py"
+)
+POST_METADATA = importlib.util.module_from_spec(SPEC)
+assert SPEC.loader is not None
+SPEC.loader.exec_module(POST_METADATA)
+
+
+class PostMetadataTests(unittest.TestCase):
+    def test_extracts_a_clean_description_from_markdown(self):
+        with TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "article.md"
+            path.write_text(
+                """---
+tags: [AI, Obsidian]
+---
+
+# 标题不会进入摘要
+
+![[missing-image.png]]
+
+这是一段真正描述文章内容的文字，包含 [可读链接](https://example.com) 与 `行内代码`，足以作为页面摘要。
+
+```python
+print("code should not leak")
+```
+""",
+                encoding="utf-8",
+            )
+
+            description = POST_METADATA._description_from_markdown(path)
+
+        self.assertIn("真正描述文章内容", description)
+        self.assertIn("可读链接", description)
+        self.assertIn("行内代码", description)
+        self.assertNotIn("标题不会进入摘要", description)
+        self.assertNotIn("missing-image", description)
+        self.assertNotIn("code should not leak", description)
+
+    def test_on_nav_uses_cdate_and_populates_article_metadata(self):
+        with TemporaryDirectory() as temp_dir:
+            docs_dir = Path(temp_dir)
+            article = docs_dir / "B-Notes" / "没有日期的文章.md"
+            article.parent.mkdir(parents=True)
+            article.write_text(
+                """---
+cdate: 2026-08-14 18:50:45
+tags:
+  - AI
+  - 写作
+---
+
+# 没有日期的文章
+
+这段正文会成为自动摘要，因此文章在搜索结果和社交分享中不再退回站点的通用描述。
+""",
+                encoding="utf-8",
+            )
+            page = SimpleNamespace(
+                file=SimpleNamespace(src_uri="B-Notes/没有日期的文章.md"),
+                meta={},
+                title="没有日期的文章",
+            )
+            nav = SimpleNamespace(pages=[page])
+
+            POST_METADATA.on_nav(nav, {"docs_dir": str(docs_dir)}, files=[])
+            # MkDocs reloads front matter after on_nav; the page-context hook
+            # makes the generated description available to the base template.
+            page.meta = {"tags": ["AI", "写作"]}
+            POST_METADATA.on_page_context({}, page, {}, nav)
+
+        self.assertEqual(page.blog_publish_key, "20260814185045")
+        self.assertEqual(page.blog_publish_label, "2026-08-14 18:50")
+        self.assertEqual(page.blog_tags_text, "AI 写作")
+        self.assertIn("这段正文会成为自动摘要", page.blog_description_text)
+        self.assertEqual(page.meta["description"], page.blog_description_text)
+
+    def test_compact_two_digit_year_remains_supported(self):
+        publish = POST_METADATA._publish_parts_from_value("260814185045")
+        self.assertEqual(publish[0], "20260814185045")
+        self.assertEqual(publish[1], "2026-08-14 18:50")
+
+    def test_generated_description_is_safe_inside_html_attributes(self):
+        description = POST_METADATA._truncate_description(
+            '"engage" 表示参与 & 连接，也可能出现在 <code> 中。'
+        )
+
+        self.assertEqual(description, "“engage” 表示参与 ＆ 连接，也可能出现在 ＜code＞ 中。")
+        self.assertNotIn('"', description)
+
+
+if __name__ == "__main__":
+    unittest.main()

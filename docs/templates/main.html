@@ -2,13 +2,17 @@
 
 {% block extrahead %}
   {{ super() }}
-  {% set is_article = page and page.file and page.file.src_uri[:1] in ["A", "B", "C", "D"] %}
+  {% set src_uri = page.file.src_uri if page and page.file else "" %}
+  {% set src_base = src_uri.rsplit("/", 1)[-1].rsplit(".", 1)[0] %}
+  {% set is_article = src_uri[:1] in ["A", "B", "C", "D"] and src_base[:6] != "000000" %}
   {% set social_title = page.title ~ " · " ~ config.site_name if page and page.title and page.title != config.site_name else config.site_name %}
   {% set social_description = config.site_description %}
   {% if page and page.meta and page.meta.description %}
     {% set social_description = page.meta.description|string|striptags|trim %}
   {% elif page and page.meta and page.meta.excerpt %}
     {% set social_description = page.meta.excerpt|string|striptags|trim %}
+  {% elif is_article and page.blog_description_text %}
+    {% set social_description = page.blog_description_text|string|striptags|trim %}
   {% elif is_article and page.content %}
     {% set social_description = page.content|striptags|trim|truncate(155) %}
   {% endif %}
@@ -22,6 +26,24 @@
   <meta name="twitter:card" content="{{ 'summary' if is_article else 'summary_large_image' }}">
   <meta name="twitter:title" content="{{ social_title|striptags|e }}">
   <meta name="twitter:description" content="{{ social_description|e }}">
+  {% if is_article %}
+    {% set article_collection = config.extra.collections.get(page.file.src_uri[:1]) if config.extra and config.extra.collections else none %}
+    {% if page.blog_publish_iso %}<meta property="article:published_time" content="{{ page.blog_publish_iso|e }}">{% endif %}
+    {% if article_collection %}<meta property="article:section" content="{{ article_collection.label|e }}">{% endif %}
+    {% set article_schema = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": page.title|string|striptags,
+      "description": social_description|string|striptags,
+      "inLanguage": "zh-CN",
+      "author": {"@type": "Person", "name": "Mon"},
+      "publisher": {"@type": "Person", "name": "Mon"}
+    } %}
+    {% if page.canonical_url %}{% set _ = article_schema.update({"url": page.canonical_url|string, "mainEntityOfPage": page.canonical_url|string}) %}{% endif %}
+    {% if page.blog_publish_iso %}{% set _ = article_schema.update({"datePublished": page.blog_publish_iso|string}) %}{% endif %}
+    {% if article_collection %}{% set _ = article_schema.update({"articleSection": article_collection.label|string}) %}{% endif %}
+    <script type="application/ld+json">{{ article_schema|tojson }}</script>
+  {% endif %}
   {% if not is_article %}
     <meta property="og:image" content="{{ (config.site_url ~ 'assets/images/og-garden.png')|e }}">
     <meta property="og:image:width" content="1200">

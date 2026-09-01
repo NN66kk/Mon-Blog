@@ -2,13 +2,14 @@
 
 {% block content %}
   {% set collections = config.extra.collections %}
-  {% set ns = namespace(entries=[], featured=none) %}
+  {% set ns = namespace(entries=[], featured=none, counts={"A": 0, "B": 0, "C": 0, "D": 0}) %}
   {% for post in nav.pages %}
     {% if post.file and post.file.src_uri[:1] in ["A", "B", "C", "D"] %}
       {% set src_uri = post.file.src_uri %}
       {% set base = src_uri.rsplit("/", 1)[-1].rsplit(".", 1)[0] %}
       {% if base[:6] != "000000" %}
         {% set section = src_uri[:1] %}
+        {% set _ = ns.counts.update({section: ns.counts.get(section, 0) + 1}) %}
         {% set item = {
           "page": post,
           "src_uri": src_uri,
@@ -104,6 +105,30 @@
             {% endif %}
           {% endfor %}
         </div>
+      </div>
+    </section>
+
+    <section class="quiet-collections" aria-labelledby="garden-collections-title">
+      <header class="quiet-collections__header">
+        <div>
+          <span class="quiet-eyebrow">GARDEN PATHS</span>
+          <h2 id="garden-collections-title">循四条小径，逛一座花园。</h2>
+        </div>
+        <p>这里的 {{ entries|length }} 篇记录不追求完成，而在持续修订中保持真实。</p>
+      </header>
+      <div class="quiet-collections__grid">
+        {% for key in ["D", "B", "A", "C"] %}
+          {% set collection = collections.get(key) %}
+          <a class="quiet-collection-card quiet-collection-card--{{ key|lower }}" href="{{ collection.index|url|e }}">
+            <span class="quiet-collection-card__mark" aria-hidden="true">{{ collection.mark }}</span>
+            <span class="quiet-collection-card__copy">
+              <small>{{ ns.counts.get(key, 0) }} NOTES</small>
+              <strong>{{ collection.label }}</strong>
+              <span>{{ collection.description }}</span>
+            </span>
+            <span class="quiet-collection-card__arrow" aria-hidden="true">↗</span>
+          </a>
+        {% endfor %}
       </div>
     </section>
   </div>

@@ -246,6 +246,12 @@ function initializeArticleToc(root = document) {
     }
   }
 
+  function getFocusableSheetElements() {
+    return Array.from(sheet.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    )).filter((element) => !element.closest("[hidden]") && !element.hidden);
+  }
+
   function openToc() {
     // Capture the reading position before focus and scroll-lock changes can
     // affect heading geometry in mobile browsers.
@@ -295,6 +301,26 @@ function initializeArticleToc(root = document) {
   });
 
   sheet.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+      const focusableElements = getFocusableSheetElements();
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!firstElement || !lastElement) {
+        event.preventDefault();
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+      return;
+    }
+
     if (event.key === "Escape") {
       event.preventDefault();
 

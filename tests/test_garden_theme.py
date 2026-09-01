@@ -182,6 +182,32 @@ class GardenThemeTests(unittest.TestCase):
         width, height = struct.unpack(">II", header[16:24])
         self.assertEqual((width, height), (1200, 630))
 
+    def test_home_and_archive_expose_content_discovery_controls(self):
+        home = read_project_file("docs/templates/garden_home_v2.html")
+        archive = read_project_file("docs/templates/garden_archive_v2.html")
+        script = read_project_file("docs/javascripts/archive-filter.js")
+        config = read_project_file("mkdocs.yml")
+
+        self.assertIn('class="quiet-collections"', home)
+        self.assertIn('class="quiet-collection-card', home)
+        self.assertIn("collection.description", home)
+        self.assertIn("data-archive-search", archive)
+        self.assertIn("data-archive-collection", archive)
+        self.assertIn("data-archive-results", archive)
+        self.assertIn("data-archive-empty", archive)
+        self.assertIn("function archiveEntryMatches", script)
+        self.assertIn("javascripts/archive-filter.js", config)
+
+    def test_articles_emit_structured_metadata_and_collection_links(self):
+        main = read_project_file("docs/templates/main.html")
+        post = read_project_file("docs/templates/post.html")
+
+        self.assertIn('property="article:published_time"', main)
+        self.assertIn('type="application/ld+json"', main)
+        self.assertIn('"@type": "BlogPosting"', main)
+        self.assertIn("collection.index", post)
+        self.assertIn('id="article-top"', post)
+
 
 if __name__ == "__main__":
     unittest.main()

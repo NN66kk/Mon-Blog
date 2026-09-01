@@ -22,9 +22,15 @@
     aria-valuenow="0"
   ></div>
 
-  <header class="post-header">
+  <header class="post-header" id="article-top">
     <div class="post-header-topline">
-      <span class="post-header-kicker">{{ section_index }} · {{ section_label }}</span>
+      {% if collection %}
+        <a class="post-header-kicker" href="{{ collection.index|url|e }}" aria-label="浏览{{ section_label }}全部内容">
+          {{ section_index }} · {{ section_label }} <span aria-hidden="true">↗</span>
+        </a>
+      {% else %}
+        <span class="post-header-kicker">{{ section_index }} · {{ section_label }}</span>
+      {% endif %}
       {% if page.blog_publish_label %}
         <time class="post-header-date" datetime="{{ page.blog_publish_iso|e }}">
           {{ page.blog_publish_label[:10]|e }}
@@ -63,7 +69,11 @@
 
   <footer class="post-end-nav" aria-label="文章尾部导航">
     <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
-    <nav><a href="{{ 'archive/'|url|e }}">返回全部文章</a><a href="#">回到顶部 ↑</a></nav>
+    <nav>
+      {% if collection %}<a href="{{ collection.index|url|e }}">继续逛{{ section_label }}</a>{% endif %}
+      <a href="{{ 'archive/'|url|e }}">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
   </footer>
 
   <div class="article-toc" data-article-toc hidden>
@@ -85,6 +95,7 @@
       class="article-toc-sheet"
       role="dialog"
       aria-labelledby="article-toc-title"
+      aria-modal="true"
       aria-hidden="true"
       inert
     >

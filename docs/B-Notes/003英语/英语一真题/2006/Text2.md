@@ -66,7 +66,7 @@ The townsfolk don’t see it this way and the local council does not **contribut
 
 ### 第六段
 
-It would be a shame to raise prices too much because it would **drive away** the young people who are Stratford’s most attractive **clientele**. They come entirely for the plays, not the sights. They all seem to look alike (though they come from all over)—lean, pointed, dedicated faces, wearing jeans and sandals, eating their buns and bedding down for the night on the flagstones outside the theatre to buy the 20 seats and 80 standing-room tickets held for the sleepers and sold to them when the box office opens at 10:30 a.m.[[20230318203820#DAT 42|💡]]
+It would be a shame to raise prices too much because it would **drive away** the young people who are Stratford’s most attractive **clientele**. They come entirely for the plays, not the sights. They all seem to look alike (though they come from all over)—lean, pointed, dedicated faces, wearing jeans and sandals, eating their buns and bedding down for the night on the flagstones outside the theatre to buy the 20 seats and 80 standing-room tickets held for the sleepers and sold to them when the box office opens at 10:30 a.m.（💡 原笔记批注未归档）
 
 ---
 

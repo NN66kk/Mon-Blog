@@ -12,8 +12,9 @@ class MobileArticleTocTests(unittest.TestCase):
         self.assertIn("data-article-toc-button", template)
         self.assertIn('aria-controls="article-toc-sheet"', template)
         self.assertIn('role="dialog"', template)
+        self.assertIn('aria-modal="true"', template)
         self.assertIn(
-            'aria-labelledby="article-toc-title"\n      aria-hidden="true"\n      inert',
+            'aria-labelledby="article-toc-title"\n      aria-modal="true"\n      aria-hidden="true"\n      inert',
             template,
         )
         self.assertIn("data-article-toc-search-toggle", template)
@@ -64,6 +65,8 @@ class MobileArticleTocTests(unittest.TestCase):
         self.assertIn('"article-toc-item--visible-last"', script)
         self.assertIn("findCurrentTocLink(sourceLinks)", script)
         self.assertIn("content.scrollTop = Math.max(0, centeredTop)", script)
+        self.assertIn("getFocusableSheetElements", script)
+        self.assertIn('event.key === "Tab"', script)
 
 
 if __name__ == "__main__":

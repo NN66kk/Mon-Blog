@@ -13,18 +13,22 @@ extra:
     A:
       mark: 行
       label: 山野日常
+      description: 训练、饮食、出行与日常生活里反复验证的小经验。
       index: "A-Life/000000生活专栏目录/"
     B:
       mark: 技
       label: 格物札记
+      description: 技术、数学、英语与 AI 学习过程中留下的方法和推演。
       index: "B-Notes/000000学习笔记目录/"
     C:
       mark: 拾
       label: 人间拾遗
+      description: 值得保存的网站、文章、故事与那些让人会心一笑的片段。
       index: "C-Highlights/000000优质内容目录/"
     D:
       mark: 思
       label: 原创手记
+      description: 对工具、旅行、成长与现实问题的亲历、判断和复盘。
       index: "D-Orginals/000000原创文章目录/"
 
 theme:
@@ -97,6 +101,8 @@ markdown_extensions:
 
 exclude_docs: |
   superpowers
+  B-Notes/003英语/总结.md
+  D-Orginals/苹果电脑自动化脚本教程_2025070215169.md
 
 plugins:
   - search
@@ -110,6 +116,7 @@ extra_javascript:
   - javascripts/mathjax.js
   - javascripts/share-link.js
   - javascripts/article-toc.js
+  - javascripts/archive-filter.js
   - javascripts/site-ui.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://unpkg.com/mermaid/dist/mermaid.min.js

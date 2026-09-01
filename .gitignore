@@ -1,6 +1,8 @@
 .vscode/settings.json
 .obsidian/
 .trash/
+.venv/
+site/
 
 .DS_Store
 **/.DS_Store
