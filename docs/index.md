@@ -1,5 +1,5 @@
 ---
-template: garden_home_v2.html
+template: home.html
 hide:
   - navigation
   - toc
@@ -17,4 +17,4 @@ hide:
 
 部分内容同步更新于公众号 **反拖延实验室**。
 
-了解更多请查看 [[2024070515116|关于我]]。
+了解更多请查看 [[about|关于我]]。

@@ -7,20 +7,12 @@
     {% set body_html = stripped.split("</h1>", 1)[1] %}
   {% endif %}
 
-  {% set section = page.file.src_uri[:1] if page.file else "" %}
-  {% set collection = config.extra.collections.get(section) if config.extra and config.extra.collections else none %}
+  {% set collection = page.blog_collection %}
   {% set section_index = collection.mark if collection else "记" %}
   {% set section_label = collection.label if collection else "数字花园" %}
 
-  <div
-    class="reading-progress"
-    data-reading-progress
-    role="progressbar"
-    aria-label="文章阅读进度"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    aria-valuenow="0"
-  ></div>
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
 
   <header class="post-header" id="article-top">
     <div class="post-header-topline">
@@ -58,6 +50,14 @@
         aria-live="polite"
       >分享</button>
     </div>
+    {% if page.blog_topic_tags %}
+      <div class="post-header-tags" aria-label="文章标签">
+        {% for tag in page.blog_topic_tags %}<a href="{{ ('archive/?q=' ~ tag)|url }}"># {{ tag }}</a>{% endfor %}
+      </div>
+    {% endif %}
+    {% if page.blog_updated_iso and page.blog_updated_iso != page.blog_publish_iso %}
+      <p class="post-header-updated">最后修订于 <time datetime="{{ page.blog_updated_iso|e }}">{{ page.blog_updated_label[:10]|e }}</time></p>
+    {% endif %}
   </header>
 
   {% if page.meta and page.meta.image and page.meta.image.add_to_post and page.meta.image.src %}
@@ -66,6 +66,30 @@
   <div class="post-body" data-post-body>
     {{ body_html|safe }}
   </div>
+
+  {% if page.blog_related_pages %}
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        {% for related in page.blog_related_pages %}
+          <a href="{{ related.url|url }}">
+            <small>{{ related.blog_collection.mark }} · {{ related.blog_collection.label }}</small>
+            <strong>{{ related.title|striptags|e }}</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        {% endfor %}
+      </div>
+    </aside>
+  {% endif %}
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    {% if page.blog_newer_page %}
+      <a href="{{ page.blog_newer_page.url|url }}"><small>← 更新一篇</small><strong>{{ page.blog_newer_page.title|striptags|e }}</strong></a>
+    {% else %}<span></span>{% endif %}
+    {% if page.blog_older_page %}
+      <a href="{{ page.blog_older_page.url|url }}"><small>更早一篇 →</small><strong>{{ page.blog_older_page.title|striptags|e }}</strong></a>
+    {% endif %}
+  </nav>
 
   <footer class="post-end-nav" aria-label="文章尾部导航">
     <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
@@ -153,5 +177,6 @@
         <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
       </nav>
     </section>
+  </div>
   </div>
 {% endblock %}

@@ -1,0 +1,118 @@
+{% extends "main.html" %}
+
+{% block content %}
+  <div class="garden-home" data-page-layout="home">
+    <section class="home-hero" aria-labelledby="home-title">
+      <div class="home-hero__copy">
+        <span class="garden-eyebrow"><i aria-hidden="true"></i> MON'S DIGITAL GARDEN</span>
+        <h1 id="home-title">保持清醒，<br>持续前行。</h1>
+        <p class="home-hero__lead">一座关于技术、山野与自我成长的个人花园。用写作整理思考，也记录答案抵达之前的路径。</p>
+        <div class="home-hero__actions">
+          <a class="garden-button garden-button--primary" href="{{ 'archive/'|url }}">开始阅读 <span aria-hidden="true">→</span></a>
+          <a class="garden-button garden-button--quiet" href="{{ config.extra.about_url|url }}">认识我</a>
+        </div>
+        <dl class="home-hero__stats" aria-label="花园概览">
+          <div><dt>{{ blog.count }}</dt><dd>篇公开记录</dd></div>
+          <div><dt>{{ blog.collections|length }}</dt><dd>条阅读小径</dd></div>
+          <div><dt>持续</dt><dd>生长与修订</dd></div>
+        </dl>
+      </div>
+
+      <div class="home-landscape" aria-hidden="true">
+        <svg viewBox="0 0 760 520" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="760" height="520" fill="currentColor"></rect>
+          <path class="home-ridge home-ridge--far" d="M0 220C102 178 159 216 248 166C349 110 411 137 492 93C572 49 669 80 760 40V520H0Z"></path>
+          <path class="home-ridge home-ridge--mid" d="M0 292C97 228 176 271 270 229C352 192 417 223 500 184C594 140 686 179 760 132V520H0Z"></path>
+          <path class="home-ridge home-ridge--near" d="M0 365C102 316 179 370 274 323C357 281 431 327 521 278C612 231 680 289 760 244V520H0Z"></path>
+          <path class="home-route" d="M109 520C143 454 191 397 255 364C322 328 367 292 421 233C468 182 520 151 555 109"></path>
+          <g class="home-contours">
+            <path d="M-30 96C91 41 191 122 294 63C402 2 510 78 790 14"></path>
+            <path d="M-28 123C95 70 196 147 306 90C410 35 517 100 790 39"></path>
+            <path d="M-20 155C94 108 198 177 317 123C424 74 526 128 790 72"></path>
+            <path d="M-25 387C96 336 191 412 296 362C399 314 520 393 787 331"></path>
+            <path d="M-22 416C104 366 201 442 305 391C410 342 528 420 790 359"></path>
+            <path d="M-20 447C108 398 208 470 319 421C427 371 539 448 790 387"></path>
+          </g>
+          <circle class="home-route__dot" cx="555" cy="109" r="7"></circle>
+          <circle class="home-route__ring" cx="555" cy="109" r="15"></circle>
+        </svg>
+        <span class="home-landscape__seal">向前</span>
+        <span class="home-landscape__caption">39.9042° N · 116.4074° E</span>
+      </div>
+    </section>
+
+    <section class="home-reading" aria-labelledby="home-reading-title">
+      <header class="section-heading">
+        <div>
+          <span class="garden-eyebrow"><i aria-hidden="true"></i> RECENT WRITING</span>
+          <h2 id="home-reading-title">近日所记</h2>
+          <p>新近写下的判断、方法和路上见闻。</p>
+        </div>
+        <a class="garden-more-link" href="{{ 'archive/'|url }}">全部文章 <span aria-hidden="true">→</span></a>
+      </header>
+
+      <div class="home-reading__grid">
+        {% if blog.featured %}
+          {% set featured = blog.featured %}
+          <article class="featured-note">
+            <span class="featured-note__label">编辑推荐</span>
+            <div>
+              <span class="garden-kicker">{{ featured.blog_collection.mark }} · {{ featured.blog_collection.label }}</span>
+              <h3><a href="{{ featured.url|url }}">{{ featured.title|striptags|e }}</a></h3>
+              {% if featured.blog_description_text %}<p>{{ featured.blog_description_text|striptags|trim|truncate(128)|e }}</p>{% endif %}
+            </div>
+            <footer>
+              <time{% if featured.blog_publish_iso %} datetime="{{ featured.blog_publish_iso|e }}"{% endif %}>{{ featured.blog_publish_label[:10]|default("持续更新", true)|e }}</time>
+              <a href="{{ featured.url|url }}" aria-label="阅读推荐文章《{{ featured.title|striptags|e }}》">阅读全文 <span aria-hidden="true">↗</span></a>
+            </footer>
+          </article>
+        {% endif %}
+
+        <div class="recent-notes">
+          {% set recent = namespace(count=0) %}
+          {% for post in blog.recent %}
+            {% if recent.count < 6 and (not blog.featured or post.file.src_uri != blog.featured.file.src_uri) %}
+              <article class="recent-note">
+                <a href="{{ post.url|url }}">
+                  <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>{{ post.blog_publish_label[:10]|default("持续更新", true)|e }}</time>
+                  <div><span>{{ post.blog_collection.mark }} · {{ post.blog_collection.label }}</span><h3>{{ post.title|striptags|e }}</h3></div>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </article>
+              {% set recent.count = recent.count + 1 %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="home-collections" aria-labelledby="home-collections-title">
+      <header class="section-heading section-heading--collections">
+        <div>
+          <span class="garden-eyebrow"><i aria-hidden="true"></i> GARDEN PATHS</span>
+          <h2 id="home-collections-title">循四条小径，逛一座花园。</h2>
+        </div>
+        <p>不按完成度摆放，只按兴趣与问题继续生长。</p>
+      </header>
+      <div class="home-collections__grid">
+        {% for collection in blog.collections %}
+          <a class="collection-card collection-card--{{ collection.key|lower }}" href="{{ collection.index|url }}">
+            <span class="collection-card__mark" aria-hidden="true">{{ collection.mark }}</span>
+            <span class="collection-card__copy">
+              <small>{{ collection.count }} NOTES</small>
+              <strong>{{ collection.label }}</strong>
+              <span>{{ collection.description }}</span>
+            </span>
+            <span class="collection-card__arrow" aria-hidden="true">↗</span>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <aside class="home-about" aria-label="关于花园主人">
+      <span>ABOUT THE GARDENER</span>
+      <p>来自河南，现于北京读研。喜欢徒步、自由搏击，也长期关注人工智能与心理学。</p>
+      <a href="{{ config.extra.about_url|url }}">继续认识我 <span aria-hidden="true">→</span></a>
+    </aside>
+  </div>
+{% endblock %}

@@ -44,7 +44,10 @@ class MobileArticleTocTests(unittest.TestCase):
         self.assertNotIn('querySelectorAll("a[href^=\'#\']")', script)
 
     def test_mobile_styles_include_safe_area_and_reduced_motion(self):
-        css = (ROOT / "docs/css/garden-v2.css").read_text(encoding="utf-8")
+        css = "\n".join(
+            (ROOT / path).read_text(encoding="utf-8")
+            for path in ("docs/css/00-tokens.css", "docs/css/30-article.css")
+        )
 
         self.assertIn(".article-toc-fab", css)
         self.assertIn(".article-toc-search-toggle", css)

@@ -1,0 +1,89 @@
+{% extends "main.html" %}
+
+{% block content %}
+  <div class="garden-archive" data-archive-root data-page-layout="archive">
+    <header class="archive-hero">
+      <span class="garden-eyebrow"><i aria-hidden="true"></i> ARCHIVE / {{ blog.count }} NOTES</span>
+      <div class="archive-hero__heading">
+        <h1>全部文章</h1>
+        <p>沿时间翻阅这座花园。技术、行走、阅读与自我观察，都在这里留下坐标。</p>
+      </div>
+      <nav class="archive-filters" aria-label="按专栏筛选" data-archive-collections>
+        <button type="button" class="is-active" data-archive-collection="" aria-pressed="true">
+          <span aria-hidden="true">全</span><strong>全部</strong><small data-archive-count="">{{ blog.count }}</small>
+        </button>
+        {% for collection in blog.collections %}
+          <button type="button" data-archive-collection="{{ collection.key }}" aria-pressed="false">
+            <span aria-hidden="true">{{ collection.mark }}</span><strong>{{ collection.label }}</strong><small data-archive-count="{{ collection.key }}">{{ collection.count }}</small>
+          </button>
+        {% endfor %}
+      </nav>
+    </header>
+
+    <section class="archive-tools" data-archive-filter aria-labelledby="archive-search-label">
+      <label id="archive-search-label" for="archive-search">搜索花园</label>
+      <div class="archive-search">
+        <span aria-hidden="true"></span>
+        <input
+          id="archive-search"
+          type="search"
+          inputmode="search"
+          enterkeyhint="search"
+          placeholder="标题、摘要、标签或年份"
+          autocomplete="off"
+          spellcheck="false"
+          data-archive-search
+        >
+        <button type="button" data-archive-clear hidden>清除</button>
+      </div>
+      <div class="archive-tools__status">
+        <output data-archive-results for="archive-search" aria-live="polite">共 {{ blog.count }} 篇</output>
+        <button type="button" data-archive-reset hidden>重置筛选</button>
+      </div>
+    </section>
+
+    <div class="archive-timeline" data-archive-timeline>
+      {% set years = namespace(current="") %}
+      {% for post in blog.posts %}
+        {% set year = post.blog_publish_label[:4] if post.blog_publish_label[:4].isdigit() else "未定" %}
+        {% if year != years.current %}
+          {% if not loop.first %}</div></section>{% endif %}
+          <section class="archive-year" data-archive-year="{{ year|e }}" aria-labelledby="archive-year-{{ year|e }}">
+            <header class="archive-year__header"><h2 id="archive-year-{{ year|e }}">{{ year }}</h2><span>YEAR</span></header>
+            <div class="archive-year__posts">
+          {% set years.current = year %}
+        {% endif %}
+
+        {% set search_text = post.title ~ " " ~ post.blog_description_text ~ " " ~ post.blog_tags_text ~ " " ~ post.blog_collection.label ~ " " ~ post.blog_publish_label %}
+        <article
+          class="archive-card"
+          data-archive-card
+          data-archive-collection="{{ post.blog_collection_key|e }}"
+          data-archive-search="{{ search_text|striptags|trim|e }}"
+        >
+          <a href="{{ post.url|url }}">
+            <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>
+              <b>{{ post.blog_publish_label[5:10]|default("未定", true)|e }}</b>
+              <span>{{ post.blog_collection.label }}</span>
+            </time>
+            <div class="archive-card__copy">
+              <span class="garden-kicker">{{ post.blog_collection.mark }} · {{ post.blog_collection.label }}</span>
+              <h3>{{ post.title|striptags|e }}</h3>
+              {% if post.blog_description_text %}<p>{{ post.blog_description_text|striptags|trim|truncate(132)|e }}</p>{% endif %}
+            </div>
+            <span class="archive-card__arrow" aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        {% if loop.last %}</div></section>{% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="archive-empty" data-archive-empty hidden>
+      <span aria-hidden="true">⌁</span>
+      <h2>这条小径暂时没有结果</h2>
+      <p>换一个关键词，或清除当前专栏筛选后再看看。</p>
+      <button type="button" data-archive-empty-reset>查看全部文章</button>
+    </div>
+  </div>
+{% endblock %}

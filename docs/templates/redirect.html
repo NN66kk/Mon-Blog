@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <meta http-equiv="refresh" content="0; url={{ page.meta.redirect_to|url }}">
+  <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block content %}
+  <div class="redirect-page" data-page-layout="redirect">
+    <span class="garden-eyebrow"><i aria-hidden="true"></i> PAGE MOVED</span>
+    <h1>页面已经迁移</h1>
+    <p>正在前往新的「关于我」页面。</p>
+    <a class="garden-button garden-button--primary" href="{{ page.meta.redirect_to|url }}">立即前往 <span aria-hidden="true">→</span></a>
+  </div>
+{% endblock %}

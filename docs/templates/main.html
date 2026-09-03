@@ -1,55 +1,92 @@
 {% extends "base.html" %}
 
+{% set is_article = page.blog_is_article|default(false) if page else false %}
+{% set is_about = page.blog_is_about|default(false) if page else false %}
+{% set page_type = page.blog_page_type|default("page", true) if page else "page" %}
+
 {% block extrahead %}
   {{ super() }}
-  {% set src_uri = page.file.src_uri if page and page.file else "" %}
-  {% set src_base = src_uri.rsplit("/", 1)[-1].rsplit(".", 1)[0] %}
-  {% set is_article = src_uri[:1] in ["A", "B", "C", "D"] and src_base[:6] != "000000" %}
   {% set social_title = page.title ~ " · " ~ config.site_name if page and page.title and page.title != config.site_name else config.site_name %}
-  {% set social_description = config.site_description %}
-  {% if page and page.meta and page.meta.description %}
-    {% set social_description = page.meta.description|string|striptags|trim %}
-  {% elif page and page.meta and page.meta.excerpt %}
-    {% set social_description = page.meta.excerpt|string|striptags|trim %}
-  {% elif is_article and page.blog_description_text %}
-    {% set social_description = page.blog_description_text|string|striptags|trim %}
-  {% elif is_article and page.content %}
-    {% set social_description = page.content|striptags|trim|truncate(155) %}
-  {% endif %}
+  {% set social_description = page.blog_description_text|default(config.site_description, true) if page else config.site_description %}
 
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="{{ 'article' if is_article else 'website' }}">
+  <meta property="og:type" content="{{ 'article' if is_article else 'profile' if is_about else 'website' }}">
   <meta property="og:site_name" content="{{ config.site_name|e }}">
   <meta property="og:title" content="{{ social_title|striptags|e }}">
-  <meta property="og:description" content="{{ social_description|e }}">
+  <meta property="og:description" content="{{ social_description|striptags|e }}">
   {% if page and page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url|e }}">{% endif %}
-  <meta name="twitter:card" content="{{ 'summary' if is_article else 'summary_large_image' }}">
+  <meta property="og:image" content="{{ (config.site_url ~ 'assets/images/og-garden.png')|e }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ social_title|striptags|e }}">
-  <meta name="twitter:description" content="{{ social_description|e }}">
+  <meta name="twitter:description" content="{{ social_description|striptags|e }}">
+  <meta name="twitter:image" content="{{ (config.site_url ~ 'assets/images/og-garden.png')|e }}">
+
   {% if is_article %}
-    {% set article_collection = config.extra.collections.get(page.file.src_uri[:1]) if config.extra and config.extra.collections else none %}
     {% if page.blog_publish_iso %}<meta property="article:published_time" content="{{ page.blog_publish_iso|e }}">{% endif %}
-    {% if article_collection %}<meta property="article:section" content="{{ article_collection.label|e }}">{% endif %}
+    {% if page.blog_updated_iso %}<meta property="article:modified_time" content="{{ page.blog_updated_iso|e }}">{% endif %}
+    {% if page.blog_collection %}<meta property="article:section" content="{{ page.blog_collection.label|e }}">{% endif %}
+    {% for tag in page.blog_topic_tags|default([]) %}<meta property="article:tag" content="{{ tag|e }}">{% endfor %}
     {% set article_schema = {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": page.title|string|striptags,
       "description": social_description|string|striptags,
       "inLanguage": "zh-CN",
-      "author": {"@type": "Person", "name": "Mon"},
-      "publisher": {"@type": "Person", "name": "Mon"}
+      "author": {"@type": "Person", "name": config.site_author},
+      "publisher": {"@type": "Person", "name": config.site_author}
     } %}
     {% if page.canonical_url %}{% set _ = article_schema.update({"url": page.canonical_url|string, "mainEntityOfPage": page.canonical_url|string}) %}{% endif %}
     {% if page.blog_publish_iso %}{% set _ = article_schema.update({"datePublished": page.blog_publish_iso|string}) %}{% endif %}
-    {% if article_collection %}{% set _ = article_schema.update({"articleSection": article_collection.label|string}) %}{% endif %}
+    {% if page.blog_updated_iso %}{% set _ = article_schema.update({"dateModified": page.blog_updated_iso|string}) %}{% endif %}
+    {% if page.blog_collection %}{% set _ = article_schema.update({"articleSection": page.blog_collection.label|string}) %}{% endif %}
+    {% if page.blog_topic_tags %}{% set _ = article_schema.update({"keywords": page.blog_topic_tags|join(", ")}) %}{% endif %}
     <script type="application/ld+json">{{ article_schema|tojson }}</script>
+  {% elif is_about %}
+    {% set profile_schema = {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "name": page.title|string|striptags,
+      "description": social_description|string|striptags,
+      "inLanguage": "zh-CN",
+      "mainEntity": {"@type": "Person", "name": config.site_author}
+    } %}
+    {% if page.canonical_url %}{% set _ = profile_schema.update({"url": page.canonical_url|string}) %}{% endif %}
+    <script type="application/ld+json">{{ profile_schema|tojson }}</script>
   {% endif %}
-  {% if not is_article %}
-    <meta property="og:image" content="{{ (config.site_url ~ 'assets/images/og-garden.png')|e }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Mon's Digital Garden 月光流釉与夜瓷星图品牌封面">
-    <meta name="twitter:image" content="{{ (config.site_url ~ 'assets/images/og-garden.png')|e }}">
-    <meta name="twitter:image:alt" content="Mon's Digital Garden 月光流釉与夜瓷星图品牌封面">
+{% endblock %}
+
+{% block site_nav %}
+  {% if "toc.integrate" not in features %}
+    {% if page and page.meta and page.meta.hide %}
+      {% set hidden = "hidden" if "toc" in page.meta.hide %}
+    {% endif %}
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" {{ hidden }}>
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          {% include "partials/toc.html" %}
+        </div>
+      </div>
+    </div>
   {% endif %}
+{% endblock %}
+
+{% block container %}
+  <div
+    class="md-content md-content--{{ page_type|e }}"
+    data-md-component="content"
+    data-page-type="{{ page_type|e }}"
+    data-page-collection="{{ page.blog_collection_key|default('', true)|e if page else '' }}"
+  >
+    {% if "navigation.path" in features %}
+      {% include "partials/path.html" %}
+    {% endif %}
+    <article class="md-content__inner md-typeset md-content__inner--{{ page_type|e }}">
+      {% block content %}
+        {% include "partials/content.html" %}
+      {% endblock %}
+    </article>
+  </div>
 {% endblock %}

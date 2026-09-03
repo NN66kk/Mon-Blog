@@ -1,5 +1,5 @@
 ---
-template: garden_archive_v2.html
+template: archive.html
 title: 全部文章
 hide:
   - toc

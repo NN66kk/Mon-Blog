@@ -22,31 +22,42 @@ def css_scheme_block(css, scheme):
 
 
 class GardenThemeTests(unittest.TestCase):
-    def test_home_uses_quiet_v3_and_archive_uses_v2_template(self):
+    def test_home_archive_and_collections_use_editorial_templates(self):
         home_page = read_project_file("docs/index.md")
         archive_page = read_project_file("docs/archive.md")
-        home_template = read_project_file("docs/templates/garden_home_v2.html")
-        archive_template = read_project_file("docs/templates/garden_archive_v2.html")
+        home_template = read_project_file("docs/templates/home.html")
+        archive_template = read_project_file("docs/templates/archive.html")
+        collection_template = read_project_file("docs/templates/collection.html")
 
-        self.assertIn("template: garden_home_v2.html", home_page)
-        self.assertIn("template: garden_archive_v2.html", archive_page)
-        self.assertNotIn("template: garden_home.html", home_page)
-        self.assertNotIn("template: garden_archive.html", archive_page)
-        self.assertIn('class="garden-home garden-home-v3"', home_template)
-        self.assertIn('class="garden-archive-v2"', archive_template)
-        self.assertIn("config.extra.collections", home_template)
-        self.assertIn("config.extra.collections", archive_template)
-        self.assertIn('class="quiet-hero"', home_template)
-        self.assertIn('class="quiet-reading"', home_template)
-        self.assertNotIn("garden-profile-v2", home_template)
-        self.assertNotIn("garden-hero-v2", home_template)
+        self.assertIn("template: home.html", home_page)
+        self.assertIn("template: archive.html", archive_page)
+        self.assertIn('class="garden-home"', home_template)
+        self.assertIn('class="garden-archive"', archive_template)
+        self.assertIn('class="garden-collection', collection_template)
+        self.assertIn("blog.recent", home_template)
+        self.assertIn("blog.posts", archive_template)
+        self.assertNotIn("nav.pages", home_template + archive_template)
 
-    def test_mkdocs_loads_only_v2_css_and_enables_site_ui_and_highlighting(self):
+    def test_mkdocs_loads_split_css_and_enables_site_ui_and_highlighting(self):
         config = read_project_file("mkdocs.yml")
-        extra_css = config.split("extra_css:\n", 1)[1].strip().splitlines()
+        extra_css = [
+            line.strip()
+            for line in config.split("extra_css:\n", 1)[1].strip().splitlines()
+        ]
 
-        self.assertEqual(extra_css, ["- css/garden-v2.css"])
-        self.assertNotIn("css/custom.css", config)
+        self.assertEqual(
+            extra_css,
+            [
+                "- css/00-tokens.css",
+                "- css/10-shell.css",
+                "- css/20-components.css",
+                "- css/30-article.css",
+                "- css/40-home.css",
+                "- css/50-archive.css",
+                "- css/60-collection.css",
+            ],
+        )
+        self.assertNotIn("css/garden-v2.css", config)
         self.assertIn("- javascripts/site-ui.js", config)
         self.assertIn("- content.code.copy", config)
         self.assertIn("- pymdownx.highlight:", config)
@@ -56,8 +67,8 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn("- pymdownx.inlinehilite", config)
         self.assertIn("- pymdownx.superfences:", config)
 
-    def test_v2_css_defines_distinct_light_and_dark_tokens(self):
-        css = read_project_file("docs/css/garden-v2.css")
+    def test_tokens_define_distinct_light_and_dark_palettes(self):
+        css = read_project_file("docs/css/00-tokens.css")
         light = css_scheme_block(css, "default")
         dark = css_scheme_block(css, "slate")
         required_tokens = (
@@ -77,13 +88,13 @@ class GardenThemeTests(unittest.TestCase):
             self.assertIn(token, light)
             self.assertIn(token, dark)
 
-        self.assertIn("--garden-paper: #f4f1e9", light)
+        self.assertIn("--garden-paper: #f3f0e7", light)
         self.assertIn("--garden-paper: #171a15", dark)
         self.assertIn("--garden-code-bg: #20251f", light)
         self.assertIn("--garden-code-bg: #11150f", dark)
 
     def test_code_blocks_use_one_outer_frame_and_reset_inner_surfaces(self):
-        css = read_project_file("docs/css/garden-v2.css")
+        css = read_project_file("docs/css/20-components.css")
         outer_selector = ".md-typeset .highlight,\n.md-typeset .highlighttable"
         reset_selector = (
             ".md-typeset .highlight pre,\n"
@@ -104,16 +115,23 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn('.highlight[data-code-enhanced="true"]', css)
         self.assertIn(".md-typeset .md-code__button:focus-visible", css)
 
-    def test_v2_css_covers_mobile_toc_and_accessibility_states(self):
-        css = read_project_file("docs/css/garden-v2.css")
+    def test_split_css_covers_mobile_toc_and_accessibility_states(self):
+        css = "\n".join(
+            read_project_file(path)
+            for path in (
+                "docs/css/00-tokens.css",
+                "docs/css/20-components.css",
+                "docs/css/30-article.css",
+            )
+        )
 
         self.assertIn("/* Mobile article contents sheet */", css)
-        self.assertIn("@media screen and (max-width: 48em)", css)
+        self.assertIn("@media screen and (max-width: 47.99em)", css)
         self.assertIn(".article-toc[hidden]", css)
         self.assertIn(".article-toc-fab", css)
         self.assertIn(".article-toc-sheet", css)
         self.assertIn("env(safe-area-inset-bottom, 0px)", css)
-        self.assertIn(":where(a, button, input, summary):focus-visible", css)
+        self.assertIn(":where(a, button, input, summary, [tabindex]):focus-visible", css)
         self.assertIn(".md-typeset .highlight pre:focus-visible", css)
         self.assertIn("@media (prefers-reduced-motion: reduce)", css)
         self.assertIn("transition-duration: 0.01ms !important", css)
@@ -122,11 +140,8 @@ class GardenThemeTests(unittest.TestCase):
         template = read_project_file("docs/templates/post.html")
 
         self.assertIn("data-reading-progress", template)
-        self.assertIn('role="progressbar"', template)
-        self.assertIn('aria-label="文章阅读进度"', template)
-        self.assertIn('aria-valuemin="0"', template)
-        self.assertIn('aria-valuemax="100"', template)
-        self.assertIn('aria-valuenow="0"', template)
+        self.assertIn('aria-hidden="true"', template)
+        self.assertNotIn('role="progressbar"', template)
         self.assertIn("data-reading-stats", template)
         self.assertIn("data-reading-count", template)
         self.assertIn("data-reading-minutes", template)
@@ -134,17 +149,16 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn("{{ body_html|safe }}", template)
 
     def test_mobile_layout_prioritizes_posts_and_compacts_article_header(self):
-        css = read_project_file("docs/css/garden-v2.css")
+        home_css = read_project_file("docs/css/40-home.css")
+        article_css = read_project_file("docs/css/30-article.css")
         template = read_project_file("docs/templates/post.html")
 
-        self.assertIn("/* Reading-first mobile layout: content arrives before decoration. */", css)
-        self.assertIn(".garden-home-v3 .quiet-hero__landscape", css)
-        self.assertIn(".garden-home-v3 .quiet-post-list", css)
-        self.assertIn("order: 1", css)
-        self.assertIn(".garden-home-v3 .quiet-about-note", css)
-        self.assertIn("order: 2", css)
-        self.assertIn(".md-content:has(.post-header) .md-path", css)
-        self.assertIn(".md-content__inner:has(.post-header)", css)
+        self.assertIn(".recent-notes", home_css)
+        self.assertIn("order: 1", home_css)
+        self.assertIn(".featured-note", home_css)
+        self.assertIn("order: 2", home_css)
+        self.assertIn(".md-content__inner--article", article_css)
+        self.assertNotIn(":has(", home_css + article_css)
         self.assertIn("post-header-attribution", template)
         self.assertIn("page.blog_publish_label[:10]", template)
         self.assertIn('aria-label="分享本文"', template)
@@ -169,7 +183,10 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn('pre.setAttribute("aria-label", `${label} 代码`)', script)
         self.assertIn('root.querySelector("[data-post-body]")', script)
         self.assertIn('root.querySelector("[data-reading-progress]")', script)
-        self.assertIn('progress.setAttribute("aria-valuenow"', script)
+        self.assertNotIn('progress.setAttribute("aria-valuenow"', script)
+        self.assertIn("syncPageLayout", script)
+        self.assertIn("initializeSiteMenu", script)
+        self.assertIn("initializeSearchButton", script)
         self.assertIn("document$.subscribe", script)
 
     def test_social_card_has_expected_png_dimensions(self):
@@ -183,13 +200,13 @@ class GardenThemeTests(unittest.TestCase):
         self.assertEqual((width, height), (1200, 630))
 
     def test_home_and_archive_expose_content_discovery_controls(self):
-        home = read_project_file("docs/templates/garden_home_v2.html")
-        archive = read_project_file("docs/templates/garden_archive_v2.html")
+        home = read_project_file("docs/templates/home.html")
+        archive = read_project_file("docs/templates/archive.html")
         script = read_project_file("docs/javascripts/archive-filter.js")
         config = read_project_file("mkdocs.yml")
 
-        self.assertIn('class="quiet-collections"', home)
-        self.assertIn('class="quiet-collection-card', home)
+        self.assertIn('class="home-collections"', home)
+        self.assertIn('class="collection-card', home)
         self.assertIn("collection.description", home)
         self.assertIn("data-archive-search", archive)
         self.assertIn("data-archive-collection", archive)

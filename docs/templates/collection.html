@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+
+{% block content %}
+  {% set view = namespace(collection=page.blog_collection, posts=blog.posts_by_collection.get(page.blog_collection_key, []), tags=[]) %}
+  {% for collection in blog.collections %}
+    {% if collection.key == page.blog_collection_key %}
+      {% set view.collection = collection %}
+      {% set view.posts = collection.posts %}
+      {% set view.tags = collection.topic_tags %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="garden-collection garden-collection--{{ page.blog_collection_key|lower }}" data-page-layout="collection">
+    <header class="collection-hero">
+      <div class="collection-hero__mark" aria-hidden="true">{{ view.collection.mark }}</div>
+      <div class="collection-hero__copy">
+        <span class="garden-eyebrow"><i aria-hidden="true"></i> COLLECTION {{ page.blog_collection_key }}</span>
+        <h1>{{ view.collection.label }}</h1>
+        <p>{{ view.collection.description }}</p>
+      </div>
+      <div class="collection-hero__meta">
+        <strong>{{ view.posts|length }}</strong>
+        <span>篇公开记录</span>
+      </div>
+    </header>
+
+    {% if view.tags %}
+      <nav class="collection-topics" aria-label="常见主题">
+        <span>常见主题</span>
+        {% for tag in view.tags %}<a href="{{ ('archive/?collection=' ~ page.blog_collection_key ~ '&q=' ~ tag)|url }}">{{ tag }}</a>{% endfor %}
+      </nav>
+    {% endif %}
+
+    <section class="collection-content" aria-labelledby="collection-latest-title">
+      <header class="section-heading">
+        <div>
+          <span class="garden-eyebrow"><i aria-hidden="true"></i> LATEST IN THIS PATH</span>
+          <h2 id="collection-latest-title">沿这条小径继续</h2>
+        </div>
+        <a class="garden-more-link" href="{{ ('archive/?collection=' ~ page.blog_collection_key)|url }}">在归档中筛选 <span aria-hidden="true">→</span></a>
+      </header>
+
+      {% if view.posts %}
+        <div class="collection-posts">
+          {% for post in view.posts %}
+            <article class="collection-post{% if loop.first %} collection-post--lead{% endif %}">
+              <a href="{{ post.url|url }}">
+                <div class="collection-post__meta">
+                  <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>{{ post.blog_publish_label[:10]|default("持续更新", true)|e }}</time>
+                  {% if post.blog_topic_tags %}<span>{{ post.blog_topic_tags[0] }}</span>{% endif %}
+                </div>
+                <div class="collection-post__copy">
+                  <h3>{{ post.title|striptags|e }}</h3>
+                  {% if post.blog_description_text %}<p>{{ post.blog_description_text|striptags|trim|truncate(150)|e }}</p>{% endif %}
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="collection-empty">
+          <span aria-hidden="true">⌁</span>
+          <h3>这条小径还在生长</h3>
+          <p>暂时没有公开文章，先去总归档看看其他记录。</p>
+          <a class="garden-button garden-button--primary" href="{{ 'archive/'|url }}">浏览全部文章</a>
+        </div>
+      {% endif %}
+    </section>
+
+    <footer class="collection-footer">
+      <p>走到这里，不妨换一条小径。</p>
+      <nav aria-label="其他专栏">
+        {% for collection in blog.collections %}
+          {% if collection.key != page.blog_collection_key %}<a href="{{ collection.index|url }}"><span aria-hidden="true">{{ collection.mark }}</span>{{ collection.label }}</a>{% endif %}
+        {% endfor %}
+      </nav>
+    </footer>
+  </div>
+{% endblock %}

@@ -1,5 +1,6 @@
 site_name: Mon's Digital Garden
 site_description: 在代码与山野之间，种一座持续生长的数字花园。
+site_author: Mon
 site_url: https://nn66kk.github.io/Mon-Blog/
 site_dir: !ENV [MON_BLOG_SITE_DIR, site]
 
@@ -8,28 +9,48 @@ repo_name: NN66kk/Mon-Blog
 edit_uri: edit/main/docs/
 
 extra:
-  featured_post: "D-Orginals/2024070515116.md"
+  featured_post: "D-Orginals/260814185045.md"
+  about_page: "about.md"
+  legacy_about_page: "D-Orginals/2024070515116.md"
+  about_url: "about/"
+  collection_order:
+    - D
+    - B
+    - A
+    - C
   collections:
     A:
       mark: 行
       label: 山野日常
       description: 训练、饮食、出行与日常生活里反复验证的小经验。
       index: "A-Life/000000生活专栏目录/"
+      index_src: "A-Life/000000生活专栏目录.md"
+      source_dir: "A-Life"
+      legacy_tag: "生活专栏"
     B:
       mark: 技
       label: 格物札记
       description: 技术、数学、英语与 AI 学习过程中留下的方法和推演。
       index: "B-Notes/000000学习笔记目录/"
+      index_src: "B-Notes/000000学习笔记目录.md"
+      source_dir: "B-Notes"
+      legacy_tag: "学习笔记"
     C:
       mark: 拾
       label: 人间拾遗
       description: 值得保存的网站、文章、故事与那些让人会心一笑的片段。
       index: "C-Highlights/000000优质内容目录/"
+      index_src: "C-Highlights/000000优质内容目录.md"
+      source_dir: "C-Highlights"
+      legacy_tag: "优质内容"
     D:
       mark: 思
       label: 原创手记
       description: 对工具、旅行、成长与现实问题的亲历、判断和复盘。
       index: "D-Orginals/000000原创文章目录/"
+      index_src: "D-Orginals/000000原创文章目录.md"
+      source_dir: "D-Orginals"
+      legacy_tag: "原创文章"
 
 theme:
   name: material
@@ -39,8 +60,6 @@ theme:
   icon:
     repo: fontawesome/brands/github
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.sections
     - navigation.top
     - navigation.tracking
@@ -122,4 +141,10 @@ extra_javascript:
   - https://unpkg.com/mermaid/dist/mermaid.min.js
 
 extra_css:
-  - css/garden-v2.css
+  - css/00-tokens.css
+  - css/10-shell.css
+  - css/20-components.css
+  - css/30-article.css
+  - css/40-home.css
+  - css/50-archive.css
+  - css/60-collection.css

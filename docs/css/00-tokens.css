@@ -1,0 +1,149 @@
+:root {
+  --garden-serif: "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+  --garden-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --garden-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --garden-xs: 0.6rem;
+  --garden-sm: 0.7rem;
+  --garden-body: 0.85rem;
+  --garden-lead: 0.95rem;
+  --garden-header-height: 3.6rem;
+  --garden-reading-width: 44rem;
+  --garden-wide-width: 74rem;
+  --garden-line: 1px solid var(--garden-border);
+  --garden-focus: 0 0 0 3px var(--garden-focus-ring);
+  --garden-ease: 180ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+[data-md-color-scheme="default"] {
+  color-scheme: light;
+  --garden-paper: #f3f0e7;
+  --garden-sheet: #faf8f2;
+  --garden-sheet-strong: #fffdf8;
+  --garden-ink: #1d261f;
+  --garden-muted: #5f6a62;
+  --garden-faint: #7c857e;
+  --garden-border: #cfcabf;
+  --garden-border-strong: #a6ab9f;
+  --garden-moss: #47624d;
+  --garden-moss-deep: #2f4937;
+  --garden-moss-soft: #dce4d8;
+  --garden-copper: #a44c32;
+  --garden-copper-soft: #ead6ca;
+  --garden-gold: #9c7836;
+  --garden-blue: #476578;
+  --garden-code-bg: #20251f;
+  --garden-code-bar: #2a3029;
+  --garden-code-line: #3b453b;
+  --garden-code-fg: #e9eee5;
+  --garden-shadow: 0 18px 50px rgba(54, 56, 48, 0.1);
+  --garden-overlay: rgba(26, 31, 27, 0.48);
+  --garden-focus-ring: rgba(164, 76, 50, 0.34);
+  --md-default-bg-color: var(--garden-paper);
+  --md-default-fg-color: var(--garden-ink);
+  --md-default-fg-color--light: var(--garden-muted);
+  --md-default-fg-color--lighter: var(--garden-faint);
+  --md-primary-fg-color: var(--garden-sheet);
+  --md-primary-bg-color: var(--garden-ink);
+  --md-accent-fg-color: var(--garden-copper);
+  --md-typeset-a-color: var(--garden-moss-deep);
+  --md-code-bg-color: var(--garden-code-bg);
+  --md-code-fg-color: var(--garden-code-fg);
+}
+
+[data-md-color-scheme="slate"] {
+  color-scheme: dark;
+  --garden-paper: #171a15;
+  --garden-sheet: #1e221c;
+  --garden-sheet-strong: #242920;
+  --garden-ink: #edf0e7;
+  --garden-muted: #b4bcad;
+  --garden-faint: #949d90;
+  --garden-border: #3d4439;
+  --garden-border-strong: #596151;
+  --garden-moss: #9eb59b;
+  --garden-moss-deep: #b8cbb4;
+  --garden-moss-soft: #2c392c;
+  --garden-copper: #dc886b;
+  --garden-copper-soft: #4a2e25;
+  --garden-gold: #d0ac65;
+  --garden-blue: #8daec1;
+  --garden-code-bg: #11150f;
+  --garden-code-bar: #191e17;
+  --garden-code-line: #384032;
+  --garden-code-fg: #ecf1e8;
+  --garden-shadow: 0 18px 55px rgba(0, 0, 0, 0.3);
+  --garden-overlay: rgba(5, 8, 5, 0.68);
+  --garden-focus-ring: rgba(220, 136, 107, 0.42);
+  --md-default-bg-color: var(--garden-paper);
+  --md-default-fg-color: var(--garden-ink);
+  --md-default-fg-color--light: var(--garden-muted);
+  --md-default-fg-color--lighter: var(--garden-faint);
+  --md-primary-fg-color: var(--garden-sheet);
+  --md-primary-bg-color: var(--garden-ink);
+  --md-accent-fg-color: var(--garden-copper);
+  --md-typeset-a-color: var(--garden-moss-deep);
+  --md-code-bg-color: var(--garden-code-bg);
+  --md-code-fg-color: var(--garden-code-fg);
+}
+
+html {
+  background: var(--garden-paper);
+  scroll-padding-top: calc(var(--garden-header-height) + 1.2rem);
+}
+
+body {
+  background:
+    radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--garden-moss-soft) 48%, transparent), transparent 26rem),
+    var(--garden-paper);
+  color: var(--garden-ink);
+  font-family: var(--garden-sans);
+  font-feature-settings: "kern", "liga";
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--garden-copper-soft);
+  color: var(--garden-ink);
+}
+
+:where(a, button, input, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--garden-copper);
+  outline-offset: 3px;
+  box-shadow: var(--garden-focus);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

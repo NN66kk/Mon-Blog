@@ -110,7 +110,7 @@ function updatePostStats(root = document) {
 
 function updateReadingProgress(root = document) {
   const progress = root.querySelector("[data-reading-progress]");
-  const article = root.querySelector(".md-content__inner");
+  const article = root.querySelector(".post-page");
 
   if (!progress || !article) {
     return;
@@ -121,7 +121,6 @@ function updateReadingProgress(root = document) {
   const value = Math.min(1, Math.max(0, (window.scrollY - articleTop) / available));
 
   progress.style.setProperty("--reading-progress", String(value));
-  progress.setAttribute("aria-valuenow", String(Math.round(value * 100)));
 }
 
 function updateHeaderState(root = document) {
@@ -132,11 +131,167 @@ function updateHeaderState(root = document) {
   }
 }
 
+const PAGE_LAYOUT_CLASSES = [
+  "layout-home",
+  "layout-archive",
+  "layout-collection",
+  "layout-article",
+  "layout-about",
+  "layout-redirect",
+  "layout-page",
+];
+
+function syncPageLayout(root = document) {
+  const marker = root.querySelector(".md-content [data-page-layout]");
+  const content = root.querySelector(".md-content[data-page-type]");
+  const layout = marker?.dataset.pageLayout || content?.dataset.pageType || "page";
+  const collection = content?.dataset.pageCollection || "";
+
+  document.body.classList.remove(...PAGE_LAYOUT_CLASSES);
+  document.body.classList.add(`layout-${layout}`);
+  document.documentElement.dataset.pageLayout = layout;
+
+  root.querySelectorAll("[data-site-nav], [data-site-nav-collection]").forEach((link) => {
+    const target = link.dataset.siteNav;
+    const targetCollection = link.dataset.siteNavCollection;
+    const active = Boolean(
+      (target === "home" && layout === "home")
+      || (target === "articles" && ["archive", "article", "collection"].includes(layout))
+      || (target === "archive" && ["archive", "article"].includes(layout))
+      || (target === "about" && layout === "about")
+      || (targetCollection && layout === "collection" && targetCollection === collection)
+    );
+
+    link.classList.toggle("is-active", active);
+    if (active) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+function getFocusableElements(container) {
+  return Array.from(container.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+  )).filter((element) => !element.closest("[hidden]") && !element.hidden);
+}
+
+function initializeSiteMenu(root = document) {
+  const button = root.querySelector("[data-site-menu-button]");
+  const panel = root.querySelector("[data-site-menu-panel]");
+
+  if (!button || !panel || panel.dataset.siteMenuBound === "true") {
+    return;
+  }
+
+  let lastFocused = null;
+
+  function closeMenu({ restoreFocus = true } = {}) {
+    delete panel.dataset.open;
+    panel.setAttribute("aria-hidden", "true");
+    panel.inert = true;
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-label", "打开站点导航");
+    document.body.classList.remove("site-menu-open");
+
+    if (restoreFocus && lastFocused instanceof HTMLElement) {
+      lastFocused.focus();
+    }
+  }
+
+  function openMenu() {
+    lastFocused = document.activeElement;
+    panel.dataset.open = "true";
+    panel.setAttribute("aria-hidden", "false");
+    panel.inert = false;
+    button.setAttribute("aria-expanded", "true");
+    button.setAttribute("aria-label", "关闭站点导航");
+    document.body.classList.add("site-menu-open");
+    getFocusableElements(panel)[0]?.focus();
+  }
+
+  button.addEventListener("click", () => {
+    if (panel.dataset.open === "true") {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  panel.querySelectorAll("[data-site-menu-close]").forEach((element) => {
+    element.addEventListener("click", () => closeMenu());
+  });
+
+  panel.querySelectorAll("a[href]").forEach((link) => {
+    link.addEventListener("click", () => closeMenu({ restoreFocus: false }));
+  });
+
+  panel.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeMenu();
+      return;
+    }
+
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const focusable = getFocusableElements(panel);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (!first || !last) {
+      event.preventDefault();
+    } else if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  panel.dataset.siteMenuBound = "true";
+  closeMenu({ restoreFocus: false });
+}
+
+function initializeSearchButton(root = document) {
+  const button = root.querySelector("[data-site-search-button]");
+  const toggle = root.querySelector("#__search");
+
+  if (!button || !toggle || button.dataset.siteSearchBound === "true") {
+    return;
+  }
+
+  const syncExpanded = () => {
+    button.setAttribute("aria-expanded", String(toggle.checked));
+  };
+
+  button.addEventListener("click", () => {
+    toggle.checked = true;
+    toggle.dispatchEvent(new Event("change", { bubbles: true }));
+    syncExpanded();
+    window.setTimeout(() => {
+      const currentQuery = document.querySelector("[data-md-component='search-query']");
+      currentQuery?.focus();
+    }, 50);
+  });
+  toggle.addEventListener("change", syncExpanded);
+
+  button.dataset.siteSearchBound = "true";
+  syncExpanded();
+}
+
 function updateSiteUi(root = document) {
+  syncPageLayout(root);
   enhanceCodeBlocks(root);
   updatePostStats(root);
   updateReadingProgress(root);
   updateHeaderState(root);
+  initializeSiteMenu(root);
+  initializeSearchButton(root);
 }
 
 function bindSiteUi() {
@@ -172,6 +327,7 @@ if (typeof document !== "undefined") {
   if (typeof document$ !== "undefined" && typeof document$.subscribe === "function") {
     document$.subscribe(() => {
       bindSiteUi();
+      window.requestAnimationFrame(() => updateSiteUi());
     });
   }
 }

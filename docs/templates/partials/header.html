@@ -1,18 +1,21 @@
-{# A quiet editorial header that keeps Material's search, palette and drawer. #}
 {% set src_uri = page.file.src_uri if page and page.file else "" %}
+{% set articles_active = src_uri == "archive.md" or page.blog_is_article|default(false) or page.blog_is_collection_index|default(false) %}
+{% set blog_context = blog|default({"count": 0, "collections": []}, true) %}
 <header class="md-header site-header" data-md-component="header">
-  <nav class="md-header__inner md-grid site-header__inner" aria-label="{{ lang.t('header') }}">
-    <label class="md-header__button md-icon site-header__menu" for="__drawer" aria-label="打开站点导航">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
       {% set icon = config.theme.icon.menu or "material/menu" %}
       {% include ".icons/" ~ icon ~ ".svg" %}
-    </label>
+    </button>
 
-    <a
-      href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}"
-      class="site-brand"
-      aria-label="{{ config.site_name }} 首页"
-      data-md-component="logo"
-    >
+    <a href="{{ nav.homepage.url|url }}" class="site-brand" aria-label="{{ config.site_name }} 首页" data-md-component="logo">
       <span class="site-brand__mark" aria-hidden="true">M</span>
       <span class="site-brand__copy">
         <strong>Mon 的个人花园</strong>
@@ -21,20 +24,27 @@
     </a>
 
     <div class="site-header__nav" aria-label="主要导航">
-      <a href="{{ nav.homepage.url | url }}"{% if page.is_homepage %} class="is-active" aria-current="page"{% endif %}>首页</a>
-      <a href="{{ 'archive/' | url }}"{% if src_uri == 'archive.md' %} class="is-active" aria-current="page"{% endif %}>文章</a>
-      <a href="{{ 'D-Orginals/2024070515116/' | url }}"{% if '2024070515116' in src_uri %} class="is-active" aria-current="page"{% endif %}>关于我</a>
-      <a href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      <a data-site-nav="home" href="{{ nav.homepage.url | url }}"{% if page.is_homepage %} class="is-active" aria-current="page"{% endif %}>首页</a>
+      <a data-site-nav="articles" href="{{ 'archive/' | url }}"{% if articles_active %} class="is-active" aria-current="page"{% endif %}>文章</a>
+      <a data-site-nav="about" href="{{ config.extra.about_url | url }}"{% if page.blog_is_about|default(false) %} class="is-active" aria-current="page"{% endif %}>关于我</a>
+      <a href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
     </div>
 
     <div class="site-header__actions">
       {% if "material/search" in config.plugins %}
         {% set search = config.plugins["material/search"] | attr("config") %}
         {% if search.enabled %}
-          <label class="md-header__button md-icon site-header__search-trigger" for="__search" aria-label="打开搜索">
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
             {% set icon = config.theme.icon.search or "material/magnify" %}
             {% include ".icons/" ~ icon ~ ".svg" %}
-          </label>
+          </button>
           {% include "partials/search.html" %}
         {% endif %}
       {% endif %}
@@ -43,11 +53,32 @@
         {% include "partials/palette.html" %}
       {% endif %}
 
-      <a class="md-header__button md-icon site-header__github" href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看仓库">
-        {% include ".icons/fontawesome/brands/github.svg" %}
-      </a>
     </div>
   </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="{{ nav.homepage.url|url }}"{% if page.is_homepage %} aria-current="page"{% endif %}><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="{{ 'archive/'|url }}"{% if articles_active and not page.blog_is_collection_index|default(false) %} aria-current="page"{% endif %}><span>02</span><strong>全部文章</strong><small>{{ blog_context.count }} 篇记录</small></a>
+        {% for collection in blog_context.collections %}
+          <a data-site-nav-collection="{{ collection.key }}" href="{{ collection.index|url }}"{% if page.blog_collection_key|default('') == collection.key and page.blog_is_collection_index|default(false) %} aria-current="page"{% endif %}>
+            <span>{{ collection.mark }}</span><strong>{{ collection.label }}</strong><small>{{ collection.count }} 篇</small>
+          </a>
+        {% endfor %}
+        <a data-site-nav="about" href="{{ config.extra.about_url|url }}"{% if page.blog_is_about|default(false) %} aria-current="page"{% endif %}><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
 
   {% if config.theme.palette and not config.theme.palette is mapping %}
     {% include "partials/javascripts/palette.html" %}
