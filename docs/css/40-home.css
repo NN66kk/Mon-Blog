@@ -53,13 +53,17 @@
 }
 
 .home-hero__stats div {
+  display: flex;
   min-width: 0;
   padding-right: 0.7rem;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.home-hero__stats dt,
-.home-hero__stats dd {
-  margin: 0;
+.md-typeset .home-hero__stats dt,
+.md-typeset .home-hero__stats dd {
+  margin-inline: 0;
+  text-align: start;
 }
 
 .home-hero__stats dt {
@@ -67,8 +71,8 @@
   font: 700 1rem/1.2 var(--garden-serif);
 }
 
-.home-hero__stats dd {
-  margin-top: 0.22rem;
+.md-typeset .home-hero__stats dd {
+  margin-block: 0.22rem 0;
   color: var(--garden-muted);
   font-size: var(--garden-xs);
 }

@@ -80,6 +80,8 @@ class GardenThemeTests(unittest.TestCase):
             "--garden-code-bar:",
             "--garden-code-line:",
             "--garden-code-fg:",
+            "--garden-line: 1px solid var(--garden-border)",
+            "--garden-focus: 0 0 0 3px var(--garden-focus-ring)",
             "--md-code-bg-color: var(--garden-code-bg)",
             "--md-code-fg-color: var(--garden-code-fg)",
         )
@@ -92,6 +94,9 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn("--garden-paper: #171a15", dark)
         self.assertIn("--garden-code-bg: #20251f", light)
         self.assertIn("--garden-code-bg: #11150f", dark)
+        root = css_rule_body(css, ":root")
+        self.assertNotIn("--garden-line:", root)
+        self.assertNotIn("--garden-focus:", root)
 
     def test_code_blocks_use_one_outer_frame_and_reset_inner_surfaces(self):
         css = read_project_file("docs/css/20-components.css")
@@ -161,7 +166,61 @@ class GardenThemeTests(unittest.TestCase):
         self.assertNotIn(":has(", home_css + article_css)
         self.assertIn("post-header-attribution", template)
         self.assertIn("page.blog_publish_label[:10]", template)
-        self.assertIn('aria-label="分享本文"', template)
+        self.assertIn('aria-label="复制本文链接"', template)
+
+    def test_custom_metadata_and_lists_reset_material_default_indentation(self):
+        home_css = read_project_file("docs/css/40-home.css")
+        article_css = read_project_file("docs/css/30-article.css")
+
+        stats = css_rule_body(home_css, ".home-hero__stats div")
+        stat_terms = css_rule_body(
+            home_css,
+            ".md-typeset .home-hero__stats dt,\n.md-typeset .home-hero__stats dd",
+        )
+        toc_item = css_rule_body(
+            article_css,
+            ".md-typeset .article-toc-content .md-nav__item",
+        )
+        about_item = css_rule_body(
+            article_css,
+            ".md-typeset .about-index ul > li",
+        )
+
+        self.assertIn("flex-direction: column", stats)
+        self.assertIn("align-items: flex-start", stats)
+        self.assertIn("margin-inline: 0", stat_terms)
+        self.assertIn("text-align: start", stat_terms)
+        self.assertIn(
+            ".md-typeset .home-hero__stats dd {\n  margin-block: 0.22rem 0",
+            home_css,
+        )
+        self.assertIn("margin: 0", toc_item)
+        self.assertIn("padding-inline-start: 0.75rem", toc_item)
+        self.assertIn("margin: 0", about_item)
+
+    def test_share_button_has_visible_label_and_feedback_states(self):
+        article_css = read_project_file("docs/css/30-article.css")
+        template = read_project_file("docs/templates/post.html")
+        script = read_project_file("docs/javascripts/share-link.js")
+        share_button = css_rule_body(article_css, ".post-share-button")
+
+        self.assertIn('data-share-link-default-text="复制链接"', template)
+        self.assertIn("data-share-link-label", template)
+        self.assertIn("display: inline-flex", share_button)
+        self.assertIn("width: 5.5rem", share_button)
+        self.assertIn("min-height: 2.2rem", share_button)
+        self.assertIn("white-space: nowrap", share_button)
+        self.assertIn(
+            '.post-share-button[data-share-link-state="copied"]',
+            article_css,
+        )
+        self.assertIn(
+            '.post-share-button[data-share-link-state="error"]',
+            article_css,
+        )
+        self.assertIn("copyShareLinkWithExecCommand", script)
+        self.assertIn("initializeShareLinkButtons();", script)
+        self.assertIn("document$.subscribe", script)
 
     def test_site_ui_labels_code_and_updates_reading_state(self):
         script = read_project_file("docs/javascripts/site-ui.js")

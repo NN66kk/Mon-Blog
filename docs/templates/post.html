@@ -42,13 +42,14 @@
       <button
         type="button"
         class="post-share-button"
-        aria-label="分享本文"
+        aria-label="复制本文链接"
         data-share-link-button
-        data-share-link-default-text="分享"
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
         data-share-link-success-text="已复制"
         data-share-link-error-text="复制失败"
         aria-live="polite"
-      >分享</button>
+      ><span data-share-link-label>复制链接</span></button>
     </div>
     {% if page.blog_topic_tags %}
       <div class="post-header-tags" aria-label="文章标签">

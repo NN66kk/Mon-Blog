@@ -9,8 +9,6 @@
   --garden-header-height: 3.6rem;
   --garden-reading-width: 44rem;
   --garden-wide-width: 74rem;
-  --garden-line: 1px solid var(--garden-border);
-  --garden-focus: 0 0 0 3px var(--garden-focus-ring);
   --garden-ease: 180ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
@@ -38,6 +36,8 @@
   --garden-shadow: 0 18px 50px rgba(54, 56, 48, 0.1);
   --garden-overlay: rgba(26, 31, 27, 0.48);
   --garden-focus-ring: rgba(164, 76, 50, 0.34);
+  --garden-line: 1px solid var(--garden-border);
+  --garden-focus: 0 0 0 3px var(--garden-focus-ring);
   --md-default-bg-color: var(--garden-paper);
   --md-default-fg-color: var(--garden-ink);
   --md-default-fg-color--light: var(--garden-muted);
@@ -74,6 +74,8 @@
   --garden-shadow: 0 18px 55px rgba(0, 0, 0, 0.3);
   --garden-overlay: rgba(5, 8, 5, 0.68);
   --garden-focus-ring: rgba(220, 136, 107, 0.42);
+  --garden-line: 1px solid var(--garden-border);
+  --garden-focus: 0 0 0 3px var(--garden-focus-ring);
   --md-default-bg-color: var(--garden-paper);
   --md-default-fg-color: var(--garden-ink);
   --md-default-fg-color--light: var(--garden-muted);
