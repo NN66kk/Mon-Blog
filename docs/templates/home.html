@@ -5,16 +5,19 @@
     <section class="home-hero" aria-labelledby="home-title">
       <div class="home-hero__copy">
         <span class="garden-eyebrow"><i aria-hidden="true"></i> MON'S DIGITAL GARDEN</span>
-        <h1 id="home-title">保持清醒，<br>持续前行。</h1>
-        <p class="home-hero__lead">一座关于技术、山野与自我成长的个人花园。用写作整理思考，也记录答案抵达之前的路径。</p>
+        <h1 id="home-title"><span>行于山野，</span><span>思于日常。</span></h1>
+        <div class="home-hero__lead">
+          <p>读书、写代码，也走进山野。</p>
+          <p>把求知的心得、行路的见闻，写成日后仍愿翻阅的文字。</p>
+        </div>
         <div class="home-hero__actions">
           <a class="garden-button garden-button--primary" href="{{ 'archive/'|url }}">开始阅读 <span aria-hidden="true">→</span></a>
           <a class="garden-button garden-button--quiet" href="{{ config.extra.about_url|url }}">认识我</a>
         </div>
         <dl class="home-hero__stats" aria-label="花园概览">
-          <div><dt>{{ blog.count }}</dt><dd>篇公开记录</dd></div>
+          <div><dt>{{ blog.count }}</dt><dd>篇随笔与札记</dd></div>
           <div><dt>{{ blog.collections|length }}</dt><dd>条阅读小径</dd></div>
-          <div><dt>持续</dt><dd>生长与修订</dd></div>
+          <div><dt>常新</dt><dd>随阅历增补</dd></div>
         </dl>
       </div>
 
@@ -53,7 +56,7 @@
 
       <div class="home-reading__grid">
         <div class="recent-notes">
-          {% for post in blog.posts %}
+          {% for post in blog.posts[:10] %}
             <article class="recent-note">
               <a href="{{ post.url|url }}">
                 <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>{{ post.blog_publish_label[:10]|default("持续更新", true)|e }}</time>
@@ -70,9 +73,9 @@
       <header class="section-heading section-heading--collections">
         <div>
           <span class="garden-eyebrow"><i aria-hidden="true"></i> GARDEN PATHS</span>
-          <h2 id="home-collections-title">循四条小径，逛一座花园。</h2>
+          <h2 id="home-collections-title">四条小径，各有风景。</h2>
         </div>
-        <p>不按完成度摆放，只按兴趣与问题继续生长。</p>
+        <p>从思考到实践，从山野到人间，随兴趣翻阅。</p>
       </header>
       <div class="home-collections__grid">
         {% for collection in blog.collections %}
@@ -88,11 +91,5 @@
         {% endfor %}
       </div>
     </section>
-
-    <aside class="home-about" aria-label="关于花园主人">
-      <span>ABOUT THE GARDENER</span>
-      <p>来自河南，现于北京读研。喜欢徒步、自由搏击，也长期关注人工智能与心理学。</p>
-      <a href="{{ config.extra.about_url|url }}">继续认识我 <span aria-hidden="true">→</span></a>
-    </aside>
   </div>
 {% endblock %}

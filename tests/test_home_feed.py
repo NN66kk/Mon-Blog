@@ -71,7 +71,7 @@ def article_links(html):
 
 
 class HomeFeedTests(unittest.TestCase):
-    def test_home_renders_every_public_article_once_in_publish_order(self):
+    def test_home_renders_latest_ten_public_articles_in_publish_order(self):
         for former_featured in ("B-Notes/note-05.md", "B-Notes/note-14.md"):
             with self.subTest(former_featured=former_featured):
                 pages = [
@@ -96,13 +96,16 @@ class HomeFeedTests(unittest.TestCase):
 
                 blog = build_blog(pages, former_featured)
                 html = render_home(blog)
-                expected = [
+                expected_public = [
                     f"B-Notes/note-{day:02d}/" for day in range(14, 4, -1)
                 ] + ["B-Notes/undated/"]
 
-                self.assertEqual(article_links(html), expected)
-                self.assertEqual(blog["count"], len(expected))
-                self.assertGreater(len(expected), len(blog["recent"]))
+                self.assertEqual(article_links(html), expected_public[:10])
+                self.assertEqual(
+                    [page.url for page in blog["posts"]], expected_public
+                )
+                self.assertEqual(blog["count"], len(expected_public))
+                self.assertGreater(len(expected_public), 10)
                 self.assertNotIn("featured", blog)
                 self.assertNotIn("featured-note", html)
                 self.assertNotIn("编辑推荐", html)

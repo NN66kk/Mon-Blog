@@ -36,7 +36,7 @@
 .archive-filters {
   display: grid;
   margin-top: 1.5rem;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-top: var(--garden-line);
   border-left: var(--garden-line);
 }
@@ -57,6 +57,10 @@
   cursor: pointer;
   text-align: left;
   transition: background var(--garden-ease), color var(--garden-ease);
+}
+
+.archive-filters__all {
+  grid-column: 1 / -1;
 }
 
 .archive-filters button > span {
@@ -361,10 +365,6 @@
   .archive-filters {
     margin-top: 1rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .archive-filters button:last-child {
-    grid-column: 1 / -1;
   }
 
   .archive-tools {
