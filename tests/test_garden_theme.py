@@ -34,7 +34,9 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn('class="garden-home"', home_template)
         self.assertIn('class="garden-archive"', archive_template)
         self.assertIn('class="garden-collection', collection_template)
-        self.assertIn("blog.recent", home_template)
+        self.assertIn("blog.posts", home_template)
+        self.assertNotIn("blog.featured", home_template)
+        self.assertNotIn("featured_post:", read_project_file("mkdocs.yml"))
         self.assertIn("blog.posts", archive_template)
         self.assertNotIn("nav.pages", home_template + archive_template)
 
@@ -153,15 +155,18 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn('class="post-body" data-post-body', template)
         self.assertIn("{{ body_html|safe }}", template)
 
-    def test_mobile_layout_prioritizes_posts_and_compacts_article_header(self):
+    def test_home_uses_one_column_and_mobile_article_header_stays_compact(self):
         home_css = read_project_file("docs/css/40-home.css")
         article_css = read_project_file("docs/css/30-article.css")
         template = read_project_file("docs/templates/post.html")
 
         self.assertIn(".recent-notes", home_css)
-        self.assertIn("order: 1", home_css)
-        self.assertIn(".featured-note", home_css)
-        self.assertIn("order: 2", home_css)
+        self.assertIn(
+            "grid-template-columns: minmax(0, 1fr)",
+            css_rule_body(home_css, ".home-reading__grid"),
+        )
+        self.assertNotIn(".featured-note", home_css)
+        self.assertNotRegex(home_css, r"(?m)^\s*order\s*:")
         self.assertIn(".md-content__inner--article", article_css)
         self.assertNotIn(":has(", home_css + article_css)
         self.assertIn("post-header-attribution", template)

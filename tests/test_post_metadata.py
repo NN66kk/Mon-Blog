@@ -18,7 +18,6 @@ def blog_config(docs_dir):
     return {
         "docs_dir": str(docs_dir),
         "extra": {
-            "featured_post": "B-Notes/没有日期的文章.md",
             "about_page": "about.md",
             "collection_order": ["B"],
             "collections": {
@@ -107,7 +106,8 @@ tags:
         self.assertTrue(page.blog_is_article)
         self.assertTrue(page.blog_is_listed)
         self.assertEqual(nav.blog["count"], 1)
-        self.assertEqual(nav.blog["featured"], page)
+        self.assertEqual(nav.blog["posts"], [page])
+        self.assertNotIn("featured", nav.blog)
 
     def test_compact_two_digit_year_remains_supported(self):
         publish = POST_METADATA._publish_parts_from_value("260814185045")

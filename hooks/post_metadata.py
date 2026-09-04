@@ -594,20 +594,10 @@ def on_nav(nav, config, files):
         collection_views.append(collection)
         collection_counts[key] = len(collection_posts)
 
-    featured_src = _normalize_text(extra.get("featured_post"))
-    featured = next(
-        (
-            page
-            for page in posts
-            if getattr(getattr(page, "file", None), "src_uri", "") == featured_src
-        ),
-        posts[0] if posts else None,
-    )
     about = next((page for page in pages if getattr(page, "blog_is_about", False)), None)
     blog = {
         "posts": posts,
         "recent": posts[:7],
-        "featured": featured,
         "about": about,
         "count": len(posts),
         "collection_order": collection_order,

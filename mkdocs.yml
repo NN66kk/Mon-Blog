@@ -9,7 +9,6 @@ repo_name: NN66kk/Mon-Blog
 edit_uri: edit/main/docs/
 
 extra:
-  featured_post: "D-Orginals/260814185045.md"
   about_page: "about.md"
   legacy_about_page: "D-Orginals/2024070515116.md"
   about_url: "about/"

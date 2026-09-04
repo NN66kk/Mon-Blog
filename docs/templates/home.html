@@ -52,35 +52,15 @@
       </header>
 
       <div class="home-reading__grid">
-        {% if blog.featured %}
-          {% set featured = blog.featured %}
-          <article class="featured-note">
-            <span class="featured-note__label">编辑推荐</span>
-            <div>
-              <span class="garden-kicker">{{ featured.blog_collection.mark }} · {{ featured.blog_collection.label }}</span>
-              <h3><a href="{{ featured.url|url }}">{{ featured.title|striptags|e }}</a></h3>
-              {% if featured.blog_description_text %}<p>{{ featured.blog_description_text|striptags|trim|truncate(128)|e }}</p>{% endif %}
-            </div>
-            <footer>
-              <time{% if featured.blog_publish_iso %} datetime="{{ featured.blog_publish_iso|e }}"{% endif %}>{{ featured.blog_publish_label[:10]|default("持续更新", true)|e }}</time>
-              <a href="{{ featured.url|url }}" aria-label="阅读推荐文章《{{ featured.title|striptags|e }}》">阅读全文 <span aria-hidden="true">↗</span></a>
-            </footer>
-          </article>
-        {% endif %}
-
         <div class="recent-notes">
-          {% set recent = namespace(count=0) %}
-          {% for post in blog.recent %}
-            {% if recent.count < 6 and (not blog.featured or post.file.src_uri != blog.featured.file.src_uri) %}
-              <article class="recent-note">
-                <a href="{{ post.url|url }}">
-                  <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>{{ post.blog_publish_label[:10]|default("持续更新", true)|e }}</time>
-                  <div><span>{{ post.blog_collection.mark }} · {{ post.blog_collection.label }}</span><h3>{{ post.title|striptags|e }}</h3></div>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </article>
-              {% set recent.count = recent.count + 1 %}
-            {% endif %}
+          {% for post in blog.posts %}
+            <article class="recent-note">
+              <a href="{{ post.url|url }}">
+                <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>{{ post.blog_publish_label[:10]|default("持续更新", true)|e }}</time>
+                <div><span>{{ post.blog_collection.mark }} · {{ post.blog_collection.label }}</span><h3>{{ post.title|striptags|e }}</h3></div>
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
           {% endfor %}
         </div>
       </div>

@@ -178,80 +178,8 @@
 
 .home-reading__grid {
   display: grid;
-  grid-template-columns: minmax(16rem, 0.68fr) minmax(0, 1.32fr);
-  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1fr);
   padding-top: 1.5rem;
-}
-
-.featured-note {
-  display: flex;
-  min-height: 22rem;
-  padding: 1.2rem;
-  flex-direction: column;
-  border: 1px solid var(--garden-border-strong);
-  background:
-    linear-gradient(to bottom, transparent 68%, color-mix(in srgb, var(--garden-moss-soft) 65%, transparent)),
-    var(--garden-sheet);
-}
-
-.featured-note__label {
-  align-self: flex-start;
-  padding: 0.25rem 0.45rem;
-  background: var(--garden-copper);
-  color: var(--garden-sheet-strong);
-  font-size: var(--garden-xs);
-  font-weight: 750;
-  letter-spacing: 0.08em;
-}
-
-.featured-note > div {
-  margin-top: auto;
-}
-
-.featured-note h3 {
-  margin: 0.5rem 0 0;
-  font-size: clamp(1.35rem, 2.7vw, 2rem);
-  line-height: 1.28;
-}
-
-.featured-note h3 a {
-  color: var(--garden-ink);
-  text-decoration: none;
-}
-
-.featured-note h3 a:hover {
-  color: var(--garden-copper);
-}
-
-.featured-note p {
-  margin: 0.65rem 0 0;
-  color: var(--garden-muted);
-  font-size: var(--garden-sm);
-  line-height: 1.7;
-}
-
-.featured-note footer {
-  display: flex;
-  margin-top: 1.2rem;
-  padding-top: 0.75rem;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.7rem;
-  border-top: var(--garden-line);
-}
-
-.featured-note footer time,
-.featured-note footer a {
-  color: var(--garden-muted);
-  font-size: var(--garden-xs);
-}
-
-.featured-note footer a {
-  min-height: 2rem;
-  padding: 0.35rem 0;
-  color: var(--garden-ink);
-  font-weight: 700;
-  text-decoration: none;
 }
 
 .recent-notes {
@@ -443,10 +371,6 @@
   .home-hero__copy {
     padding-right: 2rem;
   }
-
-  .home-reading__grid {
-    gap: 1.5rem;
-  }
 }
 
 @media screen and (max-width: 47.99em) {
@@ -490,19 +414,6 @@
   .home-reading,
   .home-collections {
     padding-top: 3.1rem;
-  }
-
-  .home-reading__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .recent-notes {
-    order: 1;
-  }
-
-  .featured-note {
-    min-height: 16rem;
-    order: 2;
   }
 
   .recent-note > a {
