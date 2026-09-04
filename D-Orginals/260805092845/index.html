@@ -1,0 +1,1124 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="BCU 是一款开源免费的 Windows 卸载工具，支持批量卸载、残留扫描和强制清理，可作为 Geek 的实用平替。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/D-Orginals/260805092845/">
+      
+      
+        <link rel="prev" href="../260802232926/">
+      
+      
+        <link rel="next" href="../260805095251/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="Windows 卸载神器 BCU：开源免费，还能批量清理软件残留 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="BCU 是一款开源免费的 Windows 卸载工具，支持批量卸载、残留扫描和强制清理，可作为 Geek 的实用平替。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/D-Orginals/260805092845/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Windows 卸载神器 BCU：开源免费，还能批量清理软件残留 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="BCU 是一款开源免费的 Windows 卸载工具，支持批量卸载、残留扫描和强制清理，可作为 Geek 的实用平替。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2026-08-05T09:28:46+08:00">
+    <meta property="article:modified_time" content="2026-08-05T09:28:46+08:00">
+    <meta property="article:section" content="原创手记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u539f\u521b\u624b\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2026-08-05T09:28:46+08:00", "datePublished": "2026-08-05T09:28:46+08:00", "description": "BCU \u662f\u4e00\u6b3e\u5f00\u6e90\u514d\u8d39\u7684 Windows \u5378\u8f7d\u5de5\u5177\uff0c\u652f\u6301\u6279\u91cf\u5378\u8f7d\u3001\u6b8b\u7559\u626b\u63cf\u548c\u5f3a\u5236\u6e05\u7406\uff0c\u53ef\u4f5c\u4e3a Geek \u7684\u5b9e\u7528\u5e73\u66ff\u3002", "headline": "Windows \u5378\u8f7d\u795e\u5668 BCU\uff1a\u5f00\u6e90\u514d\u8d39\uff0c\u8fd8\u80fd\u6279\u91cf\u6e05\u7406\u8f6f\u4ef6\u6b8b\u7559", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260805092845/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260805092845/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#windows-bcu" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="./">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../../B-Notes/000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bcu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BCU 是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bcu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么推荐 BCU
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="为什么推荐 BCU">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 卸载以后继续扫描残留
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 支持批量卸载软件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 能识别更多类型的软件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 支持强制卸载
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 筛选功能非常丰富
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应该下载哪个版本
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="应该下载哪个版本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup 安装版
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#portable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Portable 便携版
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#net" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        net 便携版
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bcu_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BCU 的基本使用方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BCU 的基本使用方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一步：打开软件并扫描列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二步：找到需要卸载的软件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三步：执行卸载
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第四步：创建还原点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第五步：扫描卸载残留
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        哪些东西不要随便卸载
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        项目地址
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="D"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%8E%9F%E5%88%9B%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    D Orginals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000原创文章目录/" aria-label="浏览原创手记全部内容">
+          思 · 原创手记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2026-08-05T09:28:46+08:00">
+          2026-08-05
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>今天给大家推荐一个 Windows 端卸载软件的神器。</p>
+<p>之前大家应该都听过 Geek Uninstaller。它在卸载软件以后，可以继续扫描软件留下的文件、文件夹和注册表项目，通常会比 Windows 自带的卸载功能清理得更加干净。</p>
+<p>不过 Geek 并不是开源软件，而且免费版的功能相对基础，批量卸载等功能需要使用付费的专业版本。它的界面虽然简单，但整体设计也稍微有些年代感。</p>
+<p>今天给大家推荐另一款可以作为 Geek 平替的开源项目，名字叫做 <strong>Bulk Crap Uninstaller</strong>，简称 <strong>BCU</strong> 或者 <strong>BCUninstaller</strong>。</p>
+<p>项目链接我会放在文末。</p>
+<h2 id="bcu">BCU 是什么<a class="headerlink" href="#bcu" title="Permanent link">&para;</a></h2>
+<p>BCU 是一款专门用于 Windows 系统的软件卸载工具。</p>
+<p>它最大的特点，是可以批量卸载大量软件，并且尽可能减少人工操作。除了普通的软件卸载，它还可以扫描卸载残留、识别失效的卸载项、强制移除损坏的软件，以及管理一些不会正常显示在 Windows 软件列表中的程序。</p>
+<p>BCU 采用 Apache 2.0 开源许可证，个人和商业环境都可以免费使用。</p>
+<p>它的名字 Bulk Crap Uninstaller 直译过来，大概就是“批量垃圾软件卸载器”。名字听起来比较直接，但也准确概括了它的主要用途：一次性清理电脑中大量不再需要的软件。</p>
+<h2 id="bcu_1">为什么推荐 BCU<a class="headerlink" href="#bcu_1" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 卸载以后继续扫描残留<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>使用 Windows 自带的卸载功能时，系统通常只是运行软件官方提供的卸载程序。</p>
+<p>但很多软件卸载以后，仍然会在电脑中留下：</p>
+<ul>
+<li>
+<p>安装目录和空文件夹；</p>
+</li>
+<li>
+<p>用户配置文件；</p>
+</li>
+<li>
+<p>缓存和日志文件；</p>
+</li>
+<li>
+<p>注册表项目；</p>
+</li>
+<li>
+<p>已经失效的卸载信息。</p>
+</li>
+</ul>
+<p>BCU 会优先调用软件自己的卸载程序。卸载结束以后，再扫描可能遗留的文件、文件夹和注册表项目，让用户决定是否继续清理。</p>
+<p>需要注意的是，残留扫描并不是绝对准确的。删除之前最好检查一下扫描结果，不要看到所有项目就直接全部勾选。</p>
+<h3 id="2">2. 支持批量卸载软件<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>这是 BCU 相比很多普通卸载工具最明显的优势。</p>
+<p>你可以一次选择多个软件，然后让 BCU 按照顺序自动执行卸载。对于支持静默卸载的软件，它还可以减少安装向导和确认窗口的数量。</p>
+<p>如果刚买了一台新电脑，系统里预装了大量用不到的软件，或者电脑里积累了很多旧工具、测试软件和游戏组件，使用批量卸载会节省不少时间。</p>
+<p>BCU 还会尽量避免同时卸载存在冲突的软件，降低多个卸载程序互相干扰的概率。</p>
+<h3 id="3">3. 能识别更多类型的软件<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>BCU 显示的不只是 Windows“已安装的应用”列表中的普通软件。</p>
+<p>它还可以识别和管理：</p>
+<ul>
+<li>
+<p>普通桌面软件；</p>
+</li>
+<li>
+<p>隐藏或者受保护的卸载项；</p>
+</li>
+<li>
+<p>卸载程序损坏的软件；</p>
+</li>
+<li>
+<p>部分便携软件；</p>
+</li>
+<li>
+<p>Microsoft Store 应用；</p>
+</li>
+<li>
+<p>Steam 游戏和应用；</p>
+</li>
+<li>
+<p>Chocolatey 安装的软件包；</p>
+</li>
+<li>
+<p>Windows 系统功能；</p>
+</li>
+<li>
+<p>Windows 更新。</p>
+</li>
+</ul>
+<p>这些项目会统一显示在 BCU 的软件列表中，可以进行搜索、筛选、排序和批量处理。</p>
+<p>对于经常安装开发环境、命令行工具、游戏或者各种测试软件的人来说，这项功能非常实用。</p>
+<h3 id="4">4. 支持强制卸载<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>有些软件明明还占着文件夹和注册表项目，但它自己的卸载程序已经损坏，点击卸载只会报错。</p>
+<p>这种情况下，可以使用 BCU 的强制卸载功能。</p>
+<p>强制卸载会绕过软件原来的卸载程序，直接查找与该软件相关的文件和注册表内容。它适合处理卸载程序丢失、安装记录损坏或者卸载过程反复报错的软件。</p>
+<p>不过这项功能的风险也比普通卸载更高。只要软件自己的卸载程序还能正常使用，就应该优先执行正常卸载。</p>
+<h3 id="5">5. 筛选功能非常丰富<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p>第一次打开 BCU 时，可能会觉得它的界面比 Geek 复杂，因为主界面会显示大量软件信息。</p>
+<p>但这也是它适合高级用户的原因。</p>
+<p>BCU 可以按照软件名称、发布者、安装位置、安装时间、软件大小和卸载方式进行筛选，还可以使用正则表达式创建自定义过滤规则。</p>
+<p>软件列表中也会通过颜色和标记提示不同类型的项目，例如：</p>
+<ul>
+<li>
+<p>已验证的软件；</p>
+</li>
+<li>
+<p>没有有效卸载程序的软件；</p>
+</li>
+<li>
+<p>疑似残留的软件；</p>
+</li>
+<li>
+<p>Windows 系统组件；</p>
+</li>
+<li>
+<p>Microsoft Store 应用；</p>
+</li>
+<li>
+<p>未注册的应用程序。</p>
+</li>
+</ul>
+<p>对于不熟悉的项目，可以先查看发布者、安装目录和数字签名，再决定是否删除。</p>
+<h2 id="_1">应该下载哪个版本<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>BCU 通常提供三个版本。</p>
+<h3 id="setup">Setup 安装版<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
+<p>安装版会像普通软件一样安装到 Windows 中，并创建开始菜单入口和卸载信息。</p>
+<p>如果电脑缺少程序需要的 .NET 运行环境，安装程序也可以协助完成安装。</p>
+<p>对于大多数普通用户，我更推荐这个版本。安装完成以后，可以直接在开始菜单中搜索：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Bulk Crap Uninstaller
+</span></code></pre></div>
+<p>或者：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>BCUninstaller
+</span></code></pre></div>
+<h3 id="portable">Portable 便携版<a class="headerlink" href="#portable" title="Permanent link">&para;</a></h3>
+<p>便携版不需要安装，解压以后直接运行文件夹中的：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>BCUninstaller.exe
+</span></code></pre></div>
+<p>它已经包含需要的运行环境，所以文件体积会相对大一些。</p>
+<p>需要注意，运行便携版的 EXE 文件并不等于把软件安装到了电脑里。Windows 开始菜单中可能不会出现它，系统的“已安装的应用”列表中也未必能够找到它。</p>
+<p>下次使用时，需要重新进入解压后的文件夹，运行 <code>BCUninstaller.exe</code>。</p>
+<p>为了方便，可以右键这个文件，选择：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>发送到 → 桌面快捷方式
+</span></code></pre></div>
+<p>这样以后就可以直接从桌面打开。</p>
+<h3 id="net">net 便携版<a class="headerlink" href="#net" title="Permanent link">&para;</a></h3>
+<p>这个版本同样不需要安装，但是电脑中必须已经存在对应的 .NET 桌面运行环境。</p>
+<p>它的体积比完整便携版更小，适合已经安装相关运行环境的用户。</p>
+<p>如果不清楚电脑有没有对应的 .NET 环境，直接选择 Setup 安装版或者完整 Portable 便携版即可。BCU 6.x 版本官方支持 Windows 10 及以上系统，并使用 .NET 8 桌面运行环境；完整便携版不要求系统提前安装该运行环境。</p>
+<h2 id="bcu_2">BCU 的基本使用方法<a class="headerlink" href="#bcu_2" title="Permanent link">&para;</a></h2>
+<h3 id="_2">第一步：打开软件并扫描列表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>第一次启动时，BCU 会读取电脑中的软件信息。</p>
+<p>电脑里安装的软件越多，第一次加载需要的时间就可能越长。等待扫描完成以后，就能在主界面看到软件列表。</p>
+<p>如果需要删除系统级软件，可以右键 BCU，选择“以管理员身份运行”。</p>
+<h3 id="_3">第二步：找到需要卸载的软件<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>可以直接在搜索框中输入软件名称，也可以根据发布者、安装时间和软件大小进行排序。</p>
+<p>选中一个软件后，界面中通常会显示它的安装路径、卸载命令、注册表位置和数字签名等信息。</p>
+<p>卸载之前建议先确认软件名称和发布者，尤其不要随意删除自己不认识的驱动程序和系统组件。</p>
+<h3 id="_4">第三步：执行卸载<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>选中需要删除的软件，然后点击卸载按钮。</p>
+<p>BCU 会让你选择卸载方式。普通用户使用默认选项即可，不需要一开始就开启强制卸载或者过于激进的自动清理功能。</p>
+<p>如果一次选择了多个软件，BCU 会创建批量卸载任务，并依次运行这些软件的卸载程序。</p>
+<h3 id="_5">第四步：创建还原点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>在批量卸载或者清理大量残留之前，建议允许 BCU 创建系统还原点。</p>
+<p>如果后续发现误删了重要组件，可以尝试通过系统还原恢复电脑状态。</p>
+<p>虽然创建还原点会多花一点时间，但在集中清理软件时非常有必要。</p>
+<h3 id="_6">第五步：扫描卸载残留<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>正常卸载结束以后，BCU 会询问是否查找残留项目。</p>
+<p>扫描结果一般会根据可信程度进行分类。可信程度较高的项目通常与刚刚卸载的软件名称、安装目录或者注册表位置直接相关。</p>
+<p>建议优先删除明确属于该软件的内容。对于路径模糊、名称不明确或者可能被多个软件共用的项目，可以暂时保留。</p>
+<h2 id="_7">哪些东西不要随便卸载<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>BCU 的检测能力比较强，但能够显示出来，不代表所有项目都应该删除。</p>
+<p>下面这些内容需要格外谨慎：</p>
+<ul>
+<li>
+<p>显卡、声卡、网卡和芯片组驱动；</p>
+</li>
+<li>
+<p>Microsoft Visual C++ Redistributable；</p>
+</li>
+<li>
+<p>.NET Runtime 和 .NET SDK；</p>
+</li>
+<li>
+<p>Java 运行环境；</p>
+</li>
+<li>
+<p>Python、Node.js 和其他开发环境；</p>
+</li>
+<li>
+<p>软件共用的更新组件；</p>
+</li>
+<li>
+<p>Windows 系统功能；</p>
+</li>
+<li>
+<p>名称中包含 Driver、Runtime、Framework、Service 的程序。</p>
+</li>
+</ul>
+<p>例如，电脑里可能同时存在多个年份和架构的 Visual C++ 运行库。它们看起来比较重复，但不同软件可能依赖不同版本，不能简单地只保留最新版本。</p>
+<p>遇到不认识的项目，最好先搜索它的名称和发布者，再决定是否卸载。</p>
+<h2 id="_8">总结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>BCU 并不是那种打开以后只有一个卸载按钮的极简工具，它更像是一套完整的 Windows 软件管理和清理工具。</p>
+<p>它既能完成普通的软件卸载，也能批量处理大量程序，扫描卸载残留，识别损坏的卸载项，并管理 Microsoft Store 应用、Steam 游戏和 Windows 功能。</p>
+<p>虽然第一次打开时界面可能稍微复杂，但熟悉基本操作以后，日常真正需要使用的功能其实只有几个：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>搜索软件 → 选择卸载 → 扫描残留 → 确认删除
+</span></code></pre></div>
+<p>对于喜欢开源软件，或者经常折腾 Windows、安装各种开发工具和测试程序的人来说，BCU 值得长期保留在电脑里。</p>
+<h2 id="_9">项目地址<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>BCU GitHub 项目主页：https://github.com/BCUninstaller/Bulk-Crap-Uninstaller</p>
+</li>
+<li>
+<p>BCU 官方网站：https://www.bcuninstaller.com/</p>
+</li>
+<li>
+<p>BCU 版本发布页面：https://github.com/BCUninstaller/Bulk-Crap-Uninstaller/releases</p>
+</li>
+</ul>
+<hr />
+<p>最近正在筹建一个「<strong>终身学习与效率提升交流群</strong>」。</p>
+<p>群内主要围绕以下内容展开：</p>
+<ul>
+<li>AI 前沿动态与实用玩法</li>
+<li>AI 编程与开发经验</li>
+<li>高效工作流搭建</li>
+<li>优质软件与工具分享</li>
+<li>学习方法、踩坑经验与不定期答疑</li>
+</ul>
+<p>希望聚集一群愿意长期学习、主动实践、共同成长的朋友。无论你是刚开始接触 AI，还是已经在使用 AI 提升学习和工作效率，都欢迎加入交流。</p>
+<p>目前社群<strong>免费开放</strong>，感兴趣的朋友可以添加我的微信：<strong>mons688</strong></p>
+<p>添加时请备注「学习群」，我会拉你进群。</p>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260814185045/">
+            <small>思 · 原创手记</small>
+            <strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805095251/">
+            <small>思 · 原创手记</small>
+            <strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260802232926/">
+            <small>思 · 原创手记</small>
+            <strong>macOS 关闭软件更新提醒的终极方案</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../260805095251/"><small>← 更新一篇</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></a>
+    
+    
+      <a href="../260802232926/"><small>更早一篇 →</small><strong>macOS 关闭软件更新提醒的终极方案</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000原创文章目录/">继续逛原创手记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

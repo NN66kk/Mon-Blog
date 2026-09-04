@@ -1,0 +1,932 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="介绍 macOS 关闭软件更新提醒的可靠方案，通过通知描述文件屏蔽弹窗、声音和角标，同时保留手动检查与安装更新功能。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/D-Orginals/260802232926/">
+      
+      
+        <link rel="prev" href="../260801090921/">
+      
+      
+        <link rel="next" href="../260805092845/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>macOS 关闭软件更新提醒的终极方案 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="macOS 关闭软件更新提醒的终极方案 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="介绍 macOS 关闭软件更新提醒的可靠方案，通过通知描述文件屏蔽弹窗、声音和角标，同时保留手动检查与安装更新功能。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/D-Orginals/260802232926/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="macOS 关闭软件更新提醒的终极方案 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="介绍 macOS 关闭软件更新提醒的可靠方案，通过通知描述文件屏蔽弹窗、声音和角标，同时保留手动检查与安装更新功能。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2026-08-02T23:29:26+08:00">
+    <meta property="article:modified_time" content="2026-08-02T23:29:26+08:00">
+    <meta property="article:section" content="原创手记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u539f\u521b\u624b\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2026-08-02T23:29:26+08:00", "datePublished": "2026-08-02T23:29:26+08:00", "description": "\u4ecb\u7ecd macOS \u5173\u95ed\u8f6f\u4ef6\u66f4\u65b0\u63d0\u9192\u7684\u53ef\u9760\u65b9\u6848\uff0c\u901a\u8fc7\u901a\u77e5\u63cf\u8ff0\u6587\u4ef6\u5c4f\u853d\u5f39\u7a97\u3001\u58f0\u97f3\u548c\u89d2\u6807\uff0c\u540c\u65f6\u4fdd\u7559\u624b\u52a8\u68c0\u67e5\u4e0e\u5b89\u88c5\u66f4\u65b0\u529f\u80fd\u3002", "headline": "macOS \u5173\u95ed\u8f6f\u4ef6\u66f4\u65b0\u63d0\u9192\u7684\u7ec8\u6781\u65b9\u6848", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260802232926/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260802232926/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#macos" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../../B-Notes/000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        背景
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么关闭自动更新后仍然会提醒
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        尝试过但不够可靠的方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="尝试过但不够可靠的方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 只关闭系统设置中的自动更新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-launchagent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 禁用提醒 LaunchAgent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最终方案：安装通知设置描述文件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安装步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何确认配置已生效
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何恢复更新提醒
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注意事项
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="D"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%8E%9F%E5%88%9B%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    D Orginals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000原创文章目录/" aria-label="浏览原创手记全部内容">
+          思 · 原创手记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2026-08-02T23:29:26+08:00">
+          2026-08-02
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">macOS 关闭软件更新提醒的终极方案</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <h2 id="_1">背景<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>macOS 会不定期弹出“有更新项目，你要今晚安装这些更新吗？”的提醒。即使已经在“系统设置 → 通用 → 软件更新 → 自动更新”中关闭自动下载和自动安装，系统仍可能继续检查更新并展示提醒。</p>
+<p>目标是：</p>
+<ul>
+<li>不再出现软件更新弹窗、声音和角标；</li>
+<li>不自动下载或安装 macOS 更新；</li>
+<li>保留“系统设置 → 通用 → 软件更新”中的手动更新能力。</li>
+</ul>
+<h2 id="_2">为什么关闭自动更新后仍然会提醒<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>“自动安装”和“自动检查/通知”不是同一层功能。关闭自动下载、自动安装，只代表系统不会自行完成更新；当后台检测到新版本时，<code>SoftwareUpdateNotificationManager</code> 仍可能展示通知。</p>
+<p>在较新的 macOS 版本中，旧命令：</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>softwareupdate<span class="w"> </span>--schedule<span class="w"> </span>off
+</span></code></pre></div>
+<p>可能仍然返回：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Automatic checking for updates is turned on
+</span></code></pre></div>
+<p>这表示系统没有接受关闭自动检查的请求。直接修改偏好值也不一定能改变系统更新守护进程的实际行为。</p>
+<h2 id="_3">尝试过但不够可靠的方法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 只关闭系统设置中的自动更新<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>应当先关闭以下选项，避免后台下载和安装：</p>
+<ul>
+<li>下载可用的更新；</li>
+<li>安装 macOS 更新；</li>
+<li>安装系统数据文件和安全性更新。</li>
+</ul>
+<p>但这些选项不能保证关闭更新提醒。</p>
+<h3 id="2-launchagent">2. 禁用提醒 LaunchAgent<a class="headerlink" href="#2-launchagent" title="Permanent link">&para;</a></h3>
+<p>提醒进程的标识符是：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>com.apple.SoftwareUpdateNotificationManager
+</span></code></pre></div>
+<p>可以尝试：</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>launchctl<span class="w"> </span>disable<span class="w"> </span><span class="s2">"gui/</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">/com.apple.SoftwareUpdateNotificationManager"</span>
+</span></code></pre></div>
+<p>验证禁用记录：</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>launchctl<span class="w"> </span>print-disabled<span class="w"> </span><span class="s2">"gui/</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>SoftwareUpdateNotificationManager
+</span></code></pre></div>
+<p>预期结果：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>"com.apple.SoftwareUpdateNotificationManager" =&gt; disabled
+</span></code></pre></div>
+<p>问题在于：已经运行的 Apple 系统进程受 SIP（系统完整性保护）限制，即使使用 <code>sudo launchctl kill</code>，也可能返回：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Not privileged to signal service.
+</span></code></pre></div>
+<p>因此，这种方法可以作为辅助措施，但不适合单独作为最终方案。不要为了终止提醒进程而关闭 SIP，这会明显降低系统安全性。</p>
+<h2 id="_4">最终方案：安装通知设置描述文件<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>macOS 支持通过 <code>com.apple.notificationsettings</code> 配置描述文件管理指定 App 的通知。针对更新提醒进程关闭通知，不会影响软件更新本身，也不会阻止手动检查更新。</p>
+<p>创建一个扩展名为 <code>.mobileconfig</code> 的文件，内容如下：</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nt">&lt;plist</span><span class="w"> </span><span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nt">&lt;dict&gt;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadContent<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">&lt;array&gt;</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="nt">&lt;dict&gt;</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>NotificationSettings<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">            </span><span class="nt">&lt;array&gt;</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">                </span><span class="nt">&lt;dict&gt;</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>AlertType<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">                    </span><span class="nt">&lt;integer&gt;</span>0<span class="nt">&lt;/integer&gt;</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>BadgesEnabled<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">                    </span><span class="nt">&lt;false/&gt;</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>BundleIdentifier<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">                    </span><span class="nt">&lt;string&gt;</span>com.apple.SoftwareUpdateNotificationManager<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>CriticalAlertEnabled<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">                    </span><span class="nt">&lt;false/&gt;</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>NotificationsEnabled<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">                    </span><span class="nt">&lt;false/&gt;</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>ShowInLockScreen<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">                    </span><span class="nt">&lt;false/&gt;</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>ShowInNotificationCenter<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">                    </span><span class="nt">&lt;false/&gt;</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">                    </span><span class="nt">&lt;key&gt;</span>SoundsEnabled<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">                    </span><span class="nt">&lt;false/&gt;</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">                </span><span class="nt">&lt;/dict&gt;</span>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="w">            </span><span class="nt">&lt;/array&gt;</span>
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadDisplayName<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>关闭<span class="w"> </span>macOS<span class="w"> </span>软件更新提醒<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadIdentifier<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>local.notifications.software-update<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadType<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>com.apple.notificationsettings<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadUUID<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="w">            </span><span class="nt">&lt;string&gt;</span>53A3BA1D-9E20-46CF-A3F7-2F4D1D11DBF4<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="w">            </span><span class="nt">&lt;key&gt;</span>PayloadVersion<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="w">            </span><span class="nt">&lt;integer&gt;</span>1<span class="nt">&lt;/integer&gt;</span>
+</span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="w">        </span><span class="nt">&lt;/dict&gt;</span>
+</span><span id="__span-7-40"><a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="w">    </span><span class="nt">&lt;/array&gt;</span>
+</span><span id="__span-7-41"><a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadDescription<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-42"><a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>关闭软件更新提醒的通知、声音和角标，不影响手动检查或安装<span class="w"> </span>macOS<span class="w"> </span>更新。<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-43"><a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadDisplayName<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-44"><a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>关闭<span class="w"> </span>macOS<span class="w"> </span>软件更新提醒<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-45"><a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadIdentifier<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-46"><a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>local.disable-software-update-notifications<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-47"><a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadOrganization<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-48"><a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>本机个人配置<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-49"><a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadRemovalDisallowed<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-50"><a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a><span class="w">    </span><span class="nt">&lt;false/&gt;</span>
+</span><span id="__span-7-51"><a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadScope<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-52"><a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>User<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-53"><a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadType<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-54"><a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>Configuration<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-55"><a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadUUID<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-56"><a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a><span class="w">    </span><span class="nt">&lt;string&gt;</span>7692C492-2E8E-49AA-B245-059129E95C11<span class="nt">&lt;/string&gt;</span>
+</span><span id="__span-7-57"><a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a><span class="w">    </span><span class="nt">&lt;key&gt;</span>PayloadVersion<span class="nt">&lt;/key&gt;</span>
+</span><span id="__span-7-58"><a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a><span class="w">    </span><span class="nt">&lt;integer&gt;</span>1<span class="nt">&lt;/integer&gt;</span>
+</span><span id="__span-7-59"><a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a><span class="nt">&lt;/dict&gt;</span>
+</span><span id="__span-7-60"><a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a><span class="nt">&lt;/plist&gt;</span>
+</span></code></pre></div>
+<p>如果要在多台设备分别创建文件，建议为两个 <code>PayloadUUID</code> 生成新的 UUID：</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uuidgen
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>uuidgen
+</span></code></pre></div>
+<h2 id="_5">安装步骤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ol>
+<li>双击 <code>.mobileconfig</code> 文件。</li>
+<li>打开“系统设置 → 通用 → 设备管理”。</li>
+<li>选择“关闭 macOS 软件更新提醒”。</li>
+<li>点击“安装”，确认安装该本地个人配置。</li>
+<li>注销或重启一次 Mac，让已经运行的旧提醒进程退出。</li>
+</ol>
+<p>用户范围的通知配置不一定要求输入管理员密码。是否出现密码提示，不是判断安装成功与否的依据。</p>
+<h2 id="_6">如何确认配置已生效<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>在“系统设置 → 通用 → 设备管理”中打开该配置，确认：</p>
+<ul>
+<li>标识符为 <code>com.apple.SoftwareUpdateNotificationManager</code>；</li>
+<li>“通知已启用”为 <code>False</code>；</li>
+<li>“在锁定屏幕上显示”为 <code>False</code>；</li>
+<li>“提醒类型”为“无”；</li>
+<li>声音和角标处于关闭状态。</li>
+</ul>
+<p>已有弹窗可能不会立即自动消失，可以手动关闭一次。注销或重启后，后续提醒应被配置阻止。</p>
+<h2 id="_7">如何恢复更新提醒<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>进入“系统设置 → 通用 → 设备管理”，选中“关闭 macOS 软件更新提醒”，然后移除配置即可。</p>
+<p>如果此前还执行过 LaunchAgent 禁用命令，可恢复为：</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>launchctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span><span class="s2">"gui/</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">/com.apple.SoftwareUpdateNotificationManager"</span>
+</span></code></pre></div>
+<p>注销或重启后生效。</p>
+<h2 id="_8">注意事项<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li>不建议关闭 SIP 来处理普通通知问题。</li>
+<li>描述文件只控制提醒的展示，不会阻止手动更新。</li>
+<li>系统大版本升级可能调整更新组件或重置部分设置，升级后应重新检查配置是否仍然生效。</li>
+<li>安全更新具有实际价值。即使关闭提醒，也建议定期手动检查并选择合适时间安装。</li>
+</ul>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260814185045/">
+            <small>思 · 原创手记</small>
+            <strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805095251/">
+            <small>思 · 原创手记</small>
+            <strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805092845/">
+            <small>思 · 原创手记</small>
+            <strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../260805092845/"><small>← 更新一篇</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></a>
+    
+    
+      <a href="../260801090921/"><small>更早一篇 →</small><strong>Claude Code Write 权限规则与 cc-switch 模板的坑</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000原创文章目录/">继续逛原创手记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

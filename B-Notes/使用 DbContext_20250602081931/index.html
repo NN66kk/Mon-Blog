@@ -1,0 +1,845 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="We created our entities and DbContext class in the previous chapters. Here you will learn the overview of working with the DbContext to create a database…">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%BF%E7%94%A8%20DbContext_20250602081931/">
+      
+      
+        <link rel="prev" href="../%E4%BD%95%E4%B8%BA%E8%BE%B9%E7%95%8C%E6%84%9F_20240925085444/">
+      
+      
+        <link rel="next" href="../%E5%85%A8%E7%BD%91%E6%9C%80%E8%AF%A6%E5%B0%BD%E8%8B%B1%E9%9B%84%E2%80%9C%E5%BD%B1%E2%80%9D%E7%BB%88%E6%9E%81%E6%94%BB%E7%95%A5%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%8C%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F_20250810100730/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>使用 DbContext - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="使用 DbContext · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="We created our entities and DbContext class in the previous chapters. Here you will learn the overview of working with the DbContext to create a database…">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%BF%E7%94%A8%20DbContext_20250602081931/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="使用 DbContext · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="We created our entities and DbContext class in the previous chapters. Here you will learn the overview of working with the DbContext to create a database…">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2025-06-02T08:19:00">
+    <meta property="article:modified_time" content="2025-06-02T08:19:00">
+    <meta property="article:section" content="格物札记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u683c\u7269\u672d\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2025-06-02T08:19:00", "datePublished": "2025-06-02T08:19:00", "description": "We created our entities and DbContext class in the previous chapters. Here you will learn the overview of working with the DbContext to create a database\u2026", "headline": "\u4f7f\u7528 DbContext", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%BF%E7%94%A8%20DbContext_20250602081931/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%BF%E7%94%A8%20DbContext_20250602081931/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dbcontext" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../../D-Orginals/000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-dbcontext-in-ef-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Working with DbContext in EF Core
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-schema-creation-in-ef-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database Schema Creation in EF Core
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="B"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    B Notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000学习笔记目录/" aria-label="浏览格物札记全部内容">
+          技 · 格物札记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2025-06-02T08:19:00">
+          2025-06-02
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">使用 DbContext</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <h2 id="working-with-dbcontext-in-ef-core">Working with DbContext in EF Core<a class="headerlink" href="#working-with-dbcontext-in-ef-core" title="Permanent link">&para;</a></h2>
+<p>We created our entities and DbContext class in the previous chapters. Here you will learn the overview of working with the DbContext to create a database and interact with it using EF Core 7 on .NET 7 platform.</p>
+<p>在前面的章节中，我们创建了实体和 DbContext 类。在这里，你将了解使用 DbContext 创建数据库以及在 .NET 7 平台上使用 EF Core 7 与其交互的概述。</p>
+<p>The following is our .NET 7 console project along with entities and a context (SchoolDbContext) class.</p>
+<p>以下是我们的 .NET 7 控制台项目，以及实体和一个上下文类（SchoolDbContext）。</p>
+<blockquote>
+<p>配图说明：EF Core 示例项目结构图（原始截图未随笔记归档）。</p>
+</blockquote>
+<p>EF Core Sample Project</p>
+<p>EF Core 示例项目</p>
+<p>The following are <code>Student</code> and <code>Grade</code> classes.</p>
+<p>以下是 <code>Student</code> 和 <code>Grade</code> 类。</p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Student</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">StudentId</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">FirstName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">LastName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">GradeId</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Grade</span><span class="w"> </span><span class="n">Grade</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">}</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Grade</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">{</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">     </span><span class="k">public</span><span class="w"> </span><span class="nf">Grade</span><span class="p">()</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">     </span><span class="p">{</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">         </span><span class="n">Students</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span><span class="p">();</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">     </span><span class="p">}</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">GradeId</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">GradeName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IList</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Students</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The following is our context class <code>SchoolDbContext</code> created in the <a href="https://www.entityframeworktutorial.net/efcore/entity-framework-core-dbcontext.aspx">Create DbContext</a> chapter.</p>
+<p>以下是我们在<a href="../%E5%88%9B%E5%BB%BA%20DbContext_20250414085220/">Create DbContext</a>章节中创建的上下文类 <code>SchoolDbContext</code>。</p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SchoolContext</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DbContext</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">{</span><span class="w">       </span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="c1">//entities</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">DbSet</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Students</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">DbSet</span><span class="o">&lt;</span><span class="n">Grade</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Grades</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnConfiguring</span><span class="p">(</span><span class="n">DbContextOptionsBuilder</span><span class="w"> </span><span class="n">optionsBuilder</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">optionsBuilder</span><span class="p">.</span><span class="n">UseSqlServer</span><span class="p">(</span><span class="s">"Server=(localdb)\\mssqllocaldb;Database=SchoolDb;Trusted_Connection=True;"</span><span class="p">);</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span><span class="w"> </span>
+</span></code></pre></div>
+<p>The above context class includes two <code>DbSet&lt;TEntity&gt;</code> properties, for <code>Student</code> and <code>Grade</code>, type which will be mapped to the <code>Students</code> and <code>Grades</code> tables in the underlying database. In the <code>OnConfiguring()</code> method, an instance of <code>DbContextOptionsBuilder</code> is used to specify a database connection string.</p>
+<p>上述上下文类包含两个 <code>DbSet&lt;TEntity&gt;</code> 属性，分别对应 <code>Student</code> 和 <code>Grade</code> 类型，这些类型将被映射到底层数据库中的 <code>Students</code> 和 <code>Grades</code> 表。在 <code>OnConfiguring()</code> 方法中，使用 <code>DbContextOptionsBuilder</code> 的实例来指定数据库连接字符串。</p>
+<h2 id="database-schema-creation-in-ef-core">Database Schema Creation in EF Core<a class="headerlink" href="#database-schema-creation-in-ef-core" title="Permanent link">&para;</a></h2>
+<p>EF Core 中的数据库架构创建</p>
+<p>After creating the context and entity classes, it's time to start interacting with our underlying database using the context class. However, before we save or retrieve data from the database, we first need to ensure that the database schema is created as per our entities and configurations.</p>
+<p>在创建上下文和实体类后，接下来是使用上下文类与底层数据库进行交互。不过，在从数据库中保存或检索数据之前，我们需要<strong>确保数据库架构根据我们的实体和配置创建完成</strong>。</p>
+<p>There are two ways using which you can create a database and schema:</p>
+<ol>
+<li>Using the <code>EnsureCreated()</code> method</li>
+<li>Using Migration API</li>
+</ol>
+<p>有两种方法可以创建数据库和架构：</p>
+<ol>
+<li>使用 <code>EnsureCreated()</code> 方法</li>
+<li>使用迁移 API</li>
+</ol>
+<p>Creating a database using the <code>EnsureCreated()</code> method is common to use following by <code>EnsureDeleted()</code> method when testing or prototyping using Entity Framework Core framework.</p>
+<p>在使用 Entity Framework Core 框架进行测试或原型开发时，<strong>通常会在调用 <code>EnsureDeleted()</code> 方法后使用 <code>EnsureCreated()</code> 方法来创建数据库</strong>。</p>
+<p>Migrations API allows you to create an initial database schema based on your entities and then as and when you add/delete/modify your entities and config, it will sync to the corresponding schema changes to your database so that it remains compatible with your EF Core model (entities and other configurations).</p>
+<p>迁移 API 允许您基于实体类创建初始数据库架构，随后当您对实体和配置进行增删改操作时，它会将对应的架构变更同步到数据库，从而<strong>保持数据库与 EF Core 模型（实体及其他配置）的兼容性</strong>。</p>
+<p>Let's use the <code>EnsureCreated()</code> method to create a database and use the context class to save student and grade data in the database.</p>
+<p>让我们使用 <code>EnsureCreated()</code> 方法<strong>创建数据库</strong>，并通过上下文类将学生和班级数据保存至数据库中。</p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">EFCoreTutorialsConsole</span><span class="p">;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SchoolDbContext</span><span class="p">())</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">{</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="c1">//creates db if not exists </span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">EnsureCreated</span><span class="p">();</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="c1">//create entity objects</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">grd1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Grade</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">GradeName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"1st Grade"</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">std1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="n">FirstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Yash"</span><span class="p">,</span><span class="w"> </span><span class="n">LastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Malhotra"</span><span class="p">,</span><span class="w"> </span><span class="n">Grade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grd1</span><span class="p">};</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="c1">//add entitiy to the context</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">Students</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">std1</span><span class="p">);</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="c1">//save data to the database tables</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="n">SaveChanges</span><span class="p">();</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="c1">//retrieve all the students from the database</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">Students</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"First Name: {s.FirstName}, Last Name: {s.LastName}"</span><span class="p">);</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Let's understand the above example code:</p>
+<p>让我们来理解上述示例代码：</p>
+<ul>
+<li>The <code>using(){ .. }</code> statement creates a scope for a <code>SchoolDbContext</code> instance called context. It ensures that the context is properly disposed of when it's no longer needed.</li>
+<li><code>using(){ .. }</code> 语句为一个名为 context 的 <code>SchoolDbContext</code> 实例创建了一个作用域。它确保在不再需要该上下文时，能够正确释放资源。</li>
+<li>The <code>context.Database.EnsureCreated();</code> statement checks if the database exists. If it doesn't exist, it creates the database based on the entity classes defined as <code>DbSet&lt;TEntity&gt;</code> properties in the <code>SchoolDbContext</code> class. This is a simple way to create the database schema based on your entity model.</li>
+<li><code>context.Database.EnsureCreated();</code> 语句检查数据库是否存在。如果数据库不存在，它将根据在 <code>SchoolDbContext</code> 类中定义为 <code>DbSet&lt;TEntity&gt;</code> 属性的实体类创建数据库。这是一种根据实体模型简单创建数据库架构的方法。</li>
+<li>Next, two entity objects are created: <code>grd1</code> of type <code>Grade</code> and <code>std1</code> of type <code>Student</code>. These objects are entity objects that represent records in the database.</li>
+<li>接下来，创建了两个实体对象：类型为 <code>Grade</code> 的 <code>grd1</code> 和类型为 <code>Student</code> 的 <code>std1</code>。这些对象是表示数据库中记录的实体对象。</li>
+<li>The <code>std1</code> student entity is added to the <code>Students</code> property of the context. It also assigns <code>grd1</code> to its <code>Grade</code> property. This prepares the <code>Student</code> entity to be saved to the database along with the <code>Grade</code> entity.</li>
+<li><code>std1</code> 学生实体被添加到上下文的 <code>Students</code> 属性中。同时，将 <code>grd1</code> 赋值给它的 <code>Grade</code> 属性。这为将 <code>Student</code> 实体和 <code>Grade</code> 实体一起保存到数据库做好了准备。</li>
+<li>The <code>context.SaveChanges();</code> is called to persist the changes to the database. It effectively inserts a new student record into the "Students" table and a new grade record into the "Grades" table.</li>
+<li>调用 <code>context.SaveChanges();</code> 以将更改持久化到数据库中。这实际上在 "Students" 表中插入了一条新的学生记录，并在 "Grades" 表中插入了一条新的成绩记录。</li>
+<li>After saving changes, a <code>foreach</code> loop retrieves all the students from the "Students" table in the database using the <code>context.Students</code> property. It then prints the first name and last name of each student to the console.</li>
+<li>在保存更改后，使用 <code>context.Students</code> 属性通过 <code>foreach</code> 循环从数据库的 "Students" 表中检索所有学生。然后将每个学生的名字和姓氏打印到控制台上。</li>
+</ul>
+<p>Now, run the project by pressing Ctrl + F5. It will display the following output.</p>
+<p>现在，通过按 Ctrl + F5 运行项目。它将显示以下输出。</p>
+<blockquote>
+<p>配图说明：控制台运行结果（原始截图未随笔记归档）。</p>
+</blockquote>
+<p>As you can see, it displays the output. EF Core API has created the "SchoolDB" database and inserted records in the "Students" and "Grades" tables. You can see that in the SQL Server Explorer in your visual studio from View -&gt; SQL Server Object Explorer. If it is not connected to your local db then click on the <code>+</code> sign to connect to your db, as shown below.</p>
+<p>如您所见，它显示了输出。EF Core API <strong>创建了 "SchoolDB" 数据库，并在 "Students" 和 "Grades" 表中插入了记录</strong>。您可以在 Visual Studio 的视图菜单 -&gt; SQL Server 对象资源管理器中查看到这一点。如果没有连接到您的本地数据库，请点击 <code>+</code> 符号以连接到您的数据库，如下所示。</p>
+<blockquote>
+<p>配图说明：Visual Studio 的 SQL Server 对象资源管理器（原始截图未随笔记归档）。</p>
+</blockquote>
+<p>In the popup, select "MSSQLLocalDB" and click on the "Connect" button, as shown below.</p>
+<p>在弹出窗口中，选择 "MSSQLLocalDB"，然后点击 "连接" 按钮，如下所示。</p>
+<blockquote>
+<p>配图说明：连接 MSSQLLocalDB 的弹窗（原始截图未随笔记归档）。</p>
+</blockquote>
+<p>Now, you can see the database, as shown below.</p>
+<p>现在，您可以看到数据库，如下所示。</p>
+<blockquote>
+<p>配图说明：SchoolDB 数据库节点（原始截图未随笔记归档）。</p>
+</blockquote>
+<p>Expand (localdb) &gt; Database &gt; SchoolDB node in SQL Server Object Explorer. You can also see tables and their columns by expanding it further, as shown below.</p>
+<p>在 SQL Server 对象资源管理器中展开 (localdb) &gt; 数据库 &gt; SchoolDB 节点。您还可以通过进一步展开它来查看表及其列，如下所示。</p>
+<blockquote>
+<p>配图说明：数据库表与字段结构（原始截图未随笔记归档）。</p>
+</blockquote>
+<p>To see the records, right-click on the table name and click "View Data". It will display records in Visual Studio as below.</p>
+<p>要查看记录，右键单击表名，然后点击“查看数据”。它将在 Visual Studio 中显示记录，如下所示。</p>
+<blockquote>
+<p>配图说明：表数据查看结果（原始截图未随笔记归档）。</p>
+</blockquote>
+<p>In this way, we have successfully used EF Core API to save and retrieve data to the SQL Server database. Visit <a href="https://www.entityframeworktutorial.net/efcore/saving-data-in-connected-scenario-in-ef-core.aspx">Saving Data</a> and <a href="https://www.entityframeworktutorial.net/efcore/querying-in-ef-core.aspx">Querying</a> chapters to learn more about saving and retrieving data in EF Core.</p>
+<p>通过这种方式，我们成功使用 EF Core API 将数据保存到 SQL Server 数据库并检索数据。请访问 <a href="https://www.entityframeworktutorial.net/efcore/saving-data-in-connected-scenario-in-ef-core.aspx">保存数据</a> 和 <a href="https://www.entityframeworktutorial.net/efcore/querying-in-ef-core.aspx">查询</a> 章节，以了解更多关于在 EF Core 中保存和检索数据的信息。</p>
+<blockquote>
+<p>The <code>EnsureCreated()</code> method does not modify the schema if the database exists and has any tables. Nothing is done to ensure the database schema is compatible with the Entity Framework model. So it is mainly for the testing in clean db. Use Migration API for the development.</p>
+<p><code>EnsureCreated()</code> 方法如果数据库存在并且有任何表，就不会修改架构。它不会做任何事情来确保数据库架构与实体框架模型兼容。因此，这主要用于在干净的数据库中进行测试。在开发中使用迁移 API。</p>
+</blockquote>
+<hr />
+<p>参考链接：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&lt;% tp.file.cursor(3) %&gt;
+</span></code></pre></div>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260715215301/">
+            <small>技 · 格物札记</small>
+            <strong>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260408092240/">
+            <small>技 · 格物札记</small>
+            <strong>把 AI 这些名词一次讲明白</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260326204122/">
+            <small>技 · 格物札记</small>
+            <strong>IELTS-Academic-TestOne-Listening-PartOne</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../%E3%80%90%E7%BF%BB%E8%AF%91%E6%90%AC%E8%BF%90%E3%80%91%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%97%B6%E4%BB%A3%EF%BC%9A%E5%88%A4%E6%96%AD%E5%8A%9B%E5%87%8C%E9%A9%BE%E4%BA%8E%E6%8A%80%E6%9C%AF%E6%8A%80%E8%83%BD%E4%B9%8B%E4%B8%8A_20250603200642/"><small>← 更新一篇</small><strong>AI and the Rise of Judgement Over Technical Skill</strong></a>
+    
+    
+      <a href="../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3_20250602081610/"><small>更早一篇 →</small><strong>人工智能相关</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000学习笔记目录/">继续逛格物札记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

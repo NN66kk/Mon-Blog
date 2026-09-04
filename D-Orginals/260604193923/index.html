@@ -1,0 +1,997 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="这套 Obsidian 记账系统以 YAML 中的 Consum 字段为核心，通过 QuickAdd 快捷录入消费，JavaScript 自动累加金额并写入日记，Dataview 实时展示预算进度，Tracker 跨日统计生成消费趋势图，实现轻量化、可扩展的个人财务管理。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/D-Orginals/260604193923/">
+      
+      
+        <link rel="prev" href="../260508204650/">
+      
+      
+        <link rel="next" href="../260610193423/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Obsidian 记账系统原理与应用场景 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="Obsidian 记账系统原理与应用场景 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="这套 Obsidian 记账系统以 YAML 中的 Consum 字段为核心，通过 QuickAdd 快捷录入消费，JavaScript 自动累加金额并写入日记，Dataview 实时展示预算进度，Tracker 跨日统计生成消费趋势图，实现轻量化、可扩展的个人财务管理。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/D-Orginals/260604193923/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Obsidian 记账系统原理与应用场景 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="这套 Obsidian 记账系统以 YAML 中的 Consum 字段为核心，通过 QuickAdd 快捷录入消费，JavaScript 自动累加金额并写入日记，Dataview 实时展示预算进度，Tracker 跨日统计生成消费趋势图，实现轻量化、可扩展的个人财务管理。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2026-06-04T19:39:23+08:00">
+    <meta property="article:modified_time" content="2026-06-04T19:39:23+08:00">
+    <meta property="article:section" content="原创手记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u539f\u521b\u624b\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2026-06-04T19:39:23+08:00", "datePublished": "2026-06-04T19:39:23+08:00", "description": "\u8fd9\u5957 Obsidian \u8bb0\u8d26\u7cfb\u7edf\u4ee5 YAML \u4e2d\u7684 Consum \u5b57\u6bb5\u4e3a\u6838\u5fc3\uff0c\u901a\u8fc7 QuickAdd \u5feb\u6377\u5f55\u5165\u6d88\u8d39\uff0cJavaScript \u81ea\u52a8\u7d2f\u52a0\u91d1\u989d\u5e76\u5199\u5165\u65e5\u8bb0\uff0cDataview \u5b9e\u65f6\u5c55\u793a\u9884\u7b97\u8fdb\u5ea6\uff0cTracker \u8de8\u65e5\u7edf\u8ba1\u751f\u6210\u6d88\u8d39\u8d8b\u52bf\u56fe\uff0c\u5b9e\u73b0\u8f7b\u91cf\u5316\u3001\u53ef\u6269\u5c55\u7684\u4e2a\u4eba\u8d22\u52a1\u7ba1\u7406\u3002", "headline": "Obsidian \u8bb0\u8d26\u7cfb\u7edf\u539f\u7406\u4e0e\u5e94\u7528\u573a\u666f", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260604193923/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260604193923/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#obsidian" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../../B-Notes/000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        插件分工
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="插件分工">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quickadd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuickAdd：快捷入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JavaScript：写入和累加
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataview：当天进度展示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracker：月度趋势分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        完整流程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用场景
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="应用场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 每日消费预算控制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 食堂和日常小额开销记录
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 月度复盘
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 和日记复盘结合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 低成本扩展个人量化数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        维护和扩展建议
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        当前系统的优点
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="D"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%8E%9F%E5%88%9B%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    D Orginals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000原创文章目录/" aria-label="浏览原创手记全部内容">
+          思 · 原创手记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2026-06-04T19:39:23+08:00">
+          2026-06-04
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">Obsidian 记账系统原理与应用场景</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>这套记账系统把“随手记录消费”和“自动汇总分析”拆成了几层：QuickAdd 负责快捷输入，JavaScript 脚本负责写入日记和累加 YAML，Dataview 负责在日记里即时展示当天进度，Tracker 负责跨日记读取 <code>Consum</code> 字段并生成月度折线图与统计摘要。</p>
+<p>核心思路是：每一天的日记既是明细账，也是当天消费总额的数据源。明细写在 <code>## 每日消费</code> 标题下，汇总金额写在 YAML frontmatter 的 <code>Consum</code> 字段里。这样既保留了人能直接阅读的消费列表，也给 Dataview 和 Tracker 留出了稳定、可计算的数据入口。</p>
+<h2 id="_1">数据结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>每篇日记的 YAML 中有一个 <code>Consum</code> 字段，用来保存当天消费总额：</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nn">---</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">Consum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">37.20</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nn">---</span>
+</span></code></pre></div>
+<p>每条消费明细写在日记正文的 <code>## 每日消费</code> 标题下，格式固定为：</p>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">-</span><span class="w"> </span>[S] 午餐 17.60 元 <span class="ni">#日记/消费</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">-</span><span class="w"> </span>[S] 晚餐 19.60 元 <span class="ni">#日记/消费</span>
+</span></code></pre></div>
+<p>这里有两个数据层级：</p>
+<ul>
+<li><code>Consum</code> 是机器读取的总额，适合 Dataview 和 Tracker 统计。</li>
+<li><code>- [S] ... #日记/消费</code> 是人阅读的明细，适合回顾当天钱花在哪里。</li>
+</ul>
+<h2 id="_2">插件分工<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="quickadd">QuickAdd：快捷入口<a class="headerlink" href="#quickadd" title="Permanent link">&para;</a></h3>
+<p>QuickAdd 提供快捷键或命令入口。触发后，它调用 <code>001-javascript/script/QuickAddConsum.js</code>，脚本弹出输入框，输入格式可以是：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>可口可乐 3
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>午餐 17.6
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>晚餐 19.60 元
+</span></code></pre></div>
+<p>脚本会从输入内容中识别最后一个金额，把前面的文本当作消费描述。这样输入速度比较快，不需要分别填“项目”和“金额”两个字段。</p>
+<h3 id="javascript">JavaScript：写入和累加<a class="headerlink" href="#javascript" title="Permanent link">&para;</a></h3>
+<p><code>QuickAddConsum.js</code> 负责实际的数据更新：</p>
+<ol>
+<li>定位当天日记：<code>002-project/003-日记/YYYY-MM-DD.md</code></li>
+<li>解析输入文本，得到消费描述和金额。</li>
+<li>把消费明细插入到 <code>## 每日消费</code> 区域。</li>
+<li>读取 YAML 中已有的 <code>Consum</code>。</li>
+<li>将本次金额累加进去，并保留两位小数。</li>
+<li>弹出提示，告诉你本次记录和今日累计金额。</li>
+</ol>
+<p>例如输入：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>可口可乐 3
+</span></code></pre></div>
+<p>会写入：</p>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">-</span><span class="w"> </span>[S] 可口可乐 3.00 元 <span class="ni">#日记/消费</span>
+</span></code></pre></div>
+<p>同时把 YAML 从：</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">Consum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">34.20</span>
+</span></code></pre></div>
+<p>更新为：</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">Consum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">37.20</span>
+</span></code></pre></div>
+<h3 id="dataview">Dataview：当天进度展示<a class="headerlink" href="#dataview" title="Permanent link">&para;</a></h3>
+<p>每个日记模板中都有 <code>## 每日消费</code> 的 Dataview 代码块，用来把 <code>Consum</code> 渲染成当天消费进度条：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>```dataview
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>list without id
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>"&lt;div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: -5px;'&gt;" +
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>"&lt;span&gt;💸 消费 &lt;span style='color: var(--text-muted);'&gt;📉 " + regexreplace(currencyformat(round((Consum/50)*100, 2), "CNY"), "[^0-9.-]", "") + "%&lt;/span&gt;&lt;/span&gt;" +
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>"&lt;span style='display: flex;'&gt;" +
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    "&lt;span style='width: 100px;'&gt;💰 " + regexreplace(currencyformat(round(Consum, 2), "CNY"), "[^0-9.-]", "") + " 元&lt;/span&gt;" +
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    "&lt;span style='width: 100px; color: var(--text-muted);'&gt;🔴 " + regexreplace(currencyformat(round(50 - Consum, 2), "CNY"), "[^0-9.-]", "") + " 元&lt;/span&gt;" +
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>"&lt;/span&gt;" +
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>"&lt;/div&gt;" +
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>"&lt;progress value='" + Consum + "' max='50' style='width: 100%;'&gt;&lt;/progress&gt;"
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>where file.path = this.file.path
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>```
+</span></code></pre></div>
+<p>这里的 <code>50</code> 是每日预算上限。Dataview 会读取当前日记的 <code>Consum</code>，展示：</p>
+<ul>
+<li>当前消费占预算的百分比</li>
+<li>已消费金额</li>
+<li>剩余金额</li>
+<li>HTML 进度条</li>
+</ul>
+<p>为了让整数也显示成两位小数，模板中使用了：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>```dataview
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>regexreplace(currencyformat(round(Consum, 2), "CNY"), "[^0-9.-]", "")
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>```
+</span></code></pre></div>
+<p>它的作用是先把数字按人民币格式转成固定两位小数，再去掉货币符号，只保留数字文本。因此 <code>16</code> 会显示为 <code>16.00</code>，<code>16.5</code> 会显示为 <code>16.50</code>。</p>
+<h3 id="tracker">Tracker：月度趋势分析<a class="headerlink" href="#tracker" title="Permanent link">&para;</a></h3>
+<p>Tracker 不读取正文里的消费明细，而是读取每篇日记 YAML 中的 <code>Consum</code> 字段。图表笔记中的消费折线图配置大致如下：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>```tracker
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>searchType: frontmatter
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>searchTarget: Consum
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>folder: 002-project/003-日记
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>startDate: 2026-06-01
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>endDate:
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>line:
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    title: "月消费额度折线图"
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    xAxisLabel: 日期
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    yAxisLabel: 额度
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    xAxisTickLabelFormat: D号
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    lineColor: grey
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>```
+</span></code></pre></div>
+<p>这段配置表示：</p>
+<ul>
+<li>从 <code>002-project/003-日记</code> 文件夹中读取日记。</li>
+<li>在每篇日记的 frontmatter 中查找 <code>Consum</code>。</li>
+<li>按日期生成月消费折线图。</li>
+<li>横轴显示日期，纵轴显示消费额度。</li>
+</ul>
+<p>同一篇图表笔记中还可以使用 Tracker 的 <code>summary</code> 统计：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>searchType: frontmatter
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>searchTarget: Consum
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>folder: 002-project/003-日记
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>startDate: 2026-06-01
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>endDate:
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>summary:
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    template: "总共：{{sum()}} 元；平均每天：{{average()}} 元\n最低：{{min()}} 元；最高：{{max()}} 元\n"
+</span></code></pre></div>
+<p>这样就能看到本月总消费、日均消费、最低值和最高值。</p>
+<h2 id="_3">完整流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    A["按快捷键触发 QuickAdd"] --&gt; B["输入消费文本，例如：午餐 17.6"]
+    B --&gt; C["QuickAdd 调用 JS 脚本"]
+    C --&gt; D["脚本定位今日日记"]
+    D --&gt; E["写入 ## 每日消费 明细"]
+    E --&gt; F["累加 YAML: Consum"]
+    F --&gt; G["Dataview 刷新当天进度条"]
+    F --&gt; H["Tracker 读取多篇日记的 Consum"]
+    H --&gt; I["生成月度折线图和统计摘要"]</code></pre>
+<p>这条链路的关键点是：<code>Consum</code> 是整个系统的中枢字段。QuickAdd 脚本负责写它，Dataview 负责显示它，Tracker 负责跨文件分析它。</p>
+<h2 id="_4">应用场景<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 每日消费预算控制<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>在日记中直接看到当天已经花了多少钱、还剩多少钱。适合设置一个固定日预算，例如 50 元或 100 元。消费越接近上限，进度条越明显，能在当天及时提醒自己收手。</p>
+<h3 id="2">2. 食堂和日常小额开销记录<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>系统适合记录高频、小额、容易遗忘的消费，例如早餐、午餐、晚餐、饮料、打印、快递、水果等。输入只需要一行文本，比打开专门记账 App 更轻。</p>
+<h3 id="3">3. 月度复盘<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>Tracker 可以把每天的 <code>Consum</code> 连成折线图。通过折线图可以快速看到哪几天花得异常多，哪几天控制得比较好，也可以配合 summary 看总额、平均值、最高值和最低值。</p>
+<h3 id="4">4. 和日记复盘结合<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>消费明细放在日记正文里，旁边通常也有当天的时间线和任务记录。月底复盘时，不只能看到“花了多少钱”，还可以回到当天日记，看当时为什么花了这笔钱。</p>
+<h3 id="5">5. 低成本扩展个人量化数据<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p>这套模式不只适合消费，也可以扩展到体重、学习时间、运动时间、睡眠时间等字段。只要遵循同样结构：把当天总量写进 YAML，再用 Dataview 做当日展示，用 Tracker 做跨日趋势分析，就能形成一套统一的个人数据面板。</p>
+<h2 id="_5">维护和扩展建议<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>如果要修改每日预算，优先修改 7 个日记模板中 <code>Consum/50</code>、<code>50 - Consum</code> 和 <code>&lt;progress max='50'&gt;</code> 里的 <code>50</code>。</li>
+<li>如果某天预算不同，可以在当天日记里单独改成 <code>50</code>，例如 <code>2026-06-04.md</code> 中的消费进度就是按 50 元预算展示。</li>
+<li>如果 Tracker 图表不显示，先检查日记 YAML 中是否有 <code>Consum</code>，再检查 <code>folder</code> 是否指向 <code>002-project/003-日记</code>。</li>
+<li>如果 QuickAdd 没有写入，检查当天日记是否已经创建，并确认日记里存在 <code>## 每日消费</code> 标题。</li>
+<li>如果想做分类统计，可以在消费描述中固定写关键词，例如 <code>早餐</code>、<code>午餐</code>、<code>晚餐</code>、<code>饮料</code>，以后再用 Dataview 或 DataviewJS 按标签/关键词聚合。</li>
+</ul>
+<h2 id="_6">当前系统的优点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ul>
+<li>输入轻：快捷键触发，一行文本完成记录。</li>
+<li>数据稳：总额落在 YAML 的 <code>Consum</code> 字段中，方便插件读取。</li>
+<li>明细清楚：每条消费都保留在日记正文里。</li>
+<li>展示即时：Dataview 直接在当天日记里显示进度。</li>
+<li>趋势清晰：Tracker 可以生成月度折线图和统计摘要。</li>
+<li>可迁移：所有数据都是 Markdown 和 YAML，不依赖封闭数据库。</li>
+</ul>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260814185045/">
+            <small>思 · 原创手记</small>
+            <strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805095251/">
+            <small>思 · 原创手记</small>
+            <strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805092845/">
+            <small>思 · 原创手记</small>
+            <strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../260610193423/"><small>← 更新一篇</small><strong>一文讲懂 Skill 和 Agent 的区别与联系</strong></a>
+    
+    
+      <a href="../260508204650/"><small>更早一篇 →</small><strong>Obsidian 中按星期自动切换日记模板的实现方案</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000原创文章目录/">继续逛原创手记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

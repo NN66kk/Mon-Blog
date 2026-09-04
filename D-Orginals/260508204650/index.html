@@ -1,0 +1,941 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="文章介绍了如何利用 Templater 将 Obsidian 日记模板改造成“模板路由器”，实现按星期自动切换不同日记模板，同时保留 Calendar 原有的使用体验与扩展性。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/D-Orginals/260508204650/">
+      
+      
+        <link rel="prev" href="../260419093410/">
+      
+      
+        <link rel="next" href="../260604193923/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Obsidian 中按星期自动切换日记模板的实现方案 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="Obsidian 中按星期自动切换日记模板的实现方案 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="文章介绍了如何利用 Templater 将 Obsidian 日记模板改造成“模板路由器”，实现按星期自动切换不同日记模板，同时保留 Calendar 原有的使用体验与扩展性。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/D-Orginals/260508204650/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Obsidian 中按星期自动切换日记模板的实现方案 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="文章介绍了如何利用 Templater 将 Obsidian 日记模板改造成“模板路由器”，实现按星期自动切换不同日记模板，同时保留 Calendar 原有的使用体验与扩展性。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2026-05-08T20:46:50+08:00">
+    <meta property="article:modified_time" content="2026-05-08T20:46:50+08:00">
+    <meta property="article:section" content="原创手记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u539f\u521b\u624b\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2026-05-08T20:46:50+08:00", "datePublished": "2026-05-08T20:46:50+08:00", "description": "\u6587\u7ae0\u4ecb\u7ecd\u4e86\u5982\u4f55\u5229\u7528 Templater \u5c06 Obsidian \u65e5\u8bb0\u6a21\u677f\u6539\u9020\u6210\u201c\u6a21\u677f\u8def\u7531\u5668\u201d\uff0c\u5b9e\u73b0\u6309\u661f\u671f\u81ea\u52a8\u5207\u6362\u4e0d\u540c\u65e5\u8bb0\u6a21\u677f\uff0c\u540c\u65f6\u4fdd\u7559 Calendar \u539f\u6709\u7684\u4f7f\u7528\u4f53\u9a8c\u4e0e\u6269\u5c55\u6027\u3002", "headline": "Obsidian \u4e2d\u6309\u661f\u671f\u81ea\u52a8\u5207\u6362\u65e5\u8bb0\u6a21\u677f\u7684\u5b9e\u73b0\u65b9\u6848", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260508204650/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260508204650/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#obsidian" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../../B-Notes/000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最终效果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calendar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么不直接改 Calendar 插件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文件结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        日记模板路由器
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obsidian_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        保持 Obsidian 配置不变
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        处理日期占位符兼容问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证方式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        这个方案的优点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        可继续扩展的方向
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="D"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%8E%9F%E5%88%9B%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    D Orginals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000原创文章目录/" aria-label="浏览原创手记全部内容">
+          思 · 原创手记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2026-05-08T20:46:50+08:00">
+          2026-05-08
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">Obsidian 中按星期自动切换日记模板的实现方案</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>在 Obsidian 里，很多人会用 Calendar 插件点击当天日期，然后自动创建一篇日记。这个流程非常顺手，但默认情况下 Daily Notes 或 Periodic Notes 只能配置一个固定模板。</p>
+<p>如果每天的节奏不同，比如周一适合做周计划，周五适合做复盘，周末适合记录休息和生活，就会遇到一个问题：点击 Calendar 日期时，如何自动调用周一到周日不同的日记模板？</p>
+<p>这篇文章记录一个不修改插件源码的实现方案：保留 Calendar 原本的点击体验，用 Templater 把原来的日记模板改造成一个“模板路由器”，再根据日记文件名中的日期分发到对应的星期模板。</p>
+<h2 id="_1">最终效果<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>实现后，原来的使用方式不变：</p>
+<ol>
+<li>在 Calendar 插件中点击某一天。</li>
+<li>Obsidian 创建对应日期的日记文件，例如 <code>2026-05-08.md</code>。</li>
+<li>Templater 在文件创建时自动执行。</li>
+<li>根据文件名判断这一天是星期几。</li>
+<li>自动插入对应的模板，比如周五就插入 <code>日记-周五.md</code>。</li>
+</ol>
+<p>也就是说，用户层面的操作仍然是“点日期，生成日记”，但底层模板已经可以按周一到周日自动分流。</p>
+<h2 id="calendar">为什么不直接改 Calendar 插件<a class="headerlink" href="#calendar" title="Permanent link">&para;</a></h2>
+<p>Calendar 插件本身的职责是创建或打开日期笔记，它通常会读取 Daily Notes 或 Periodic Notes 的配置。直接修改插件逻辑当然也能做到多模板，但有几个明显问题：</p>
+<ul>
+<li>插件升级后修改容易被覆盖。</li>
+<li>插件源码维护成本更高。</li>
+<li>这类需求本质上是模板选择逻辑，放在模板系统里更合适。</li>
+<li>Templater 已经提供了日期解析、文件 include、文件创建触发等能力。</li>
+</ul>
+<p>所以更稳妥的方式是让 Calendar 继续指向同一个模板入口，然后由这个入口模板决定真正要加载哪一个子模板。</p>
+<h2 id="_2">文件结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>原来的通用日记模板是：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>005-template/日记.md
+</span></code></pre></div>
+<p>现在把它改成路由入口，并新增七个星期模板：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>005-template/日记.md
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>005-template/日记-周一.md
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>005-template/日记-周二.md
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>005-template/日记-周三.md
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>005-template/日记-周四.md
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>005-template/日记-周五.md
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>005-template/日记-周六.md
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>005-template/日记-周日.md
+</span></code></pre></div>
+<p>七个星期模板初始内容可以全部从原来的 <code>日记.md</code> 复制。之后再逐步定制即可，比如：</p>
+<ul>
+<li>周一模板增加周计划。</li>
+<li>周三模板增加阶段检查。</li>
+<li>周五模板增加本周复盘。</li>
+<li>周六、周日模板增加休息、运动、生活记录。</li>
+</ul>
+<h2 id="_3">日记模板路由器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>新的 <code>005-template/日记.md</code> 不再保存完整日记内容，而是只保存一段 Templater 脚本：</p>
+<div class="language-md highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&lt;%*
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>const templatesByIsoWeekday = {
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  1: "005-template/日记-周一",
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  2: "005-template/日记-周二",
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  3: "005-template/日记-周三",
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  4: "005-template/日记-周四",
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  5: "005-template/日记-周五",
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  6: "005-template/日记-周六",
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  7: "005-template/日记-周日",
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>};
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>const date = moment(tp.file.title, "YYYY-MM-DD", true);
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>const weekday = date.isValid() ? date.isoWeekday() : moment().isoWeekday();
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>tR += await tp.file.include("[" + "[" + templatesByIsoWeekday[weekday] + "]" + "]");
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>%&gt;
+</span></code></pre></div>
+<p>这段代码的核心点有三个。</p>
+<p>第一，<code>tp.file.title</code> 是当前日记文件名。Daily Notes 的文件名格式是 <code>YYYY-MM-DD</code>，例如 <code>2026-05-08</code>。</p>
+<p>第二，<code>moment(tp.file.title, "YYYY-MM-DD", true)</code> 会严格按日期格式解析文件名。解析成功后，用 <code>isoWeekday()</code> 得到星期数字：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>1 = 周一
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>2 = 周二
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>3 = 周三
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>4 = 周四
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>5 = 周五
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>6 = 周六
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>7 = 周日
+</span></code></pre></div>
+<p>第三，<code>tp.file.include()</code> 会把对应模板的内容插入到当前日记中，并继续解析被 include 模板里的 Templater 语法。</p>
+<p>这样 Calendar 仍然只知道一个模板入口，但 Templater 会在创建日记时自动完成二次分发。</p>
+<h2 id="obsidian_1">保持 Obsidian 配置不变<a class="headerlink" href="#obsidian_1" title="Permanent link">&para;</a></h2>
+<p>这个方案不需要修改 Daily Notes、Periodic Notes 或 Calendar 的配置。</p>
+<p>Daily Notes 仍然指向原来的模板入口：</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YYYY-MM-DD"</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">"folder"</span><span class="p">:</span><span class="w"> </span><span class="s2">"002-project/003-日记"</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"005-template/日记"</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Periodic Notes 中的 daily template 也继续指向：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>005-template/日记.md
+</span></code></pre></div>
+<p>Templater 需要开启文件创建时自动执行：</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">"trigger_on_file_creation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span></code></pre></div>
+<p>如果这个选项没有开启，Calendar 创建日记后只会插入模板源码，不会自动执行路由逻辑。</p>
+<h2 id="_4">处理日期占位符兼容问题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>原模板里可能会有 Calendar 或 Daily Notes 风格的日期占位符，比如：</p>
+<div class="language-md highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>{{DATE: YYYY-MM-DD-ddd}}
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>{{date:YYYY-MM-DD}}
+</span></code></pre></div>
+<p>当它们直接存在于 Daily Notes 模板里时，Obsidian 或相关插件可能会替换它们。但现在七个星期模板是通过 <code>tp.file.include()</code> 间接插入的，所以更稳妥的做法是统一改成 Templater 表达式。</p>
+<p>替换前：</p>
+<div class="language-md highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[<span class="nt">{{DATE: YYYY-MM-DD-ddd}}</span>](<span class="na">待处理任务-202401201627</span>)
+</span></code></pre></div>
+<p>替换后：</p>
+<div class="language-md highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[<span class="nt">&lt;% tp.date.now("YYYY-MM-DD-ddd", 0, tp.file.title, "YYYY-MM-DD") %&gt;</span>](<span class="na">待处理任务-202401201627</span>)
+</span></code></pre></div>
+<p>替换前：</p>
+<div class="language-md highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>due before {{date:YYYY-MM-DD}}
+</span></code></pre></div>
+<p>替换后：</p>
+<div class="language-md highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>due before &lt;% tp.date.now("YYYY-MM-DD", 0, tp.file.title, "YYYY-MM-DD") %&gt;
+</span></code></pre></div>
+<p>这里关键是传入 <code>tp.file.title</code> 作为参考日期。否则模板会使用当前真实日期，而不是 Calendar 中被点击的那一天。</p>
+<p>例如今天是 2026-05-08，但你点击 Calendar 里的 2026-05-04，如果不使用 <code>tp.file.title</code>，模板里的日期就可能错用今天。</p>
+<h2 id="_5">验证方式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>可以用一周连续日期验证路由是否正确：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>2026-05-04 -&gt; 周一 -&gt; 日记-周一.md
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>2026-05-05 -&gt; 周二 -&gt; 日记-周二.md
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>2026-05-06 -&gt; 周三 -&gt; 日记-周三.md
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>2026-05-07 -&gt; 周四 -&gt; 日记-周四.md
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>2026-05-08 -&gt; 周五 -&gt; 日记-周五.md
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>2026-05-09 -&gt; 周六 -&gt; 日记-周六.md
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>2026-05-10 -&gt; 周日 -&gt; 日记-周日.md
+</span></code></pre></div>
+<p>生成日记后重点检查三件事：</p>
+<ol>
+<li>内容是否来自对应星期模板。</li>
+<li>文件中是否还残留 <code>{{date:...}}</code> 或 <code>{{DATE:...}}</code>。</li>
+<li>Tasks、Dataview、Buttons、QuickAdd 等代码块是否仍按原样工作。</li>
+</ol>
+<p>如果七天都能正确生成，就说明路由逻辑已经稳定。</p>
+<h2 id="_6">这个方案的优点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>这个实现的好处是足够轻量：</p>
+<ul>
+<li>不修改 Calendar 插件源码。</li>
+<li>不修改 Periodic Notes 插件源码。</li>
+<li>不改变原来的 Calendar 点击流程。</li>
+<li>后续维护时只需要编辑七个普通 Markdown 模板。</li>
+<li>可以渐进式定制，先复制原模板，再慢慢修改不同星期的内容。</li>
+</ul>
+<p>它也比较适合迁移已有知识库，因为历史日记不会受到影响。只有之后新建的日记会走新的路由逻辑。</p>
+<h2 id="_7">可继续扩展的方向<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>有了这个路由入口后，还可以继续扩展更多规则。例如：</p>
+<ul>
+<li>工作日和周末使用不同模板。</li>
+<li>每月第一天使用月计划模板。</li>
+<li>每周最后一天自动插入周复盘模块。</li>
+<li>根据文件夹或标签使用不同模板。</li>
+<li>遇到特殊日期时加载节假日模板。</li>
+</ul>
+<p>这些都可以在 <code>日记.md</code> 这个入口模板中继续扩展。核心思路不变：让创建日记的插件保持简单，把复杂的模板选择逻辑交给 Templater。</p>
+<h2 id="_8">总结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>Obsidian 的插件体系很灵活，但很多时候不需要改插件源码。对于“Calendar 点击日期后按星期使用不同日记模板”这样的需求，最稳的实现方式是：</p>
+<ol>
+<li>Calendar 继续指向同一个日记模板。</li>
+<li>把这个模板改成 Templater 路由入口。</li>
+<li>用日记文件名解析星期几。</li>
+<li>通过 <code>tp.file.include()</code> 插入对应的周一到周日模板。</li>
+<li>把子模板里的日期占位符统一改成基于 <code>tp.file.title</code> 的 Templater 表达式。</li>
+</ol>
+<p>这样既保留了原来的操作手感，又让日记系统具备了按星期自动变化的能力。</p>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260814185045/">
+            <small>思 · 原创手记</small>
+            <strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805095251/">
+            <small>思 · 原创手记</small>
+            <strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805092845/">
+            <small>思 · 原创手记</small>
+            <strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../260604193923/"><small>← 更新一篇</small><strong>Obsidian 记账系统原理与应用场景</strong></a>
+    
+    
+      <a href="../260419093410/"><small>更早一篇 →</small><strong>RAG 与 LLM Wiki</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000原创文章目录/">继续逛原创手记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

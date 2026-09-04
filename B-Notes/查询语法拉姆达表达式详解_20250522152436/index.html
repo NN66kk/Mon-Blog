@@ -1,0 +1,1004 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="在现代 C# 开发中，Lambda 表达式已经成为一种不可或缺的工具，尤其在处理集合数据时，它能够显著提升代码的简洁性和可读性。本文将深入探讨 Lambda 表达式的语法结构、使用时的关键注意事项，并详细介绍常用的数组及 LINQ 集合操作方法，最后通过对比展示 Lambda 表达式的优势。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E6%8B%89%E5%A7%86%E8%BE%BE%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%A6%E8%A7%A3_20250522152436/">
+      
+      
+        <link rel="prev" href="../%E6%9C%BA%E6%A2%B0%E8%A1%A8%E8%B0%83%E6%95%B4%E6%95%99%E7%A8%8B_20240705105722/">
+      
+      
+        <link rel="next" href="../%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93_20250414082121/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>查询语法拉姆达表达式详解 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="查询语法拉姆达表达式详解 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="在现代 C# 开发中，Lambda 表达式已经成为一种不可或缺的工具，尤其在处理集合数据时，它能够显著提升代码的简洁性和可读性。本文将深入探讨 Lambda 表达式的语法结构、使用时的关键注意事项，并详细介绍常用的数组及 LINQ 集合操作方法，最后通过对比展示 Lambda 表达式的优势。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E6%8B%89%E5%A7%86%E8%BE%BE%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%A6%E8%A7%A3_20250522152436/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="查询语法拉姆达表达式详解 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="在现代 C# 开发中，Lambda 表达式已经成为一种不可或缺的工具，尤其在处理集合数据时，它能够显著提升代码的简洁性和可读性。本文将深入探讨 Lambda 表达式的语法结构、使用时的关键注意事项，并详细介绍常用的数组及 LINQ 集合操作方法，最后通过对比展示 Lambda 表达式的优势。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2025-05-22T15:24:00">
+    <meta property="article:modified_time" content="2025-05-22T15:24:00">
+    <meta property="article:section" content="格物札记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u683c\u7269\u672d\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2025-05-22T15:24:00", "datePublished": "2025-05-22T15:24:00", "description": "\u5728\u73b0\u4ee3 C# \u5f00\u53d1\u4e2d\uff0cLambda \u8868\u8fbe\u5f0f\u5df2\u7ecf\u6210\u4e3a\u4e00\u79cd\u4e0d\u53ef\u6216\u7f3a\u7684\u5de5\u5177\uff0c\u5c24\u5176\u5728\u5904\u7406\u96c6\u5408\u6570\u636e\u65f6\uff0c\u5b83\u80fd\u591f\u663e\u8457\u63d0\u5347\u4ee3\u7801\u7684\u7b80\u6d01\u6027\u548c\u53ef\u8bfb\u6027\u3002\u672c\u6587\u5c06\u6df1\u5165\u63a2\u8ba8 Lambda \u8868\u8fbe\u5f0f\u7684\u8bed\u6cd5\u7ed3\u6784\u3001\u4f7f\u7528\u65f6\u7684\u5173\u952e\u6ce8\u610f\u4e8b\u9879\uff0c\u5e76\u8be6\u7ec6\u4ecb\u7ecd\u5e38\u7528\u7684\u6570\u7ec4\u53ca LINQ \u96c6\u5408\u64cd\u4f5c\u65b9\u6cd5\uff0c\u6700\u540e\u901a\u8fc7\u5bf9\u6bd4\u5c55\u793a Lambda \u8868\u8fbe\u5f0f\u7684\u4f18\u52bf\u3002", "headline": "\u67e5\u8be2\u8bed\u6cd5\u62c9\u59c6\u8fbe\u8868\u8fbe\u5f0f\u8be6\u89e3", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E6%8B%89%E5%A7%86%E8%BE%BE%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%A6%E8%A7%A3_20250522152436/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E6%8B%89%E5%A7%86%E8%BE%BE%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%A6%E8%A7%A3_20250522152436/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../../D-Orginals/000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lambda 表达式语法解析
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambda_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lambda 表达式的使用注意事项
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用的数组和集合操作方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="常用的数组和集合操作方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Array 类方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LINQ 扩展方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambda-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优势对比：Lambda 表达式 vs. 传统方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="B"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    B Notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000学习笔记目录/" aria-label="浏览格物札记全部内容">
+          技 · 格物札记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2025-05-22T15:24:00">
+          2025-05-22
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">查询语法拉姆达表达式详解</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>在现代 C# 开发中，Lambda 表达式已经成为一种不可或缺的工具，尤其在处理集合数据时，它能够显著提升代码的简洁性和可读性。本文将深入探讨 Lambda 表达式的语法结构、使用时的关键注意事项，并详细介绍常用的数组及 LINQ 集合操作方法，最后通过对比展示 Lambda 表达式的优势。</p>
+<h3 id="lambda">Lambda 表达式语法解析<a class="headerlink" href="#lambda" title="Permanent link">&para;</a></h3>
+<p>Lambda 表达式提供了一种简洁的方式来创建匿名函数。它们可以直接在需要委托类型参数的方法中使用。让我们通过一个具体的例子来理解其语法：</p>
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">strLists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Visual C#"</span><span class="p">,</span><span class="w"> </span><span class="s">"C# Express"</span><span class="p">,</span><span class="w"> </span><span class="s">"ASP.NET"</span><span class="p">,</span><span class="w"> </span><span class="s">"Java"</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">strList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">FindAll</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s">"C#"</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">// strList 将包含 {"Visual C#", "C# Express"}</span>
+</span></code></pre></div>
+<p>上述代码中，<code>Array.FindAll</code> 方法用于在 <code>strLists</code> 数组中查找所有包含子字符串 "C#" 的元素。其中，Lambda 表达式 <code>s =&gt; (s.IndexOf("C#") &gt;= 0)</code> 的语法结构解析如下：</p>
+<ol>
+<li>
+<p><strong>参数部分</strong> <code>s</code>：代表传递给 Lambda 表达式的输入参数。在这个场景下，<code>s</code> 依次代表数组 <code>strLists</code> 中的每一个字符串元素。如果 Lambda 表达式有多个参数，则参数列表需要用括号括起来，例如 <code>(x, y) =&gt; x + y</code>。如果 Lambda 表达式没有参数，则使用空括号 <code>() =&gt; Console.WriteLine("No parameters")</code>。</p>
+</li>
+<li>
+<p><strong>Lambda 运算符</strong> <code>=&gt;</code>：读作"goes to"或"becomes"。它是一个分隔符，用于分隔左侧的参数列表和右侧的表达式主体。</p>
+</li>
+<li>
+<p><strong>表达式主体</strong> <code>(s.IndexOf("C#") &gt;= 0)</code>：这是 Lambda 表达式要执行的逻辑。</p>
+</li>
+</ol>
+<p><code>s.IndexOf("C#")</code>：调用字符串 <code>s</code> 的 <code>IndexOf</code> 方法，查找子字符串 "C#" 在 <code>s</code> 中首次出现的位置。</p>
+<p>如果找到了 "C#"，<code>IndexOf</code> 方法返回其在字符串 <code>s</code> 中的起始索引（一个大于或等于 0 的整数）。</p>
+<p>如果未找到 "C#"，<code>IndexOf</code> 方法返回 -1。</p>
+<p><code>&gt;= 0</code>：这是一个条件判断，检查 <code>IndexOf</code> 方法的返回值是否大于或等于 0。如果为 <code>true</code>，则表示字符串 <code>s</code> 中包含 "C#"；如果为 <code>false</code>，则表示不包含。</p>
+<p>在 <code>Array.FindAll()</code> 方法的上下文中，这个 Lambda 表达式充当了一个谓词函数（Predicate）。<code>Array.FindAll</code> 会遍历数组中的每个元素，并将每个元素作为参数 <code>s</code> 传递给这个 Lambda 表达式。只有当 Lambda 表达式对某个元素返回 <code>true</code> 时，该元素才会被包含在最终的结果数组中。</p>
+<h3 id="lambda_1">Lambda 表达式的使用注意事项<a class="headerlink" href="#lambda_1" title="Permanent link">&para;</a></h3>
+<p>虽然 Lambda 表达式提供了极大的便利性，但在使用过程中，也需要了解并遵守一些重要的规则和限制，以避免潜在的问题和错误：</p>
+<ol>
+<li><strong>变量范围与生命周期（闭包特性）</strong>：<br />
+Lambda 表达式可以捕获其定义范围内的外部变量（称为“闭包”）。被捕获的变量的生命周期会延长，直到引用该变量的委托（即 Lambda 表达式实例）不再被引用并符合垃圾回收的条件。</li>
+</ol>
+<p><strong>通俗解释</strong>：当你在 Lambda 表达式中使用了其外部方法中定义的局部变量时，即使外部方法已经执行完毕，只要这个 Lambda 表达式还可能被调用，那么这些被捕获的外部变量就会一直存在于内存中，不会被系统立即回收。这是因为 Lambda 表达式可能在稍后的某个时间点需要访问这些变量的值。</p>
+<ol>
+<li><strong>变量作用域隔离</strong>：<br />
+在外部方法中无法直接访问 Lambda 表达式内部定义的变量。Lambda 表达式有其自己的作用域。</li>
+</ol>
+<p><strong>通俗解释</strong>：如果你在 Lambda 表达式的 <code>{}</code>（如果是语句块形式的 Lambda）内部声明了一个新的变量，那么这个变量只在 Lambda 表达式内部可见和可用。外部代码，包括定义该 Lambda 的方法，都无法直接使用或看到这个内部变量。</p>
+<ol>
+<li><strong>参数传递（<code>out</code> 和 <code>ref</code> 参数的捕获）</strong>：<br />
+Lambda 表达式不能直接捕获 <code>ref</code> 或 <code>out</code> 参数。如果需要操作这类参数，通常需要将它们的值赋给一个局部变量，然后捕获这个局部变量。</li>
+</ol>
+<p><strong>通俗解释</strong>：Lambda 表达式在设计上不直接支持从包含它的方法中捕获标记为 "out" 或 "ref" 的参数。如果你的 Lambda 需要与这类参数交互，你需要先将 <code>out</code> 或 <code>ref</code> 参数的值读取到一个普通的局部变量中，然后在 Lambda 中使用这个局部变量。对这个局部变量的修改不会直接影响原始的 <code>out</code> 或 <code>ref</code> 参数，除非你有其他机制将修改后的值写回。<br />
+<em>(原始描述中关于“直接抽取 out 参数”的说法可能存在歧义，这里做了更精确的澄清。通常情况下，直接捕获并修改 <code>out</code> 或 <code>ref</code> 参数是不被允许的，因为 Lambda 的执行时机可能与外部方法参数的生命周期不一致，可能导致未定义行为。)</em></p>
+<ol>
+<li><strong>返回语句行为</strong>：<br />
+Lambda 表达式中的 <code>return</code> 语句只会从 Lambda 表达式自身返回一个值或控制流，并不会导致包含该 Lambda 的外部方法返回。</li>
+</ol>
+<p><strong>通俗解释</strong>：如果你的 Lambda 表达式包含一个 <code>return</code> 语句，这个 <code>return</code> 的作用是结束当前 Lambda 表达式的执行，并（如果 Lambda 表达式需要返回值）返回一个结果给调用该 Lambda 的代码（例如 <code>Array.FindAll</code> 或 <code>List.Where</code>）。它不会影响到定义这个 Lambda 的外部方法的执行流程；外部方法会继续执行 <code>return</code> 语句之后的代码，直到遇到它自己的 <code>return</code> 语句或执行完毕。</p>
+<ol>
+<li><strong>跳转语句限制</strong>：<br />
+Lambda 表达式不能包含 <code>goto</code>、<code>break</code> 或 <code>continue</code> 语句，如果这些语句的目标位于 Lambda 表达式主体之外。</li>
+</ol>
+<p><strong>通俗解释</strong>：你不能在 Lambda 表达式内部使用 <code>goto</code> 来跳转到 Lambda 外面的某个标签，也不能使用 <code>break</code> 或 <code>continue</code> 来跳出或继续 Lambda 外部的循环。这些跳转语句的控制流必须限制在 Lambda 表达式自身的代码块内部。例如，你可以在 Lambda 内部的一个循环中使用 <code>break</code> 来跳出这个内部循环，但不能用它来跳出包含该 Lambda 的外部方法的循环。</p>
+<p>理解并遵守这些注意事项对于正确、高效地使用 Lambda 表达式至关重要。它们揭示了 Lambda 表达式虽然语法简洁且常以内联形式出现，但其行为更接近于一个独立的函数单元，拥有自己的作用域和执行规则。</p>
+<h3 id="_2">常用的数组和集合操作方法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>Lambda 表达式的威力在与集合操作方法结合时表现得淋漓尽致。C# 提供了丰富的内置方法来处理数组和各种集合类型，这些方法通常接受一个委托参数，而 Lambda 表达式正是创建这些委托实例的理想方式。</p>
+<h4 id="array">Array 类方法<a class="headerlink" href="#array" title="Permanent link">&para;</a></h4>
+<p><code>System.Array</code> 类提供了一系列静态方法，用于对数组进行查找、判断和转换等操作。许多这类方法都接受一个 <code>Predicate&lt;T&gt;</code> 委托作为参数，该委托定义了确定元素是否满足特定条件的方法。</p>
+<ol>
+<li><strong><code>Array.Find&lt;T&gt;(T[] array, Predicate&lt;T&gt; match)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：在数组中搜索满足指定谓词所定义条件的元素，并返回第一个匹配项。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">strLists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"C# Language"</span><span class="p">,</span><span class="w"> </span><span class="s">"Java Language"</span><span class="p">,</span><span class="w"> </span><span class="s">"Python Script"</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kt">string</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// result 将是 "C# Language"</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Array.FindAll&lt;T&gt;(T[] array, Predicate&lt;T&gt; match)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：检索数组中所有满足指定谓词所定义条件的元素。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">strLists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Visual C#"</span><span class="p">,</span><span class="w"> </span><span class="s">"C# Express"</span><span class="p">,</span><span class="w"> </span><span class="s">"ASP.NET"</span><span class="p">,</span><span class="w"> </span><span class="s">"Java"</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">FindAll</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">// results 将是 {"Visual C#", "C# Express"}</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Array.FindIndex&lt;T&gt;(T[] array, Predicate&lt;T&gt; match)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：在数组中搜索满足指定谓词所定义条件的元素，并返回第一个匹配项的从零开始的索引。如果未找到，则返回 -1。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">FindIndex</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"ASP.NET"</span><span class="p">));</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1">// index 将是 2</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Array.FindLast&lt;T&gt;(T[] array, Predicate&lt;T&gt; match)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：在数组中搜索满足指定谓词所定义条件的元素，并返回最后一个匹配项。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">strLists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">"Old C# Code"</span><span class="p">,</span><span class="w"> </span><span class="s">"New C# Code"</span><span class="p">,</span><span class="w"> </span><span class="s">"Future C#"</span><span class="w"> </span><span class="p">};</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kt">string</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">FindLast</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">// result 将是 "Future C#"</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Array.FindLastIndex&lt;T&gt;(T[] array, Predicate&lt;T&gt; match)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：在数组中搜索满足指定谓词所定义条件的元素，并返回最后一个匹配项的从零开始的索引。如果未找到，则返回 -1。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">FindLastIndex</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1">// index 将是 2 (假设 strLists 如上例)</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Array.Exists&lt;T&gt;(T[] array, Predicate&lt;T&gt; match)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：确定数组中是否存在满足指定谓词所定义条件的元素。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">bool</span><span class="w"> </span><span class="n">exists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"Java"</span><span class="p">));</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1">// exists 将是 true (假设 strLists 包含 "Java")</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Array.TrueForAll&lt;T&gt;(T[] array, Predicate&lt;T&gt; match)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：确定数组中的所有元素是否都满足指定谓词所定义的条件。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kt">bool</span><span class="w"> </span><span class="n">allMatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">TrueForAll</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1">// allMatch 的值取决于 strLists 中所有字符串的长度是否都大于5</span>
+</span></code></pre></div></p>
+<h4 id="linq">LINQ 扩展方法<a class="headerlink" href="#linq" title="Permanent link">&para;</a></h4>
+<p>LINQ (Language Integrated Query) 引入了一套标准的查询操作符，这些操作符以扩展方法的形式提供给实现了 <code>IEnumerable&lt;T&gt;</code> 或 <code>IQueryable&lt;T&gt;</code> 接口的任何数据源（包括数组和各种集合类，如 <code>List&lt;T&gt;</code>、<code>Dictionary&lt;TKey, TValue&gt;</code> 等）。LINQ 极大地增强了 C# 在数据查询和操作方面的能力，而 Lambda 表达式是使用 LINQ 方法语法的核心。</p>
+<p>以下是一些常用的 LINQ 扩展方法：</p>
+<ol>
+<li><strong><code>Where&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：根据谓词筛选值序列。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1">// result 是一个 IEnumerable&lt;string&gt;，包含所有含 "C#" 的字符串</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>First&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code> / <code>FirstOrDefault&lt;TSource&gt;(...)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：返回序列中满足指定条件的第一个元素。<code>First</code> 在找不到元素或序列为空时会抛出异常；<code>FirstOrDefault</code> 则返回该类型的默认值（例如，对于引用类型是 <code>null</code>，对于数值类型是 <code>0</code>）。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">string</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">First</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kt">string</span><span class="w"> </span><span class="n">firstOrNull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">FirstOrDefault</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"不存在的字符串"</span><span class="p">));</span><span class="w"> </span><span class="c1">// 返回 null</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Last&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code> / <code>LastOrDefault&lt;TSource&gt;(...)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：返回序列中满足指定条件的最后一个元素。行为与 <code>First/FirstOrDefault</code> 类似，但针对的是最后一个元素。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">string</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">Last</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">// 如果 strLists 中有多个含 "C#" 的字符串，这将返回最后一个</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Any&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：确定序列中是否有任何元素满足条件。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kt">bool</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">Any</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">// 如果至少有一个字符串包含 "C#"，则 any 为 true</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>All&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：确定序列中的所有元素是否都满足条件。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">bool</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">All</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1">// 如果所有字符串的长度都大于3，则 all 为 true</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Count&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：返回序列中满足条件的元素数量。还有一个无参版本 <code>Count()</code> 用于获取序列总元素数。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">Count</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="s">"C#"</span><span class="p">));</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1">// count 是包含 "C#" 的字符串的数量</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Select&lt;TSource, TResult&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TResult&gt; selector)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：将序列中的每个元素投影到新形式。这常用于数据转换。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">lengths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1">// lengths 是一个 IEnumerable&lt;int&gt;，包含每个字符串的长度</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kt">var</span><span class="w"> </span><span class="n">upperCaseStrings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">());</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1">// upperCaseStrings 包含所有字符串的大写版本</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>OrderBy&lt;TSource, TKey&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)</code> / <code>OrderByDescending&lt;TSource, TKey&gt;(...)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：根据键按升序（<code>OrderBy</code>）或降序（<code>OrderByDescending</code>）对序列的元素进行排序。还可以使用 <code>ThenBy</code> 和 <code>ThenByDescending</code> 进行次要排序。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">orderedByLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kt">var</span><span class="w"> </span><span class="n">orderedByNameDesc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">OrderByDescending</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>GroupBy&lt;TSource, TKey&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：根据指定的键选择器函数对序列的元素进行分组。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">groupedByLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">GroupBy</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1">// groupedByLength 是一个 IEnumerable&lt;IGrouping&lt;int, string&gt;&gt;</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1">// 每个 IGrouping 对象有一个 Key (长度) 和一个包含该长度所有字符串的序列</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">groupedByLength</span><span class="p">)</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">{</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"Strings with length {group.Key}:"</span><span class="p">);</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">group</span><span class="p">)</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$"  {str}"</span><span class="p">);</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<ol>
+<li><strong><code>Skip&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, int count)</code> / <code>Take&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, int count)</code></strong></li>
+</ol>
+<p><strong>功能</strong>：<code>Skip</code> 跳过序列中指定数量的元素，然后返回剩余的元素。<code>Take</code> 从序列的开头返回指定数量的连续元素。常用于分页。</p>
+<p><strong>示例</strong>：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">subset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strLists</span><span class="p">.</span><span class="n">Skip</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">Take</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c1">// 假设 strLists 有至少3个元素, subset 将包含第二个和第三个元素</span>
+</span></code></pre></div></p>
+<p>LINQ 提供的这些以及其他众多扩展方法（如 <code>Average</code>, <code>Sum</code>, <code>Min</code>, <code>Max</code>, <code>Distinct</code>, <code>Concat</code>, <code>Union</code>, <code>Join</code> 等）与 Lambda 表达式的结合，为数据处理提供了强大、灵活且富有表现力的声明式编程模型。</p>
+<h3 id="lambda-vs">优势对比：Lambda 表达式 vs. 传统方法<a class="headerlink" href="#lambda-vs" title="Permanent link">&para;</a></h3>
+<p>为了更直观地理解 Lambda 表达式带来的好处，让我们比较一下使用 Lambda 表达式和传统命名方法的代码：</p>
+<p><strong>场景</strong>：从一个字符串数组中找出所有包含子字符串 "C#" 的元素。</p>
+<p><strong>使用 Lambda 表达式：</strong><br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">// 假设 strLists 已定义</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">strListLambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">FindAll</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s">"C#"</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span></code></pre></div><br />
+这段代码非常紧凑。条件 <code>s =&gt; s.IndexOf("C#") &gt;= 0</code> 直接内联在 <code>Array.FindAll</code> 调用中，逻辑清晰明了。</p>
+<p><strong>使用传统方法（命名方法）：</strong><br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">// 首先，需要定义一个单独的方法作为谓词</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">ContainsCSharpSubstring</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="p">)</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="p">{</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s">"C#"</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">}</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1">// 然后，在调用 Array.FindAll 时传递这个方法</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="c1">// 假设 strLists 已定义</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">strListTraditional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">FindAll</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="n">ContainsCSharpSubstring</span><span class="p">);</span>
+</span></code></pre></div></p>
+<p>或者使用匿名委托（Lambda 表达式之前的方式）：<br />
+<div class="language-csharp highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">// 使用匿名委托</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">strListAnonymous</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Array</span><span class="p">.</span><span class="n">FindAll</span><span class="p">(</span><span class="n">strLists</span><span class="p">,</span><span class="w"> </span><span class="k">delegate</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="p">)</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="p">{</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s">"C#"</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="p">});</span>
+</span></code></pre></div></p>
+<p><strong>对比分析：</strong></p>
+<ol>
+<li><strong>简洁性</strong>：Lambda 表达式 <code>s =&gt; s.IndexOf("C#") &gt;= 0</code> 显然比定义一个完整的 <code>ContainsCSharpSubstring</code> 方法或者使用 <code>delegate(...) { ... }</code> 语法更为简洁。代码行数减少，逻辑更集中。</li>
+<li><strong>可读性</strong>：对于简单的、一次性的操作，将逻辑直接内联在调用处（如 Lambda 表达式所做）可以提高代码的可读性。读者不必跳转到另一个方法定义去理解其行为。当条件逻辑与使用它的地方紧密相关时，这种方式尤其有效。</li>
+<li><strong>减少样板代码</strong>：Lambda 表达式避免了为简单委托编写完整方法声明的繁琐工作，减少了不必要的样板代码。</li>
+<li><strong>关注点分离</strong>：如果谓词逻辑非常复杂或者需要在多处复用，那么定义一个独立的命名方法仍然是更好的选择，因为它有助于更好地组织代码和实现关注点分离。但对于许多常见的集合操作，Lambda 表达式提供的内联方式是更优的。</li>
+</ol>
+<p>Lambda 表达式与 LINQ 的结合，更是将这种声明式编程的优势发挥到了极致。开发者可以更专注于“想要什么样的数据结果”，而不是“如何一步步获取数据”的指令式细节。</p>
+<h3 id="_3">总结<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Lambda 表达式是 C# 语言中一个强大且优雅的特性。它们通过提供简洁的匿名函数语法，极大地简化了尤其是在处理集合数据时的编码工作。结合 <code>Array</code> 类提供的方法以及更为强大的 LINQ 扩展方法，Lambda 表达式使得开发者能够以更少的代码、更高的可读性和更强的声明性方式来查询、筛选、转换和操作数据。</p>
+<p>理解 Lambda 表达式的语法、作用域规则及其与各种集合操作方法的配合使用，是每一位 C# 开发者提升编程效率和代码质量的关键技能。通过熟练运用这些工具，可以编写出更加现代化、高效和易于维护的 C# 应用程序。</p>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260715215301/">
+            <small>技 · 格物札记</small>
+            <strong>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260408092240/">
+            <small>技 · 格物札记</small>
+            <strong>把 AI 这些名词一次讲明白</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260326204122/">
+            <small>技 · 格物札记</small>
+            <strong>IELTS-Academic-TestOne-Listening-PartOne</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../LINQ%20%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AF%AD%E6%B3%95_20250522153850/"><small>← 更新一篇</small><strong>LINQ 查询语法与方法语法</strong></a>
+    
+    
+      <a href="../%E5%93%91%E9%93%83%E4%BE%A7%E5%B9%B3%E4%B8%BE_2025052212347/"><small>更早一篇 →</small><strong>哑铃侧平举</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000学习笔记目录/">继续逛格物札记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

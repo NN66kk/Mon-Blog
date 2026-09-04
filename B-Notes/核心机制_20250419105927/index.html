@@ -1,0 +1,1166 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="《金铲铲之战》的核心机制是游戏的灵魂所在，掌握这些机制能让你在对局中更具优势。本章将深入讲解三大核心机制：棋子羁绊、经济管理和装备系统。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6_20250419105927/">
+      
+      
+        <link rel="prev" href="../%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93_20250414085633/">
+      
+      
+        <link rel="next" href="../%E6%B1%82%E5%AF%BC%E4%B8%8E%E6%B1%82%E5%BE%AE%E5%88%86%E7%9A%84%E6%A6%82%E5%BF%B5%E8%BE%A8%E6%9E%90/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>核心机制 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="核心机制 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="《金铲铲之战》的核心机制是游戏的灵魂所在，掌握这些机制能让你在对局中更具优势。本章将深入讲解三大核心机制：棋子羁绊、经济管理和装备系统。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6_20250419105927/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="核心机制 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="《金铲铲之战》的核心机制是游戏的灵魂所在，掌握这些机制能让你在对局中更具优势。本章将深入讲解三大核心机制：棋子羁绊、经济管理和装备系统。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2025-04-19T10:59:27">
+    <meta property="article:modified_time" content="2025-04-19T10:59:27">
+    <meta property="article:section" content="格物札记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u683c\u7269\u672d\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2025-04-19T10:59:27", "datePublished": "2025-04-19T10:59:27", "description": "\u300a\u91d1\u94f2\u94f2\u4e4b\u6218\u300b\u7684\u6838\u5fc3\u673a\u5236\u662f\u6e38\u620f\u7684\u7075\u9b42\u6240\u5728\uff0c\u638c\u63e1\u8fd9\u4e9b\u673a\u5236\u80fd\u8ba9\u4f60\u5728\u5bf9\u5c40\u4e2d\u66f4\u5177\u4f18\u52bf\u3002\u672c\u7ae0\u5c06\u6df1\u5165\u8bb2\u89e3\u4e09\u5927\u6838\u5fc3\u673a\u5236\uff1a\u68cb\u5b50\u7f81\u7eca\u3001\u7ecf\u6d4e\u7ba1\u7406\u548c\u88c5\u5907\u7cfb\u7edf\u3002", "headline": "\u6838\u5fc3\u673a\u5236", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6_20250419105927/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6_20250419105927/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../../D-Orginals/000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        棋子羁绊系统
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="棋子羁绊系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        羁绊概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        羁绊类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        羁绊激活门槛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        羁绊搭配策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        经济管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="经济管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        金币获取途径
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        经济曲线
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="经济曲线">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        早期经济（1-10回合）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中期经济（11-25回合）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        后期经济（25回合以后）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        经济管理技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        装备系统
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="装备系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        装备获取
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        装备合成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        装备优先级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        特殊装备效果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        装备搭配策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        棋子定位与角色
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="棋子定位与角色">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        棋子费用与强度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        棋子角色分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实战应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实战应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阵容构建思路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        阵容过渡案例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="B"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    B Notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000学习笔记目录/" aria-label="浏览格物札记全部内容">
+          技 · 格物札记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2025-04-19T10:59:27">
+          2025-04-19
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">核心机制</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>《金铲铲之战》的核心机制是游戏的灵魂所在，掌握这些机制能让你在对局中更具优势。本章将深入讲解三大核心机制：棋子羁绊、经济管理和装备系统。</p>
+<h2 id="_2">棋子羁绊系统<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">羁绊概念<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>羁绊是《金铲铲之战》中最重要的战术核心，通过组合特定特质的棋子，可以激活强力的羁绊效果，大幅提升阵容整体实力。</p>
+<h3 id="_4">羁绊类型<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>羁绊主要分为两大类：</p>
+<ol>
+<li><strong>职业羁绊</strong>：基于棋子的职业特点，如刺客、守护者、法师等。</li>
+<li><strong>种族羁绊</strong>：基于棋子的种族背景，如暗影、光明、约德尔人等。</li>
+</ol>
+<h3 id="_5">羁绊激活门槛<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>羁绊效果通常有多个激活层级，随着同类棋子数量的增加，效果会逐步增强：</p>
+<table>
+<thead>
+<tr>
+<th>激活层级</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>铜羁绊</td>
+<td>最低层级激活，效果较弱</td>
+</tr>
+<tr>
+<td>银羁绊</td>
+<td>中等层级激活，效果适中</td>
+</tr>
+<tr>
+<td>金羁绊</td>
+<td>最高层级激活，效果最强</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">羁绊搭配策略<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>核心羁绊</strong>：确定1-2个主要羁绊作为阵容核心。</li>
+<li><strong>辅助羁绊</strong>：通过少量棋子激活辅助性羁绊，提供额外效果。</li>
+<li><strong>万金油棋子</strong>：一些棋子拥有多种羁绊标签，可以灵活组合。</li>
+<li><strong>羁绊赋能道具</strong>：特殊道具可以为棋子增加额外羁绊标签。</li>
+</ol>
+<h2 id="_7">经济管理<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">金币获取途径<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>基础收入</strong>：每回合结束后获得基础金币（5金币）。</li>
+<li><strong>连胜/连败奖励</strong>：根据连胜或连败次数获得额外金币。</li>
+<li><strong>利息系统</strong>：每回合结束时，每10金币可获得1枚利息（最高5枚）。</li>
+<li><strong>PVE回合奖励</strong>：击杀小怪获得额外金币和物品。</li>
+<li><strong>出售棋子</strong>：出售棋子可回收部分金币。</li>
+</ol>
+<h3 id="_9">经济曲线<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>了解游戏不同阶段的经济管理策略至关重要：</p>
+<h4 id="1-10">早期经济（1-10回合）<a class="headerlink" href="#1-10" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>储蓄策略</strong>：前期适当储蓄金币，争取每回合获得最大利息。</li>
+<li><strong>连胜/连败</strong>：利用连胜或连败机制获取额外金币。</li>
+<li><strong>最低消费</strong>：保持最低阵容强度，同时最大化经济收益。</li>
+</ul>
+<h4 id="11-25">中期经济（11-25回合）<a class="headerlink" href="#11-25" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>升级时机</strong>：根据阵容需求选择合适的升级时机。</li>
+<li><strong>过渡阵容</strong>：保持阵容强度的同时为过渡到终极阵容做准备。</li>
+<li><strong>滚动商店</strong>：在关键等级大量刷新商店寻找核心棋子。</li>
+</ul>
+<h4 id="25">后期经济（25回合以后）<a class="headerlink" href="#25" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>全力投入</strong>：将储备金币投入到阵容升级和完善中。</li>
+<li><strong>高费棋子</strong>：积极寻找高费核心棋子和完善装备配置。</li>
+<li><strong>阵容增幅</strong>：购买经验快速提升等级，增加场上棋子数量。</li>
+</ul>
+<h3 id="_10">经济管理技巧<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>开局储蓄</strong>：前期争取50金币的储蓄目标，最大化利息收益。</li>
+<li><strong>理性消费</strong>：避免冲动消费和过度刷新商店。</li>
+<li><strong>损失控制</strong>：在劣势时合理止损，保持健康经济。</li>
+<li><strong>关键转折点</strong>：识别游戏中的经济转折点，及时调整策略。</li>
+</ol>
+<h2 id="_11">装备系统<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="_12">装备获取<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>PVE回合</strong>：击杀小怪掉落基础装备。</li>
+<li><strong>转盘机制</strong>：特定回合有装备选择转盘。</li>
+<li><strong>宝箱系统</strong>：宝箱可能包含装备或装备碎片。</li>
+</ol>
+<h3 id="_13">装备合成<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>装备合成是《金铲铲之战》中的重要机制：</p>
+<ol>
+<li><strong>基础装备</strong>：游戏中有8种基础装备，每种提供不同的属性加成。</li>
+<li><strong>合成公式</strong>：两件基础装备可以合成一件高级装备。</li>
+<li><strong>装备拆分</strong>：部分模式中可以拆分已合成的装备。</li>
+</ol>
+<h3 id="_14">装备优先级<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>合理分配装备对阵容强度有决定性影响：</p>
+<ol>
+<li><strong>核心C位</strong>：主要输出棋子优先获得进攻类装备。</li>
+<li><strong>前排坦克</strong>：防御型和生存类装备优先给予前排棋子。</li>
+<li><strong>功能型棋子</strong>：特殊效果装备（如蓝BUFF）给予关键技能棋子。</li>
+</ol>
+<h3 id="_15">特殊装备效果<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>被动型装备</strong>：提供持续性属性加成或特殊效果。</li>
+<li><strong>触发型装备</strong>：在特定条件下触发额外效果。</li>
+<li><strong>羁绊装备</strong>：提供额外羁绊标签，增强阵容协同。</li>
+<li><strong>专属装备</strong>：只适用于特定棋子的强力装备。</li>
+</ol>
+<h3 id="_16">装备搭配策略<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>装备协同</strong>：某些装备组合在一起效果更佳。</li>
+<li><strong>阵容匹配</strong>：装备应与阵容整体策略相匹配。</li>
+<li><strong>灵活调整</strong>：根据对手阵容调整装备分配。</li>
+<li><strong>装备预留</strong>：有时保留基础装备等待更优合成选择是明智的。</li>
+</ol>
+<h2 id="_17">棋子定位与角色<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<h3 id="_18">棋子费用与强度<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>棋子按照商店出现的费用分为1-5费，通常费用越高，棋子基础属性和技能越强：</p>
+<table>
+<thead>
+<tr>
+<th>棋子费用</th>
+<th>特点</th>
+<th>定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1费棋子</td>
+<td>前期过渡，容易升星</td>
+<td>前期承担，后期羁绊补充</td>
+</tr>
+<tr>
+<td>2费棋子</td>
+<td>中期过渡，较易升星</td>
+<td>中期核心，部分可作为后期C位</td>
+</tr>
+<tr>
+<td>3费棋子</td>
+<td>中期主力</td>
+<td>多为中期C位或重要辅助</td>
+</tr>
+<tr>
+<td>4费棋子</td>
+<td>后期核心</td>
+<td>关键C位或强力前排</td>
+</tr>
+<tr>
+<td>5费棋子</td>
+<td>终极棋子</td>
+<td>阵容核心，游戏终结者</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_19">棋子角色分类<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>根据战场定位，棋子可分为以下几类：</p>
+<ol>
+<li><strong>主C</strong>：主要输出来源，通常站位后排，需重点保护。</li>
+<li><strong>副C</strong>：次要输出来源，能够在主C阵亡后承担输出任务。</li>
+<li><strong>前排坦克</strong>：承担伤害，保护后排，通常具有控制或减伤能力。</li>
+<li><strong>功能性棋子</strong>：提供关键buff、控制或特殊效果的棋子。</li>
+<li><strong>过渡棋子</strong>：前中期临时使用，后期会被替换的棋子。</li>
+</ol>
+<h2 id="_20">实战应用<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<h3 id="_21">阵容构建思路<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>确定核心</strong>：选择1-2个强力羁绊作为阵容核心。</li>
+<li><strong>选择C位</strong>：根据羁绊确定主要输出棋子。</li>
+<li><strong>补充前排</strong>：加入能够保护C位的坦克棋子。</li>
+<li><strong>功能性补充</strong>：根据需要添加控制、增益或辅助棋子。</li>
+<li><strong>灵活调整</strong>：根据对手阵容和获得的棋子进行动态调整。</li>
+</ol>
+<h3 id="_22">阵容过渡案例<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>以"六光明"阵容为例，展示从早期到后期的阵容过渡思路：</p>
+<ol>
+<li><strong>早期（1-10回合）</strong>：</li>
+<li>收集早期战士和光明棋子</li>
+<li>
+<p>优先2星低费棋子保证生存</p>
+</li>
+<li>
+<p><strong>中期（11-25回合）</strong>：</p>
+</li>
+<li>激活4光明羁绊</li>
+<li>加入关键3费光明核心</li>
+<li>
+<p>开始储备高费光明棋子</p>
+</li>
+<li>
+<p><strong>后期（25回合以后）</strong>：</p>
+</li>
+<li>完成6光明羁绊</li>
+<li>替换低费过渡棋子</li>
+<li>装备分配最优化</li>
+</ol>
+<p>通过掌握《金铲铲之战》的这些核心机制，你将能够更加灵活地应对各种对局情况，制定更加合理的策略，在游戏中取得更好的成绩！在下一章中，我们将详细探讨热门阵容的搭配与使用技巧。</p>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260715215301/">
+            <small>技 · 格物札记</small>
+            <strong>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260408092240/">
+            <small>技 · 格物札记</small>
+            <strong>把 AI 这些名词一次讲明白</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260326204122/">
+            <small>技 · 格物札记</small>
+            <strong>IELTS-Academic-TestOne-Listening-PartOne</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../MBTI%20%E6%80%A7%E6%A0%BC%E6%B5%8B%E8%AF%95_20250503120011/"><small>← 更新一篇</small><strong>MBTI 性格测试--INTJ</strong></a>
+    
+    
+      <a href="../%E6%B8%B8%E6%88%8F%E5%9F%BA%E7%A1%80_20250419105117/"><small>更早一篇 →</small><strong>游戏基础</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000学习笔记目录/">继续逛格物札记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

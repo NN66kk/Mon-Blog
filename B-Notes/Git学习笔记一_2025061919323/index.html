@@ -1,0 +1,889 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="运行后，你会看到提示说“Initialized empty Git repository in .../.git/”。这表示 Git 已经在你的项目里安家了。它创建了一个名为 .git 的隐藏文件夹，这就是我们前面说的“档案柜”。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/B-Notes/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80_2025061919323/">
+      
+      
+        <link rel="prev" href="../GPT-4.5%20%E6%B7%B1%E5%BA%A6%E8%AF%84%E6%B5%8B%EF%BC%9A%E6%9B%B4%E6%87%82%E4%BA%BA%E5%BF%83%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%85%A8%E8%83%BD%E6%88%98%E5%A3%AB_20250228125042/">
+      
+      
+        <link rel="next" href="../LINQ%20%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AF%AD%E6%B3%95_20250522153850/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Git 学习笔记一 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="Git 学习笔记一 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="运行后，你会看到提示说“Initialized empty Git repository in .../.git/”。这表示 Git 已经在你的项目里安家了。它创建了一个名为 .git 的隐藏文件夹，这就是我们前面说的“档案柜”。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/B-Notes/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80_2025061919323/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Git 学习笔记一 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="运行后，你会看到提示说“Initialized empty Git repository in .../.git/”。这表示 Git 已经在你的项目里安家了。它创建了一个名为 .git 的隐藏文件夹，这就是我们前面说的“档案柜”。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2025-06-19T19:32:00">
+    <meta property="article:modified_time" content="2025-06-19T19:32:00">
+    <meta property="article:section" content="格物札记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u683c\u7269\u672d\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2025-06-19T19:32:00", "datePublished": "2025-06-19T19:32:00", "description": "\u8fd0\u884c\u540e\uff0c\u4f60\u4f1a\u770b\u5230\u63d0\u793a\u8bf4\u201cInitialized empty Git repository in .../.git/\u201d\u3002\u8fd9\u8868\u793a Git \u5df2\u7ecf\u5728\u4f60\u7684\u9879\u76ee\u91cc\u5b89\u5bb6\u4e86\u3002\u5b83\u521b\u5efa\u4e86\u4e00\u4e2a\u540d\u4e3a .git \u7684\u9690\u85cf\u6587\u4ef6\u5939\uff0c\u8fd9\u5c31\u662f\u6211\u4eec\u524d\u9762\u8bf4\u7684\u201c\u6863\u6848\u67dc\u201d\u3002", "headline": "Git \u5b66\u4e60\u7b14\u8bb0\u4e00", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/B-Notes/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80_2025061919323/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/B-Notes/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80_2025061919323/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#git" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../../D-Orginals/000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 Git 初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Git 初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 初始化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 暂存提交
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 其它
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 Git 暂存区
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Git 对象
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 Git 重置
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="B"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    B Notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000学习笔记目录/" aria-label="浏览格物札记全部内容">
+          技 · 格物札记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2025-06-19T19:32:00">
+          2025-06-19
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">Git 学习笔记一</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <h2 id="1-git">1 Git 初始化<a class="headerlink" href="#1-git" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 初始化<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>init
+</span></code></pre></div>
+<p>运行后，你会看到提示说“Initialized empty Git repository in .../.git/”。这表示 Git 已经在你的项目里安家了。它创建了一个名为 <code>.git</code> 的隐藏文件夹，这就是我们前面说的“档案柜”。</p>
+<h3 id="12">1.2 暂存提交<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>add<span class="w"> </span>index.html
+</span></code></pre></div>
+<p>这个命令是告诉 Git：“嘿，请把 <code>index.html</code> 这个文件准备好，我下一步就要把它存到档案里了。” 这个“准备区”在 Git 里叫“暂存区”。</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"创建了网站首页"</span>
+</span></code></pre></div>
+<p>Git 会拍下一个快照，永久保存在你的“档案柜”里。<code>-m</code> 后面跟着的文字是“提交信息”，是你对这次改动的描述，比如“创建了网站首页”或者“修复了一个 bug”，这非常重要，能让你以后快速看懂每次都改了什么。</p>
+<h3 id="13">1.3 其它<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p><code>git config</code> 命令用来配置 Git 的一些设置，其中最重要的就是告诉 Git 你是谁。它有三个主要的级别（参数），区别在于“作用范围”：</p>
+<ul>
+<li><code>--local</code>：<strong>只对当前这一个项目有效</strong>。配置信息保存在当前项目目录下的 <code>.git/config</code> 文件里。比如你给公司项目设置公司的邮箱，给个人项目设置个人邮箱。</li>
+<li><code>--global</code>：<strong>对当前电脑用户的所有项目都有效</strong>。这是最常用的！配置信息保存在你的用户主目录下的一个文件里（比如 <code>~/.gitconfig</code>）。我们第一次安装 Git 时，设置的就是全局的姓名和邮箱。</li>
+<li><code>--system</code>：<strong>对这台电脑上的所有用户都有效</strong>。这个用得比较少，通常是服务器管理员才会配置。</li>
+</ul>
+<p>我们可以设置别名：</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.st<span class="w"> </span>status
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.ci<span class="w"> </span>commit
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.co<span class="w"> </span>checkout
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.lg<span class="w"> </span><span class="s2">"log --oneline --graph --decorate --all"</span>
+</span></code></pre></div>
+<p>设置完之后，你就可以这样用了：</p>
+<ul>
+<li><code>git st</code> 就等同于 <code>git status</code></li>
+<li><code>git ci -m "..."</code> 就等同于 <code>git commit -m "..."</code></li>
+<li><code>git lg</code> 会给你一个非常酷炫、清晰的单行历史日志图。</li>
+</ul>
+<h2 id="2-git">2 Git 暂存区<a class="headerlink" href="#2-git" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">命令</th>
+<th style="text-align: left;">作用</th>
+<th style="text-align: left;">比喻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>git add &lt;file&gt;</code></td>
+<td style="text-align: left;">将工作区的修改添加到暂存区</td>
+<td style="text-align: left;">把书桌上写好的手稿，放进“最终稿文件夹”</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>git commit</code></td>
+<td style="text-align: left;">将暂存区的所有内容提交到仓库</td>
+<td style="text-align: left;">命令出版社，将“最终稿文件夹”里的所有内容印刷存档</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>git diff</code></td>
+<td style="text-align: left;">查看工作区和暂存区的差异</td>
+<td style="text-align: left;">对比“书桌”和“最终稿文件夹”</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>git diff --staged</code></td>
+<td style="text-align: left;">查看暂存区和仓库最新版本的差异</td>
+<td style="text-align: left;">对比“最终稿文件夹”和“已出版的最新版”</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>git commit -a</code></td>
+<td style="text-align: left;">(不推荐) 跳过<code>add</code>，直接提交所有已跟踪文件的修改</td>
+<td style="text-align: left;">贪图方便，把书桌上所有东西（除了新来的）一股脑丢给出版社</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>git stash</code></td>
+<td style="text-align: left;">临时保存工作区和暂存区的修改，清空工作区</td>
+<td style="text-align: left;">把书桌上所有东西临时塞进抽屉，以清空桌面</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>git stash pop</code></td>
+<td style="text-align: left;">恢复最近一次<code>stash</code>的内容</td>
+<td style="text-align: left;">把抽屉里的东西再拿出来放回书桌</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-git">3 Git 对象<a class="headerlink" href="#3-git" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Blob （数据对象）--内容</li>
+<li>Tree （树对象）--目录清单</li>
+<li>Commit （提交对象）--快照</li>
+</ul>
+<p>SHA1 哈希值就是根据对象的内容算出来的一个绝对唯一的ID，用来保证数据的完整性和唯一性。</p>
+<h2 id="4-git">4 Git 重置<a class="headerlink" href="#4-git" title="Permanent link">&para;</a></h2>
+<p>把你的项目历史想象成一条长长的路径，路径上有很多存档点（commit）。master 是一个旗子，插在最新的存档点上。而 HEAD 就是一个“你在这里”的地图标志，告诉你当前正站在哪个存档点上。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;"><code>HEAD</code></th>
+<th style="text-align: left;"><code>master</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>本质</strong></td>
+<td style="text-align: left;">指向当前工作位置的<strong>指针</strong></td>
+<td style="text-align: left;">默认主<strong>分支</strong>的名称，也是一个指针</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>指向对象</strong></td>
+<td style="text-align: left;">可以指向一个<strong>分支</strong>（如 <code>master</code>），也可以直接指向一个<strong>commit</strong></td>
+<td style="text-align: left;">始终指向 <code>master</code> 分支上的<strong>最新 commit</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>如何移动</strong></td>
+<td style="text-align: left;">通过 <code>git checkout</code> 或 <code>git switch</code> 命令来改变指向</td>
+<td style="text-align: left;">当在 <code>master</code> 分支上产生新 commit 时自动向前移动</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>常见状态</strong></td>
+<td style="text-align: left;"><code>HEAD -&gt; master -&gt; commit</code> 或 <code>HEAD -&gt; commit</code> (分离头指针)</td>
+<td style="text-align: left;"><code>master -&gt; commit</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>目的</strong></td>
+<td style="text-align: left;">标识用户当前的工作区状态</td>
+<td style="text-align: left;">标识一条主要的、稳定的开发线</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>git reset --soft A</code> （温柔的重置）</li>
+<li><code>git reset --mixed A</code> （中等重置 - <strong>默认模式</strong>）</li>
+<li><code>git reset --hard A</code> （硬核重置 - <strong>危险！</strong>）</li>
+<li><code>reflog</code> 是<strong>最后的安全网</strong></li>
+</ul>
+<hr />
+<p>参考链接：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>https://www.worldhello.net/gotgit/
+</span></code></pre></div>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260715215301/">
+            <small>技 · 格物札记</small>
+            <strong>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260408092240/">
+            <small>技 · 格物札记</small>
+            <strong>把 AI 这些名词一次讲明白</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260326204122/">
+            <small>技 · 格物札记</small>
+            <strong>IELTS-Academic-TestOne-Listening-PartOne</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../langchain%20%E6%8A%80%E6%9C%AF%E8%A7%A3%E8%AF%BB_2025071716332/"><small>← 更新一篇</small><strong>langchain 技术架构解读</strong></a>
+    
+    
+      <a href="../../D-Orginals/%E8%AF%B4%E8%AF%9D%E8%B6%8A%E6%9D%A5%E8%B6%8A%E2%80%9C%E5%AE%98%E6%96%B9%E2%80%9D%EF%BC%8C%E6%88%91%E4%BB%AC%E6%AD%A3%E5%9C%A8%E8%A2%AB%E7%A4%BE%E4%BC%9A%E9%A9%AF%E5%8C%96_20250605154744/"><small>更早一篇 →</small><strong>说话越来越“官方”，我们正在被社会驯化</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000学习笔记目录/">继续逛格物札记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

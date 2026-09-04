@@ -1,0 +1,1703 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="本文介绍 SDD 开发理念，说明其如何通过规范、拆解和验收提升 AI 编程质量，并展望未来趋势。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/D-Orginals/260615205353/">
+      
+      
+        <link rel="prev" href="../260610193423/">
+      
+      
+        <link rel="next" href="../260719222321/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>AI 编程时代，为什么“SDD 开发”越来越重要？ - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="AI 编程时代，为什么“SDD 开发”越来越重要？ · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="本文介绍 SDD 开发理念，说明其如何通过规范、拆解和验收提升 AI 编程质量，并展望未来趋势。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/D-Orginals/260615205353/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI 编程时代，为什么“SDD 开发”越来越重要？ · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="本文介绍 SDD 开发理念，说明其如何通过规范、拆解和验收提升 AI 编程质量，并展望未来趋势。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2026-06-15T20:53:53+08:00">
+    <meta property="article:modified_time" content="2026-06-15T20:53:53+08:00">
+    <meta property="article:section" content="原创手记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u539f\u521b\u624b\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2026-06-15T20:53:53+08:00", "datePublished": "2026-06-15T20:53:53+08:00", "description": "\u672c\u6587\u4ecb\u7ecd SDD \u5f00\u53d1\u7406\u5ff5\uff0c\u8bf4\u660e\u5176\u5982\u4f55\u901a\u8fc7\u89c4\u8303\u3001\u62c6\u89e3\u548c\u9a8c\u6536\u63d0\u5347 AI \u7f16\u7a0b\u8d28\u91cf\uff0c\u5e76\u5c55\u671b\u672a\u6765\u8d8b\u52bf\u3002", "headline": "AI \u7f16\u7a0b\u65f6\u4ee3\uff0c\u4e3a\u4ec0\u4e48\u201cSDD \u5f00\u53d1\u201d\u8d8a\u6765\u8d8a\u91cd\u8981\uff1f", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260615205353/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260615205353/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai-sdd" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../../B-Notes/000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sdd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、什么是 SDD？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-sdd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、为什么 AI 编程特别需要 SDD？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、SDD 和普通提示词编程有什么区别？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdd_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、SDD 的基本流程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、SDD 的基本流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 写需求规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 写设计规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 写任务拆解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 写验收标准
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 根据规范实现和迭代
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdd-harness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、SDD 和 Harness 工程的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdd_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、SDD 的优势
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、SDD 的优势">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 降低 AI 跑偏的概率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 提高复杂项目成功率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 方便多人或多 Agent 协作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 方便测试和验收
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 方便长期维护
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdd_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、SDD 也不是万能的
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdd_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、一个最小可用的 SDD 模板
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、一个最小可用的 SDD 模板">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 项目目标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 用户角色
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 核心功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 非目标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 技术设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 数据设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 接口设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 任务拆解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 验收标准
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 风险和边界
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、未来发展展望
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="九、未来发展展望">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 规范会成为新的核心资产
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 程序员角色会向“系统设计者”转变
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ai-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AI Agent 会越来越像工程团队成员
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 开发流程会从“代码驱动”转向“规范驱动”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 测试和验证会变得更重要
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-sdd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. SDD 会和企业知识库结合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-sdd-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. SDD 会成为 Agent 协作的基础协议
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdd_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、普通开发者应该如何开始实践 SDD？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        结语
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="D"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%8E%9F%E5%88%9B%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    D Orginals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000原创文章目录/" aria-label="浏览原创手记全部内容">
+          思 · 原创手记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2026-06-15T20:53:53+08:00">
+          2026-06-15
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">AI 编程时代，为什么“SDD 开发”越来越重要？</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>过去我们写代码，通常是这样的流程：</p>
+<p>先有一个想法，然后直接打开编辑器开始写。写着写着发现需求没想清楚，于是边写边改；改到一半又发现架构不合适，于是继续重构；最后功能虽然勉强跑起来了，但文档、测试、边界条件、异常处理往往都没有跟上。</p>
+<p>在人类程序员时代，这种方式已经容易失控。到了 AI 编程时代，问题会被进一步放大。</p>
+<p>因为 AI 写代码很快，但它也很容易“跑偏”。如果你只给它一句模糊的需求，比如“帮我做一个用户管理系统”，它可能很快生成一堆代码，但这些代码是否符合你的真实需求、是否结构清晰、是否方便扩展、是否有测试、是否能长期维护，就不一定了。</p>
+<p>所以现在越来越多 AI 编程实践开始强调一个理念：<strong>不要急着写代码，先写规范。</strong></p>
+<p>这就是 SDD。</p>
+<hr />
+<h2 id="sdd">一、什么是 SDD？<a class="headerlink" href="#sdd" title="Permanent link">&para;</a></h2>
+<p>SDD 一般可以理解为 <strong>Spec-Driven Development</strong>，也就是“规范驱动开发”。</p>
+<p>它的核心思想很简单：</p>
+<blockquote>
+<p>在正式写代码之前，先把需求、设计、接口、数据结构、任务拆解、验收标准写清楚，然后再让人或 AI 根据这些规范去实现。</p>
+</blockquote>
+<p>即让“规范”成为项目的起点。</p>
+<p>传统开发里，代码经常是最重要的资产；而在 SDD 里，真正的源头资产是规范文档。</p>
+<p>代码只是规范的一种实现结果。</p>
+<hr />
+<h2 id="ai-sdd_1">二、为什么 AI 编程特别需要 SDD？<a class="headerlink" href="#ai-sdd_1" title="Permanent link">&para;</a></h2>
+<p>AI 编程和普通编程最大的区别在于：AI 执行速度很快，但它对目标的理解高度依赖上下文。</p>
+<p>如果上下文不清楚，AI 就会自己补全。它补全得好，项目就顺；它补全错了，项目就会偏。</p>
+<p>比如你让 AI 写一个登录功能，但没有说明：</p>
+<ul>
+<li>
+<p>是否需要手机号登录？</p>
+</li>
+<li>
+<p>是否需要邮箱登录？</p>
+</li>
+<li>
+<p>密码是否要加密？</p>
+</li>
+<li>
+<p>是否需要验证码？</p>
+</li>
+<li>
+<p>是否需要防暴力破解？</p>
+</li>
+<li>
+<p>登录态用 Session 还是 JWT？</p>
+</li>
+<li>
+<p>Token 有效期多久？</p>
+</li>
+<li>
+<p>失败返回什么错误码？</p>
+</li>
+<li>
+<p>前端如何处理异常？</p>
+</li>
+<li>
+<p>是否需要单元测试？</p>
+</li>
+<li>
+<p>是否需要接口文档？</p>
+</li>
+</ul>
+<p>如果这些东西没有提前写清楚，AI 会按照它自己的“默认经验”来生成代码。结果就是：它可能写得很快，但不一定写得对。</p>
+<p>SDD 的价值就在这里。</p>
+<p>它先把模糊想法变成清晰规范，再让 AI 执行。这样 AI 不再是“自由发挥”，而是在一个明确框架里工作。</p>
+<hr />
+<h2 id="sdd_1">三、SDD 和普通提示词编程有什么区别？<a class="headerlink" href="#sdd_1" title="Permanent link">&para;</a></h2>
+<p>普通提示词编程更像是：</p>
+<blockquote>
+<p>我说一句，你写一段。</p>
+</blockquote>
+<p>SDD 更像是：</p>
+<blockquote>
+<p>我们先把项目蓝图、施工图、验收标准都定好，然后你按图施工。</p>
+</blockquote>
+<p>两者差别非常大。</p>
+<p>普通提示词编程适合小任务，比如写一个函数、修一个 bug、生成一个脚本。但如果项目稍微复杂一点，只靠一句话提示就很容易混乱。</p>
+<p>SDD 更适合中大型任务，比如：</p>
+<ul>
+<li>
+<p>做一个完整 Web 应用</p>
+</li>
+<li>
+<p>改造一个已有项目</p>
+</li>
+<li>
+<p>开发一个 AI Agent</p>
+</li>
+<li>
+<p>写一个数据分析平台</p>
+</li>
+<li>
+<p>做一个带数据库、权限、接口、前端的系统</p>
+</li>
+<li>
+<p>做毕业设计、简历项目、课程项目</p>
+</li>
+</ul>
+<p>因为这些项目不是单点代码问题，而是系统工程问题。</p>
+<hr />
+<h2 id="sdd_2">四、SDD 的基本流程<a class="headerlink" href="#sdd_2" title="Permanent link">&para;</a></h2>
+<p>一个比较实用的 SDD 流程可以分成五步。</p>
+<h3 id="1">1. 写需求规范<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>第一步不是写代码，而是写清楚“到底要做什么”。</p>
+<p>比如一个电商数据查询系统，需求规范里至少要说明：</p>
+<ul>
+<li>
+<p>系统服务谁？</p>
+</li>
+<li>
+<p>解决什么问题？</p>
+</li>
+<li>
+<p>用户可以做哪些操作？</p>
+</li>
+<li>
+<p>哪些功能必须有？</p>
+</li>
+<li>
+<p>哪些功能暂时不做？</p>
+</li>
+<li>
+<p>输入是什么？</p>
+</li>
+<li>
+<p>输出是什么？</p>
+</li>
+<li>
+<p>成功标准是什么？</p>
+</li>
+</ul>
+<p>这一步的重点是把“想法”变成“可执行需求”。</p>
+<p>很多项目失败，不是因为代码写不出来，而是因为需求从一开始就是模糊的。</p>
+<hr />
+<h3 id="2">2. 写设计规范<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>需求说明“做什么”，设计说明“怎么做”。</p>
+<p>设计规范通常包括：</p>
+<ul>
+<li>
+<p>系统架构</p>
+</li>
+<li>
+<p>模块划分</p>
+</li>
+<li>
+<p>数据流</p>
+</li>
+<li>
+<p>接口设计</p>
+</li>
+<li>
+<p>数据库结构</p>
+</li>
+<li>
+<p>前后端分工</p>
+</li>
+<li>
+<p>权限设计</p>
+</li>
+<li>
+<p>异常处理方式</p>
+</li>
+<li>
+<p>日志和监控方案</p>
+</li>
+</ul>
+<p>如果是 AI Agent 项目，还要额外说明：</p>
+<ul>
+<li>
+<p>Agent 的角色是什么</p>
+</li>
+<li>
+<p>Agent 可以调用哪些工具</p>
+</li>
+<li>
+<p>Agent 的记忆如何管理</p>
+</li>
+<li>
+<p>哪些操作需要人工确认</p>
+</li>
+<li>
+<p>失败后如何重试</p>
+</li>
+<li>
+<p>如何判断任务完成</p>
+</li>
+<li>
+<p>如何防止 Agent 越权操作</p>
+</li>
+</ul>
+<p>这一步相当于给项目画施工图。施工图越清楚，AI 后面实现时越不容易乱改。</p>
+<hr />
+<h3 id="3">3. 写任务拆解<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>复杂项目不能直接让 AI 一口气完成。正确做法是拆成一组小任务。</p>
+<p>比如：</p>
+<ol>
+<li>
+<p>初始化项目结构</p>
+</li>
+<li>
+<p>创建数据库模型</p>
+</li>
+<li>
+<p>实现用户登录接口</p>
+</li>
+<li>
+<p>实现权限中间件</p>
+</li>
+<li>
+<p>实现数据查询接口</p>
+</li>
+<li>
+<p>实现前端页面</p>
+</li>
+<li>
+<p>添加单元测试</p>
+</li>
+<li>
+<p>添加接口文档</p>
+</li>
+<li>
+<p>运行测试并修复问题</p>
+</li>
+<li>
+<p>整理 README</p>
+</li>
+</ol>
+<p>每个任务都应该有清晰边界。</p>
+<p>好的任务拆解有三个特点：</p>
+<ul>
+<li>
+<p>一个任务只解决一个主要问题</p>
+</li>
+<li>
+<p>每个任务都有明确输入和输出</p>
+</li>
+<li>
+<p>每个任务都可以被检查和验收</p>
+</li>
+</ul>
+<p>这对 AI 编程尤其重要。因为任务越大，AI 越容易丢失上下文；任务越清楚，AI 越容易稳定完成。</p>
+<hr />
+<h3 id="4">4. 写验收标准<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>很多人用 AI 编程时只关心“代码生成了没有”，但真正重要的是“代码是否符合要求”。</p>
+<p>所以 SDD 一定要有验收标准。</p>
+<p>比如一个登录接口的验收标准可以写成：</p>
+<ul>
+<li>
+<p>用户输入正确账号密码时，可以成功登录</p>
+</li>
+<li>
+<p>密码错误时返回明确错误信息</p>
+</li>
+<li>
+<p>不存在的用户不能登录</p>
+</li>
+<li>
+<p>密码必须加密存储</p>
+</li>
+<li>
+<p>Token 必须设置过期时间</p>
+</li>
+<li>
+<p>接口返回结构必须统一</p>
+</li>
+<li>
+<p>必须包含对应单元测试</p>
+</li>
+<li>
+<p>所有测试必须通过</p>
+</li>
+</ul>
+<p>这一步的作用是防止 AI 自说自话。</p>
+<p>没有验收标准，AI 很容易“看起来完成了”。有了验收标准，才知道它是否真的完成了。</p>
+<hr />
+<h3 id="5">5. 根据规范实现和迭代<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p>当前四步完成后，才进入代码实现。</p>
+<p>这时候 AI 的工作方式就会变成：</p>
+<ul>
+<li>
+<p>读取需求规范</p>
+</li>
+<li>
+<p>读取设计规范</p>
+</li>
+<li>
+<p>读取任务清单</p>
+</li>
+<li>
+<p>按任务逐步实现</p>
+</li>
+<li>
+<p>每完成一步就运行测试</p>
+</li>
+<li>
+<p>不符合验收标准就修复</p>
+</li>
+<li>
+<p>修复后更新文档</p>
+</li>
+<li>
+<p>记录失败原因和经验</p>
+</li>
+</ul>
+<p>这就不是简单的“让 AI 写代码”，而是在构建一个可控制、可检查、可复盘的开发流程。</p>
+<hr />
+<h2 id="sdd-harness">五、SDD 和 Harness 工程的关系<a class="headerlink" href="#sdd-harness" title="Permanent link">&para;</a></h2>
+<p>现在 AI 编程里还有一个常见词：Harness 工程。</p>
+<p>可以简单理解为：</p>
+<blockquote>
+<p>Harness 是给 AI 搭建的运行框架，SDD 是告诉 AI 怎么工作的规范体系。</p>
+</blockquote>
+<p>如果把 AI 当成一个很强但需要管理的工程师，那么：</p>
+<ul>
+<li>
+<p>SDD 是需求文档、设计文档、任务书、验收标准</p>
+</li>
+<li>
+<p>Harness 是工作台、工具链、测试环境、日志系统、权限系统</p>
+</li>
+<li>
+<p>AI Agent 是具体执行者</p>
+</li>
+<li>
+<p>人类开发者是架构师、产品经理和最终审核者</p>
+</li>
+</ul>
+<p>这三者结合起来，AI 编程才会真正稳定。</p>
+<p>单纯让 AI 写代码，就像让一个新人没有需求文档、没有测试环境、没有代码规范，直接去改生产系统。这当然风险很高。</p>
+<p>而 SDD + Harness 的目标，就是让 AI 在一个明确、可控、可验证的环境里工作。</p>
+<hr />
+<h2 id="sdd_3">六、SDD 的优势<a class="headerlink" href="#sdd_3" title="Permanent link">&para;</a></h2>
+<h3 id="1-ai">1. 降低 AI 跑偏的概率<a class="headerlink" href="#1-ai" title="Permanent link">&para;</a></h3>
+<p>需求和设计越清楚，AI 自由发挥的空间越小，结果越稳定。</p>
+<h3 id="2_1">2. 提高复杂项目成功率<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>复杂项目最怕上下文混乱。SDD 通过文档和任务拆解，把复杂问题分层处理。</p>
+<h3 id="3-agent">3. 方便多人或多 Agent 协作<a class="headerlink" href="#3-agent" title="Permanent link">&para;</a></h3>
+<p>如果没有统一规范，不同人或不同 Agent 很容易互相覆盖、重复劳动、实现风格不一致。</p>
+<p>SDD 可以让所有执行者围绕同一套规范工作。</p>
+<h3 id="4_1">4. 方便测试和验收<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<p>SDD 从一开始就定义“什么叫完成”，不会等代码写完才发现缺少关键功能。</p>
+<h3 id="5_1">5. 方便长期维护<a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h3>
+<p>规范文档保留下来后，后续重构、扩展、排错都会更容易。</p>
+<hr />
+<h2 id="sdd_4">七、SDD 也不是万能的<a class="headerlink" href="#sdd_4" title="Permanent link">&para;</a></h2>
+<p>SDD 并不意味着文档越多越好。</p>
+<p>如果项目很小，比如写一个脚本、改一个样式、修一个简单 bug，写大量规范反而会降低效率。</p>
+<p>SDD 更适合这些场景：</p>
+<ul>
+<li>
+<p>项目结构复杂</p>
+</li>
+<li>
+<p>需求容易变化</p>
+</li>
+<li>
+<p>需要长期维护</p>
+</li>
+<li>
+<p>涉及多人协作</p>
+</li>
+<li>
+<p>涉及多个模块</p>
+</li>
+<li>
+<p>涉及数据库、接口、权限、测试</p>
+</li>
+<li>
+<p>使用 AI Agent 进行自动化开发</p>
+</li>
+<li>
+<p>希望项目可以复盘、扩展、交付</p>
+</li>
+</ul>
+<p>所以 SDD 的关键是“在合适的复杂度下写必要的规范”。</p>
+<p>简单任务轻规范，复杂任务重规范。</p>
+<hr />
+<h2 id="sdd_5">八、一个最小可用的 SDD 模板<a class="headerlink" href="#sdd_5" title="Permanent link">&para;</a></h2>
+<p>如果刚开始实践 SDD，不需要一上来写得特别复杂。可以先用一个最小模板。</p>
+<h3 id="1_1">1. 项目目标<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>这个项目要解决什么问题？</p>
+<h3 id="2_2">2. 用户角色<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h3>
+<p>谁会使用这个系统？</p>
+<h3 id="3_1">3. 核心功能<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>系统必须包含哪些功能？</p>
+<h3 id="4_2">4. 非目标<a class="headerlink" href="#4_2" title="Permanent link">&para;</a></h3>
+<p>哪些功能这次不做？</p>
+<h3 id="5_2">5. 技术设计<a class="headerlink" href="#5_2" title="Permanent link">&para;</a></h3>
+<p>使用什么技术栈？系统分成哪些模块？</p>
+<h3 id="6">6. 数据设计<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<p>有哪些核心数据表或数据结构？</p>
+<h3 id="7">7. 接口设计<a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
+<p>主要接口有哪些？输入输出是什么？</p>
+<h3 id="8">8. 任务拆解<a class="headerlink" href="#8" title="Permanent link">&para;</a></h3>
+<p>开发任务按什么顺序执行？</p>
+<h3 id="9">9. 验收标准<a class="headerlink" href="#9" title="Permanent link">&para;</a></h3>
+<p>怎样判断功能完成？</p>
+<h3 id="10">10. 风险和边界<a class="headerlink" href="#10" title="Permanent link">&para;</a></h3>
+<p>有哪些容易出错的地方？哪些操作不能让 AI 自动执行？</p>
+<p>这个模板不复杂，但已经足够让 AI 编程从“随口指挥”变成“规范化开发”。</p>
+<hr />
+<h2 id="_1">九、未来发展展望<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>SDD 很可能会影响未来软件开发的基本形态。</p>
+<h3 id="1_2">1. 规范会成为新的核心资产<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<p>过去很多团队最重视代码仓库。未来，规范文档、架构决策、任务计划、测试标准可能会变得和代码一样重要，甚至更重要。</p>
+<p>因为 AI 可以快速生成代码，但前提是它要知道生成什么、为什么这样生成、如何判断生成结果是否正确。</p>
+<p>未来优秀项目的核心竞争力，可能不只看代码是否写得好，还要看规范体系写得好不好。</p>
+<hr />
+<h3 id="2_3">2. 程序员角色会向“系统设计者”转变<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h3>
+<p>AI 能承担越来越多具体编码工作后，程序员的价值会更多体现在：</p>
+<ul>
+<li>
+<p>定义问题</p>
+</li>
+<li>
+<p>拆解任务</p>
+</li>
+<li>
+<p>设计架构</p>
+</li>
+<li>
+<p>编写规范</p>
+</li>
+<li>
+<p>设计测试</p>
+</li>
+<li>
+<p>审查结果</p>
+</li>
+<li>
+<p>控制风险</p>
+</li>
+<li>
+<p>维护系统演化方向</p>
+</li>
+</ul>
+<p>也就是说，程序员不会消失，但会从“主要写代码的人”变成“设计软件生产系统的人”。</p>
+<p>会写代码仍然重要，但只会写代码可能不够了。</p>
+<hr />
+<h3 id="3-ai-agent">3. AI Agent 会越来越像工程团队成员<a class="headerlink" href="#3-ai-agent" title="Permanent link">&para;</a></h3>
+<p>未来的 AI Agent 不会只是一个聊天窗口，而会更像一个团队成员：</p>
+<ul>
+<li>
+<p>有自己的角色</p>
+</li>
+<li>
+<p>有自己的权限</p>
+</li>
+<li>
+<p>有自己的任务列表</p>
+</li>
+<li>
+<p>能读取项目规范</p>
+</li>
+<li>
+<p>能提交代码</p>
+</li>
+<li>
+<p>能运行测试</p>
+</li>
+<li>
+<p>能写总结</p>
+</li>
+<li>
+<p>能根据失败经验改进流程</p>
+</li>
+</ul>
+<p>这时候，管理 Agent 就会变得像管理一个小型工程团队。</p>
+<p>你需要给它岗位职责、工作流程、验收标准和权限边界。</p>
+<hr />
+<h3 id="4_3">4. 开发流程会从“代码驱动”转向“规范驱动”<a class="headerlink" href="#4_3" title="Permanent link">&para;</a></h3>
+<p>传统开发流程里，很多细节是在写代码过程中慢慢浮现的。</p>
+<p>未来更可能是：</p>
+<ol>
+<li>
+<p>人类提出目标</p>
+</li>
+<li>
+<p>AI 辅助生成需求规范</p>
+</li>
+<li>
+<p>AI 辅助生成设计规范</p>
+</li>
+<li>
+<p>人类审查并修正规范</p>
+</li>
+<li>
+<p>AI 根据规范生成任务</p>
+</li>
+<li>
+<p>AI 执行任务并生成代码</p>
+</li>
+<li>
+<p>自动测试和验证系统检查结果</p>
+</li>
+<li>
+<p>人类审核关键决策</p>
+</li>
+<li>
+<p>规范和代码一起演化</p>
+</li>
+</ol>
+<p>这是一种新的软件生产线。</p>
+<p>在这条生产线里，代码即是规范推导出来的结果。</p>
+<hr />
+<h3 id="5_3">5. 测试和验证会变得更重要<a class="headerlink" href="#5_3" title="Permanent link">&para;</a></h3>
+<p>AI 写代码越快，验证就越重要。</p>
+<p>未来 AI 编程的瓶颈可能不是“生成代码”，而是“证明代码是对的”。</p>
+<p>所以测试、静态分析、类型检查、接口契约、运行日志、安全扫描、自动化验收都会变得更加关键。</p>
+<p>谁能构建更好的验证体系，谁就能更放心地使用 AI 自动开发。</p>
+<hr />
+<h3 id="6-sdd">6. SDD 会和企业知识库结合<a class="headerlink" href="#6-sdd" title="Permanent link">&para;</a></h3>
+<p>未来 SDD 不会只是几份 Markdown 文档。</p>
+<p>它可能会和企业内部知识库、代码仓库、设计系统、API 文档、测试平台、项目管理工具连接起来。</p>
+<p>AI 在开发前，会自动读取：</p>
+<ul>
+<li>
+<p>公司代码规范</p>
+</li>
+<li>
+<p>历史架构决策</p>
+</li>
+<li>
+<p>业务规则</p>
+</li>
+<li>
+<p>数据库约束</p>
+</li>
+<li>
+<p>接口文档</p>
+</li>
+<li>
+<p>过往故障记录</p>
+</li>
+<li>
+<p>安全合规要求</p>
+</li>
+<li>
+<p>用户反馈</p>
+</li>
+</ul>
+<p>这样生成的代码会更符合组织真实需求，而不是只符合通用模板。</p>
+<hr />
+<h3 id="7-sdd-agent">7. SDD 会成为 Agent 协作的基础协议<a class="headerlink" href="#7-sdd-agent" title="Permanent link">&para;</a></h3>
+<p>当一个项目里有多个 Agent 时，必须有统一规范，否则协作会非常混乱。</p>
+<p>未来可能会出现这样的分工：</p>
+<ul>
+<li>
+<p>Product Agent 负责需求分析</p>
+</li>
+<li>
+<p>Architect Agent 负责系统设计</p>
+</li>
+<li>
+<p>Coding Agent 负责代码实现</p>
+</li>
+<li>
+<p>Test Agent 负责编写测试</p>
+</li>
+<li>
+<p>Review Agent 负责代码审查</p>
+</li>
+<li>
+<p>DevOps Agent 负责部署和监控</p>
+</li>
+<li>
+<p>Security Agent 负责安全检查</p>
+</li>
+</ul>
+<p>这些 Agent 之间需要共享同一套规范。SDD 就可能成为它们之间的协作协议。</p>
+<hr />
+<h2 id="sdd_6">十、普通开发者应该如何开始实践 SDD？<a class="headerlink" href="#sdd_6" title="Permanent link">&para;</a></h2>
+<p>不需要一开始就追求复杂流程，可以从三个习惯开始。</p>
+<p>第一，写代码前先写一句清晰目标：</p>
+<blockquote>
+<p>我要做什么？为什么做？做到什么程度算完成？</p>
+</blockquote>
+<p>第二，让 AI 先生成设计方案，不要直接生成代码：</p>
+<blockquote>
+<p>请先给我需求分析、模块设计、数据结构和任务拆解，暂时不要写代码。</p>
+</blockquote>
+<p>第三，每个任务都要求 AI 给出验收方式：</p>
+<blockquote>
+<p>完成后需要运行哪些测试？如何判断结果正确？有哪些边界情况？</p>
+</blockquote>
+<p>只要坚持这三点，AI 编程质量就会明显提升。</p>
+<hr />
+<h2 id="_2">结语<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>SDD 的本质是让开发过程从“凭感觉推进”变成“按规范推进”。</p>
+<p>在 AI 编程时代，这一点尤其重要。</p>
+<p>因为 AI 的执行能力越来越强，真正稀缺的能力会变成：定义目标、设计系统、制定规范、控制风险、验证结果。</p>
+<p>未来的软件开发，很可能不再是一个人从零开始敲代码，而是人类和多个 AI Agent 在同一套规范下协同工作。</p>
+<p>谁能写出更清晰的规范，谁就能更好地驾驭 AI。</p>
+<p>代码会越来越容易生成，但好的规范、好的架构、好的判断力，会越来越值钱。</p>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260814185045/">
+            <small>思 · 原创手记</small>
+            <strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805095251/">
+            <small>思 · 原创手记</small>
+            <strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805092845/">
+            <small>思 · 原创手记</small>
+            <strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../../B-Notes/260715215301/"><small>← 更新一篇</small><strong>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</strong></a>
+    
+    
+      <a href="../260610193423/"><small>更早一篇 →</small><strong>一文讲懂 Skill 和 Agent 的区别与联系</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000原创文章目录/">继续逛原创手记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

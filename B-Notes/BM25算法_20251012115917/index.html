@@ -1,0 +1,864 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="它的名字叫 BM25，全称是 “Best Match 25”，你可以把它理解成一个非常经典的、经过了20多次迭代优化后诞生的“最佳匹配”算法。 它的本质是一个排名函数或评分函数。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/B-Notes/BM25%E7%AE%97%E6%B3%95_20251012115917/">
+      
+      
+        <link rel="prev" href="../AppleScript%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%99%B7%E9%98%B1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%AF%BC%E8%87%B4%E7%9A%84%E7%AC%A6%E5%8F%B7%E9%94%99%E8%AF%AF_20250907233250/">
+      
+      
+        <link rel="next" href="../GET_20241207153536/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>BM25算法 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="BM25算法 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="它的名字叫 BM25，全称是 “Best Match 25”，你可以把它理解成一个非常经典的、经过了20多次迭代优化后诞生的“最佳匹配”算法。 它的本质是一个排名函数或评分函数。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/B-Notes/BM25%E7%AE%97%E6%B3%95_20251012115917/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BM25算法 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="它的名字叫 BM25，全称是 “Best Match 25”，你可以把它理解成一个非常经典的、经过了20多次迭代优化后诞生的“最佳匹配”算法。 它的本质是一个排名函数或评分函数。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2025-10-12T11:59:00">
+    <meta property="article:modified_time" content="2025-10-12T11:59:00">
+    <meta property="article:section" content="格物札记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u683c\u7269\u672d\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2025-10-12T11:59:00", "datePublished": "2025-10-12T11:59:00", "description": "\u5b83\u7684\u540d\u5b57\u53eb BM25\uff0c\u5168\u79f0\u662f \u201cBest Match 25\u201d\uff0c\u4f60\u53ef\u4ee5\u628a\u5b83\u7406\u89e3\u6210\u4e00\u4e2a\u975e\u5e38\u7ecf\u5178\u7684\u3001\u7ecf\u8fc7\u4e8620\u591a\u6b21\u8fed\u4ee3\u4f18\u5316\u540e\u8bde\u751f\u7684\u201c\u6700\u4f73\u5339\u914d\u201d\u7b97\u6cd5\u3002 \u5b83\u7684\u672c\u8d28\u662f\u4e00\u4e2a\u6392\u540d\u51fd\u6570\u6216\u8bc4\u5206\u51fd\u6570\u3002", "headline": "BM25\u7b97\u6cd5", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/B-Notes/BM25%E7%AE%97%E6%B3%95_20251012115917/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/B-Notes/BM25%E7%AE%97%E6%B3%95_20251012115917/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bm25" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../../D-Orginals/000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bm25-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、BM25 是什么，它在 RAG 系统里做什么？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bm25_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、BM25 的核心思想
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bm25_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、庖丁解牛：一步步拆解 BM25 公式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、庖丁解牛：一步步拆解 BM25 公式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#idfq_i-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一部分：\(IDF(q_i)\) - 查询词的重要性权重
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二部分：那个复杂的大分数 - 词频与文档长度的平衡艺术
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第二部分：那个复杂的大分数 - 词频与文档长度的平衡艺术">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1k_1-12-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        旋钮1：\(k_1\) (通常在 1.2 到 2.0 之间)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2b-075" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        旋钮2：\(b\) (通常为 0.75)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sum_i1n-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三部分：\(\sum_{i=1}^{n}\) - 汇总所有词的得分
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、总结与梳理
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="B"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    B Notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000学习笔记目录/" aria-label="浏览格物札记全部内容">
+          技 · 格物札记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2025-10-12T11:59:00">
+          2025-10-12
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">BM25算法</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <h3 id="bm25-rag">一、BM25 是什么，它在 RAG 系统里做什么？<a class="headerlink" href="#bm25-rag" title="Permanent link">&para;</a></h3>
+<p>我们先从宏观上理解一下。</p>
+<ul>
+<li>它的名字叫 BM25，全称是 "Best Match 25"，你可以把它理解成一个非常经典的、经过了20多次迭代优化后诞生的“最佳匹配”算法。</li>
+<li>它的本质是一个<code>排名函数</code>或<code>评分函数</code>。</li>
+</ul>
+<p>想象一下，在 RAG 流程中，我们根据用户的提问（Query），需要在知识库（一大堆文档）里找到最相关的几篇文档，然后交给语言模型去生成答案。</p>
+<p>问题来了：怎么判断哪些文档“最相关”呢？</p>
+<p>BM25 就是解决这个问题的工具。它会为每一篇文档都打一个“相关性分数”。分数越高的文档，就代表它和用户的提问越相关，我们也就越应该把它排在前面。</p>
+<h3 id="bm25_1">二、BM25 的核心思想<a class="headerlink" href="#bm25_1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>核心思想是根据词项的出现频率来评估文档对于查询的相关性。</p>
+</blockquote>
+<p>BM25 主要考虑了三个核心要素来计算这个分数：</p>
+<ol>
+<li>查询词在文档中出现的次数（TF - Term Frequency）。</li>
+<li>查询词在所有文档中的普遍程度（IDF - Inverse Document Frequency）。</li>
+<li>文档的长度。</li>
+</ol>
+<p>简单来说，一个词在某篇文档里出现次数越多，这篇文档的相关性可能就越高。但是，我们还需要考虑这个词本身的重要性以及文档的长度，不能一概而论。BM25 就是一个把这三者巧妙结合起来的数学公式。</p>
+<h3 id="bm25_2">三、庖丁解牛：一步步拆解 BM25 公式<a class="headerlink" href="#bm25_2" title="Permanent link">&para;</a></h3>
+<p>我们再来看一下这个公式：</p>
+<div class="arithmatex">\[
+Score(D, Q) = \sum_{i=1}^{n} IDF(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot (1 - b + b \cdot \frac{|D|}{avgdl})}
+\]</div>
+<p>别怕，我们把它拆成三块来看：</p>
+<h4 id="idfq_i-">第一部分：<span class="arithmatex">\(IDF(q_i)\)</span> - 查询词的重要性权重<a class="headerlink" href="#idfq_i-" title="Permanent link">&para;</a></h4>
+<ul>
+<li><span class="arithmatex">\(q_i\)</span> 指的是你查询语句中的第 <span class="arithmatex">\(i\)</span> 个词。比如查询是“人工智能的应用”，那 <span class="arithmatex">\(q_1\)</span> 就是“人工智能”，<span class="arithmatex">\(q_2\)</span> 就是“的”，<span class="arithmatex">\(q_3\)</span> 就是“应用”。（当然，像“的”这种停用词通常会预先被去掉）。</li>
+<li><span class="arithmatex">\(IDF(q_i)\)</span> 是“逆文档频率”（Inverse Document Frequency）。它的作用是给每个查询词一个权重。</li>
+</ul>
+<p>这个思想很直观：一个词如果在所有文档里都很少出现（比如“量子纠缠”），那它一旦在某篇文档里出现，这篇文档就很可能是我们想要的，所以这个词的权重就应该很高。相反，一个词如果到处都是（比如“技术”、“一个”），那它就没什么区分度，权重自然就应该很低。</p>
+<blockquote>
+<p><strong>补充</strong></p>
+<p>IDF 常见的计算方式：</p>
+<div class="arithmatex">\[
+IDF(q_i) = \log\left(\frac{N - n(q_i) + 0.5}{n(q_i) + 0.5} + 1\right)
+\]</div>
+<ul>
+<li><span class="arithmatex">\(N\)</span> 是文档总数。</li>
+<li><span class="arithmatex">\(n(q_i)\)</span> 是包含词 <span class="arithmatex">\(q_i\)</span> 的文档数量。</li>
+</ul>
+<p>包含这个词的文档 <span class="arithmatex">\(n(q_i)\)</span> 越多，分母就越大，算出来的 IDF 值就越小。这就通过数学公式实现了我们刚才说的那个直观想法。</p>
+</blockquote>
+<h4 id="-">第二部分：那个复杂的大分数 - 词频与文档长度的平衡艺术<a class="headerlink" href="#-" title="Permanent link">&para;</a></h4>
+<p>这部分是 BM25 的精髓，我们把它也拆开看。</p>
+<div class="arithmatex">\[
+\frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot (1 - b + b \cdot \frac{|D|}{avgdl})}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(f(q_i, D)\)</span>：这个很简单，就是查询词 <span class="arithmatex">\(q_i\)</span> 在文档 <span class="arithmatex">\(D\)</span> 中出现的次数（词频）。</li>
+<li><span class="arithmatex">\(|D|\)</span>：文档 <span class="arithmatex">\(D\)</span> 的长度（比如包含多少个词）。</li>
+<li><span class="arithmatex">\(avgdl\)</span>：所有文档的平均长度。</li>
+</ul>
+<p>这部分引入了两个讲义中提到的重要参数 <span class="arithmatex">\(k_1\)</span> 和 <span class="arithmatex">\(b\)</span>，它们是 BM25 的“调节旋钮”。</p>
+<h5 id="1k_1-12-20">旋钮1：<span class="arithmatex">\(k_1\)</span> (通常在 1.2 到 2.0 之间)<a class="headerlink" href="#1k_1-12-20" title="Permanent link">&para;</a></h5>
+<p><span class="arithmatex">\(k_1\)</span> 用来控制“词频饱和度”。什么意思呢？</p>
+<p>想象一下，一个词在一篇文档里从出现 1 次变成出现 3 次，相关性可能会大大增加。但如果它从 30 次变成 32 次，相关性的提升可能就没那么明显了。也就是说，词频带来的收益不是无限线性增长的，它会“饱和”。<span class="arithmatex">\(k_1\)</span> 就是用来调节这个饱和曲线的。<span class="arithmatex">\(k_1\)</span> 值越小，饱和的速度越快，词频的微小差异带来的影响就越小。</p>
+<h5 id="2b-075">旋钮2：<span class="arithmatex">\(b\)</span> (通常为 0.75)<a class="headerlink" href="#2b-075" title="Permanent link">&para;</a></h5>
+<p><span class="arithmatex">\(b\)</span> 用来控制“文档长度”的影响力。</p>
+<p>这个也很好理解：一个 100 字的短评里出现了“好吃”，和一个 5000 字的美食报告里出现了“好吃”，前者的重要性显然更高。BM25 认为，长文档有天然的优势（更容易包含查询词），所以需要对它们进行一些“惩罚”。</p>
+<ul>
+<li>当文档 <span class="arithmatex">\(D\)</span> 的长度 <span class="arithmatex">\(|D|\)</span> 大于平均长度 <span class="arithmatex">\(avgdl\)</span> 时，<span class="arithmatex">\(\frac{|D|}{avgdl}\)</span> 大于 1，分母会变大，最终得分会变小（惩罚）。</li>
+<li>当文档 <span class="arithmatex">\(D\)</span> 的长度 <span class="arithmatex">\(|D|\)</span> 小于平均长度 <span class="arithmatex">\(avgdl\)</span> 时，<span class="arithmatex">\(\frac{|D|}{avgdl}\)</span> 小于 1，分母会变小，最终得分会变高（鼓励）。</li>
+</ul>
+<p>参数 <span class="arithmatex">\(b\)</span> 就是控制这个惩罚/鼓励力度的。如果 <span class="arithmatex">\(b=0\)</span>，那文档长度就完全不起作用了。如果 <span class="arithmatex">\(b=1\)</span>，则完全用文档长度来做调节。</p>
+<h4 id="sum_i1n-">第三部分：<span class="arithmatex">\(\sum_{i=1}^{n}\)</span> - 汇总所有词的得分<a class="headerlink" href="#sum_i1n-" title="Permanent link">&para;</a></h4>
+<p>这个 <span class="arithmatex">\(\sum\)</span> 符号是求和的意思。因为一个查询通常包含多个词（比如 "RAG 系统 培训"），BM25 会为 "RAG"、"系统"、"培训" 这三个词分别计算上面两大块（IDF 和那个大分数）的乘积，最后再把这三个词的得分加起来，就得到了这篇文档相对于整个查询的总分 <span class="arithmatex">\(Score(D, Q)\)</span>。</p>
+<h3 id="_1">四、总结与梳理<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>好了，现在我们把所有零件都组装起来，重新梳理一下 BM25 的工作流程：</p>
+<ol>
+<li><strong>接收任务</strong>：拿到一个查询 <span class="arithmatex">\(Q\)</span>（比如 "人工智能的应用"）和一篇待评分的文档 <span class="arithmatex">\(D\)</span>。</li>
+<li><strong>分词</strong>：把查询 <span class="arithmatex">\(Q\)</span> 拆成一个个的词 <span class="arithmatex">\(q_i\)</span> ("人工智能", "应用")。</li>
+<li><strong>逐词计算</strong>：对每一个词 <span class="arithmatex">\(q_i\)</span>：<br />
+    a.  <strong>计算重要性</strong>：计算这个词的 <span class="arithmatex">\(IDF(q_i)\)</span> 值。这个词越稀有，值越高。<br />
+    b.  <strong>计算词频相关性</strong>：计算那个大分数。它会考虑词 <span class="arithmatex">\(q_i\)</span> 在文档 <span class="arithmatex">\(D\)</span> 中出现的次数，并用 <span class="arithmatex">\(k_1\)</span> 来防止词频影响过大，同时用 <span class="arithmatex">\(b\)</span> 和文档长度来对得分进行校正。<br />
+    c.  <strong>相乘</strong>：将 a 和 b 的结果乘起来，得到词 <span class="arithmatex">\(q_i\)</span> 对总分的贡献。</li>
+<li><strong>累加总分</strong>：把所有查询词（"人工智能"、"应用"）的得分加起来，就是文档 <span class="arithmatex">\(D\)</span> 的最终 BM25 分数。</li>
+<li><strong>排序</strong>：对知识库里所有文档都执行一遍这个流程，得到一个分数列表，然后按分数从高到低排序，排名最靠前的就是与查询最相关的文档。</li>
+</ol>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260715215301/">
+            <small>技 · 格物札记</small>
+            <strong>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260408092240/">
+            <small>技 · 格物札记</small>
+            <strong>把 AI 这些名词一次讲明白</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260326204122/">
+            <small>技 · 格物札记</small>
+            <strong>IELTS-Academic-TestOne-Listening-PartOne</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../%E5%AF%86%E9%9B%86%E6%A3%80%E7%B4%A2%EF%BC%9A%E8%AE%A9%E6%90%9C%E7%B4%A2%E6%9B%B4%E6%87%82%E4%BD%A0%E7%9A%84%E6%8A%80%E6%9C%AF_20251016192836/"><small>← 更新一篇</small><strong>密集检索：让搜索更懂你的技术</strong></a>
+    
+    
+      <a href="../AppleScript%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%99%B7%E9%98%B1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%AF%BC%E8%87%B4%E7%9A%84%E7%AC%A6%E5%8F%B7%E9%94%99%E8%AF%AF_20250907233250/"><small>更早一篇 →</small><strong>AppleScript 自动化陷阱：如何解决中英文输入法导致的符号错误</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000学习笔记目录/">继续逛格物札记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

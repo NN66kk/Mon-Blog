@@ -1,0 +1,2466 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="技术、数学、英语与 AI 学习过程中留下的方法和推演。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/B-Notes/000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/">
+      
+      
+        <link rel="prev" href="../../A-Life/001%E7%94%9F%E6%B4%BB%E7%99%BE%E7%A7%91/%E9%B8%A1%E8%9B%8B%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%E5%BE%AE%E6%B3%A2%E7%82%89%E5%8A%A0%E7%83%AD%EF%BC%9F/">
+      
+      
+        <link rel="next" href="../168%20%E6%96%AD%E9%A3%9F%E6%B3%95_20240606121851/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>格物札记 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="格物札记 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="技术、数学、英语与 AI 学习过程中留下的方法和推演。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/B-Notes/000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="格物札记 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="技术、数学、英语与 AI 学习过程中留下的方法和推演。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../../D-Orginals/000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../000000学习笔记目录/" aria-current="page">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+      
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--collection"
+    data-md-component="content"
+    data-page-type="collection"
+    data-page-collection="B"
+  >
+    
+      
+
+  
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    B Notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--collection">
+      
+  
+  
+    
+  
+    
+      
+      
+      
+    
+  
+    
+  
+    
+  
+
+  <div class="garden-collection garden-collection--b" data-page-layout="collection">
+    <header class="collection-hero">
+      <div class="collection-hero__mark" aria-hidden="true">技</div>
+      <div class="collection-hero__copy">
+        <span class="garden-eyebrow"><i aria-hidden="true"></i> COLLECTION B</span>
+        <h1>格物札记</h1>
+        <p>技术、数学、英语与 AI 学习过程中留下的方法和推演。</p>
+      </div>
+      <div class="collection-hero__meta">
+        <strong>137</strong>
+        <span>篇公开记录</span>
+      </div>
+    </header>
+
+    
+      <nav class="collection-topics" aria-label="常见主题">
+        <span>常见主题</span>
+        <a href="../../archive/?collection=B&q=写作应用">写作应用</a><a href="../../archive/?collection=B&q=GPT">GPT</a><a href="../../archive/?collection=B&q=田静">田静</a><a href="../../archive/?collection=B&q=健身">健身</a><a href="../../archive/?collection=B&q=电脑知识">电脑知识</a><a href="../../archive/?collection=B&q=技巧">技巧</a><a href="../../archive/?collection=B&q=人工智能">人工智能</a><a href="../../archive/?collection=B&q=考研数学">考研数学</a>
+      </nav>
+    
+
+    <section class="collection-content" aria-labelledby="collection-latest-title">
+      <header class="section-heading">
+        <div>
+          <span class="garden-eyebrow"><i aria-hidden="true"></i> LATEST IN THIS PATH</span>
+          <h2 id="collection-latest-title">沿这条小径继续</h2>
+        </div>
+        <a class="garden-more-link" href="../../archive/?collection=B">在归档中筛选 <span aria-hidden="true">→</span></a>
+      </header>
+
+      
+        <div class="collection-posts">
+          
+            <article class="collection-post collection-post--lead">
+              <a href="../260715215301/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-07-15T21:53:01+08:00">2026-07-15</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</h3>
+                  <p>文章结合邓紫棋历次演出曲目，预测天津演唱会可能演唱的五十首歌曲，并汇总歌词、创作背景与作品故事，供观众提前熟悉歌单。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../260408092240/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-04-08T09:22:41+08:00">2026-04-08</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>把 AI 这些名词一次讲明白</h3>
+                  <p>系统梳理了 Skill、Harness Engineering、RAG 等 AI 核心概念，解释其定义、作用、区别与工程关系，帮助建立完整技术认知框架。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../260326204122/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-03-26T20:41:23+08:00">2026-03-26</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>IELTS-Academic-TestOne-Listening-PartOne</h3>
+                  <p>剑雅二十测试一的第一个听力版块，自主学习使用，刚开始准备还是挺困难的，慢慢啃吧。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../260323143157/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-03-23T14:31:57+08:00">2026-03-23</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>华哥使用吕布对线孙策的恐怖细节</h3>
+                  <p>逐帧解析华哥对线孙策的操作细节，看后令人叹为观止，脊背发凉！请永远铭记 2568 这四个数字！~</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../260320184526/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-03-20T18:45:26+08:00">2026-03-20</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>杠铃卧推运动细节</h3>
+                  <p>系统梳理杠铃卧推动作细节，涵盖起始姿势、握距发力路径、呼吸节奏与核心稳定。强调肩胛控制、避免常见错误、提升训练效果与安全性。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../20260308114756/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-03-12T23:55:37+08:00">2026-03-12</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>上学的意义，远不只是为了找一份工作</h3>
+                  <p>文章反思“为什么要上学”。认为教育不应只服务于就业，更重要的是拓展认知、认识他人、培养学习能力与独立思考，并在相对宽松的环境中完成自我探索与人格成长。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../260311211821/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-03-11T21:18:21+08:00">2026-03-11</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>为什么 Claude Code 放弃 RAG，转向 Agentic Search</h3>
+                  <p>在代码理解场景中，传统 RAG 往往因为检索噪声与上下文污染导致回答不稳定。本文结合 Claude Code 的实践经验，分析 Agentic Search 的工作机制及其优势。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%B8%80%E5%91%A8%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92_20260307095200/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-03-07T09:52:00">2026-03-07</time>
+                  <span>健身</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>一周健身训练计划</h3>
+                  <p>整体结构采用 Upper / Lower Split（上下肢分化）。这样每个肌群一周刺激 2 次，恢复时间约 48–72 小时，比较合理。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../RAG_%E4%B8%8E_n8n_%E7%9A%84%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90_20260130195623/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-01-30T19:56:00">2026-01-30</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>RAG 与 n8n 的关系分析</h3>
+                  <p>很多人在接触 RAG（Retrieval-Augmented Generation）之后，会下意识地联想到 n8n、Zapier 这类自动化工具，觉得二者“思路很像”。这种直觉并不是表层误判，而是触及到了一个更深层的共性：它们都在用“可编排流程”重构系统能力的边界。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%BB%80%E4%B9%88%E6%98%AF%20n8n%EF%BC%9F%E4%B8%80%E7%AF%87%E6%8A%8A%20AI%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%B2%E6%B8%85%E6%A5%9A%E7%9A%84%E7%A7%91%E6%99%AE%E6%96%87%E7%AB%A0_20260130192258/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-01-30T19:22:00">2026-01-30</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>什么是 n8n？一篇把 AI 工作流讲清楚的科普文章</h3>
+                  <p>很多人第一次接触 n8n，都会有一种感觉： “这东西看起来好像很强，但我一时说不清它到底是干嘛的。”</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%A0%94%E7%A9%B6%E7%94%9F%E5%BF%83%E7%90%86%E8%A7%82%E5%AF%9F_20260112224858/">
+                <div class="collection-post__meta">
+                  <time datetime="2026-01-12T22:48:00">2026-01-12</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>研究生心理观察</h3>
+                  <p>21 世纪 20 年代，中国高等教育正经历剧烈的结构性变革。截至 2023 年，在读硕士和博士研究生总数突破 365.36 万人，这庞大的高知群体承载着国家创新驱动发展的厚望。然而，随着“研究生教育大众化”进程加速，学历稀缺性逐渐被稀释，社会学意义上的“学历通胀”愈发明显。当代研究生身处一个充满悖论的生存夹…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%A4%BA%E8%8C%83%E6%96%87%E7%AB%A0_20251203075029/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-12-03T07:50:00">2025-12-03</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>示范文章</h3>
+                  <p>In the modern fast-paced society, people are increasingly aware of the importance of social harmony. Meanwhile, listening plays a significant role in it.…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%AD%89%E9%AB%98%E7%BA%BF%E5%9C%B0%E5%BD%A2%E5%9B%BE_20251130101423/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-11-30T10:14:00">2025-11-30</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>等高线地形图</h3>
+                  <p>我们可以把等高线地形图想象成一个“切土豆”的过程。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%AF%86%E9%9B%86%E6%A3%80%E7%B4%A2%EF%BC%9A%E8%AE%A9%E6%90%9C%E7%B4%A2%E6%9B%B4%E6%87%82%E4%BD%A0%E7%9A%84%E6%8A%80%E6%9C%AF_20251016192836/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-10-16T19:28:00">2025-10-16</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>密集检索：让搜索更懂你的技术</h3>
+                  <p>当我们向搜索引擎提出一个问题时，我们期望它能像一个聪明的助手那样，理解我们话语背后的真实意图，而不仅仅是识别出几个孤立的关键词。这项让我们得以实现的魔法，就是“密集检索”（Dense Retrieval）技术。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../BM25%E7%AE%97%E6%B3%95_20251012115917/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-10-12T11:59:00">2025-10-12</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>BM25算法</h3>
+                  <p>它的名字叫 BM25，全称是 “Best Match 25”，你可以把它理解成一个非常经典的、经过了20多次迭代优化后诞生的“最佳匹配”算法。 它的本质是一个排名函数或评分函数。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../AppleScript%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%99%B7%E9%98%B1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%AF%BC%E8%87%B4%E7%9A%84%E7%AC%A6%E5%8F%B7%E9%94%99%E8%AF%AF_20250907233250/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-09-07T23:32:00">2025-09-07</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>AppleScript 自动化陷阱：如何解决中英文输入法导致的符号错误</h3>
+                  <p>在使用 AppleScript 进行文本自动化处理时，一个常见且令人头疼的问题是符号输入的不确定性。你可能希望脚本输入一个半角的英文符号（如 ），但由于执行时系统恰好处于中文输入法状态，结果输入的却是全角符号（｜）。这个问题虽小，却能让整个自动化流程失败。本文将从一个真实案例出发，层层递进，为你展示如何编写…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%A2%A8%E8%8F%B2%E5%AE%9A%E5%BE%8B_20250905213828/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-09-05T21:38:00">2025-09-05</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>深度解析墨菲定律</h3>
+                  <p>你是否有过这样的经历：在一条空旷的马路上开车，却偏偏在唯一有坑的地方爆了胎；或者你越是担心新买的白衬衫被弄脏，就越有可能在午餐时把酱汁滴在上面。这种仿佛被诅咒一般，“怕什么来什么”的现象，其实可以用一个著名的定律来解释——墨菲定律。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E6%95%B0%E5%88%B6%E3%80%81%E8%A1%A5%E7%A0%81%E4%B8%8E%E5%87%8F%E6%B3%95%E5%AE%9E%E7%8E%B0_20250904214148/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-09-04T21:41:00">2025-09-04</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>理解计算机中的数制、补码与减法实现</h3>
+                  <p>这篇文章的核心始于计算机世界的基本沟通方式——数制。首先，我们需要理解我们日常使用的十进制，它基于“逢十进一”的规则，是我们与世界互动的自然语言。然而，计算机的硬件由无数个微小的开关构成，只能表示“开”和“关”两种状态，这对应着二进制中的 1 和 0。二进制是计算机能够直接理解的“母语”，其规则是“逢二进一…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../Transformer%20Encoder%20%E9%80%9A%E4%BF%97%E5%8C%96%E8%A7%A3%E8%AF%BB_2025090318229/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-09-03T18:22:00">2025-09-03</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Transformer Encoder 通俗化解读</h3>
+                  <p>本文针对讲解的是 VIT 文献中的一张图，目的是为了用简单的语言说明白这样图的原理：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%85%A8%E7%BD%91%E6%9C%80%E8%AF%A6%E5%B0%BD%E8%8B%B1%E9%9B%84%E2%80%9C%E5%BD%B1%E2%80%9D%E7%BB%88%E6%9E%81%E6%94%BB%E7%95%A5%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%8C%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F_20250810100730/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-08-10T10:07:00">2025-08-10</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>全网最详尽英雄“影”终极攻略：从入门到精通，一篇就够</h3>
+                  <p>新英雄“影”以其独特的双形态机制、两条命的设定和极高的操作上限，吸引了无数玩家的目光，但其复杂的机制也劝退了不少初学者。今天，这篇攻略将融合多位顶尖玩家数百小时的研究成果，为你彻底揭开“影”的神秘面纱，带你从入门设置到顶尖博弈，全面征服这个强大的英雄。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%BC%80%E9%94%85%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%8E%9F%E7%90%86%E6%8C%87%E5%8D%97_20250805105752/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-08-05T10:57:00">2025-08-05</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>开锅技术与原理指南</h3>
+                  <p>对于许多烹饪新手而言，“开锅”是一个既熟悉又陌生的词汇。为什么要给一口新买的炒菜锅，尤其是铁锅，进行这道看似充满仪式感的工序？这背后其实蕴藏着朴素的科学原理和实用的烹饪智慧。本文将为您详细解读开锅的原理和步骤，确保即便是零基础的厨房小白也能轻松掌握。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../langchain%20%E6%8A%80%E6%9C%AF%E8%A7%A3%E8%AF%BB_2025071716332/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-07-17T16:33:00">2025-07-17</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>langchain 技术架构解读</h3>
+                  <p>这一层是所有工作的起点，是你用来设计和搭建房子“毛坯房”的核心工具。它们都是开源免费 (OSS) 的。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80_2025061919323/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-06-19T19:32:00">2025-06-19</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Git 学习笔记一</h3>
+                  <p>运行后，你会看到提示说“Initialized empty Git repository in .../.git/”。这表示 Git 已经在你的项目里安家了。它创建了一个名为 .git 的隐藏文件夹，这就是我们前面说的“档案柜”。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E3%80%90%E7%BF%BB%E8%AF%91%E6%90%AC%E8%BF%90%E3%80%91%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%97%B6%E4%BB%A3%EF%BC%9A%E5%88%A4%E6%96%AD%E5%8A%9B%E5%87%8C%E9%A9%BE%E4%BA%8E%E6%8A%80%E6%9C%AF%E6%8A%80%E8%83%BD%E4%B9%8B%E4%B8%8A_20250603200642/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-06-03T20:06:00">2025-06-03</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>AI and the Rise of Judgement Over Technical Skill</h3>
+                  <p>这是一篇搬运作品，笔者觉得写得非常好，希望对大家以后的职业规划起到积极作用，原文链接见文末。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%BD%BF%E7%94%A8%20DbContext_20250602081931/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-06-02T08:19:00">2025-06-02</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>使用 DbContext</h3>
+                  <p>We created our entities and DbContext class in the previous chapters. Here you will learn the overview of working with the DbContext to create a database…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3_20250602081610/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-06-02T08:16:00">2025-06-02</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>人工智能相关</h3>
+                  <p>用于人工智能学习的 Anaconda 环境搭建20250302093618 关于在 Anaconda 环境中安装包自动创建内核问题的解决方案20250526202516</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%B8%80%E9%94%AE%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%A4%B9%E5%86%85%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8D%E7%A7%B0_20250528085840/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-05-28T08:58:40">2025-05-28</time>
+                  <span>电脑知识</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>一键获取文件夹内所有文件的名称</h3>
+                  <p>获取当前文件夹下所有文件的名称并保存在一个filename.txt文件当中：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%85%B3%E4%BA%8E%E8%AF%B8%E8%91%9B%E4%BA%AE%E3%80%8A%E9%9A%86%E4%B8%AD%E5%AF%B9%E3%80%8B%E7%9A%84%E6%80%9D%E8%80%83_20250526211312/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-05-26T21:13:00">2025-05-26</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>关于诸葛亮《隆中对》的思考</h3>
+                  <p>亮躬耕陇亩，好为《梁父吟》。身长八尺，每自比于管仲、乐毅，时人莫之许也。惟博陵崔州平、颍川徐庶元直与亮友善，谓为信然。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%85%B3%E4%BA%8E%E5%9C%A8%20Anaconda%20%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85%E5%8C%85%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%86%85%E6%A0%B8%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_20250526202516/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-05-26T20:25:00">2025-05-26</time>
+                  <span>人工智能</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>关于在 Anaconda 环境中安装包自动创建内核问题的解决方案</h3>
+                  <p>首先我们需要明确 conda 环境和 jupyter 内核之间的区别与联系，简单来说，Conda 环境像是一个独立的工具箱，里面装着特定版本的 Python 解释器和项目所需的各种库，确保不同项目间的依赖不冲突。而 Jupyter 内核则是 Jupyter Notebook 用来执行代码的“引擎”或“翻译官…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../LINQ%20%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AF%AD%E6%B3%95_20250522153850/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-05-22T15:38:00">2025-05-22</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>LINQ 查询语法与方法语法</h3>
+                  <p>LINQ (Language Integrated Query) 是 .NET 中一项强大的功能，它允许开发者使用一种统一的、类型安全的方式来查询和操作各种数据源，例如内存中的对象集合、数据库、XML 文档等。在编写 LINQ 查询时，C# 提供了两种主要的风格：查询语法 (Query Syntax) 和…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E6%8B%89%E5%A7%86%E8%BE%BE%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%A6%E8%A7%A3_20250522152436/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-05-22T15:24:00">2025-05-22</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>查询语法拉姆达表达式详解</h3>
+                  <p>在现代 C# 开发中，Lambda 表达式已经成为一种不可或缺的工具，尤其在处理集合数据时，它能够显著提升代码的简洁性和可读性。本文将深入探讨 Lambda 表达式的语法结构、使用时的关键注意事项，并详细介绍常用的数组及 LINQ 集合操作方法，最后通过对比展示 Lambda 表达式的优势。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%93%91%E9%93%83%E4%BE%A7%E5%B9%B3%E4%B8%BE_2025052212347/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-05-22T12:34:00">2025-05-22</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>哑铃侧平举</h3>
+                  <p>决定中束刺激范围的大小 上半身略微前倾可以练到后束 前倾角度因人而异，可以在用卡片测量法</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E9%9B%B6%E5%B7%A5%E5%A4%A7%E6%BD%AE%EF%BC%9A%E5%88%B6%E9%80%A0%E4%B8%9A%E7%9A%84%E7%BB%93%E6%9E%84%E6%80%A7%E5%8F%98%E9%9D%A9_20250506103739/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-05-06T10:37:00">2025-05-06</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>零工大潮：制造业的结构性变革</h3>
+                  <p>近期，北京大学张丹丹教授的研究揭示了中国制造业正在经历的一场深刻变革：零工化趋势日益明显。数据显示，制造业中派遣工已达 4000 万人，占从业人员的 31.12%，意味着三个工人中就有一个是零工。更令人震惊的是，在一些万人大厂，这一比例甚至高达 80%。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../MBTI%20%E6%80%A7%E6%A0%BC%E6%B5%8B%E8%AF%95_20250503120011/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-05-03T12:00:00">2025-05-03</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>MBTI 性格测试--INTJ</h3>
+                  <p>了解了这个测试之后我认为这个东西不是天生的，它会受到人生经历、环境变化等各种因素的影响，前几年的我来测试应该不是这样的结果。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6_20250419105927/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-19T10:59:27">2025-04-19</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>核心机制</h3>
+                  <p>《金铲铲之战》的核心机制是游戏的灵魂所在，掌握这些机制能让你在对局中更具优势。本章将深入讲解三大核心机制：棋子羁绊、经济管理和装备系统。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%B8%B8%E6%88%8F%E5%9F%BA%E7%A1%80_20250419105117/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-19T10:51:17">2025-04-19</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>游戏基础</h3>
+                  <p>《金铲铲之战》是一款8人对战的自动战斗策略游戏。每位玩家通过合理购买、布置、升级棋子，搭配装备和羁绊效果，来组建最强阵容与其他玩家对战。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93_20250414085633/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-14T08:56:33">2025-04-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>核心总结 20250414085633</h3>
+                  <p>DbSet 允许 EF Core 查询和保存指定实体的实例到数据库。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%88%9B%E5%BB%BA%20DbContext_20250414085220/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-14T08:52:20">2025-04-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>DbContext in Entity Framework Core</h3>
+                  <p>The DbContext class is an integral part of the Entity Framework. An instance of DbContext represents a session with the database which can be used to quer…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E9%87%91%E9%93%B2%E9%93%B2%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A_20250414083941/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-14T08:39:00">2025-04-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>金铲铲从入门到精通</h3>
+                  <p>欢迎来到《金铲铲从入门到精通》教程！本教程旨在帮助新手玩家快速了解并掌握《金铲铲之战》这款自走棋游戏的核心玩法和策略。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93_20250414082121/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-14T08:21:21">2025-04-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>核心总结 20250414082121</h3>
+                  <p>要想对领域类内容进行 CURD 操作，我们需要在 Entity Framework 的 DbContext 类中将它们作为 DbSet 属性包含，以便 EF 引擎能够跟踪它们的状态。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93_20250414081656/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-14T08:16:00">2025-04-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Create Entities</h3>
+                  <p>Here we will create domain classes for our demo application and will see the difference between domain classes and entity classes of Entity Framework Core.</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%BF%BB%E8%AF%91%E5%AD%A6%E4%B9%A0%20Entity%20Framework%20Tutorial_2025041408136/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-14T08:13:00">2025-04-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Entity Framework Tutorial</h3>
+                  <p>参考文档：Entity Framework Tutorial--边翻译边做注解。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../LocalSend_20250407082622/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-04-07T08:26:00">2025-04-07</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>LocalSend</h3>
+                  <p>这么好用的软件我不允许还有人不知道。设备之间文件互传，不限制文件大小！免费、开源、全平台使用、最重要的是没有任何广告，下面请看详细介绍。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E9%85%B1%E6%B2%B9%E7%83%A4%E5%8D%97%E7%93%9C_20250331092447/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-03-31T09:24:00">2025-03-31</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>酱油烤南瓜</h3>
+                  <p>第一步：南瓜去皮切 ​0.5 cm 均匀薄片​（太厚需延长烤时）。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E9%B8%A1%E8%82%89%E9%A6%99%E8%8F%87%E7%83%A4%E8%8C%84%E5%AD%90_20250329222422/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-03-29T22:24:00">2025-03-29</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>鸡肉香菇烤茄子</h3>
+                  <p>长茄子 2 根 鸡胸肉 200 g 干香菇 5 朵 洋葱半颗 大蒜 5 瓣 生抽 2 勺 橄榄油 5 mL</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E8%8F%A0%E8%8F%9C%E8%8A%99%E8%93%89%E6%B1%A4_2025031623307/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-03-16T23:30:00">2025-03-16</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>菠菜芙蓉汤：清新滋养的健康之选</h3>
+                  <p>在快节奏的现代生活中，人们对于美食的追求不仅局限于口感的享受，更注重其营养价值与健康属性。今天，我要和大家分享一道既美味又健康的佳肴——菠菜芙蓉汤，这道汤品以其丰富的食材、均衡的营养和低卡高纤的特点，成为了众多食客心中的宠儿。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../Mac%20%E8%A7%82%E7%9C%8B%E6%9D%9C%E6%AF%94%E8%A7%86%E9%A2%91%E5%8F%91%E7%B4%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_20250315171239/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-03-15T17:12:00">2025-03-15</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Mac 观看杜比视频发紫解决方案</h3>
+                  <p>第二步：如下图所示，在观看电影界面点击右下角的三个点，划到最下面，找到色调，拖动红色圈圈小圆点改变值，左上角的红色方块区域会显示值，个人认为调整为 -47 效果是最好的。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E8%A5%BF%E8%8A%B9%E8%8B%B9%E6%9E%9C%E6%B1%81_20250228155625/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-28T15:56:00">2025-02-28</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>西芹苹果汁</h3>
+                  <p>西芹 150 g（约 3 根中等茎秆） 苹果 100 g（½个富士苹果） 饮用水 250 mL 可选辅料：柠檬汁 5 mL、蜂蜜 5-10 g</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../Synergy%20%E6%8A%A5%E9%94%99_20250228141341/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-28T14:13:00">2025-02-28</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Synergy 报错：NOTE: Cursor is locked to screen, check Scroll Lock key</h3>
+                  <p>开启了键盘的滚动锁定 （Scroll Lock）功能，再次点击该按键即可。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../GPT-4.5%20%E6%B7%B1%E5%BA%A6%E8%AF%84%E6%B5%8B%EF%BC%9A%E6%9B%B4%E6%87%82%E4%BA%BA%E5%BF%83%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%85%A8%E8%83%BD%E6%88%98%E5%A3%AB_20250228125042/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-28T12:50:00">2025-02-28</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>GPT-4.5 深度评测：更懂人心，但非全能战士</h3>
+                  <p>2025 年 2 月 28 日凌晨，OpenAI 以一场 13 分钟的直播发布了最新语言模型 GPT-4.5（代号 Orion）。作为 GPT-4 的迭代版本，这一号称“史上最大规模、最高情商”的模型迅速引发热议。本文将从性能、技术革新、争议点及行业影响四个维度，结合多方评测数据，全面解析 GPT-4.5…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%88%A9%E7%94%A8%20AI%20%E8%87%AA%E5%8A%A8%E5%8C%96%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%B7%B2%E6%94%AF%E6%8C%81%20Deepseek_2025022013309/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-20T13:30:00">2025-02-20</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>利用 AI 自动化操作电脑开源项目已支持 Deepseek</h3>
+                  <p>传统的大型语言模型（LLM）在处理文本和代码时表现优异，但面对图形用户界面（GUI）这一人类最自然的交互方式时，却如同“盲人摸象”——无法精准识别按钮、图标或理解界面逻辑。而近期开源的 OmniParser V 2 项目，打破了这一僵局。通过将屏幕截图转化为结构化数据，它赋予 LLM 一双“数字眼睛”，使其…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%A4%A9%E7%94%9F%E6%98%93%E4%BE%BF%E7%A7%98%EF%BC%9F%E7%A7%91%E5%AD%A6%E8%B0%83%E7%90%86%E8%82%A0%E9%81%93%EF%BC%8C%E9%87%8D%E8%8E%B7%E9%A1%BA%E7%95%85%E7%94%9F%E6%B4%BB_202502181046/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-18T22:45:00">2025-02-18</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>天生易便秘？科学调理肠道，重获顺畅生活</h3>
+                  <p>对于天生容易便秘的人来说，肠道似乎总是“慢半拍”——腹胀、排便费力、甚至长期依赖药物，这些困扰不仅影响生活质量，还可能引发焦虑。事实上，肠道健康与先天体质有关，但后天的科学管理更能扭转局面。通过调整饮食、优化习惯、激活肠道动力，即使“天生肠道弱”，也能逐步建立起规律的排便节奏。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E9%9D%92%E8%8F%9C%E9%A6%99%E8%8F%87%E8%B1%86%E7%93%A3%E6%B1%A4_202502171526/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-17T15:26:00">2025-02-17</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>青菜香菇豆瓣汤</h3>
+                  <p>在繁忙的生活中，我们常常需要一些既简单又健康的菜肴来满足日常的营养需求。今天，我想和大家分享一道清淡又富有营养的汤品——青菜香菇豆腐汤。这道汤不仅味道鲜美，而且制作过程非常简单，适合家庭日常食用。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%BD%93%20AI%20%E8%B5%B0%E8%BF%9B%E8%A1%97%E5%A4%B4%E5%B7%B7%E5%B0%BE_202502151709/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-15T17:08:00">2025-02-15</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>当 AI 走进街头巷尾</h3>
+                  <p>腊月二十九，村口一片热闹。李大爷的手机里正放着 AI 演绎的京剧唱腔，韵味十足；王奶奶手里珍藏的那张军装照也被 AI 修复得焕然如新。这样的场景，勾勒出中国 AI 技术深深扎根民间的生动画面。曾经让人觉得高深莫测的技术名词，如今成了菜摊老板们讨价还价时的日常话题。这场全民认知的变革，背后是 DeepSeek…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0_202502130855/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-13T08:54:00">2025-02-13</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>20250213 阅读笔记</h3>
+                  <p>今天凌晨，OpenAI 首席执行官 Sam Altman 宣布了关于 GPT-4.5 和 GPT-5 的重要消息。GPT-4.5，即猎户座模型（Orion），将很快发布，并是最后一个非思维链模型。随后，OpenAI 将整合 GPT 和 O 系列模型，推出一个新系统，能够自动选择思考和非思考功能，适用于多种任…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%B8%80%E5%A5%97%E9%94%AE%E9%BC%A0%E5%90%8C%E6%97%B6%E6%8E%A7%E5%88%B6%E4%B8%A4%E5%8F%B0%E7%94%B5%E8%84%91_202502111359/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-11T13:58:00">2025-02-11</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>一套键鼠同时控制两台电脑</h3>
+                  <p>要求：Mac 自带的键盘和触摸板非常好用，想要让其同时控制两台电脑。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E8%B1%86%E8%85%90%E6%8B%8C%E9%9D%92%E8%8F%9C_20250206203955/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-02-06T20:39:00">2025-02-06</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>豆腐拌青菜</h3>
+                  <p>青菜：300 克 胡萝卜：80 克 豆腐：100 克</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%A4%9A%E5%AA%92%E4%BD%93%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BFPowerPoint%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%EF%BC%8C%E5%8F%AF%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D%E6%AD%A4%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BF_20250118114421/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-01-18T11:44:00">2025-01-18</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>多媒体演示文稿 PowerPoint 无法打开，可尝试修复此演示文稿</h3>
+                  <p>当我们在新的设备打开 PPT 文件或者打开别人发来的文件的时候经常出现标题中的提示信息，就算点击修复了打开也是空白文件，经过搜索，我发现了一个测试能用的方法，分享给大家：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E8%9A%9D%E6%B2%B9%E4%B8%8A%E6%B5%B7%E9%9D%92/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-01-17T22:54:00">2025-01-17</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>蚝油上海青</h3>
+                  <p>青菜洗净，茎叶分离。 将 2 g 盐和 2 mL 食用油（焯烫用，不计入用量）倒入水锅，水沸后先放入青菜梗焯烫，30 秒后放入青菜叶，快速焯烫后捞出沥干。 青菜装盘，浇上稀释的耗油即可。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E9%99%8D%E5%8E%8B%E5%87%8F%E8%84%82%E8%8F%9C%E8%B0%B1/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-01-17T22:52:00">2025-01-17</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>降压减脂菜谱</h3>
+                  <p>蚝油上海青 豆腐拌青菜 青菜香菇豆瓣汤 西芹苹果汁 菠菜芙蓉汤 鸡肉香菇烤茄子</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-01-16T22:22:00">2025-01-16</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>进制转换</h3>
+                  <p>进制转换是将一个数从一种进制表示转换为另一种进制表示的过程。以下是常见的进制转换方法和计算步骤，包括从非十进制到十进制、从十进制到其他进制以及直接在两种非十进制之间转换。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%A7%91%E5%AD%A6%E9%99%8D%E5%8E%8B%EF%BC%8C%E4%BB%8E%E9%A5%AE%E9%A3%9F%E5%BC%80%E5%A7%8B/">
+                <div class="collection-post__meta">
+                  <time datetime="2025-01-16T20:55:00">2025-01-16</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>科学降压，从饮食开始</h3>
+                  <p>高血压是现代社会中一种常见的慢性疾病，它不仅影响着我们的日常生活，还可能引发严重的心血管疾病。除了药物治疗，调整饮食结构、摄取有益的营养素也是控制血压的重要手段。今天，我们就来聊聊饮食中那些对降压有益的营养素和食材，让健康从餐桌开始。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E5%88%86%E4%BA%AB_20241208185942/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-12-08T18:59:00">2024-12-08</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>20241208 阅读笔记分享</h3>
+                  <p>AI 技术影响的不止医疗领域，这关乎到我们生活的方方面面，今后的年轻人想要获得更好的发展就一定要拥抱 AI，善于使用 AI。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%BA%8C%E9%9B%B6%E4%BA%8C%E4%B8%80%E5%B9%B4%E4%B8%80%E6%9C%88%E4%BB%BD_20241207153647/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-12-07T15:36:00">2024-12-07</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>二零二一年一月份</h3>
+                  <p>1、M: That skirt you are wearing looks beautiful. How much did it cost?</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../GET_20241207153536/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-12-07T15:35:00">2024-12-07</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>GET</h3>
+                  <p>二零二一年一月份</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%8F%92%E5%8F%99%E4%BA%BA%E7%94%9F%E6%AD%8C%E8%AF%8D%E8%B5%8F%E6%9E%90_2024112318387/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-11-23T18:38:00">2024-11-23</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>插叙人生歌词赏析</h3>
+                  <p>先说下我对这首歌的认识，起初这首歌发布的时候我就听过了，当时没怎么看歌词，就是觉得挺好听的就加入歌单了，半年后当我再次打开这首歌的时候没想到播放量达到了好几百万，随后我就认真看了看歌词，越看越牛逼，最后直接给跪了。这首歌的听感、故事性、韵脚等都达到了顶级水平，真的是大师级的作品！拓宽了中文说唱的边界，正如黄…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%85%A8%E8%BA%AB%E8%82%8C%E8%82%89%E8%AE%AD%E7%BB%83%E7%AC%94%E8%AE%B0_2024102918596/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-10-29T18:59:00">2024-10-29</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>全身肌肉训练笔记</h3>
+                  <p>身体上斜 斜向上哑铃 斜向上飞鸟 斜向上卧推 低位俯卧撑</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%88%A9%E7%94%A8PowerShell%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%BD%99%E5%AD%97%E6%AE%B5_20241006101357/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-10-06T10:13:00">2024-10-06</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>利用 PowerShell 批量删除文件名中的多余字段</h3>
+                  <p>在我们从网上下载视频的时候总会碰到文件名称中带有各种各样的广告或者多余字段的情况，比如说 1-引言-1080P 高清-AVC 这段文件名后面的 -1080P 高清-AVC 我就不想让他存在（强迫症），接下来我将介绍利用 PowerShell 批量删除文件名中的多余字段的方法：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%BD%95%E4%B8%BA%E8%BE%B9%E7%95%8C%E6%84%9F_20240925085444/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-09-25T08:54:00">2024-09-25</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>何为边界感</h3>
+                  <p>边界感是指在人际关系、个人生活以及心理层面中，对自我与他人、自我与外部世界之间设定的合理界限。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85%E5%AE%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E8%BF%9E%E6%8E%A5%E7%94%B5%E6%BA%90%E4%BC%9A%E5%98%80%E7%9A%84%E4%B8%80%E5%A3%B0_20240917142147/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-09-17T14:21:00">2024-09-17</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>笔记本电脑重装完系统后连接电源会嘀的一声</h3>
+                  <p>自从自己的电脑重装完系统之后，每次连接电源或者断开电源的时候都会发出嘀的一声提示音。这要是在家里还好，如果在自习室或者班里面就很社死了，今天花了一点时间终于解决了这个问题，请看操作。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%9C%BA%E6%A2%B0%E8%A1%A8%E8%B0%83%E6%95%B4%E6%95%99%E7%A8%8B_20240705105722/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-07-05T10:57:00">2024-07-05</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>机械表调整教程</h3>
+                  <p>调节时间的时候要逆时针转动调节按钮，不可让表盘逆时针转动，否则会损坏机芯。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%AD%B5%E5%8C%96%E6%95%99%E7%A8%8B_20240705104333/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-07-05T10:43:00">2024-07-05</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>孵化教程</h3>
+                  <p>孵化其他种蛋需要自行调试机器，按一下 SET 键，显示数字开始闪烁，点按“+”或“-”调整到需要的温度，再次点一下 SET 键完成温度设定。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%8E%8B%E5%88%9A%EF%BC%9A%E9%85%B8%E8%BE%A3%E5%9C%9F%E8%B1%86%E4%B8%9D_20240624172920/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-06-24T17:29:00">2024-06-24</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>王刚：酸辣土豆丝</h3>
+                  <p>土豆过凉水淘洗干净； 锅中烧开水，放入土豆丝至半透明状捞出，迅速过凉水； 锅中放稍微多点油，放入干辣椒煸香后放入土豆丝； 锅边淋入陈醋和酱油，快速翻炒十来秒； 加入适量食盐和白糖调味； 加入葱花再翻炒几下即可出锅。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%85%B3%E4%BA%8E%20RSS%20%E9%98%85%E8%AF%BB_20240611163019/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-06-11T16:30:00">2024-06-11</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>关于 RSS 阅读</h3>
+                  <p>今天鸟姐群里面讨论了关于 RSS 阅读的经验，再次丰富了我的阅读方式。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%96%B0%E7%94%9F%E5%84%BF%E6%99%BA%E5%95%86%E5%BD%B1%E5%93%8D%E5%A4%96%E5%9B%A0_20240606135825/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-06-06T13:58:00">2024-06-06</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>新生儿智商影响外因</h3>
+                  <p>出生时体重大的孩子比出生时体重小的孩子平均智商更高，出生时孩子的体重严重影响其一生的智力水平。 发达国家低体重应该比例比较高 女性现在追求变瘦，生出的孩子体重也会变小 ADHD（注意力不足运动症）多发生在体重较小的新生儿</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%92%96%E5%95%A1_20240606133219/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-06-06T13:32:00">2024-06-06</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>咖啡</h3>
+                  <p>提神醒脑 提高警惕性（开车犯困的时候喝杯咖啡） 降低死亡率（全因死亡率） 黑咖啡 U 型相关每天 2.5-4.5 杯（一杯 270 mL 左右） 咖啡加糖更好（每天不能超过 1.5-2.5 杯，不能加太多） 人工甜味剂最好不要加 抗老化 有多酚（深色化合物，深颜色的蔬菜水果也可以） 可以减少皮肤色斑 降低心…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../168%20%E6%96%AD%E9%A3%9F%E6%B3%95_20240606121851/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-06-06T12:18:00">2024-06-06</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>168 断食法</h3>
+                  <p>168 断食法（16/8 Intermittent Fasting）是一种间歇性断食方法，它的基本原则是每天在一个 8 小时的进食窗口内进食，然后在剩余的 16 小时内不摄入任何热量。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%89%93%E5%8D%B0%E6%96%B9%E5%BC%8F_20240605110444/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-06-05T11:04:00">2024-06-05</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>打印方式</h3>
+                  <p>适用于不需要专业处理且重要性较低的文档。打印件看起来会比使用其他配置文件打印的打印件淡一些，但使用的墨粉较少。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%BD%93%E8%82%B2%E8%BF%90%E5%8A%A8%E4%B8%AD%E7%9A%84%E5%8A%9F%E8%83%BD%E6%80%A7%E8%AE%AD%E7%BB%83%EF%BC%9A%E7%AC%AC2%E7%89%88_2024060409412/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-06-04T09:41:00">2024-06-04</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>体育运动中的功能性训练：第2版</h3>
+                  <p>无论运动员看起来有多么不同，训练方案都是相似的。 功能性训练的最大特点就是练习时双脚与地面接触，没有器械的辅助，极少有例外。 功能性训练包括简单的下蹲、向前弯身、弓箭步、推和拉。其目的是提供一系列连续的练习，训练运动员在所有运动平面中控制自己的身体。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../win%2010%20%E7%B3%BB%E7%BB%9F%E6%97%A0%E7%BC%98%E6%97%A0%E6%95%85%E8%A2%AB%E9%99%90%E9%80%9F_2024051514575/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-05-15T14:57:00">2024-05-15</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>win 10 系统无缘无故被限速</h3>
+                  <p>之前自己的电脑下载东西一直是 10 mb/s 左右的网速，最近几天最高才能达到 1 mb/s，但是利用网络测速软件进行测试却是 10 mb/s，这就很不正常！查了一圈原来是 win10 系统默认限制网速，我真的搞不明白为什么整这个限速 ....，接下来我将展示解决办法。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../python%20%E4%B8%AD%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%BF%90%E7%AE%97%E7%AC%A6_20240515091341/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-05-15T09:13:00">2024-05-15</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>python 中的身份运算符</h3>
+                  <p>在 Python 中，身份运算符用于比较两个对象的内存地址，以确定它们是否是同一个对象。Python 提供了两个身份运算符：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%AE%A1%E7%AE%97_20240515090418/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-05-15T09:04:00">2024-05-15</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>二进制计算</h3>
+                  <p>25 ÷ 2 12 余 1 12 ÷ 2 6 余 0 6 ÷ 2 3 余 0 3 ÷ 2 1 余 1 1 ÷ 2 0 余 1</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%88%A9%E7%94%A8%20AI%20%E7%BB%83%E4%B9%A0%E8%8B%B1%E8%AF%AD%E5%8F%A3%E8%AF%AD_2024051416167/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-05-14T16:16:00">2024-05-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>利用 AI 练习英语口语</h3>
+                  <p>今天群友推了一款应用，叫做豆包，可以进行英文对话，帮助我们练习口语，可以直接安装在手机端，非常方便，有兴趣的朋友可以去试试。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../GPT%20%E4%BA%A4%E6%B5%81%E6%8A%80%E5%B7%A7_20240211100541/">
+                <div class="collection-post__meta">
+                  <time datetime="2024-02-11T10:05:00">2024-02-11</time>
+                  <span>GPT</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>GPT 交流技巧</h3>
+                  <p>提示结构： 任务 讲清楚，别说的太模糊 格式 限制字数 要求分条作答 使用表格输出 角色 措辞用语和详细程度 角色属性、专业不想关或者答案明确的话对输出结果影响不大 例子 不是绝对必要的，但能提高输出质量 小技巧 循环提问（GPT 能够理解上下文） 拆分任务 改变人设（三种人设） 友善礼貌 主动发问 给出明…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%B1%82%E5%AF%BC%E4%B8%8E%E6%B1%82%E5%BE%AE%E5%88%86%E7%9A%84%E6%A6%82%E5%BF%B5%E8%BE%A8%E6%9E%90/">
+                <div class="collection-post__meta">
+                  <time datetime="2023-09-14T16:07:00">2023-09-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>求导与求微分的概念辨析</h3>
+                  <p>求导和求微分是微积分中两个相关但稍有不同的概念。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%B9%82%E7%BA%A7%E6%95%B0%E4%B8%8E%E5%B9%82%E7%BA%A7%E6%95%B0%E7%9A%84%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/">
+                <div class="collection-post__meta">
+                  <time datetime="2023-08-14T13:59:00">2023-08-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>幂级数与幂级数的和函数的区别与联系</h3>
+                  <p>幂级数是一种特殊的函数表示形式，它可以表示为一个无穷级数的形式，其中每一项都是自变量的幂次与系数的乘积。幂级数可以表示为：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E7%9B%B8%E4%BA%92%E7%8B%AC%E7%AB%8B%E4%B8%8E%E4%B8%A4%E4%B8%A4%E7%8B%AC%E7%AB%8B/">
+                <div class="collection-post__meta">
+                  <time datetime="2023-08-14T09:28:00">2023-08-14</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>相互独立与两两独立</h3>
+                  <p>“两两独立”和“相互独立”是统计学和概率论领域中常用的概念，用于描述多个事件或变量之间的关系。它们的含义略有不同：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%8F%8D%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E6%80%A7%E8%B4%A8%E9%97%AE%E9%A2%98/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  <span>考研数学</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>反对称矩阵行列式的性质问题</h3>
+                  <p>如果矩阵 A 是一个反对称矩阵（也称为斜对称矩阵），意味着它满足以下性质：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E5%BC%A7%E5%BA%A6%E7%9A%84%E5%AE%9A%E4%B9%89/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>弧度的定义</h3>
+                  <p>弧度（radian）是一种角度的度量单位，通常用符号 “rad” 表示。弧度的量纲来源于角度的定义，其定义基于圆的几何性质。</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  <span>GPT</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>数学归纳法</h3>
+                  <p>第一类数学归纳法（简称为数学归纳法）是一种用于证明自然数集合上的命题的方法。它包括两个步骤：基础步和归纳步。基础步是证明命题在某个初始值（通常是 0 或 1）成立，而归纳步是假设命题在某个自然数 $n$ 成立，然后证明命题在 $n+1$ 也成立。这种方法常用于证明形如“对于所有自然数 $n$，命题 $P(n…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../001%E6%95%B0%E5%AD%A6/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E4%B8%80%E5%85%83%E5%87%BD%E6%95%B0%E5%BE%AE%E5%88%86%E5%AD%A6/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>第二章 一元函数微分学</h3>
+                  <p>导数定义 导函数 一元函数可微的定义 可导与可微的关系</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/engage%E8%AF%8D%E4%B9%89%E8%BE%A8%E6%9E%90/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Engage词义辨析</h3>
+                  <p>“engage” 这个动词有多个具体的意思，根据不同的上下文可以有以下解释：</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2002/Text1/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2002 Text 1</h3>
+                  <p>If you intend using humor in your talk to make people smile, you must know how to identify shared experiences and problems. Your humor must be relevant to…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2002/Text2/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2002 Text 2</h3>
+                  <p>Since the dawn of human ingenuity, people have devised ever more cunning tools to cope with work that is dangerous, boring, burdensome, or just plain nast…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2002/Text3/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2002 Text 3</h3>
+                  <p>Could the bad old days of economic decline be about to return? Since OPEC agreed to supply-cuts in March, the price of crude oil has jumped to almost $26…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2002/Text4/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  <span>写作应用</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2002 Text 4</h3>
+                  <p>The Supreme Court’s decisions on physician-assisted suicide carry important implications for how medicine seeks to relieve dying patients of pain and suff…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2002/Trans/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Trans</h3>
+                  <p>Almost all our major problems involve human behavior, and they cannot be solved by physical and biological technology alone. What is needed is a technolog…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2003/Text1/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2003 Text 1</h3>
+                  <p>Wild Bill Donovan would have loved the Internet. The American spymaster who built the Office of Strategic Services in the World War Ⅱ and later laid the r…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2003/Text2/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  <span>考研</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2003 T2</h3>
+                  <p>To paraphrase 18th-century statesman Edmund Burke, “all that is needed for the triumph of a misguided cause is that good people do nothing.” One such caus…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2003/Text3/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  <span>写作应用</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2003-T3</h3>
+                  <p>In recent years, railroads have been combining with each other, merging into supersystems, causing heightened concerns about monopoly. As recently as 1995…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2003/Text4/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2003-T4</h3>
+                  <p>It is said that in England death is pressing, in Canada inevitable and in California optional. Small wonder. Americans’ life expectancy has nearly doubled…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2003/Trans/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Trans</h3>
+                  <p>Human beings in all times and places think about their world and wonder at their place in it. Humans are thoughtful and creative, possessed of insatiable…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2004/Text1/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2004 T1</h3>
+                  <p>Hunting for a job late last year, lawyer Gant Redmon stumbled across CareerBuilder, a job database on the Internet. He searched it with no success but was…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2004/Text2/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2004 T2</h3>
+                  <p>Over the past century, all kinds of unfairness and discrimination have been condemned or made illegal. But one insidious form continues to thrive: alphabe…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2004/Text3/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2004 T3</h3>
+                  <p>When it comes to the slowing economy, Ellen Spero isn&#39;t biting her nails just yet. But the 47-year-old manicurist isn&#39;t cutting, filing or polishing as ma…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2004/Text4/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  <span>写作应用</span>
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2004 T4</h3>
+                  <p>Americans today don&#39;t place a very high value on intellect. Our heroes are athletes, entertainers, and entrepreneurs, not scholars. Even our schools are w…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2004/Trans/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Trans</h3>
+                  <p>The relation of language and mind has interested philosophers for many centuries. (41) The Greeks assumed that the structure of language had some connecti…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2005/Text1/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2005 T1</h3>
+                  <p>Everybody loves a fat pay rise. Yet pleasure at your own can vanish if you learn that a colleague has been given a bigger one. Indeed, if he has a reputat…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2005/Text2/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2005 T1</h3>
+                  <p>Do you remember all those years when scientists argued that smoking would kill us but the doubters insisted that we didn’t know for sure? That the evidenc…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2005/Text3/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2005 T3</h3>
+                  <p>Of all the components of a good night’s sleep, dreams seem to be least within our control. In dreams, a window opens into a world where logic is suspended…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2005/Text4/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2005 T4</h3>
+                  <p>Americans no longer expect public figures, whether in speech or in writing, to command the English language with skill and gift. Nor do they aspire to suc…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2005/Text5/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text5</h3>
+                  <p>Canada’s premiers (the leaders of provincial governments), if they have any breath left after complaining about Ottawa at their late July annual meeting…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2005/Trans/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Trans</h3>
+                  <p>It is not easy to talk about the role of the mass media in this overwhelmingly significant phase in European history. History and news become confused, an…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2006/Text1/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2006-T1</h3>
+                  <p>In spite of “endless talk of difference,” American society is an amazing machine for homogenizing people. There is “the democratizing uniformity of dress…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2006/Text2/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2006-T2</h3>
+                  <p>Stratford-on-Avon, as we all know, has only one industry—William Shakespeare—but there are two distinctly separate and increasingly hostile branches. Ther…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2006/Text3/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2006 T-3</h3>
+                  <p>When prehistoric man arrived in new parts of the world, something strange happened to the large animals: they suddenly became extinct. Smaller species sur…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2006/Text4/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2006 T-4</h3>
+                  <p>Many things make people think artists are weird. But the weirdest may be this: artists’ only job is to explore emotions, and yet they choose to focus on t…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2006/Text5/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text5</h3>
+                  <p>In the following article, some sentences have been removed. For Questions 41-45, choose the most suitable one from the list A-G to fit into each of number…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2006/Trans/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Trans</h3>
+                  <p>Is it true that the American intellectual is rejected and considered of no account in his society? I am going to suggest that it is not true. Father Bruck…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2007/Text1/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2007 T-1</h3>
+                  <p>If you were to examine the birth certificates of every soccer player in 2006’s World Cup tournament, you would most likely find a noteworthy quirk: elite…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2007/Text2/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2007 T-2</h3>
+                  <p>For the past several years, the Sunday newspaper supplement Parade has featured a column called “Ask Marilyn.” People are invited to query Marilyn vos Sav…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2007/Text3/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2007 T-3</h3>
+                  <p>During the past generation, the American middle-class family that once could count on hard work and fair play to keep itself financially secure has been t…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2007/Text4/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2007 T-4</h3>
+                  <p>It never rains but it pours. Just as bosses and boards have finally sorted out their worst accounting and compliance troubles, and improved their feeble c…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2007/Text5/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text5</h3>
+                  <p>Mothers and fathers can do a lot to ensure a safe landing in early adulthood for their kids. Even if a job’s starting salary seems too small to satisfy an…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2007/Trans/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Trans</h3>
+                  <p>The study of law has been recognized for centuries as a basic intellectual discipline in European universities. However, only in recent years has it becom…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2008/Text1/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2008 T-1</h3>
+                  <p>While still catching up to men in some spheres of modern life, women appear to be way ahead in at least one undesirable category. “Women are particularly…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2008/Text2/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2008 T-2</h3>
+                  <p>It used to be so straightforward. A team of researchers working together in the laboratory would submit the results of their research to a journal. A jour…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2008/Text3/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2008 T-3</h3>
+                  <p>In the early 1960s Wilt Chamberlain was one of the only three players in the National Basketball Association (NBA) listed at over seven feet. If he had pl…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2008/Text4/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>2008 T-4</h3>
+                  <p>In 1784, five years before he became president of the United States, George Washington, 52, was nearly toothless. So he hired a dentist to transplant nine…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2008/Text5/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text5</h3>
+                  <p>The time for sharpening pencils, arranging your desk, and doing almost anything else instead of writing has ended. The first draft will appear on the page…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2008/Trans/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Trans</h3>
+                  <p>In his autobiography，Darwin himself speaks of his intellectualpowers with extraordinary modesty. He points out that he always experienced much difficulty…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2009/Text1/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text1</h3>
+                  <p>Habits are a funny thing. We reach for them mindlessly, setting our brains on auto-pilot and relaxing into the unconscious comfort of familiar routine. “N…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2009/Text2/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text2</h3>
+                  <p>It is a wise father that knows his own child, but today a man can boost his paternal (fatherly) wisdom — or at least confirm that he’s the kid’s dad. All…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2009/Text3/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text3</h3>
+                  <p>The relationship between formal education and economic growth in poor countries is widely misunderstood by economists and politicians alike. Progress in b…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2009/Text4/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text4</h3>
+                  <p>The most thoroughly studied intellectuals in the history of the new world are the ministers and political leaders of seventeenth-century New England. Acco…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2009/Text5/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Text5</h3>
+                  <p>Coinciding with the groundbreaking theory of biological evolution proposed by British naturalist Charles Darwin in the 1860s, British social philosopher H…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+            <article class="collection-post">
+              <a href="../003%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E4%B8%80%E7%9C%9F%E9%A2%98/2009/Trans/">
+                <div class="collection-post__meta">
+                  <time>持续更新</time>
+                  
+                </div>
+                <div class="collection-post__copy">
+                  <h3>Trans</h3>
+                  <p>There is a marked difference between the education which every one gets from living with others, and the deliberate educating of the young. In the former…</p>
+                </div>
+                <span class="collection-post__arrow" aria-hidden="true">→</span>
+              </a>
+            </article>
+          
+        </div>
+      
+    </section>
+
+    <footer class="collection-footer">
+      <p>走到这里，不妨换一条小径。</p>
+      <nav aria-label="其他专栏">
+        
+          <a href="../../D-Orginals/000000原创文章目录/"><span aria-hidden="true">思</span>原创手记</a>
+        
+          
+        
+          <a href="../../A-Life/000000生活专栏目录/"><span aria-hidden="true">行</span>行旅札记</a>
+        
+          <a href="../../C-Highlights/000000优质内容目录/"><span aria-hidden="true">拾</span>人间拾遗</a>
+        
+      </nav>
+    </footer>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1001 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="打开Anaconda 下载界面，点击 Skip registration，进入下载界面下载对应的软件版本。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%94%A8%E4%BA%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E7%9A%84%20Anaconda%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA_20250302093618/">
+      
+      
+        <link rel="prev" href="../%E7%94%A8%20Termux%20%E5%9C%A8%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%AE%A1%E7%90%86%20Git%20%E5%92%8C%20GitHub_20260307232547/">
+      
+      
+        <link rel="next" href="../%E7%BB%99%20Obsidian%20%E4%B8%AD%E7%9A%84%20CSS%20%E7%89%87%E6%AE%B5%E7%BB%91%E5%AE%9A%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>用于人工智能学习的 Anaconda 环境搭建 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="用于人工智能学习的 Anaconda 环境搭建 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="打开Anaconda 下载界面，点击 Skip registration，进入下载界面下载对应的软件版本。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%94%A8%E4%BA%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E7%9A%84%20Anaconda%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA_20250302093618/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="用于人工智能学习的 Anaconda 环境搭建 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="打开Anaconda 下载界面，点击 Skip registration，进入下载界面下载对应的软件版本。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2025-03-02T09:36:00">
+    <meta property="article:modified_time" content="2025-03-02T09:36:00">
+    <meta property="article:section" content="原创手记">
+    <meta property="article:tag" content="人工智能">
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u539f\u521b\u624b\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2025-03-02T09:36:00", "datePublished": "2025-03-02T09:36:00", "description": "\u6253\u5f00Anaconda \u4e0b\u8f7d\u754c\u9762\uff0c\u70b9\u51fb Skip registration\uff0c\u8fdb\u5165\u4e0b\u8f7d\u754c\u9762\u4e0b\u8f7d\u5bf9\u5e94\u7684\u8f6f\u4ef6\u7248\u672c\u3002", "headline": "\u7528\u4e8e\u4eba\u5de5\u667a\u80fd\u5b66\u4e60\u7684 Anaconda \u73af\u5883\u642d\u5efa", "inLanguage": "zh-CN", "keywords": "\u4eba\u5de5\u667a\u80fd", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%94%A8%E4%BA%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E7%9A%84%20Anaconda%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA_20250302093618/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%94%A8%E4%BA%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E7%9A%84%20Anaconda%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA_20250302093618/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#anaconda" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../../B-Notes/000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-anaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 下载 Anaconda
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 配置环境变量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 建立虚拟分区，安装相关软件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 建立虚拟分区，安装相关软件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 打开命令行工具
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 建立虚拟分区
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 激活分区
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-jupyter-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 安装 jupyter notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-ipython" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 安装 ipython
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-matplotlib" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 安装 matplotlib
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 运行与关闭
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 运行与关闭">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 命令行没关闭的情况下继续运行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 完全关闭后再次运行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 知识点科普
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 知识点科普">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-anaconda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Anaconda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 虚拟环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-jupyter-notebook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Jupyter Notebook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-ipython" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 IPython
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-matplotlib" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Matplotlib
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56-pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 pip
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#57" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.7 环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#58" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.8 命令行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="D"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%8E%9F%E5%88%9B%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    D Orginals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000原创文章目录/" aria-label="浏览原创手记全部内容">
+          思 · 原创手记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2025-03-02T09:36:00">
+          2025-03-02
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">用于人工智能学习的 Anaconda 环境搭建</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+      <div class="post-header-tags" aria-label="文章标签">
+        <a href="../../archive/?q=人工智能"># 人工智能</a>
+      </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <h2 id="1-anaconda">1 下载 Anaconda<a class="headerlink" href="#1-anaconda" title="Permanent link">&para;</a></h2>
+<p>打开<a href="https://www.anaconda.com/download">Anaconda 下载界面</a>，点击 <code>Skip registration</code>，进入下载界面下载对应的软件版本。</p>
+<p><img alt="2ywEZxc1bXDnOQ9.png" src="https://s2.loli.net/2025/03/02/2ywEZxc1bXDnOQ9.png" /></p>
+<p>这里以 Win 为例，下载下来双击文件一路默认安装即可（安装等待时间较长，不是你卡了，耐心~）。</p>
+<h2 id="2">2 配置环境变量<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>打开电脑设置界面，搜索<strong>查看高级系统设置</strong>，进入后点击环境变量。</p>
+<p><img alt="6CKX9GLJyrHhVM1.png" src="https://s2.loli.net/2025/03/02/6CKX9GLJyrHhVM1.png" /></p>
+<p>双击<strong>系统变量</strong>下的 <strong>Path</strong>，将以下三个路径<strong>逐个</strong>新建保存，最后<strong>点完三个确定</strong>。</p>
+<blockquote>
+<p>在“环境变量”窗口中，你会看到“用户变量”和“系统变量”两个部分。如果你希望所有用户都能使用 Anaconda，你可以在“系统变量”中添加路径。如果只想为当前用户添加，可以在“用户变量”中操作。</p>
+</blockquote>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>C:\ProgramData\Anaconda3\
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>C:\ProgramData\Anaconda3\Scripts
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>C:\ProgramData\Anaconda3\Library\bin
+</span></code></pre></div>
+<p><img alt="zWcna478LpbKlfd.png" src="https://s2.loli.net/2025/03/02/zWcna478LpbKlfd.png" /></p>
+<h2 id="3">3 建立虚拟分区，安装相关软件<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 打开命令行工具<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>在 Win 应用搜索栏中搜索 <strong>Anaconda Prompt</strong>，点击打开一个类似命令行的工具。</p>
+<blockquote>
+<p>注意不是 PowerShell 那个命令行！</p>
+</blockquote>
+<p><img alt="CkPlNKvEV5zBZwO.png" src="https://s2.loli.net/2025/03/02/CkPlNKvEV5zBZwO.png" /></p>
+<h3 id="32">3.2 建立虚拟分区<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>输入 <code>conda create --name 363 python=3.6.2</code> 并回车后建立虚拟分区。</p>
+<blockquote>
+<p>中间会有个提示，输入 <code>y</code> 然后回车即可继续。</p>
+</blockquote>
+<h3 id="33">3.3 激活分区<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>输入 <code>conda activate 363</code> 后回车。</p>
+<h3 id="34-jupyter-notebook">3.4 安装 jupyter notebook<a class="headerlink" href="#34-jupyter-notebook" title="Permanent link">&para;</a></h3>
+<p>输入 <code>conda install jupyter</code> 后回车。</p>
+<blockquote>
+<p>中间同样会有个提示，输入 <code>y</code> 然后回车即可继续。</p>
+</blockquote>
+<h3 id="35-ipython">3.5 安装 ipython<a class="headerlink" href="#35-ipython" title="Permanent link">&para;</a></h3>
+<p>输入 <code>conda install ipython</code> 后回车。</p>
+<h3 id="36-matplotlib">3.6 安装 matplotlib<a class="headerlink" href="#36-matplotlib" title="Permanent link">&para;</a></h3>
+<p>输入<code>pip install --user -i https://pypi.tuna.tsinghua.edu.cn/simple matplotlib</code>并回车。运行完成之后会有一段黄色的字体提示，我们只需要<strong>把里面的路径复制下来，重复 2 配置环境变量</strong>就可以了。</p>
+<blockquote>
+<p>注意这里不可以开代理，否则会有一大堆红色的报错。</p>
+</blockquote>
+<p><img alt="LaUkVHhMC273TZv.png" src="https://s2.loli.net/2025/03/02/LaUkVHhMC273TZv.png" /></p>
+<h2 id="4">4 运行与关闭<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 命令行没关闭的情况下继续运行<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>继续在命令行中输入 <code>jupyter notebook</code> 后回车，浏览器会自动跳出如下界面，表示安装成功。</p>
+<p><img alt="ykVzYS8pOdJNmjg.png" src="https://s2.loli.net/2025/03/02/ykVzYS8pOdJNmjg.png" /></p>
+<p>这里想要关闭运行环境不是简单叉掉浏览器就可以的，我们需要继续回到命令行界面，按住快捷键 <code>Ctrl+C</code> 才可以。</p>
+<p>到这里我们的环境就彻底搭建好了，下次重新启动的时候我们只需要参考下节操作就可以了。</p>
+<h3 id="42">4.2 完全关闭后再次运行<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>第一步 打开 <strong>Anaconda Prompt</strong> 命令行界面。</p>
+<p>第二步 输入 <code>conda activate 363</code> 并回车激活一开始创建的 363 虚拟环境。</p>
+<p>第三步 输入 <code>jupyter notebook</code> 启动 Jupyter Notebook。</p>
+<p>第四步 使用结束后 <code>Ctrl+C</code> 关闭程序。</p>
+<h2 id="5">5 知识点科普<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>搭建这样的环境能够为数据科学和分析的工作提供灵活性和便捷性，使得从数据处理到模型构建、可视化和结果展示的整个过程都能在一个统一的环境中完成。这种集成的开发环境大大提高了工作效率，并降低了学习和使用的门槛。下面我将逐个解释前文安装过程中所涉及到的名词：</p>
+<h3 id="51-anaconda">5.1 Anaconda<a class="headerlink" href="#51-anaconda" title="Permanent link">&para;</a></h3>
+<p>Anaconda 是一个开源的 Python 和 R 语言的发行版，主要用于科学计算和数据分析。它包括了许多流行的库和工具，如 NumPy、Pandas、Matplotlib 和 Jupyter Notebook，方便用户进行数据处理和可视化。Anaconda 还提供了包管理器 <code>conda</code>，用于安装和管理软件包。</p>
+<h3 id="52">5.2 虚拟环境<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p>虚拟环境是一个独立的工作空间，允许用户在同一台计算机上安装不同版本的 Python 和库，而互不干扰。例如，如果你在一个项目中需要使用 Python 3.6，而在另一个项目中需要 Python 3.8，你可以创建两个不同的虚拟环境来满足这些需求。</p>
+<h3 id="53-jupyter-notebook">5.3 Jupyter Notebook<a class="headerlink" href="#53-jupyter-notebook" title="Permanent link">&para;</a></h3>
+<p>Jupyter Notebook 是一个开源的 Web 应用程序，允许你创建和共享包含代码、方程式、可视化和文本的文档。它非常适合用于数据分析、机器学习和教学等领域。用户可以在 Notebook 中实时运行代码，查看输出结果，方便进行交互式计算。</p>
+<h3 id="54-ipython">5.4 IPython<a class="headerlink" href="#54-ipython" title="Permanent link">&para;</a></h3>
+<p>IPython 是一个增强版的 Python 解释器，提供了更强大的交互式计算功能。它是 Jupyter Notebook 的基础，提供了更丰富的功能，如自动补全、命令历史记录和强大的调试工具。</p>
+<h3 id="55-matplotlib">5.5 Matplotlib<a class="headerlink" href="#55-matplotlib" title="Permanent link">&para;</a></h3>
+<p>Matplotlib 是 Python 中一个非常流行的绘图库，用于创建静态、动态和交互式的可视化图表。它可以绘制多种类型的图形，如折线图、散点图、柱状图等，是数据分析和可视化中常用的工具。</p>
+<h3 id="56-pip">5.6 pip<a class="headerlink" href="#56-pip" title="Permanent link">&para;</a></h3>
+<p><code>pip</code> 是 Python 的包管理工具，用于安装和管理 Python 包。它是 Python 的官方推荐工具，用户可以使用它从 Python 包索引 (PyPI) 下载和安装各种库和工具。</p>
+<h3 id="57">5.7 环境变量<a class="headerlink" href="#57" title="Permanent link">&para;</a></h3>
+<h3 id="58">5.8 命令行<a class="headerlink" href="#58" title="Permanent link">&para;</a></h3>
+<p>命令行是一个文本界面，用户可以通过输入命令与计算机进行交互。在 Windows 中，Anaconda Prompt 是一个专为 Anaconda 环境设计的命令行工具，用户可以在其中输入 <code>conda</code> 命令来管理虚拟环境和软件包。</p>
+<hr />
+<p>参考：ChatGPT、教师文档</p>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../../B-Notes/%E5%85%B3%E4%BA%8E%E5%9C%A8%20Anaconda%20%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85%E5%8C%85%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%86%85%E6%A0%B8%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_20250526202516/">
+            <small>技 · 格物札记</small>
+            <strong>关于在 Anaconda 环境中安装包自动创建内核问题的解决方案</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260814185045/">
+            <small>思 · 原创手记</small>
+            <strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805095251/">
+            <small>思 · 原创手记</small>
+            <strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../../B-Notes/Mac%20%E8%A7%82%E7%9C%8B%E6%9D%9C%E6%AF%94%E8%A7%86%E9%A2%91%E5%8F%91%E7%B4%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_20250315171239/"><small>← 更新一篇</small><strong>Mac 观看杜比视频发紫解决方案</strong></a>
+    
+    
+      <a href="../../B-Notes/%E8%A5%BF%E8%8A%B9%E8%8B%B9%E6%9E%9C%E6%B1%81_20250228155625/"><small>更早一篇 →</small><strong>西芹苹果汁</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000原创文章目录/">继续逛原创手记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1183 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="分享一个通过 Obsidian QuickAdd 调用的 Markdown 修复脚本，可一键清理 ChatGPT 网页复制产生的公式、表格、转义符和标题格式问题，让内容快速恢复为规范、可直接使用的 Obsidian 笔记。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/D-Orginals/260814185045/">
+      
+      
+        <link rel="prev" href="../260805095251/">
+      
+      
+        <link rel="next" href="../AI%20%E8%BE%85%E5%8A%A9%E9%98%85%E8%AF%BB_2024112315422/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="分享一个通过 Obsidian QuickAdd 调用的 Markdown 修复脚本，可一键清理 ChatGPT 网页复制产生的公式、表格、转义符和标题格式问题，让内容快速恢复为规范、可直接使用的 Obsidian 笔记。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/D-Orginals/260814185045/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="分享一个通过 Obsidian QuickAdd 调用的 Markdown 修复脚本，可一键清理 ChatGPT 网页复制产生的公式、表格、转义符和标题格式问题，让内容快速恢复为规范、可直接使用的 Obsidian 笔记。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2026-08-14T18:50:45+08:00">
+    <meta property="article:modified_time" content="2026-08-14T18:50:45+08:00">
+    <meta property="article:section" content="原创手记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u539f\u521b\u624b\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2026-08-14T18:50:45+08:00", "datePublished": "2026-08-14T18:50:45+08:00", "description": "\u5206\u4eab\u4e00\u4e2a\u901a\u8fc7 Obsidian QuickAdd \u8c03\u7528\u7684 Markdown \u4fee\u590d\u811a\u672c\uff0c\u53ef\u4e00\u952e\u6e05\u7406 ChatGPT \u7f51\u9875\u590d\u5236\u4ea7\u751f\u7684\u516c\u5f0f\u3001\u8868\u683c\u3001\u8f6c\u4e49\u7b26\u548c\u6807\u9898\u683c\u5f0f\u95ee\u9898\uff0c\u8ba9\u5185\u5bb9\u5feb\u901f\u6062\u590d\u4e3a\u89c4\u8303\u3001\u53ef\u76f4\u63a5\u4f7f\u7528\u7684 Obsidian \u7b14\u8bb0\u3002", "headline": "\u4e00\u952e\u4fee\u590d ChatGPT \u590d\u5236\u5230 Obsidian \u540e\u7684\u516c\u5f0f\u548c Markdown", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260814185045/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/D-Orginals/260814185045/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chatgpt-obsidian-markdown" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="./">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../../B-Notes/000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、这个脚本是干什么的？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、为什么需要专门处理公式？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、它不只是修公式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、表格也是重点处理对象
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、还有一个很容易踩坑的问题：公式中的竖线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obsidian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、怎么在 Obsidian 中使用？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quickadd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一步：安装 QuickAdd
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二步：保存脚本
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quickadd-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三步：创建 QuickAdd Macro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第四步：添加 User Script
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、实际怎么用？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、实际怎么用？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第四步
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、强烈建议再绑定一个快捷键
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obsidian_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、脚本不会直接处理整个 Obsidian 仓库
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、代码块也会自动跳过
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、这个脚本适合哪些人？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十二、需要注意的地方
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十三、完整源码下载
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="D"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%8E%9F%E5%88%9B%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    D Orginals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000原创文章目录/" aria-label="浏览原创手记全部内容">
+          思 · 原创手记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2026-08-14T18:50:45+08:00">
+          2026-08-14
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>平时我经常使用 ChatGPT 整理学习笔记、知识点和技术资料，然后再把内容复制到 Obsidian 中长期保存。</p>
+<p>这个流程本身很好用，但有一个很烦的问题：</p>
+<p><strong>ChatGPT 网页里看起来完全正常的内容，复制到 Obsidian 后，经常会出现各种格式问题。</strong></p>
+<p>尤其是数学公式比较多的时候，例如：</p>
+<ul>
+<li>行内公式无法正常渲染</li>
+<li>块级公式格式错误</li>
+<li>LaTeX 命令多出反斜杠</li>
+<li>表格复制后直接散架</li>
+<li>Markdown 标题、列表、加粗被转义</li>
+<li>公式里的绝对值符号把表格错误地切成好几列</li>
+<li>原本正常的公式被网页复制拆成好几行</li>
+</ul>
+<p>如果内容比较短，手动改一下还可以。</p>
+<p>但一篇 ChatGPT 输出几千字，里面又有几十个公式时，一个个检查就很麻烦了。</p>
+<p>所以我写了一个 <strong>Obsidian + QuickAdd 用户脚本</strong>，专门处理这个问题。</p>
+<p>现在我的使用方式基本就是：</p>
+<blockquote>
+<p>ChatGPT 复制内容 → 粘贴到 Obsidian → 执行一次 QuickAdd → 完成</p>
+</blockquote>
+<hr />
+<h2 id="_1">一、这个脚本是干什么的？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>简单来说，它就是一个：</p>
+<p><strong>“ChatGPT → Obsidian 格式清洗器”。</strong></p>
+<p>脚本会读取当前正在打开的 Markdown 文件，把网页复制过程中产生的一些常见格式污染自动修复，然后直接覆盖回当前笔记。</p>
+<p>它主要处理以下问题：</p>
+<ol>
+<li>修复块级数学公式</li>
+<li>修复行内数学公式</li>
+<li>清理异常反斜杠</li>
+<li>修复部分 LaTeX 命令</li>
+<li>合并被网页复制拆开的公式</li>
+<li>修复重复的关系符</li>
+<li>清理被转义的 Markdown 标记</li>
+<li>尝试重建被复制散架的 Markdown 表格</li>
+<li>修复部分标题层级</li>
+<li>保护表格公式中的绝对值符号</li>
+<li>自动跳过代码块</li>
+<li>只处理当前正在编辑的 Markdown 文件</li>
+</ol>
+<p>这些也是当前脚本实际实现的主要功能。</p>
+<hr />
+<h2 id="_2">二、为什么需要专门处理公式？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>这是我写这个脚本最主要的原因。</p>
+<p>例如 ChatGPT 网页中的行内公式可能采用类似这样的定界方式：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>\(x^2+1\)
+</span></code></pre></div>
+<p>而我自己的 Obsidian 笔记习惯使用：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$x^2+1$
+</span></code></pre></div>
+<p>块级公式同样如此。</p>
+<p>网页复制过来的内容可能是：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>\[
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>x^2+y^2=1
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>\]
+</span></code></pre></div>
+<p>而 Obsidian 中我希望统一整理为：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$$
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>x^2+y^2=1
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>$$
+</span></code></pre></div>
+<p>这个脚本会自动完成这类转换。</p>
+<p>除此之外，网页复制还有可能把 LaTeX 命令变成类似：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>\\frac
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>\\sqrt
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>\\vec
+</span></code></pre></div>
+<p>脚本也会尝试把明显异常的重复反斜杠恢复成正常形式。</p>
+<p>所以对于经常在 ChatGPT 中处理数学、物理、工程类内容的人来说，这一步能省掉不少重复整理的时间。</p>
+<hr />
+<h2 id="_3">三、它不只是修公式<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>一开始我只是想解决数学公式的问题。</p>
+<p>但使用一段时间之后发现，ChatGPT 网页复制到 Obsidian 时，出现问题的不只有 LaTeX。</p>
+<p>比如 Markdown 标记也可能被转义。</p>
+<p>原本应该是：</p>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gu">## 二、函数性质</span>
+</span></code></pre></div>
+<p>复制之后可能出现一些异常转义。</p>
+<p>列表、加粗、分隔线和表格竖线也可能遇到类似情况。</p>
+<p>所以后来我把这些清理逻辑也逐渐加入脚本。</p>
+<p>现在脚本会识别明显属于 Markdown 语法的转义，再进行恢复，同时尽量避免误伤正常的 LaTeX 内容。</p>
+<hr />
+<h2 id="_4">四、表格也是重点处理对象<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>ChatGPT 很喜欢使用表格。</p>
+<p>比如：</p>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>| 函数 | 定义域 | 值域 |
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>| --- | --- | --- |
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>| y=x² | R | [0,+∞) |
+</span></code></pre></div>
+<p>在网页中看起来没有任何问题。</p>
+<p>但复制之后，有时表格会直接变成：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>函数
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>定义域
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>值域
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>y=x²
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>R
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>[0,+∞)
+</span></code></pre></div>
+<p>也就是所有单元格被拆成了一个个普通段落。</p>
+<p>这个脚本会尝试判断这些连续内容是不是原来的表格，并按照列数重新组合成 Markdown 表格。</p>
+<p>目前采用的是比较保守的识别方式，只对特征比较明显的内容进行处理，避免随便把普通正文改成表格。脚本中的表格重建逻辑主要针对 2～4 列、具有明显表头特征并且至少包含两行数据的情况。</p>
+<hr />
+<h2 id="_5">五、还有一个很容易踩坑的问题：公式中的竖线<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>比如数学中经常会出现绝对值：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>|x|
+</span></code></pre></div>
+<p>或者复数模：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>|z|
+</span></code></pre></div>
+<p>放在 Markdown 表格里面以后，问题就来了。</p>
+<p>因为 Markdown 本身也是使用 <code>|</code> 来划分表格列的。</p>
+<p>于是原本属于数学公式的竖线，有可能被解析成新的表格分隔符，最后整张表格直接错位。</p>
+<p>这个脚本会专门识别 Markdown 表格内部的数学公式，将其中的竖线转换成更安全的 LaTeX 表达，从而尽量避免公式把表格结构破坏掉。</p>
+<p>这属于一个比较小众的问题，但对于数学笔记来说非常实用。</p>
+<hr />
+<h2 id="obsidian">六、怎么在 Obsidian 中使用？<a class="headerlink" href="#obsidian" title="Permanent link">&para;</a></h2>
+<p>我使用的是 <strong>QuickAdd</strong> 插件。</p>
+<p>QuickAdd 支持 Macro 和 User Script，可以通过 Macro 调用保存在 Obsidian 仓库中的 JavaScript 文件。官方文档目前也推荐将用户脚本保存在 Vault 内的普通目录中，并通过 Macro Builder 添加 <code>User Script</code> 命令。(<a href="https://quickadd.obsidian.guide/docs/Choices/MacroChoice/" title="Macros | QuickAdd">QuickAdd</a>)</p>
+<p>整个配置其实并不复杂。</p>
+<h2 id="quickadd">第一步：安装 QuickAdd<a class="headerlink" href="#quickadd" title="Permanent link">&para;</a></h2>
+<p>打开：</p>
+<p><strong>Obsidian → 设置 → 第三方插件</strong></p>
+<p>搜索：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>QuickAdd
+</span></code></pre></div>
+<p>安装并启用。</p>
+<hr />
+<h2 id="_6">第二步：保存脚本<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>在自己的 Obsidian 仓库里新建一个目录，例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Scripts
+</span></code></pre></div>
+<p>然后把脚本保存进去：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Scripts/fix-chatgpt-latex.js
+</span></code></pre></div>
+<p>需要注意，最好不要把脚本放进 <code>.obsidian</code> 或其他以 <code>.</code> 开头的隐藏目录，因为 QuickAdd 的脚本选择器依赖 Obsidian 已经索引到的文件。官方文档建议使用类似 <code>scripts/</code> 这样的普通目录。(<a href="https://quickadd.obsidian.guide/docs/Choices/MacroChoice/" title="Macros | QuickAdd">QuickAdd</a>)</p>
+<hr />
+<h2 id="quickadd-macro">第三步：创建 QuickAdd Macro<a class="headerlink" href="#quickadd-macro" title="Permanent link">&para;</a></h2>
+<p>进入：</p>
+<p><strong>设置 → QuickAdd</strong></p>
+<p>新建一个 Choice。</p>
+<p>类型选择：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Macro
+</span></code></pre></div>
+<p>名称可以自己设置，例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>修复 ChatGPT Markdown
+</span></code></pre></div>
+<p>然后点击这个 Macro 后面的齿轮图标，进入 <strong>Macro Builder</strong>。</p>
+<p>QuickAdd 官方目前也是通过这种方式创建 Macro：先添加 Macro Choice，再进入 Macro Builder 配置具体命令。(<a href="https://quickadd.obsidian.guide/docs/Choices/MacroChoice/" title="Macros | QuickAdd">QuickAdd</a>)</p>
+<hr />
+<h2 id="user-script">第四步：添加 User Script<a class="headerlink" href="#user-script" title="Permanent link">&para;</a></h2>
+<p>在 Macro Builder 中添加：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>User Script
+</span></code></pre></div>
+<p>然后选择刚才保存的：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>fix-chatgpt-latex.js
+</span></code></pre></div>
+<p>保存即可。</p>
+<p>QuickAdd 的 User Script 可以直接调用 Obsidian 的 <code>app</code> 对象，所以脚本能够读取当前活动文件、获取编辑器内容，并对文件进行修改。(<a href="https://quickadd.obsidian.guide/docs/UserScripts/" title="User Scripts | QuickAdd">QuickAdd</a>)</p>
+<p>而我的这个脚本正是通过这种方式获取当前活动 Markdown 文件，并在处理完成后直接写回编辑器。</p>
+<hr />
+<h2 id="_7">七、实际怎么用？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>配置完成以后，日常使用就很简单了。</p>
+<p>假设我刚刚在 ChatGPT 中生成了一篇数学知识点总结。</p>
+<h3 id="_8">第一步<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>直接在 ChatGPT 网页复制内容。</p>
+<h3 id="_9">第二步<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>粘贴进 Obsidian。</p>
+<p>先不用管里面的公式和 Markdown 有没有错。</p>
+<h3 id="_10">第三步<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>保持当前这篇笔记处于打开状态。</p>
+<h3 id="_11">第四步<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>执行刚才创建的：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>修复 ChatGPT Markdown
+</span></code></pre></div>
+<p>脚本会自动读取当前笔记并进行清理。</p>
+<p>如果发现需要修复的内容，处理完成后会弹出提示：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>当前文件的 Markdown 修复完成
+</span></code></pre></div>
+<p>如果没有检测到变化，则会提示：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>未发现需要修复的内容
+</span></code></pre></div>
+<p>这些提示和判断都是脚本本身已经实现的。</p>
+<hr />
+<h2 id="_12">八、强烈建议再绑定一个快捷键<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p>如果每天都要使用，当然没必要每次进入 QuickAdd 菜单。</p>
+<p>QuickAdd 的 Macro 可以进一步绑定快捷键。官方文档也支持通过 QuickAdd Choice 或 Obsidian 的 Hotkeys 设置调用 Macro。(<a href="https://quickadd.obsidian.guide/docs/Choices/MacroChoice/" title="Macros | QuickAdd">QuickAdd</a>)</p>
+<p>例如可以设置一个自己顺手的组合键。</p>
+<p>这样整个工作流就变成：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>复制 ChatGPT
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>↓
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>粘贴 Obsidian
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>↓
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>按快捷键
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>↓
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>完成
+</span></code></pre></div>
+<p>这才是这个脚本真正方便的地方。</p>
+<p>一次可能只节省几十秒，但如果每天都在 ChatGPT 和 Obsidian 之间搬运大量内容，长期下来能减少很多重复的格式整理工作。</p>
+<hr />
+<h2 id="obsidian_1">九、脚本不会直接处理整个 Obsidian 仓库<a class="headerlink" href="#obsidian_1" title="Permanent link">&para;</a></h2>
+<p>这一点需要特别说明。</p>
+<p>目前这个版本只处理：</p>
+<p><strong>当前正在打开的 Markdown 文件。</strong></p>
+<p>它不会扫描整个 Vault，也不会批量修改所有笔记。</p>
+<p>我故意这样设计，主要是为了降低误修改的风险。</p>
+<p>正常流程就是：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>打开哪篇笔记
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>↓
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>运行脚本
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>↓
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>只修这一篇
+</span></code></pre></div>
+<p>比较可控。</p>
+<hr />
+<h2 id="_13">十、代码块也会自动跳过<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>如果一篇文章里面本身包含 JavaScript、Python、Shell 等代码，例如：</p>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="sb">```javascript</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\\frac"</span><span class="p">;</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="sb">```</span>
+</span></code></pre></div>
+<p>显然不能把代码里面的反斜杠也一起“修复”。</p>
+<p>否则代码本身可能就被改坏了。</p>
+<p>所以脚本在处理 Markdown 时会识别三反引号或波浪线代码块，在代码块内部停止格式清理。</p>
+<p>这也是我比较看重的一点：</p>
+<p><strong>格式修复脚本不能只追求“改得多”，还要尽量控制误修改。</strong></p>
+<hr />
+<h2 id="_14">十一、这个脚本适合哪些人？<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<p>我觉得比较适合下面几类场景：</p>
+<ul>
+<li>经常把 ChatGPT 回答保存进 Obsidian</li>
+<li>经常整理数学笔记</li>
+<li>经常使用 LaTeX 公式</li>
+<li>使用 ChatGPT 辅助写学习笔记</li>
+<li>使用 ChatGPT 整理技术文档</li>
+<li>经常保存带 Markdown 表格的内容</li>
+<li>不想每次复制之后手动检查格式</li>
+</ul>
+<p>如果你只是偶尔复制一两句话，那其实没必要专门配置。</p>
+<p>但如果 Obsidian 本身就是你的长期知识库，同时 ChatGPT 又已经成为日常内容输入工具，那么把两者之间的格式清洗自动化，我认为还是很值得的。</p>
+<hr />
+<h2 id="_15">十二、需要注意的地方<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p>虽然这个脚本现在已经覆盖了我日常遇到的大部分问题，但它本质上仍然属于：</p>
+<p><strong>基于规则进行自动修复。</strong></p>
+<p>所以我不建议把它理解成一个“任何 Markdown 都能百分之百修复”的工具。</p>
+<p>尤其是特别复杂的：</p>
+<ul>
+<li>多层嵌套 LaTeX</li>
+<li>极其复杂的 Markdown 表格</li>
+<li>本身已经损坏的公式</li>
+<li>不规则 HTML</li>
+<li>特殊插件语法</li>
+</ul>
+<p>仍然建议运行之后简单检查一下。</p>
+<p>另外，脚本不会凭空知道原文是什么。</p>
+<p>如果复制过程中某一部分内容已经彻底丢失，那么自动修复本身也存在边界。</p>
+<p>因此我目前的使用思路一直都是：</p>
+<blockquote>
+<p><strong>解决高频、机械、能够明确判断的格式问题，把少量特殊情况留给人工检查。</strong></p>
+</blockquote>
+<p>这样反而更可靠。</p>
+<hr />
+<h2 id="_16">十三、完整源码下载<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<p>为了方便直接使用，我把完整的 JavaScript 源码单独整理出来了。</p>
+<p>下载后将 <code>.js</code> 文件放进 Obsidian Vault 中，再按照上面的 QuickAdd 配置方法添加为 User Script 即可。</p>
+<p><strong>完整源码：</strong><code>https://pan.quark.cn/s/924f05b30f1c</code></p>
+<p>压缩包密码：mons688</p>
+<p>文件名：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>fix-chatgpt-latex.js
+</span></code></pre></div>
+<p>如果后续又遇到新的 ChatGPT → Obsidian 格式问题，我也会继续根据自己的实际使用情况完善这个脚本。</p>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260805095251/">
+            <small>思 · 原创手记</small>
+            <strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260805092845/">
+            <small>思 · 原创手记</small>
+            <strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260802232926/">
+            <small>思 · 原创手记</small>
+            <strong>macOS 关闭软件更新提醒的终极方案</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    <span></span>
+    
+      <a href="../260805095251/"><small>更早一篇 →</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000原创文章目录/">继续逛原创手记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

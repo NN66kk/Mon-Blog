@@ -1,0 +1,1084 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="在代码理解场景中，传统 RAG 往往因为检索噪声与上下文污染导致回答不稳定。本文结合 Claude Code 的实践经验，分析 Agentic Search 的工作机制及其优势。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/B-Notes/260311211821/">
+      
+      
+        <link rel="prev" href="../20260308114756/">
+      
+      
+        <link rel="next" href="../260320184526/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>为什么 Claude Code 放弃 RAG，转向 Agentic Search - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="为什么 Claude Code 放弃 RAG，转向 Agentic Search · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="在代码理解场景中，传统 RAG 往往因为检索噪声与上下文污染导致回答不稳定。本文结合 Claude Code 的实践经验，分析 Agentic Search 的工作机制及其优势。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/B-Notes/260311211821/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="为什么 Claude Code 放弃 RAG，转向 Agentic Search · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="在代码理解场景中，传统 RAG 往往因为检索噪声与上下文污染导致回答不稳定。本文结合 Claude Code 的实践经验，分析 Agentic Search 的工作机制及其优势。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2026-03-11T21:18:21+08:00">
+    <meta property="article:modified_time" content="2026-03-11T21:18:21+08:00">
+    <meta property="article:section" content="格物札记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u683c\u7269\u672d\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2026-03-11T21:18:21+08:00", "datePublished": "2026-03-11T21:18:21+08:00", "description": "\u5728\u4ee3\u7801\u7406\u89e3\u573a\u666f\u4e2d\uff0c\u4f20\u7edf RAG \u5f80\u5f80\u56e0\u4e3a\u68c0\u7d22\u566a\u58f0\u4e0e\u4e0a\u4e0b\u6587\u6c61\u67d3\u5bfc\u81f4\u56de\u7b54\u4e0d\u7a33\u5b9a\u3002\u672c\u6587\u7ed3\u5408 Claude Code \u7684\u5b9e\u8df5\u7ecf\u9a8c\uff0c\u5206\u6790 Agentic Search \u7684\u5de5\u4f5c\u673a\u5236\u53ca\u5176\u4f18\u52bf\u3002", "headline": "\u4e3a\u4ec0\u4e48 Claude Code \u653e\u5f03 RAG\uff0c\u8f6c\u5411 Agentic Search", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/B-Notes/260311211821/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/B-Notes/260311211821/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#claude-code-rag-agentic-search" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260814185045/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-14</small><strong>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805095251/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/260805092845/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-08-05</small><strong>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>243 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../../D-Orginals/000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>74 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>137 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>16 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、RAG 的基本原理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rag_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、为什么 RAG 在代码场景中效果不佳
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、为什么 RAG 在代码场景中效果不佳">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 代码定位依赖符号，而不是语义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 代码理解依赖全局结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 文本切块破坏代码层级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 代码库更新频繁
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agentic-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、Agentic Search 的核心思路
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、Agentic Search 的核心思路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agentic-search_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agentic Search 的基本流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agentic-search_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、为什么 Agentic Search 更适合代码
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、一个实际例子
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="B"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    B Notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000学习笔记目录/" aria-label="浏览格物札记全部内容">
+          技 · 格物札记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2026-03-11T21:18:21+08:00">
+          2026-03-11
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">为什么 Claude Code 放弃 RAG，转向 Agentic Search</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>最近在技术社区中，一条观点引发了不少讨论：<strong>Claude Code 在代码理解场景中放弃了 RAG，转而采用 Agentic Search</strong>。<br />
+这一决策来自 Claude Code 创始人 Boris Cherny 的实践经验。他甚至用一句非常工程化的话总结了这种方法：</p>
+<blockquote>
+<p>所谓 Agentic Search，其实只是 glob 和 grep 的高级说法。</p>
+</blockquote>
+<p>乍一看这似乎有些反直觉。毕竟 RAG 一直被认为是当前 AI 应用中最主流的知识检索方案。那么为什么在代码场景里，复杂的 RAG 反而不如传统的 Unix 搜索工具？要理解这一点，需要先看清两种技术路线的底层原理。</p>
+<hr />
+<h2 id="rag">一、RAG 的基本原理<a class="headerlink" href="#rag" title="Permanent link">&para;</a></h2>
+<p>RAG 的核心思想是：<strong>通过检索外部知识来增强大模型的回答能力</strong>。</p>
+<p>在标准的 RAG 系统中，一般包含以下流程。</p>
+<p>首先，系统会将知识库中的文档拆分成多个文本块。这一过程通常称为 <strong>chunking</strong>，每个文本块通常在几百到一千个 token 左右。</p>
+<p>接着，每个文本块会被转换成向量表示：</p>
+<div class="arithmatex">\[  
+v_i = f(\text{text}_i)  
+\]</div>
+<p>这里 <span class="arithmatex">\(f(\cdot)\)</span> 表示 embedding 模型，它会把文本映射到一个高维向量空间。</p>
+<p>当用户提出问题时，系统同样会把问题转成向量：</p>
+<div class="arithmatex">\[  
+q = f(\text{query})  
+\]</div>
+<p>然后通过相似度搜索找到最相关的文本块。常见的计算方式是余弦相似度：</p>
+<div class="arithmatex">\[  
+\text{sim}(q, v_i) = \frac{q \cdot v_i}{|q||v_i|}  
+\]</div>
+<p>最后，把检索到的文本块和用户问题一起输入大模型：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>用户问题 + 检索到的上下文 → LLM
+</span></code></pre></div>
+<p>大模型再基于这些上下文生成答案。</p>
+<p>这种架构在很多场景中非常有效，例如：</p>
+<ul>
+<li>
+<p>企业知识库问答</p>
+</li>
+<li>
+<p>文档检索系统</p>
+</li>
+<li>
+<p>客服机器人</p>
+</li>
+<li>
+<p>FAQ 系统</p>
+</li>
+</ul>
+<p>这些场景的共同特点是：<strong>信息以自然语言为主，语义相似度是有效的检索方式</strong>。</p>
+<hr />
+<h2 id="rag_1">二、为什么 RAG 在代码场景中效果不佳<a class="headerlink" href="#rag_1" title="Permanent link">&para;</a></h2>
+<p>当我们把 RAG 直接应用到代码仓库时，问题开始出现。原因并不是 RAG 技术本身不好，而是 <strong>代码的结构特性与自然语言完全不同</strong>。</p>
+<p>在工程实践中，主要存在四个核心问题。</p>
+<hr />
+<h3 id="1">1 代码定位依赖符号，而不是语义<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>RAG 的检索逻辑基于语义相似度，但代码的定位方式通常依赖符号信息，例如：</p>
+<ul>
+<li>
+<p>函数名</p>
+</li>
+<li>
+<p>类名</p>
+</li>
+<li>
+<p>文件路径</p>
+</li>
+<li>
+<p>import 关系</p>
+</li>
+<li>
+<p>调用关系</p>
+</li>
+</ul>
+<p>例如一段代码：</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">compute_slope_stability</span><span class="p">():</span>
+</span></code></pre></div>
+<p>如果用户提问：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>稳定性计算在哪里实现
+</span></code></pre></div>
+<p>embedding 检索未必能找到这个函数。</p>
+<p>但如果直接执行：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>grep compute_slope_stability
+</span></code></pre></div>
+<p>几乎可以瞬间定位。</p>
+<p>这说明在代码场景中，<strong>精确符号匹配往往比语义匹配更有效</strong>。</p>
+<hr />
+<h3 id="2">2 代码理解依赖全局结构<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>自然语言文本通常是相对独立的段落，但代码并不是这样。</p>
+<p>例如一个简单的调用链：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>A.py 调用 B.py
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>B.py 调用 C.py
+</span></code></pre></div>
+<p>如果代码被 RAG 切分成多个 chunk：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>chunk1: A.py
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>chunk2: B.py
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>chunk3: C.py
+</span></code></pre></div>
+<p>向量检索可能只返回其中一部分内容，而缺失关键调用关系。</p>
+<p>但在实际工程中，理解代码往往需要完整的：</p>
+<ul>
+<li>
+<p>调用链</p>
+</li>
+<li>
+<p>类型定义</p>
+</li>
+<li>
+<p>模块依赖</p>
+</li>
+<li>
+<p>import 关系</p>
+</li>
+</ul>
+<p>RAG 的 chunk 机制会破坏这些结构。</p>
+<hr />
+<h3 id="3">3 文本切块破坏代码层级<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>代码仓库本身具有清晰的结构：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>repository
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> ├─ folder
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> │   ├─ file
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a> │   │   ├─ class
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a> │   │   │   ├─ method
+</span></code></pre></div>
+<p>这种层级结构对于理解代码非常重要。</p>
+<p>但在 RAG 系统中，所有内容都会被拆分成无结构的文本块：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>chunk_102
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>chunk_103
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>chunk_104
+</span></code></pre></div>
+<p>文件路径、模块边界和上下文关系都会丢失。</p>
+<hr />
+<h3 id="4">4 代码库更新频繁<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>代码仓库的变化速度远高于普通文档。</p>
+<p>典型的开发流程包括：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>git commit
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>git branch
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>git merge
+</span></code></pre></div>
+<p>如果使用 RAG，每次更新代码库都需要：</p>
+<ol>
+<li>
+<p>重新切分文档</p>
+</li>
+<li>
+<p>重新生成 embedding</p>
+</li>
+<li>
+<p>更新向量数据库</p>
+</li>
+</ol>
+<p>在大型仓库中，这一成本非常高。</p>
+<hr />
+<h2 id="agentic-search">三、Agentic Search 的核心思路<a class="headerlink" href="#agentic-search" title="Permanent link">&para;</a></h2>
+<p>Claude Code 团队采用了一种更接近工程师工作方式的方法：<strong>Agentic Search</strong>。</p>
+<p>简单来说，就是让大模型像程序员一样使用工具来探索代码仓库。</p>
+<p>核心工具包括：</p>
+<ul>
+<li>
+<p>glob：查找文件</p>
+</li>
+<li>
+<p>grep / ripgrep：搜索文本</p>
+</li>
+<li>
+<p>tree：查看目录结构</p>
+</li>
+<li>
+<p>open：读取文件内容</p>
+</li>
+</ul>
+<hr />
+<h3 id="agentic-search_1">Agentic Search 的基本流程<a class="headerlink" href="#agentic-search_1" title="Permanent link">&para;</a></h3>
+<p>当模型需要理解代码仓库时，会进行一系列循环操作：</p>
+<p>第一步，搜索文件结构。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>glob("*.py")
+</span></code></pre></div>
+<p>第二步，搜索关键词。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>grep compute_slope
+</span></code></pre></div>
+<p>或者</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>rg compute_slope
+</span></code></pre></div>
+<p>第三步，打开相关文件。</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>open slope_analysis.py
+</span></code></pre></div>
+<p>第四步，根据新信息继续搜索。</p>
+<p>例如：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>grep factor_of_safety
+</span></code></pre></div>
+<p>整个过程会不断循环：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>搜索 → 阅读 → 推理 → 再搜索
+</span></code></pre></div>
+<p>这就是所谓的 <strong>Agentic（代理式）行为</strong>。</p>
+<hr />
+<h2 id="agentic-search_2">四、为什么 Agentic Search 更适合代码<a class="headerlink" href="#agentic-search_2" title="Permanent link">&para;</a></h2>
+<p>在代码仓库场景下，Agentic Search 具有明显优势。</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>RAG</th>
+<th>Agentic Search</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>函数定位</td>
+<td>较弱</td>
+<td>非常强</td>
+</tr>
+<tr>
+<td>调用链分析</td>
+<td>困难</td>
+<td>容易</td>
+</tr>
+<tr>
+<td>结构信息</td>
+<td>容易丢失</td>
+<td>完整保留</td>
+</tr>
+<tr>
+<td>实时更新</td>
+<td>成本高</td>
+<td>成本低</td>
+</tr>
+<tr>
+<td>工程可控性</td>
+<td>较差</td>
+<td>较好</td>
+</tr>
+</tbody>
+</table>
+<p>本质上，两者的差别可以总结为：</p>
+<p><strong>RAG 是语义检索</strong></p>
+<p><strong>Agentic Search 是工程检索</strong></p>
+<p>代码仓库显然更适合后者。</p>
+<hr />
+<h2 id="_1">五、一个实际例子<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>假设一个代码仓库包含 50 万行代码，用户提出问题：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>边坡稳定性算法在哪里实现
+</span></code></pre></div>
+<p>如果使用 RAG，系统可能会检索到：</p>
+<ul>
+<li>
+<p>一些文档说明</p>
+</li>
+<li>
+<p>不完整的代码片段</p>
+</li>
+<li>
+<p>与问题语义相近但不相关的函数</p>
+</li>
+</ul>
+<p>结果往往不稳定。</p>
+<p>但如果使用 Agentic Search，模型可能会执行：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>grep slope
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>grep stability
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>grep factor_of_safety
+</span></code></pre></div>
+<p>然后逐步打开相关文件：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>open slope_analysis.py
+</span></code></pre></div>
+<p>继续查找调用关系：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>grep compute_factor_of_safety
+</span></code></pre></div>
+<p>最终定位到真正实现算法的函数。</p>
+<p>整个过程和工程师调试代码几乎完全一致。</p>
+<hr />
+<h2 id="_2">六、总结<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>Claude Code 放弃 RAG 的原因并不是 RAG 技术不好，而是因为 <strong>代码仓库具有完全不同的信息结构</strong>。</p>
+<p>自然语言知识库适合语义检索，而代码仓库更适合符号搜索和结构分析。</p>
+<p>因此在代码理解场景中：</p>
+<ul>
+<li>
+<p>RAG 更像是 <strong>语义搜索引擎</strong></p>
+</li>
+<li>
+<p>Agentic Search 更像是 <strong>AI 驱动的代码探索工具</strong></p>
+</li>
+</ul>
+<p>Boris Cherny 的那句话其实揭示了一个工程事实：</p>
+<p><strong>很多看似复杂的 AI 系统，最终可能只是对经典工具的一种自动化封装。</strong></p>
+<p>而在代码世界里，几十年前诞生的 Unix 工具 —— <code>glob</code> 和 <code>grep</code> —— 依然是最可靠的基础设施。</p>
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260715215301/">
+            <small>技 · 格物札记</small>
+            <strong>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260408092240/">
+            <small>技 · 格物札记</small>
+            <strong>把 AI 这些名词一次讲明白</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260326204122/">
+            <small>技 · 格物札记</small>
+            <strong>IELTS-Academic-TestOne-Listening-PartOne</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    
+      <a href="../../D-Orginals/20260310154048/"><small>← 更新一篇</small><strong>在 Android 手机上用 Termux + Git 同步 Obsidian 笔记的一种更稳定的实践方案</strong></a>
+    
+    
+      <a href="../../D-Orginals/260311163709/"><small>更早一篇 →</small><strong>用脚本打造更安全的 Git 工作流</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000学习笔记目录/">继续逛格物札记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
