@@ -257,30 +257,226 @@ function initializeSiteMenu(root = document) {
   closeMenu({ restoreFocus: false });
 }
 
+let disposeSiteSearch = null;
+
 function initializeSearchButton(root = document) {
   const button = root.querySelector("[data-site-search-button]");
   const toggle = root.querySelector("#__search");
+  const dialog = root.querySelector("[data-md-component='search']");
+  const query = dialog?.querySelector("[data-md-component='search-query']");
 
-  if (!button || !toggle || button.dataset.siteSearchBound === "true") {
+  if (!button || !toggle || !dialog || !query || button.dataset.siteSearchBound === "true") {
     return;
   }
 
-  const syncExpanded = () => {
-    button.setAttribute("aria-expanded", String(toggle.checked));
+  // Instant navigation may replace the header. Retire its document listeners.
+  disposeSiteSearch?.();
+  const controller = new AbortController();
+  const events = { signal: controller.signal };
+  const idle = dialog.querySelector("[data-search-idle]");
+  const empty = dialog.querySelector("[data-search-empty]");
+  const meta = dialog.querySelector(".md-search-result__meta");
+  const list = dialog.querySelector(".md-search-result__list");
+  const scrollwrap = dialog.querySelector(".md-search__scrollwrap");
+  let active = false;
+  let composing = false;
+  let returnFocus = button;
+  let restoreFocus = true;
+  let previousOverflow = null;
+  let queryValue = query.value;
+  let resultValue = null;
+  let emptyTimer = null;
+
+  function unlockScroll() {
+    document.body.classList.remove("site-search-open");
+    if (previousOverflow) {
+      document.body.style.overflow = previousOverflow.body;
+      document.documentElement.style.overflow = previousOverflow.html;
+      previousOverflow = null;
+    }
+  }
+
+  function syncExpanded() {
+    const nextActive = toggle.checked;
+    button.setAttribute("aria-expanded", String(nextActive));
+    dialog.setAttribute("aria-hidden", String(!nextActive));
+
+    if (nextActive === active) {
+      return;
+    }
+
+    active = nextActive;
+    if (active) {
+      if (!dialog.contains(document.activeElement)) {
+        returnFocus = document.activeElement instanceof HTMLElement
+          && document.activeElement !== document.body ? document.activeElement : button;
+      }
+      previousOverflow = {
+        body: document.body.style.overflow,
+        html: document.documentElement.style.overflow,
+      };
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.body.classList.add("site-search-open");
+    } else {
+      unlockScroll();
+      if (dialog.contains(document.activeElement)) {
+        document.activeElement.blur();
+      }
+      if (restoreFocus) {
+        const target = returnFocus?.isConnected ? returnFocus : button;
+        target.focus({ preventScroll: true });
+      }
+      restoreFocus = true;
+    }
+  }
+
+  function setOpen(open) {
+    if (toggle.checked !== open) {
+      toggle.checked = open;
+      toggle.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    syncExpanded();
+  }
+
+  function openSearch(event) {
+    setOpen(true);
+    // Safari does not always focus buttons on click; remember the actual opener.
+    if (event?.currentTarget === button) returnFocus = button;
+    // Keep this synchronous with the gesture so iOS can open its keyboard.
+    query.focus({ preventScroll: true });
+    query.select();
+  }
+
+  function syncQueryState() {
+    if (query.value !== queryValue) {
+      queryValue = query.value;
+      resultValue = null;
+      window.clearTimeout(emptyTimer);
+      if (empty) empty.hidden = true;
+      if (scrollwrap) scrollwrap.scrollTop = 0;
+    }
+    dialog.dataset.searchState = query.value.length ? "query" : "idle";
+    if (idle) idle.hidden = Boolean(query.value.length);
+    if (empty && !query.value.length) empty.hidden = true;
+  }
+
+  function notifyQueryChange() {
+    syncQueryState();
+    // Material observes keyup/focus, not input. Also support paste, reset and IME.
+    query.dispatchEvent(new KeyboardEvent("keyup", { bubbles: true, key: "Unidentified" }));
+  }
+
+  const resultObserver = new MutationObserver(() => {
+    resultValue = query.value;
+    window.clearTimeout(emptyTimer);
+    if (empty) empty.hidden = true;
+    // Wait for an actual engine update; an empty list alone can mean "loading".
+    if (!empty || !query.value.length || !dialog.dataset.searchNoResults) return;
+    emptyTimer = window.setTimeout(() => {
+      empty.hidden = !(resultValue === query.value
+        && query.value.length
+        && meta?.textContent.trim() === dialog.dataset.searchNoResults.trim()
+        && !list?.children.length);
+    }, 150);
+  });
+  if (meta) resultObserver.observe(meta, { childList: true, characterData: true, subtree: true });
+
+  button.addEventListener("click", openSearch, events);
+  toggle.addEventListener("change", syncExpanded, events);
+  const toggleObserver = new MutationObserver(syncExpanded);
+  toggleObserver.observe(toggle, { attributes: true, attributeFilter: ["checked"] });
+
+  dialog.querySelectorAll("[data-site-search-close]").forEach((close) => {
+    close.addEventListener("click", () => setOpen(false), events);
+  });
+  dialog.querySelectorAll("[data-search-term]").forEach((term) => {
+    term.addEventListener("click", () => {
+      query.value = term.dataset.searchTerm || term.textContent.trim();
+      notifyQueryChange();
+      query.focus({ preventScroll: true });
+    }, events);
+  });
+  // Material closes the toggle when a result or a recent article is selected.
+  dialog.addEventListener("click", (event) => {
+    if (event.target instanceof Element && event.target.closest("a[href]")) {
+      restoreFocus = false;
+    }
+  }, { ...events, capture: true });
+
+  query.addEventListener("input", (event) => {
+    syncQueryState();
+    if (!composing && !event.isComposing) notifyQueryChange();
+  }, events);
+  query.addEventListener("keyup", syncQueryState, events);
+  query.addEventListener("compositionstart", () => { composing = true; }, events);
+  query.addEventListener("compositionend", () => {
+    composing = false;
+    notifyQueryChange();
+  }, events);
+  query.form?.addEventListener("reset", () => {
+    // The browser applies the form reset after its reset event has completed.
+    window.setTimeout(() => {
+      if (!query.isConnected) return;
+      notifyQueryChange();
+      if (toggle.checked) query.focus({ preventScroll: true });
+    }, 0);
+  }, events);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.isComposing || composing || event.keyCode === 229) return;
+
+    if ((event.metaKey || event.ctrlKey) && !event.altKey && event.key.toLowerCase() === "k") {
+      event.preventDefault();
+      event.stopPropagation();
+      openSearch();
+      return;
+    }
+    if (!toggle.checked) return;
+
+    // Material's window keydown handler closes on Tab. Handle modal keys first,
+    // while allowing its ArrowUp/ArrowDown and result Enter navigation through.
+    if (event.key === "Escape") {
+      event.preventDefault();
+      event.stopPropagation();
+      setOpen(false);
+      return;
+    }
+    if (event.key === "Tab") {
+      event.preventDefault();
+      event.stopPropagation();
+      const focusable = Array.from(dialog.querySelectorAll(
+        "a[href], button, input, select, textarea, summary, [tabindex]",
+      )).filter((element) => element.tabIndex >= 0
+        && !element.disabled
+        && !element.closest("[hidden], [inert]")
+        && element.getClientRects().length
+        && window.getComputedStyle(element).visibility !== "hidden");
+      const index = focusable.indexOf(document.activeElement);
+      const next = index < 0 ? (event.shiftKey ? focusable.length - 1 : 0)
+        : (index + (event.shiftKey ? -1 : 1) + focusable.length) % focusable.length;
+      (focusable[next] || query).focus({ preventScroll: true });
+      return;
+    }
+    // Let keyboard activation reach the new buttons without Material moving
+    // focus back into the query before a Space keyup can click the button.
+    if ((event.key === " " || event.key === "Enter")
+      && event.target instanceof Element && event.target.closest("button")) {
+      event.stopPropagation();
+    }
+  }, { ...events, capture: true });
+
+  disposeSiteSearch = () => {
+    controller.abort();
+    resultObserver.disconnect();
+    toggleObserver.disconnect();
+    window.clearTimeout(emptyTimer);
+    unlockScroll();
+    delete button.dataset.siteSearchBound;
   };
 
-  button.addEventListener("click", () => {
-    toggle.checked = true;
-    toggle.dispatchEvent(new Event("change", { bubbles: true }));
-    syncExpanded();
-    window.setTimeout(() => {
-      const currentQuery = document.querySelector("[data-md-component='search-query']");
-      currentQuery?.focus();
-    }, 50);
-  });
-  toggle.addEventListener("change", syncExpanded);
-
   button.dataset.siteSearchBound = "true";
+  syncQueryState();
   syncExpanded();
 }
 

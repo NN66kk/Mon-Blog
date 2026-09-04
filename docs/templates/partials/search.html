@@ -1,0 +1,65 @@
+<div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="{{ lang.t('search.result.none') }}" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        {% include ".icons/material/close.svg" %}
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true">{% include ".icons/material/magnify.svg" %}</span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          {% include ".icons/material/close-circle-outline.svg" %}
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              {% for term in ["Obsidian", "AI", "徒步", "心理学"] %}
+                <button type="button" data-search-term="{{ term }}">{{ term }} <span aria-hidden="true">↗</span></button>
+              {% endfor %}
+            </div>
+          </section>
+          {% set search_blog = blog|default({"posts": []}, true) %}
+          {% if search_blog.posts %}
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="{{ 'archive/'|url }}">全部文章 <span aria-hidden="true">→</span></a></header>
+              {% for post in search_blog.posts[:3] %}
+                <a class="garden-search__recent-link" href="{{ post.url|url }}">
+                  <span><small>{{ post.blog_collection.label }}<span aria-hidden="true"> · </span>{{ post.blog_publish_label[:10]|e }}</small><strong>{{ post.title|striptags|e }}</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              {% endfor %}
+            </section>
+          {% endif %}
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">{{ lang.t("search.result.initializer") }}</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="{{ 'archive/'|url }}">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>

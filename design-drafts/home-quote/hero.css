@@ -1,0 +1,138 @@
+/* Draft only. Loaded by preview.py; no production styles are changed. */
+.garden-home {
+  padding-top: 2.9rem;
+}
+
+.home-hero.home-hero--folio {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: stretch;
+  gap: 2.5rem;
+  padding: 0.75rem 0 2.65rem;
+  border-bottom: var(--garden-line);
+}
+
+.home-hero__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.55rem 0 0;
+}
+
+.home-hero--folio h1 {
+  margin: 0 0 0.7rem;
+  font: 600 1.3rem/1.5 var(--garden-serif);
+  letter-spacing: 0.06em;
+}
+
+.home-hero--folio .home-hero__intro {
+  margin: 0;
+  font-size: max(14px, 0.7rem);
+  line-height: 1.9;
+  letter-spacing: 0.035em;
+}
+
+.home-hero--folio .garden-more-link {
+  gap: 0.5rem;
+  margin-top: 1.15rem;
+  color: var(--garden-muted) !important;
+}
+
+.home-hero--folio .garden-more-link:hover {
+  color: var(--garden-copper) !important;
+}
+
+.md-typeset .home-hero__epigraph {
+  margin: 0;
+  padding-left: 2rem;
+  border-left: var(--garden-line);
+}
+
+.md-typeset .home-hero--folio .home-hero__quotation {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.home-hero--folio .home-hero__quotation p {
+  max-width: none;
+  margin: 0;
+  color: var(--garden-ink);
+  font: 500 clamp(1.55rem, 3.2vw, 2.05rem)/1.75 var(--garden-serif);
+  letter-spacing: 0.065em;
+}
+
+.home-hero__quotation p > span {
+  display: block;
+}
+
+.md-typeset .home-hero__epigraph figcaption {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  color: var(--garden-muted);
+  font: 400 max(13px, 0.65rem)/1.6 var(--garden-sans);
+  letter-spacing: 0.08em;
+  text-align: left;
+}
+
+.home-hero__attribution-rule {
+  width: 1.15rem;
+  height: 1px;
+  background: var(--garden-copper);
+}
+
+@media screen and (max-width: 47.99em) {
+  .garden-home {
+    padding: 1.55rem 0.45rem 0;
+  }
+
+  .home-hero.home-hero--folio {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.55rem;
+    padding: 0 0 1.7rem;
+  }
+
+  .home-hero__identity {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0;
+  }
+
+  .home-hero--folio h1 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .home-hero--folio .home-hero__intro {
+    display: none;
+  }
+
+  .home-hero--folio .garden-more-link {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .md-typeset .home-hero__epigraph {
+    padding: 0;
+    border: 0;
+  }
+
+  .home-hero--folio .home-hero__quotation p {
+    font-size: clamp(26px, 6.7vw, 36px);
+    line-height: 1.6;
+    letter-spacing: 0.055em;
+  }
+
+  .md-typeset .home-hero__epigraph figcaption {
+    margin-top: 0.8rem;
+  }
+
+  .home-reading {
+    padding-top: 1.25rem;
+  }
+}

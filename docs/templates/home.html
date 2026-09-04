@@ -2,10 +2,20 @@
 
 {% block content %}
   <div class="garden-home" data-page-layout="home">
-    <section class="home-hero" aria-labelledby="home-title">
-      <h1 id="home-title">读书与行路</h1>
-      <p>永远不要自怜，永远不要嫉妒。</p>
-      <a class="garden-more-link" href="{{ config.extra.about_url|url }}">关于我 <span aria-hidden="true">→</span></a>
+    <section class="home-hero home-hero--folio" aria-labelledby="home-title">
+      <div class="home-hero__identity">
+        <div>
+          <h1 id="home-title">读书与行路</h1>
+          <p class="home-hero__intro">记录学习与思考，<br>也记下沿途所见。</p>
+        </div>
+        <a class="garden-more-link" href="{{ config.extra.about_url|url }}">关于我 <span aria-hidden="true">↗</span></a>
+      </div>
+      <figure class="home-hero__epigraph">
+        <blockquote class="home-hero__quotation">
+          <p><span>永远不要自怜，</span><span>永远不要嫉妒。</span></p>
+        </blockquote>
+        <figcaption><span class="home-hero__attribution-rule" aria-hidden="true"></span>查理·芒格</figcaption>
+      </figure>
     </section>
 
     <section class="home-reading" aria-labelledby="home-reading-title">

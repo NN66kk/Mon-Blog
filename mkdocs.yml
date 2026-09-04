@@ -66,8 +66,6 @@ theme:
     - navigation.path
     - toc.follow
     - search.highlight
-    - search.suggest
-    - search.share
     - content.code.copy
     - content.code.annotate
   palette:
