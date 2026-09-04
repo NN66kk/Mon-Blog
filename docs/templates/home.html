@@ -3,65 +3,27 @@
 {% block content %}
   <div class="garden-home" data-page-layout="home">
     <section class="home-hero" aria-labelledby="home-title">
-      <div class="home-hero__copy">
-        <span class="garden-eyebrow"><i aria-hidden="true"></i> MON'S DIGITAL GARDEN</span>
-        <h1 id="home-title"><span>行于山野，</span><span>思于日常。</span></h1>
-        <div class="home-hero__lead">
-          <p>读书、写代码，也走进山野。</p>
-          <p>把求知的心得、行路的见闻，写成日后仍愿翻阅的文字。</p>
-        </div>
-        <div class="home-hero__actions">
-          <a class="garden-button garden-button--primary" href="{{ 'archive/'|url }}">开始阅读 <span aria-hidden="true">→</span></a>
-          <a class="garden-button garden-button--quiet" href="{{ config.extra.about_url|url }}">认识我</a>
-        </div>
-        <dl class="home-hero__stats" aria-label="花园概览">
-          <div><dt>{{ blog.count }}</dt><dd>篇随笔与札记</dd></div>
-          <div><dt>{{ blog.collections|length }}</dt><dd>条阅读小径</dd></div>
-          <div><dt>常新</dt><dd>随阅历增补</dd></div>
-        </dl>
-      </div>
-
-      <div class="home-landscape" aria-hidden="true">
-        <svg viewBox="0 0 760 520" preserveAspectRatio="xMidYMid slice" focusable="false">
-          <rect width="760" height="520" fill="currentColor"></rect>
-          <path class="home-ridge home-ridge--far" d="M0 220C102 178 159 216 248 166C349 110 411 137 492 93C572 49 669 80 760 40V520H0Z"></path>
-          <path class="home-ridge home-ridge--mid" d="M0 292C97 228 176 271 270 229C352 192 417 223 500 184C594 140 686 179 760 132V520H0Z"></path>
-          <path class="home-ridge home-ridge--near" d="M0 365C102 316 179 370 274 323C357 281 431 327 521 278C612 231 680 289 760 244V520H0Z"></path>
-          <path class="home-route" d="M109 520C143 454 191 397 255 364C322 328 367 292 421 233C468 182 520 151 555 109"></path>
-          <g class="home-contours">
-            <path d="M-30 96C91 41 191 122 294 63C402 2 510 78 790 14"></path>
-            <path d="M-28 123C95 70 196 147 306 90C410 35 517 100 790 39"></path>
-            <path d="M-20 155C94 108 198 177 317 123C424 74 526 128 790 72"></path>
-            <path d="M-25 387C96 336 191 412 296 362C399 314 520 393 787 331"></path>
-            <path d="M-22 416C104 366 201 442 305 391C410 342 528 420 790 359"></path>
-            <path d="M-20 447C108 398 208 470 319 421C427 371 539 448 790 387"></path>
-          </g>
-          <circle class="home-route__dot" cx="555" cy="109" r="7"></circle>
-          <circle class="home-route__ring" cx="555" cy="109" r="15"></circle>
-        </svg>
-        <span class="home-landscape__seal">向前</span>
-        <span class="home-landscape__caption">39.9042° N · 116.4074° E</span>
-      </div>
+      <h1 id="home-title">读书与行路</h1>
+      <p>我是 Mon，在北京读研。这里记些学习笔记、生活琐事，还有路上的见闻。</p>
+      <a class="garden-more-link" href="{{ config.extra.about_url|url }}">关于我 <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="home-reading" aria-labelledby="home-reading-title">
       <header class="section-heading">
-        <div>
-          <span class="garden-eyebrow"><i aria-hidden="true"></i> RECENT WRITING</span>
-          <h2 id="home-reading-title">近日所记</h2>
-          <p>新近写下的判断、方法和路上见闻。</p>
-        </div>
-        <a class="garden-more-link" href="{{ 'archive/'|url }}">全部文章 <span aria-hidden="true">→</span></a>
+        <h2 id="home-reading-title">最新文章</h2>
+        <a class="garden-more-link" href="{{ 'archive/'|url }}">全部文章 · {{ blog.count }} <span aria-hidden="true">→</span></a>
       </header>
-
       <div class="home-reading__grid">
         <div class="recent-notes">
           {% for post in blog.posts[:10] %}
             <article class="recent-note">
               <a href="{{ post.url|url }}">
-                <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>{{ post.blog_publish_label[:10]|default("持续更新", true)|e }}</time>
-                <div><span>{{ post.blog_collection.mark }} · {{ post.blog_collection.label }}</span><h3>{{ post.title|striptags|e }}</h3></div>
-                <span aria-hidden="true">→</span>
+                <h3>{{ post.title|striptags|e }}</h3>
+                {% if post.blog_description_text %}<p>{{ post.blog_description_text|striptags|trim|truncate(120)|e }}</p>{% endif %}
+                <div class="recent-note__meta">
+                  <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>{{ post.blog_publish_label[:10]|default("日期未记", true)|e }}</time>
+                  <span>{{ post.blog_collection.label }}</span>
+                </div>
               </a>
             </article>
           {% endfor %}
@@ -70,23 +32,14 @@
     </section>
 
     <section class="home-collections" aria-labelledby="home-collections-title">
-      <header class="section-heading section-heading--collections">
-        <div>
-          <span class="garden-eyebrow"><i aria-hidden="true"></i> GARDEN PATHS</span>
-          <h2 id="home-collections-title">四条小径，各有风景。</h2>
-        </div>
-        <p>从思考到实践，从山野到人间，随兴趣翻阅。</p>
+      <header class="section-heading">
+        <h2 id="home-collections-title">按分类阅读</h2>
       </header>
       <div class="home-collections__grid">
         {% for collection in blog.collections %}
-          <a class="collection-card collection-card--{{ collection.key|lower }}" href="{{ collection.index|url }}">
-            <span class="collection-card__mark" aria-hidden="true">{{ collection.mark }}</span>
-            <span class="collection-card__copy">
-              <small>{{ collection.count }} NOTES</small>
-              <strong>{{ collection.label }}</strong>
-              <span>{{ collection.description }}</span>
-            </span>
-            <span class="collection-card__arrow" aria-hidden="true">↗</span>
+          <a class="collection-card" href="{{ collection.index|url }}">
+            <span class="collection-card__heading"><strong>{{ collection.label }}</strong><small>{{ collection.count }} 篇</small></span>
+            <span class="collection-card__description">{{ collection.description }}</span>
           </a>
         {% endfor %}
       </div>

@@ -174,14 +174,8 @@ class GardenThemeTests(unittest.TestCase):
         self.assertIn('aria-label="复制本文链接"', template)
 
     def test_custom_metadata_and_lists_reset_material_default_indentation(self):
-        home_css = read_project_file("docs/css/40-home.css")
         article_css = read_project_file("docs/css/30-article.css")
 
-        stats = css_rule_body(home_css, ".home-hero__stats div")
-        stat_terms = css_rule_body(
-            home_css,
-            ".md-typeset .home-hero__stats dt,\n.md-typeset .home-hero__stats dd",
-        )
         toc_item = css_rule_body(
             article_css,
             ".md-typeset .article-toc-content .md-nav__item",
@@ -191,14 +185,6 @@ class GardenThemeTests(unittest.TestCase):
             ".md-typeset .about-index ul > li",
         )
 
-        self.assertIn("flex-direction: column", stats)
-        self.assertIn("align-items: flex-start", stats)
-        self.assertIn("margin-inline: 0", stat_terms)
-        self.assertIn("text-align: start", stat_terms)
-        self.assertIn(
-            ".md-typeset .home-hero__stats dd {\n  margin-block: 0.22rem 0",
-            home_css,
-        )
         self.assertIn("margin: 0", toc_item)
         self.assertIn("padding-inline-start: 0.75rem", toc_item)
         self.assertIn("margin: 0", about_item)

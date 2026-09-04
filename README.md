@@ -1,6 +1,6 @@
 # Mon's Digital Garden
 
-一个由 Obsidian 笔记持续生长而来的个人数字花园，内容涵盖技术学习、原创思考、山野日常与优质收藏。站点使用 MkDocs Material 构建，并通过少量模板、样式和原生 JavaScript 保持轻量。
+一个由 Obsidian 笔记持续生长而来的个人数字花园，内容涵盖技术学习、原创思考、行旅札记与优质收藏。站点使用 MkDocs Material 构建，并通过少量模板、样式和原生 JavaScript 保持轻量。
 
 线上地址：[nn66kk.github.io/Mon-Blog](https://nn66kk.github.io/Mon-Blog/)
 

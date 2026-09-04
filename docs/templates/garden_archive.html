@@ -19,11 +19,11 @@
     <header class="garden-archive-header">
       <span class="garden-eyebrow">ARCHIVE / {{ entries|length }} NOTES</span>
       <h1>全部文章</h1>
-      <p>沿时间展开这座数字花园，查看技术、思考、山野与收藏。</p>
+      <p>按时间翻阅技术笔记、生活随笔、行旅见闻与收藏。</p>
       <nav class="garden-archive-filters" aria-label="卷目快捷入口">
         <a href="{{ 'B-Notes/000000学习笔记目录/'|url|e }}"><span>技</span> 格物札记</a>
         <a href="{{ 'D-Orginals/000000原创文章目录/'|url|e }}"><span>思</span> 原创手记</a>
-        <a href="{{ 'A-Life/000000生活专栏目录/'|url|e }}"><span>行</span> 山野日常</a>
+        <a href="{{ 'A-Life/000000生活专栏目录/'|url|e }}"><span>行</span> 行旅札记</a>
         <a href="{{ 'C-Highlights/000000优质内容目录/'|url|e }}"><span>拾</span> 人间拾遗</a>
       </nav>
     </header>
@@ -33,7 +33,7 @@
         {% set post = entry.page %}
         {% set description = post.blog_description_text|default("", true) or post.blog_excerpt_text|default("", true) %}
         {% if not description and post.meta and post.meta.description %}{% set description = post.meta.description %}{% endif %}
-        {% if entry.section == "A" %}{% set index = "行" %}{% set collection = "山野日常" %}
+        {% if entry.section == "A" %}{% set index = "行" %}{% set collection = "行旅札记" %}
         {% elif entry.section == "B" %}{% set index = "技" %}{% set collection = "格物札记" %}
         {% elif entry.section == "C" %}{% set index = "拾" %}{% set collection = "人间拾遗" %}
         {% else %}{% set index = "思" %}{% set collection = "原创手记" %}{% endif %}

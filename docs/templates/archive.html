@@ -6,7 +6,7 @@
       <span class="garden-eyebrow"><i aria-hidden="true"></i> ARCHIVE / {{ blog.count }} NOTES</span>
       <div class="archive-hero__heading">
         <h1>全部文章</h1>
-        <p>沿时间翻阅这座花园。技术、行走、阅读与自我观察，都在这里留下坐标。</p>
+        <p>学习、生活、行旅与收藏，按时间收在这里。</p>
       </div>
       <nav class="archive-filters" aria-label="按专栏筛选" data-archive-collections>
         {% set archive_collections = (blog.collections|selectattr("key", "equalto", "C")|list) + (blog.collections|rejectattr("key", "equalto", "C")|list) %}
@@ -16,7 +16,7 @@
           </button>
         {% endfor %}
         <button type="button" class="archive-filters__all is-active" data-archive-collection="" aria-pressed="true">
-          <span aria-hidden="true">全</span><strong>全部文章</strong><small data-archive-count="">{{ blog.count }}</small>
+          <span class="archive-filters__label"><span aria-hidden="true">全</span><strong>全部文章</strong></span><small data-archive-count="">{{ blog.count }}</small>
         </button>
       </nav>
     </header>

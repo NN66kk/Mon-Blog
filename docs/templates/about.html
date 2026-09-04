@@ -12,7 +12,7 @@
       <div class="about-hero__copy">
         <span class="garden-eyebrow"><i aria-hidden="true"></i> ABOUT THE GARDENER</span>
         <h1>关于我</h1>
-        <p>我把这里当作一间公开的书房：认真处理问题，也诚实记录问题还没有答案的时候。</p>
+        <p>一些兴趣，也有一些不太好改的习惯。</p>
       </div>
       <div class="about-portrait" aria-hidden="true">
         <span>M</span>
@@ -24,17 +24,17 @@
       <aside class="about-index" aria-label="个人关键词">
         <span>关键词</span>
         <ul>
-          <li><b>01</b> 写作与思考</li>
-          <li><b>02</b> 山野与训练</li>
-          <li><b>03</b> AI 与工具</li>
-          <li><b>04</b> 边界与自省</li>
+          <li><b>01</b> 写作与记录</li>
+          <li><b>02</b> 徒步与搏击</li>
+          <li><b>03</b> AI 与心理学</li>
+          <li><b>04</b> 独处与思考</li>
         </ul>
       </aside>
       <div class="about-body post-body">{{ body_html|safe }}</div>
     </div>
 
     <section class="about-paths" aria-labelledby="about-paths-title">
-      <header><span>继续逛逛</span><h2 id="about-paths-title">从一篇文章开始认识我。</h2></header>
+      <header><span>继续逛逛</span><h2 id="about-paths-title">最近写的几篇</h2></header>
       <div>
         {% for post in blog.recent[:3] %}
           <a href="{{ post.url|url }}"><small>{{ post.blog_collection.mark }} · {{ post.blog_collection.label }}</small><strong>{{ post.title|striptags|e }}</strong><span aria-hidden="true">→</span></a>

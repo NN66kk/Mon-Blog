@@ -59,8 +59,29 @@
   transition: background var(--garden-ease), color var(--garden-ease);
 }
 
-.archive-filters__all {
+.archive-filters button.archive-filters__all {
   grid-column: 1 / -1;
+  grid-template-columns: minmax(3ch, 1fr) auto minmax(3ch, 1fr);
+}
+
+.archive-filters button > .archive-filters__label {
+  display: inline-flex;
+  grid-column: 2;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: inherit;
+  font: inherit;
+}
+
+.archive-filters__label > span {
+  color: var(--garden-copper);
+  font: 700 var(--garden-sm)/1 var(--garden-serif);
+}
+
+.archive-filters__all > small {
+  grid-column: 3;
+  justify-self: end;
 }
 
 .archive-filters button > span {

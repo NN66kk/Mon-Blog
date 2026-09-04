@@ -35,7 +35,7 @@
       <div class="garden-hero-copy">
         <span class="garden-eyebrow">MON'S DIGITAL GARDEN / 2026</span>
         <h1 id="garden-hero-title">格物，也格自己。</h1>
-        <p>在代码与山野之间，种一座持续生长的数字花园。</p>
+        <p>记些学习笔记、生活琐事，还有路上的见闻。</p>
         <a class="garden-text-link" href="#garden-latest">开始游园 <span aria-hidden="true">→</span></a>
       </div>
 
@@ -52,7 +52,7 @@
         <section class="garden-author-card">
           <div class="garden-avatar" aria-hidden="true">M</div>
           <h2>Mon</h2>
-          <p>代码 × 山野 × 独立思考</p>
+          <p>学习、行旅与生活</p>
           <div class="garden-now"><span aria-hidden="true"></span><small>NOW</small> 正在打磨这座数字花园</div>
         </section>
 
@@ -61,7 +61,7 @@
           <div class="garden-collection-grid">
             <a href="{{ 'B-Notes/000000学习笔记目录/'|url|e }}"><b>技</b><span>格物札记</span><small>{{ ns.notes }}</small></a>
             <a href="{{ 'D-Orginals/000000原创文章目录/'|url|e }}"><b>思</b><span>原创手记</span><small>{{ ns.originals }}</small></a>
-            <a href="{{ 'A-Life/000000生活专栏目录/'|url|e }}"><b>行</b><span>山野日常</span><small>{{ ns.life }}</small></a>
+            <a href="{{ 'A-Life/000000生活专栏目录/'|url|e }}"><b>行</b><span>行旅札记</span><small>{{ ns.life }}</small></a>
             <a href="{{ 'C-Highlights/000000优质内容目录/'|url|e }}"><b>拾</b><span>人间拾遗</span><small>{{ ns.highlights }}</small></a>
           </div>
         </section>
@@ -99,7 +99,7 @@
               {% set post = entry.page %}
               {% set description = post.blog_description_text|default("", true) or post.blog_excerpt_text|default("", true) %}
               {% if not description and post.meta and post.meta.description %}{% set description = post.meta.description %}{% endif %}
-              {% if entry.section == "A" %}{% set index = "行" %}{% set collection = "山野日常" %}
+              {% if entry.section == "A" %}{% set index = "行" %}{% set collection = "行旅札记" %}
               {% elif entry.section == "B" %}{% set index = "技" %}{% set collection = "格物札记" %}
               {% elif entry.section == "C" %}{% set index = "拾" %}{% set collection = "人间拾遗" %}
               {% else %}{% set index = "思" %}{% set collection = "原创手记" %}{% endif %}

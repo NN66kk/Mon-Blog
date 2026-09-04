@@ -1,5 +1,5 @@
 site_name: Mon's Digital Garden
-site_description: 在代码与山野之间，种一座持续生长的数字花园。
+site_description: Mon 的学习笔记、生活记录与行旅札记。
 site_author: Mon
 site_url: https://nn66kk.github.io/Mon-Blog/
 site_dir: !ENV [MON_BLOG_SITE_DIR, site]
@@ -20,7 +20,7 @@ extra:
   collections:
     A:
       mark: 行
-      label: 山野日常
+      label: 行旅札记
       description: 训练、饮食、出行与日常生活里反复验证的小经验。
       index: "A-Life/000000生活专栏目录/"
       index_src: "A-Life/000000生活专栏目录.md"

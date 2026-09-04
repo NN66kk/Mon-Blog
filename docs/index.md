@@ -1,11 +1,12 @@
 ---
 template: home.html
+title: 首页
 hide:
   - navigation
   - toc
 ---
 
-# Mon's Digital Garden
+# 读书与行路 {#home-title}
 
 这是我的数字花园。
 
