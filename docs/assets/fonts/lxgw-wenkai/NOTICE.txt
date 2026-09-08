@@ -1,0 +1,6 @@
+LXGW WenKai / 霞鹜文楷
+Typeface: https://github.com/lxgw/LxgwWenKai
+Webfont packaging: https://github.com/chawyehsu/lxgw-wenkai-webfont
+Package: lxgw-wenkai-webfont@1.7.0
+License: SIL Open Font License 1.1 (OFL.txt); webfont packaging license in LICENSE.
+Unmodified regular/bold and mono regular WOFF2 subsets; unicode ranges load glyphs on demand.
