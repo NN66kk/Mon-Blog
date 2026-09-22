@@ -1,4 +1,9 @@
 import { parseDocument } from 'yaml';
+import type { Definition, Image, ImageReference, Nodes } from 'mdast';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import { articleUrl, splitMarkdown, validPath } from './content';
 import { previewImageUrl } from './editor-content';
 
@@ -89,16 +94,77 @@ export function restoredContent(source: string, release: string) {
   return `${source.replace(/\n?<!-- publisher-release:[a-z0-9-]+ -->\n?/g, '').trimEnd()}\n\n<!-- publisher-release:${release} -->\n`;
 }
 
-// Copies and exports change the Markdown location; keep existing article images resolvable.
+const imageMarkdownParser = unified()
+  .use(remarkParse)
+  .use(remarkGfm)
+  .use(remarkMath);
+
+function markdownImageText(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/[\\`*_[\]]/g, '\\$&')
+    .replace(/\r/g, '&#13;')
+    .replace(/\n/g, '&#10;');
+}
+
+function portableImageMarkdown(
+  image: Image | ImageReference,
+  destination: Image | Definition,
+  url: string,
+) {
+  const alt = markdownImageText(image.alt || '');
+  // Encode destination delimiters so parentheses and escaped filenames remain
+  // valid even when an original angle-bracket destination is serialized inline.
+  const target = url
+    .replace(
+      /[()\\]/g,
+      (character) => `%${character.charCodeAt(0).toString(16).toUpperCase()}`,
+    )
+    .replace(/&/g, '&amp;');
+  const title =
+    destination.title == null
+      ? ''
+      : ` "${markdownImageText(destination.title).replace(/"/g, '\\"')}"`;
+  return `![${alt}](${target}${title})`;
+}
+
+// Copies and exports change the Markdown location; keep existing article images
+// resolvable without rewriting Markdown examples or unrelated source formatting.
 export function portableImages(body: string, sourcePath?: string | null) {
   if (!sourcePath) return body;
-  return body.replace(
-    /(!\[[^\]]*\]\()(<[^>\n]+>|[^\s)]+)/g,
-    (match, before, raw) => {
-      const source = raw.startsWith('<') ? raw.slice(1, -1) : raw;
-      if (/^(?:https?:|\/api\/media\/|#)/i.test(source)) return match;
-      const resolved = previewImageUrl(source, sourcePath);
-      return resolved ? `${before}${resolved}` : match;
-    },
-  );
+  const tree = imageMarkdownParser.parse(body);
+  const definitions = new Map<string, Definition>();
+  const images: (Image | ImageReference)[] = [];
+  const collect = (node: Nodes) => {
+    if (node.type === 'definition' && !definitions.has(node.identifier))
+      definitions.set(node.identifier, node);
+    if (node.type === 'image' || node.type === 'imageReference')
+      images.push(node);
+    if ('children' in node) node.children.forEach(collect);
+  };
+  collect(tree);
+
+  const edits: { start: number; end: number; text: string }[] = [];
+  for (const image of images) {
+    const destination =
+      image.type === 'image' ? image : definitions.get(image.identifier);
+    if (!destination || /^(?:https?:|\/api\/media\/|#)/i.test(destination.url))
+      continue;
+    const resolved = previewImageUrl(destination.url, sourcePath);
+    const start = image.position?.start.offset;
+    const end = image.position?.end.offset;
+    if (!resolved || start == null || end == null) continue;
+    // Inline only this image reference: a shared definition may also belong to
+    // an ordinary link, whose destination must remain unchanged.
+    edits.push({
+      start,
+      end,
+      text: portableImageMarkdown(image, destination, resolved),
+    });
+  }
+  for (const edit of edits.sort((a, b) => b.start - a.start))
+    body = body.slice(0, edit.start) + edit.text + body.slice(edit.end);
+  return body;
 }

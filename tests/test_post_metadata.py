@@ -1,6 +1,7 @@
 from pathlib import Path
 from types import SimpleNamespace
 from tempfile import TemporaryDirectory
+from datetime import date, datetime, timezone
 import importlib.util
 import unittest
 
@@ -113,6 +114,56 @@ tags:
         publish = POST_METADATA._publish_parts_from_value("260814185045")
         self.assertEqual(publish[0], "20260814185045")
         self.assertEqual(publish[1], "2026-08-14 18:50")
+
+    def test_timestamp_offsets_use_beijing_dates_and_preserve_legacy_wall_time(self):
+        expected = (
+            "20260922013000",
+            "2026-09-22 01:30",
+            "2026-09-22T01:30:00+08:00",
+        )
+        for value in (
+            "2026-09-21T17:30:00Z",
+            "2026-09-22T01:30:00+08:00",
+            "2026-09-21T13:30:00-04:00",
+            "2026-09-22 01:30:00",
+            "260922013000",
+            datetime(2026, 9, 21, 17, 30, tzinfo=timezone.utc),
+        ):
+            with self.subTest(value=value):
+                self.assertEqual(POST_METADATA._publish_parts_from_value(value), expected)
+        self.assertEqual(
+            POST_METADATA._publish_parts_from_value(date(2026, 9, 22)),
+            ("20260922000000", "2026-09-22", "2026-09-22"),
+        )
+
+    def test_nav_sorts_mixed_timezones_and_displays_studio_revision_in_beijing(self):
+        with TemporaryDirectory() as temp_dir:
+            docs_dir = Path(temp_dir)
+            (docs_dir / "B-Notes").mkdir()
+            pages = []
+            for name, published in (
+                ("earlier", "2026-09-22T01:00:00+08:00"),
+                ("later", "2026-09-21T17:15:00Z"),
+            ):
+                src_uri = f"B-Notes/{name}.md"
+                (docs_dir / src_uri).write_text(
+                    f"---\npublished_at: {published}\n"
+                    "updated_at: 2026-09-21T17:30:00Z\n"
+                    "tags: [Claude Code]\n---\nText\n",
+                    encoding="utf-8",
+                )
+                pages.append(SimpleNamespace(
+                    file=SimpleNamespace(src_uri=src_uri), meta={}, title=name,
+                ))
+            nav = SimpleNamespace(pages=pages)
+            POST_METADATA.on_nav(nav, blog_config(docs_dir), files=[])
+
+        self.assertEqual([page.title for page in nav.blog["posts"]], ["later", "earlier"])
+        for page in pages:
+            self.assertEqual(page.blog_publish_label[:10], "2026-09-22")
+            self.assertEqual(page.blog_updated_label, "2026-09-22 01:30")
+            self.assertGreater(page.blog_updated_key, page.blog_publish_key)
+            self.assertEqual(page.blog_topic_tags, ["Claude Code"])
 
     def test_generated_description_is_safe_inside_html_attributes(self):
         description = POST_METADATA._truncate_description(

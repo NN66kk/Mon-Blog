@@ -4,7 +4,7 @@ import os
 import re
 from collections import Counter
 from collections.abc import Mapping
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -30,6 +30,7 @@ COLLECTION_KEYS = ("A", "B", "C", "D")
 NON_PUBLIC_STATUSES = {"draft", "private"}
 UNLISTED_STATUSES = {"draft", "hidden", "redirect", "private"}
 GENERIC_TAGS = {"zettelkasten"}
+BLOG_TIMEZONE = timezone(timedelta(hours=8))
 
 
 def _normalize_text(value: Any) -> str:
@@ -228,6 +229,14 @@ def _expand_two_digit_year(year_text: str) -> int:
 
 def _publish_parts_from_datetime(value: date | datetime) -> tuple[str, str, str]:
     if isinstance(value, datetime):
+        # Legacy timestamps without an offset are Beijing wall time. Publication
+        # timestamps from the writing studio can be UTC and must use the same
+        # timezone before producing either a display label or the sorting key.
+        value = (
+            value.replace(tzinfo=BLOG_TIMEZONE)
+            if value.tzinfo is None
+            else value.astimezone(BLOG_TIMEZONE)
+        )
         return (
             value.strftime("%Y%m%d%H%M%S"),
             value.strftime("%Y-%m-%d %H:%M"),
@@ -254,11 +263,7 @@ def _publish_parts_from_compact(compact: str) -> tuple[str, str, str] | None:
             )
         except ValueError:
             return None
-        return (
-            parsed.strftime("%Y%m%d%H%M%S"),
-            parsed.strftime("%Y-%m-%d %H:%M"),
-            parsed.isoformat(),
-        )
+        return _publish_parts_from_datetime(parsed)
 
     if len(compact) == 12 and _is_plausible_year(compact[:4]):
         try:
@@ -271,11 +276,7 @@ def _publish_parts_from_compact(compact: str) -> tuple[str, str, str] | None:
             )
         except ValueError:
             return None
-        return (
-            parsed.strftime("%Y%m%d%H%M%S"),
-            parsed.strftime("%Y-%m-%d %H:%M"),
-            parsed.isoformat(),
-        )
+        return _publish_parts_from_datetime(parsed)
 
     if len(compact) == 12:
         try:
@@ -289,11 +290,7 @@ def _publish_parts_from_compact(compact: str) -> tuple[str, str, str] | None:
             )
         except ValueError:
             return None
-        return (
-            parsed.strftime("%Y%m%d%H%M%S"),
-            parsed.strftime("%Y-%m-%d %H:%M"),
-            parsed.isoformat(),
-        )
+        return _publish_parts_from_datetime(parsed)
 
     if len(compact) == 10:
         try:
@@ -306,11 +303,7 @@ def _publish_parts_from_compact(compact: str) -> tuple[str, str, str] | None:
             )
         except ValueError:
             return None
-        return (
-            parsed.strftime("%Y%m%d%H%M%S"),
-            parsed.strftime("%Y-%m-%d %H:%M"),
-            parsed.isoformat(),
-        )
+        return _publish_parts_from_datetime(parsed)
 
     if len(compact) == 8 and _is_plausible_year(compact[:4]):
         try:

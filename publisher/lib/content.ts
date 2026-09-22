@@ -28,7 +28,8 @@ export function composeMarkdown(draft: { title: string; metadata: string; body: 
   if (doc.errors.length || !doc.toJSON() || Array.isArray(doc.toJSON()) || typeof doc.toJSON() !== 'object') throw new Error('文章信息必须是有效的 YAML 对象。');
   doc.set('title', draft.title.trim());
   if (!doc.get('published_at') && !doc.get('cdate') && !doc.get('date') && (!draft.source_path || draft.first_published_at)) doc.set('published_at', draft.first_published_at || now);
-  if (typeof doc.get('tags') === 'string' && /[,，]/.test(String(doc.get('tags')))) doc.set('tags', String(doc.get('tags')).split(/[,，]/).map(t => t.trim()).filter(Boolean));
+  // The editor separates tags with commas; spaces may belong to a single tag.
+  if (typeof doc.get('tags') === 'string') doc.set('tags', String(doc.get('tags')).split(/[,，]/).map(t => t.trim()).filter(Boolean));
   doc.set('updated_at', now);
   doc.set('status', 'published');
   if (doc.has('draft')) doc.set('draft', false);

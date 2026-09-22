@@ -43,11 +43,12 @@ export async function removeArticle(call: GitCall, path: string, expectedSha: st
   return commit.sha as string;
 }
 export type GitCall = ReturnType<typeof github>;
+export type GitAsset = { path: string } & ({ base64: string } | { sha: string });
 export async function readArticle(call: GitCall, path: string, ref = 'main') {
   if (!validPath(path)) throw new ApiError(400, '不能编辑此路径。');
   return call(`/repos/${REPO}/contents/${path.split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(ref)}`);
 }
-export async function commitArticle(call: GitCall, input: { path: string; baseSha: string | null; markdown: string; title: string; release: string; assets: { path: string; base64: string }[] }, beforeAdvance: (sha: string) => Promise<void>) {
+export async function commitArticle(call: GitCall, input: { path: string; baseSha: string | null; markdown: string; title: string; release: string; assets: GitAsset[] }, beforeAdvance: (sha: string) => Promise<void>) {
   if (!validPath(input.path)) throw new ApiError(400, '文章路径无效。');
   const head = await call(`/repos/${REPO}/git/ref/heads/main`);
   const parent = head.object.sha;
@@ -58,7 +59,7 @@ export async function commitArticle(call: GitCall, input: { path: string; baseSh
   const tree: any[] = [{ path: input.path, mode: '100644', type: 'blob', content: input.markdown }];
   for (const asset of input.assets) {
     if (!/^docs\/assets\/publisher\/[a-f0-9-]{36}\/[a-f0-9-]{36}\.(png|jpg|webp|gif)$/.test(asset.path)) throw new ApiError(400, '图片路径无效。');
-    const blob = await call(`/repos/${REPO}/git/blobs`, 'POST', { content: asset.base64, encoding: 'base64' });
+    const blob = 'sha' in asset ? asset : await call(`/repos/${REPO}/git/blobs`, 'POST', { content: asset.base64, encoding: 'base64' });
     tree.push({ path: asset.path, mode: '100644', type: 'blob', sha: blob.sha });
   }
   const nextTree = await call(`/repos/${REPO}/git/trees`, 'POST', { base_tree: commit.tree.sha, tree });

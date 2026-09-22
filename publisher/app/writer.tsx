@@ -175,14 +175,15 @@ export default function Writer({
   const [recovery, setRecovery] = useState<Draft | null>(null);
   const [inspectorOpen, setInspectorOpen] = useState(false);
   const [versionsOpen, setVersionsOpen] = useState(false);
-  const [versions, setVersions] = useState<
-    {
+  const [versionHistory, setVersionHistory] = useState<{
+    draftId: string;
+    versions: {
       revision: number;
       title: string;
       created_at: string;
       characters: number;
-    }[]
-  >([]);
+    }[];
+  } | null>(null);
   const [restoreVersion, setRestoreVersion] = useState<number | null>(null);
   const [mediaOpen, setMediaOpen] = useState(false);
   const [mediaItems, setMediaItems] = useState<
@@ -197,6 +198,7 @@ export default function Writer({
   const latest = useRef(draft);
   const pending = useRef<Promise<Draft> | null>(null);
   const pollOffset = useRef(0);
+  const historyRequest = useRef(0);
   const transition = useRef(createDraftTransition<Draft>()).current;
   const dirtyRef = useRef(false);
   const storageKey = `mon-writer-recovery:${user?.id || 'local'}`;
@@ -299,15 +301,22 @@ export default function Writer({
   }, [publishing, switching, user]);
 
   async function openVersions() {
+    const draftId = latest.current.id;
+    const request = ++historyRequest.current;
+    const isCurrent = () =>
+      request === historyRequest.current && latest.current.id === draftId;
     setPanelBusy(true);
     setError('');
     try {
       const saved = await save();
-      setVersions((await api(`drafts/${saved.id}/history`)).versions);
+      if (!isCurrent() || saved.id !== draftId) return;
+      const result = await api(`drafts/${draftId}/history`);
+      if (!isCurrent()) return;
+      setVersionHistory({ draftId, versions: result.versions });
       setRestoreVersion(null);
       setVersionsOpen(true);
     } catch (error: any) {
-      setError(error.message);
+      if (isCurrent()) setError(error.message);
     } finally {
       setPanelBusy(false);
     }
@@ -417,6 +426,10 @@ export default function Writer({
         },
         loadNext,
         activate: (loaded) => {
+          historyRequest.current++;
+          setVersionHistory(null);
+          setRestoreVersion(null);
+          setVersionsOpen(false);
           latest.current = loaded;
           setDraft(loaded);
           setDirty(recovered);
@@ -438,6 +451,22 @@ export default function Writer({
     await moveToDraft(() =>
       next ? api(`drafts/${next.id}`) : Promise.resolve(fresh()),
     );
+  }
+  async function restoreHistory() {
+    const draftId = versionHistory?.draftId;
+    const version = restoreVersion;
+    if (!draftId || version === null || latest.current.id !== draftId) return;
+    const restored = await moveToDraft(() =>
+      api('restore-version', 'POST', {
+        id: draftId,
+        version,
+        revision: latest.current.revision,
+      }),
+    );
+    if (restored) {
+      setNotice('历史内容已恢复为新的草稿版本。');
+      await reload();
+    }
   }
   async function restoreDraft() {
     if (!recovery) return;
@@ -1538,7 +1567,7 @@ export default function Writer({
             </DialogDescription>
           </DialogHeader>
           <div className="manager-version-list">
-            {versions.map((version) => (
+            {versionHistory?.versions.map((version) => (
               <article key={version.revision}>
                 <div>
                   <strong>
@@ -1563,24 +1592,8 @@ export default function Writer({
             <div className="manager-check-result">
               <p>确认恢复到版本 {restoreVersion}？当前内容会先保存。</p>
               <Button
-                disabled={switching}
-                onClick={() =>
-                  void (async () => {
-                    const version = restoreVersion;
-                    const restored = await moveToDraft(() =>
-                      api('restore-version', 'POST', {
-                        id: latest.current.id,
-                        version,
-                        revision: latest.current.revision,
-                      }),
-                    );
-                    if (restored) {
-                      setVersionsOpen(false);
-                      setNotice('历史内容已恢复为新的草稿版本。');
-                      await reload();
-                    }
-                  })()
-                }
+                disabled={switching || versionHistory?.draftId !== draft.id}
+                onClick={() => void restoreHistory()}
               >
                 确认恢复
               </Button>

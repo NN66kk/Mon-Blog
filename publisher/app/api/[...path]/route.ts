@@ -5,6 +5,7 @@ import { checkPublication, needsPublicationCheck } from '@/lib/publication';
 import { publishDraft } from '@/lib/publish';
 import { managementRequest, snapshotDraft } from '@/lib/management-server';
 import { ensureDraftFilename } from '@/lib/draft-filename';
+import { draftPublicationUpdate } from '@/lib/publication-baseline';
 
 export const dynamic = 'force-dynamic';
 const UUID = /^[a-f0-9-]{36}$/;
@@ -122,7 +123,7 @@ async function handle(request: Request) {
         });
         await db.batch([
           db.prepare('UPDATE publications SET state=? WHERE id=? AND owner=?').bind('submitted', release, owner),
-          db.prepare('UPDATE drafts SET source_path=?,base_sha=?,first_published_at=COALESCE(first_published_at,?) WHERE id=? AND owner=?').bind(path, result.blobSha, result.firstPublishedAt, id, owner),
+          draftPublicationUpdate(db, { owner, draftId: id, path, blobSha: result.blobSha, firstPublishedAt: result.firstPublishedAt, expectedBaseSha: draft.base_sha }),
         ]);
       } catch (error) {
         const message = error instanceof ApiError || (error instanceof Error && error.message.startsWith('文章信息')) ? (error as Error).message : '发布请求未完成。草稿已保留，请检查发布记录。';
@@ -135,6 +136,9 @@ async function handle(request: Request) {
       let job = await db.prepare('SELECT * FROM publications WHERE id=? AND owner=?').bind(id, owner).first<any>();
       if (!job) throw new ApiError(404, '找不到发布记录。');
       if (!needsPublicationCheck(job.state)) return response(job);
+      const draft = job.state === 'verifying' && job.action !== 'delete' && job.action !== 'restore'
+        ? await ownedDraft(owner, job.draft_id)
+        : null;
       const successor = job.commit_sha && job.target_path
         ? await db.prepare('SELECT id FROM publications WHERE owner=? AND target_path=? AND state=? AND created_at>? LIMIT 1').bind(owner, job.target_path, 'live', job.created_at).first()
         : null;
@@ -142,7 +146,16 @@ async function handle(request: Request) {
       job = await checkPublication(job, call, async (blobSha, publishedAt) => {
         if (job.action === 'delete' || job.action === 'restore') {
           await db.prepare('UPDATE article_trash SET state=?,restored_at=? WHERE id=? AND owner=?').bind(job.action === 'delete' ? 'removed' : 'restored', job.action === 'restore' ? new Date().toISOString() : null, job.trash_id, owner).run();
-        } else await db.prepare('UPDATE drafts SET source_path=?,base_sha=?,first_published_at=COALESCE(first_published_at,?) WHERE id=? AND owner=?').bind(job.target_path, blobSha, publishedAt, job.draft_id, owner).run();
+        } else if (draft) {
+          // A late verification may begin after a newer publication already
+          // updated this draft. Its commit must still be the current article;
+          // the CAS also protects a newer confirmation arriving during this read.
+          let current;
+          try { current = await readArticle(call, job.target_path); }
+          catch (error) { if (error instanceof ApiError && error.status === 404) return; throw error; }
+          if (current.sha !== blobSha) return;
+          await draftPublicationUpdate(db, { owner, draftId: job.draft_id, path: job.target_path, blobSha, firstPublishedAt: publishedAt, expectedBaseSha: draft.base_sha }).run();
+        }
       }, fetch, Date.now(), Boolean(successor));
       await db.prepare('UPDATE publications SET state=?,error=? WHERE id=? AND owner=?').bind(job.state, job.error, job.id, owner).run();
       if (job.state === 'failed' && job.action === 'delete') await db.prepare("UPDATE article_trash SET state='failed' WHERE id=? AND owner=? AND state='pending'").bind(job.trash_id, owner).run();

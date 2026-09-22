@@ -201,6 +201,7 @@ export default function Manager({
   const syncLock = useRef(false);
   const mounted = useRef(true);
   const pollLock = useRef(false);
+  const pollOffset = useRef(0);
   const title = sections.find((item) => item.id === view)!;
   const changeView = (next: View) => {
     setView(next);
@@ -351,16 +352,16 @@ export default function Manager({
   }, []);
   useEffect(() => {
     if (!user || !jobs.some((job) => needsPublicationCheck(job.state))) return;
-    let index = 0;
     const timer = setInterval(async () => {
       if (pollLock.current) return;
       pollLock.current = true;
       const waiting = jobs.filter((job) => needsPublicationCheck(job.state));
+      const index = pollOffset.current % waiting.length;
       const batch = [...waiting.slice(index), ...waiting.slice(0, index)].slice(
         0,
         4,
       );
-      index = (index + 4) % waiting.length;
+      pollOffset.current = (index + batch.length) % waiting.length;
       try {
         const updates = await Promise.all(
           batch.map((job) => api(`publication/${job.id}`).catch(() => job)),
