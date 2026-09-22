@@ -14,3 +14,6 @@ CLAUDE.md
 # Python bytecode and interpreter caches
 __pycache__/
 *.py[cod]
+
+# Publisher dependency cache
+.npm-cache/

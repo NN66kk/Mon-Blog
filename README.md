@@ -12,11 +12,7 @@ python3 -m venv .venv
 .venv/bin/mkdocs serve
 ```
 
-浏览器访问终端显示的本地地址即可。生产构建建议开启严格模式，确保不存在失效的内部链接：
-
-```bash
-.venv/bin/mkdocs build --strict
-```
+浏览器访问终端显示的本地地址即可。Windows 使用 `.venv\Scripts\python.exe` 和 `.venv\Scripts\mkdocs.exe`。日常修改运行下方回归测试，不要求本地执行 `mkdocs build`。
 
 ## 质量检查
 
@@ -31,13 +27,14 @@ node --test tests/*.test.js
 
 - `docs/`：公开文章、首页、归档页和静态资源。
 - `docs/templates/`：首页、文章页、归档页及站点框架的 Jinja 模板。
-- `docs/css/garden-v2.css`：明暗主题、阅读排版和响应式样式。
+- `docs/css/00-tokens.css` 至 `60-collection.css`：当前实际加载的主题变量、页面框架、组件和各类页面样式；加载顺序见 `mkdocs.yml`。
 - `docs/javascripts/`：目录、分享、文章筛选与阅读状态等渐进增强。
-- `hooks/post_metadata.py`：统一解析 `date`、`cdate`、文件名日期、标签和自动摘要。
+- `hooks/post_metadata.py`：统一解析发布日期、更新日期、标签和自动摘要，并排除草稿及私有文章。
 - `tests/`：Python 与 Node.js 回归测试。
+- `publisher/`：独立的网页写作后台，运行、托管和发布验收说明见 [publisher/README.md](publisher/README.md)。
 
 ## 内容约定
 
-文章放在 `A-Life`、`B-Notes`、`C-Highlights` 或 `D-Orginals` 下即可自动进入首页和文章库。日期优先读取 front matter 中的 `date`，其次读取 `cdate`，最后尝试从文件名解析；未填写 `description` 时，构建钩子会从正文首个有效段落生成简洁摘要。
+公开文章放在 `A-Life`、`B-Notes`、`C-Highlights` 或 `D-Orginals` 下即可自动进入首页和文章库。发布日期依次读取 front matter 中的 `published_at`、`cdate`、`date`，最后尝试从文件名解析；未填写 `description` 时，构建钩子会从正文首个有效段落生成简洁摘要。
 
-笔记仍可在 Obsidian 中使用 Wiki Link。提交前运行严格构建，及时发现未同步的附件或目标笔记。
+笔记仍可在 Obsidian 中使用 Wiki Link。提交前运行回归测试，并检查引用的附件与目标笔记是否已同步。推送 `main` 后由现有 GitHub Actions 流程部署博客。

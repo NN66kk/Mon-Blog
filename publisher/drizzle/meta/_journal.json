@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1788828399294,
+      "tag": "0000_useful_dark_phoenix",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1788828837231,
+      "tag": "0001_minor_star_brand",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790059480303,
+      "tag": "0002_mushy_starhawk",
+      "breakpoints": true
+    }
+  ]
+}
