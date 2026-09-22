@@ -22,6 +22,13 @@
       "when": 1790059480303,
       "tag": "0002_mushy_starhawk",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1790070710649,
+      "tag": "0003_easy_hellcat",
+      "breakpoints": true
     }
   ]
 }

@@ -78,6 +78,49 @@ test('draft revisions survive round trips and stale saves cannot overwrite new c
   assert.equal(stored.source_path, null);
 });
 
+test('numeric filenames are unique, persistent and independent of editable titles and dates', async () => {
+  const create = async () => {
+    const input = {
+      ...draft,
+      id: crypto.randomUUID(),
+      title: '真正的 YAML 标题',
+      metadata:
+        'title: 真正的 YAML 标题\ndate: 2026-08-14T18:50:45+08:00\naliases: [参考]',
+    };
+    const result = await fetch(`${origin}/api/drafts`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(input),
+    });
+    assert.equal(result.status, 200);
+    const saved = (await result.json()) as any;
+    assert.match(saved.filename, /^\d{12}\.md$/);
+    return { ...input, ...saved };
+  };
+  const samples = await Promise.all(Array.from({ length: 3 }, create));
+  assert.equal(new Set(samples.map((item) => item.filename)).size, 3);
+  const original = samples[0];
+  const changed = await fetch(`${origin}/api/drafts`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      ...original,
+      title: '修改后的标题',
+      metadata:
+        'title: 修改后的标题\ndate: 2020-01-01T00:00:00+08:00\naliases: [参考]',
+      filename: '../../unsafe.md',
+    }),
+  });
+  assert.equal(changed.status, 200);
+  assert.equal(((await changed.json()) as any).filename, original.filename);
+  const stored = (await (
+    await fetch(`${origin}/api/drafts/${original.id}`, { headers })
+  ).json()) as any;
+  assert.equal(stored.filename, original.filename);
+  assert.equal(stored.source_path, null);
+  assert.match(stored.metadata, /aliases: \[参考\]/);
+});
+
 test('invalid draft data is rejected without creating an article', async () => {
   const result = await fetch(`${origin}/api/drafts`, {
     method: 'POST',
@@ -273,7 +316,13 @@ test('media recycling preserves bytes and blocks recycling referenced images', a
 });
 
 test('new management endpoints reject anonymous access and unconfirmed repository mutations', async () => {
-  for (const path of ['trash', 'backup', 'media', `drafts/${draft.id}/history`])
+  for (const path of [
+    'trash',
+    'backup',
+    'media',
+    'templates',
+    `drafts/${draft.id}/history`,
+  ])
     assert.equal((await fetch(`${origin}/api/${path}`)).status, 401);
   const unconfirmed = await fetch(`${origin}/api/article-operation`, {
     method: 'POST',

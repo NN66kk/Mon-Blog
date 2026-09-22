@@ -27,6 +27,7 @@ import {
   History,
   Images,
   ArrowLeft,
+  LayoutTemplate,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -52,7 +53,20 @@ import {
   exportMarkdown,
   previewImageUrl,
   updateMetadata,
+  metadataDocument,
+  metadataFields,
+  metadataProblem,
+  normalizeYamlInput,
 } from '@/lib/editor-content';
+import {
+  BUILTIN_TEMPLATES,
+  COLLECTION_TAGS,
+  dateForInput,
+  materializeTemplate,
+  standardArticle,
+  syncHeading,
+  type ArticleTemplate,
+} from '@/lib/article-templates';
 import { download, jobLabel } from '@/lib/client-api';
 import { draftBackup } from '@/lib/backup';
 import 'katex/dist/katex.min.css';
@@ -66,6 +80,7 @@ type Draft = {
   revision: number;
   updated_at?: string;
   source_path?: string | null;
+  filename?: string | null;
   base_sha?: string | null;
 };
 type Job = {
@@ -90,10 +105,8 @@ const labels: Record<string, string> = {
 };
 const fresh = (): Draft => ({
   id: crypto.randomUUID(),
-  title: '',
   collection: 'D-Orginals',
-  body: '',
-  metadata: '',
+  ...standardArticle(),
   revision: 0,
 });
 const contentKey = (d: Draft) =>
@@ -136,6 +149,16 @@ export default function Writer({
   const [switching, setSwitching] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [mode, setMode] = useState('write');
+  const [templatesOpen, setTemplatesOpen] = useState(false);
+  const [templates, setTemplates] =
+    useState<ArticleTemplate[]>(BUILTIN_TEMPLATES);
+  const [selectedTemplate, setSelectedTemplate] = useState(
+    BUILTIN_TEMPLATES[0].path,
+  );
+  const [templateBusy, setTemplateBusy] = useState(false);
+  const [templateMessage, setTemplateMessage] = useState(
+    '当前为随写作室保存的博客模板。连接博客后可同步最新版本。',
+  );
   const [query, setQuery] = useState('');
   const [library, setLibrary] = useState(false);
   const [settings, setSettings] = useState(false);
@@ -330,7 +353,13 @@ export default function Writer({
     }
     const snapshot = { ...latest.current };
     if (!snapshot.id) throw new Error('编辑器正在准备，请稍后重试。');
-    if (!dirtyRef.current && snapshot.revision > 0 && !force) return snapshot;
+    if (
+      !dirtyRef.current &&
+      snapshot.revision > 0 &&
+      (snapshot.filename || snapshot.source_path) &&
+      !force
+    )
+      return snapshot;
     setSaving(true);
     const work = api('drafts', 'POST', snapshot).then((result) => {
       const saved = { ...snapshot, ...result };
@@ -340,6 +369,7 @@ export default function Writer({
           ...latest.current,
           revision: result.revision,
           updated_at: result.updated_at,
+          filename: result.filename,
         };
         setDraft(latest.current);
         window.history.replaceState(null, '', `/write?draft=${snapshot.id}`);
@@ -501,9 +531,121 @@ export default function Writer({
       setError(e.message);
     }
   }
+  function setTitle(title: string) {
+    try {
+      change({
+        title,
+        metadata: updateMetadata(latest.current.metadata, 'title', title),
+        body: syncHeading(latest.current.body, latest.current.title, title),
+      });
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }
+  function setYaml(value: string) {
+    const source = normalizeYamlInput(value);
+    const update: Partial<Draft> = { metadata: source };
+    if (!metadataProblem(source)) {
+      const data = metadataDocument(source).toJSON();
+      if (Object.hasOwn(data, 'title')) {
+        update.title = data.title ?? '';
+        update.body = syncHeading(
+          latest.current.body,
+          latest.current.title,
+          update.title!,
+        );
+      }
+    }
+    change(update);
+  }
+  function setCollection(value: string) {
+    try {
+      const current = latest.current;
+      const tags = editorMetadata(current.metadata).tags;
+      const nextTags =
+        tags === COLLECTION_TAGS[current.collection]
+          ? COLLECTION_TAGS[value]
+          : tags;
+      change({
+        collection: value,
+        ...(tags !== nextTags
+          ? { metadata: updateMetadata(current.metadata, 'tags', nextTags) }
+          : {}),
+      });
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }
+  async function syncTemplates() {
+    setTemplateBusy(true);
+    try {
+      const result = await api('templates');
+      setTemplates(result.templates);
+      setSelectedTemplate(result.templates[0]?.path || '');
+      setTemplateMessage(
+        result.templates.length
+          ? '已同步博客仓库中的模板。'
+          : '仓库模板目录暂时没有 Markdown 文件。',
+      );
+    } catch (error: any) {
+      setTemplateMessage(`同步未完成：${error.message} 当前模板仍可使用。`);
+    } finally {
+      setTemplateBusy(false);
+    }
+  }
+  async function useTemplate(template: ArticleTemplate) {
+    try {
+      if (template.kind === 'snippet') {
+        insert(`\n\n${template.source}\n`);
+        setMode('write');
+        setTemplatesOpen(false);
+        setNotice('模板片段已插入正文。');
+      } else {
+        const content = materializeTemplate(
+          template,
+          latest.current.collection,
+        );
+        const next = {
+          ...fresh(),
+          collection: latest.current.collection,
+          ...content,
+        };
+        const moved = await moveToDraft(async () => next, true);
+        if (moved) {
+          setTemplatesOpen(false);
+          setMode('write');
+          setNotice('已按模板新建草稿。');
+        }
+      }
+    } catch (error: any) {
+      setTemplateMessage(error.message);
+    }
+  }
   const metadata = editorMetadata(draft.metadata);
+  const fields = metadataFields(draft.metadata);
+  const yamlError = metadataProblem(draft.metadata);
+  const articleFilename = draft.source_path?.split('/').pop() || draft.filename;
+  const activeTemplate = templates.find(
+    (item) => item.path === selectedTemplate,
+  );
+  let templatePreview = activeTemplate?.source || '';
+  if (activeTemplate?.kind === 'article') {
+    try {
+      templatePreview = exportMarkdown(
+        materializeTemplate(activeTemplate, draft.collection),
+      );
+    } catch {
+      /* Show the source when the template needs correction. */
+    }
+  }
   async function publish() {
     if (transition.busy) return;
+    const problem = metadataProblem(latest.current.metadata);
+    if (problem) {
+      setError(problem);
+      setMode('yaml');
+      return;
+    }
     if (!connected) {
       setSettings(true);
       return;
@@ -524,12 +666,15 @@ export default function Writer({
       setJobs((items) => [job, ...items.filter((j) => j.id !== job.id)]);
       setNotice(labels[job.state] || '发布任务已创建');
       const updated = await api(`drafts/${saved.id}`);
-      if (latest.current.id === updated.id)
-        setDraft((d) => ({
-          ...d,
+      if (latest.current.id === updated.id) {
+        latest.current = {
+          ...latest.current,
           source_path: updated.source_path,
           base_sha: updated.base_sha,
-        }));
+          filename: updated.filename,
+        };
+        setDraft(latest.current);
+      }
       if (job.error) setError(job.error);
     } catch (e: any) {
       setError(e.message);
@@ -604,7 +749,7 @@ export default function Writer({
     });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = `${(draft.title || '未命名文章').replace(/[\\/:*?"<>|]/g, '-')}.md`;
+    link.download = articleFilename || '未保存草稿.md';
     link.click();
     setTimeout(() => URL.revokeObjectURL(link.href), 1000);
     setNotice(
@@ -785,6 +930,14 @@ export default function Writer({
             </div>
             <div className="editor-actions">
               <Button
+                variant="outline"
+                onClick={() => setTemplatesOpen(true)}
+                disabled={opening || switching || publishing}
+              >
+                <LayoutTemplate size={17} />
+                模板
+              </Button>
+              <Button
                 variant="ghost"
                 title="草稿历史版本"
                 aria-label="草稿历史版本"
@@ -819,6 +972,7 @@ export default function Writer({
                   uploading ||
                   !draft.title.trim() ||
                   !draft.body.trim() ||
+                  Boolean(yamlError) ||
                   !user
                 }
               >
@@ -903,16 +1057,122 @@ export default function Writer({
                 </span>
               </div>
               <div className="paper-title">
+                <label className="frontmatter-caption" htmlFor="article-title">
+                  文章标题 · YAML title
+                </label>
                 <Input
+                  id="article-title"
                   className="title-input"
                   aria-label="文章标题"
                   placeholder="写下你的标题…"
                   maxLength={300}
                   value={draft.title}
-                  disabled={publishing || switching || opening}
-                  onChange={(e) => change({ title: e.target.value })}
+                  disabled={
+                    publishing || switching || opening || Boolean(yamlError)
+                  }
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
+              <section className="frontmatter-form" aria-label="YAML 逐项填写">
+                <div className="frontmatter-file">
+                  <span>文章文件名</span>
+                  <code>
+                    {articleFilename || '首次保存后自动生成 12 位时间编号.md'}
+                  </code>
+                  <small>
+                    {draft.source_path
+                      ? '沿用原文件名，修改标题不会改变链接。'
+                      : '按北京时间生成；标题和日期修改后，编号保持不变。'}
+                  </small>
+                </div>
+                <div className="frontmatter-field">
+                  <label htmlFor="yaml-collection">收录栏目</label>
+                  <NativeSelect
+                    id="yaml-collection"
+                    value={draft.collection}
+                    disabled={
+                      Boolean(draft.source_path) ||
+                      publishing ||
+                      switching ||
+                      opening ||
+                      Boolean(yamlError)
+                    }
+                    onChange={(e) => setCollection(e.target.value)}
+                  >
+                    {COLLECTIONS.map((c) => (
+                      <NativeSelectOption key={c.id} value={c.id}>
+                        {c.name}
+                      </NativeSelectOption>
+                    ))}
+                  </NativeSelect>
+                </div>
+                <div className="frontmatter-field">
+                  <label htmlFor="yaml-date">
+                    文章日期 · {fields.dateField} <small>北京时间</small>
+                  </label>
+                  <Input
+                    id="yaml-date"
+                    type="datetime-local"
+                    step="1"
+                    value={dateForInput(fields.date)}
+                    disabled={
+                      publishing || switching || opening || Boolean(yamlError)
+                    }
+                    onChange={(e) =>
+                      setMeta(
+                        fields.dateField,
+                        e.target.value ? `${e.target.value}+08:00` : '',
+                      )
+                    }
+                  />
+                  {fields.date && !dateForInput(fields.date) && (
+                    <small>
+                      原日期：{fields.date}。可在 YAML 中查看和修改。
+                    </small>
+                  )}
+                </div>
+                <div className="frontmatter-field frontmatter-wide">
+                  <label htmlFor="yaml-tags">文章标签 · tags</label>
+                  <Input
+                    id="yaml-tags"
+                    placeholder="原创文章，AI，工具"
+                    value={metadata.tags}
+                    onChange={(e) => setMeta('tags', e.target.value)}
+                    disabled={
+                      publishing || switching || opening || Boolean(yamlError)
+                    }
+                  />
+                  <small>多个标签用逗号分隔；默认使用该栏目的标签。</small>
+                </div>
+                <div className="frontmatter-field frontmatter-wide">
+                  <label htmlFor="yaml-description">
+                    文章摘要 · description
+                  </label>
+                  <Textarea
+                    id="yaml-description"
+                    placeholder="用一两句话概括文章内容。"
+                    value={metadata.description}
+                    onChange={(e) => setMeta('description', e.target.value)}
+                    disabled={
+                      publishing || switching || opening || Boolean(yamlError)
+                    }
+                  />
+                </div>
+                <div className="frontmatter-help">
+                  <span>逐项填写会同步到 YAML，其他原有字段会保留。</span>
+                  <Button
+                    variant="ghost"
+                    onClick={() => setMode(mode === 'yaml' ? 'write' : 'yaml')}
+                  >
+                    {mode === 'yaml' ? '返回正文' : '编辑完整 YAML'}
+                  </Button>
+                </div>
+                {yamlError && (
+                  <p className="frontmatter-error" role="alert">
+                    {yamlError} 内容仍可保存和导出；修正后可发布。
+                  </p>
+                )}
+              </section>
               <div className="editor-toolbar">
                 <div className="format-tools">
                   <Button
@@ -931,7 +1191,7 @@ export default function Writer({
                     aria-label="加粗"
                     title="加粗"
                     onClick={() => insert('**', '**')}
-                    disabled={publishing || switching || mode === 'preview'}
+                    disabled={publishing || switching || mode !== 'write'}
                   >
                     <Bold />
                   </Button>
@@ -941,7 +1201,7 @@ export default function Writer({
                     aria-label="插入二级标题"
                     title="标题"
                     onClick={() => insert('\n## ')}
-                    disabled={publishing || switching || mode === 'preview'}
+                    disabled={publishing || switching || mode !== 'write'}
                   >
                     <span className="heading-icon">H₂</span>
                   </Button>
@@ -951,7 +1211,7 @@ export default function Writer({
                     aria-label="插入链接"
                     title="链接"
                     onClick={() => insert('[', '](https://)')}
-                    disabled={publishing || switching || mode === 'preview'}
+                    disabled={publishing || switching || mode !== 'write'}
                   >
                     <Link2 />
                   </Button>
@@ -961,7 +1221,7 @@ export default function Writer({
                     aria-label="插入代码块"
                     title="代码块"
                     onClick={() => insert('\n```\n', '\n```\n')}
-                    disabled={publishing || switching || mode === 'preview'}
+                    disabled={publishing || switching || mode !== 'write'}
                   >
                     <Code2 />
                   </Button>
@@ -998,11 +1258,27 @@ export default function Writer({
                 >
                   <TabsList>
                     <TabsTrigger value="write">写作</TabsTrigger>
+                    <TabsTrigger value="yaml">YAML</TabsTrigger>
                     <TabsTrigger value="preview">预览</TabsTrigger>
                   </TabsList>
                 </Tabs>
               </div>
-              {mode === 'write' ? (
+              {mode === 'yaml' ? (
+                <div className="yaml-editor-panel">
+                  <p>
+                    填写字段和内容即可，无需手写两端的 <code>---</code>。修改
+                    title 会同步上方标题。
+                  </p>
+                  <Textarea
+                    aria-label="完整 YAML"
+                    className="yaml-editor"
+                    value={draft.metadata}
+                    onChange={(e) => setYaml(e.target.value)}
+                    disabled={publishing || switching || opening}
+                    spellCheck={false}
+                  />
+                </div>
+              ) : mode === 'write' ? (
                 <Textarea
                   ref={editor}
                   className="body-editor"
@@ -1117,7 +1393,7 @@ export default function Writer({
                         disabled={
                           Boolean(draft.source_path) || publishing || switching
                         }
-                        onChange={(e) => change({ collection: e.target.value })}
+                        onChange={(e) => setCollection(e.target.value)}
                       >
                         {COLLECTIONS.map((c) => (
                           <NativeSelectOption key={c.id} value={c.id}>
@@ -1153,7 +1429,7 @@ export default function Writer({
                       <Textarea
                         aria-label="YAML 文章信息"
                         value={draft.metadata}
-                        onChange={(e) => change({ metadata: e.target.value })}
+                        onChange={(e) => setYaml(e.target.value)}
                         disabled={publishing || switching}
                       />
                     </details>
@@ -1442,6 +1718,74 @@ export default function Writer({
                   {error}
                 </p>
               )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+      <Dialog open={templatesOpen} onOpenChange={setTemplatesOpen}>
+        <DialogContent className="template-dialog">
+          <DialogHeader>
+            <DialogTitle>博客文章模板</DialogTitle>
+            <DialogDescription>
+              来自你的博客模板目录。文章模板会新建草稿；正文片段插入当前文章。
+            </DialogDescription>
+          </DialogHeader>
+          <div className="template-sync">
+            <p role="status">{templateMessage}</p>
+            <Button
+              variant="outline"
+              disabled={!user || !connected || templateBusy || switching}
+              onClick={() => void syncTemplates()}
+            >
+              <RefreshCw size={16} className={templateBusy ? 'spin' : ''} />
+              同步仓库模板
+            </Button>
+          </div>
+          <label htmlFor="article-template">选择模板</label>
+          <NativeSelect
+            id="article-template"
+            value={selectedTemplate}
+            onChange={(e) => setSelectedTemplate(e.target.value)}
+            disabled={templateBusy || switching}
+          >
+            {templates.map((item) => (
+              <NativeSelectOption key={item.path} value={item.path}>
+                {item.name === 'yaml'
+                  ? '标准文章 · YAML 与一级标题'
+                  : item.name}{' '}
+                {item.kind === 'snippet'
+                  ? '· 正文片段'
+                  : item.kind === 'unsupported'
+                    ? '· 需转换脚本'
+                    : ''}
+              </NativeSelectOption>
+            ))}
+          </NativeSelect>
+          {activeTemplate && (
+            <>
+              <small className="template-path">{activeTemplate.path}</small>
+              <pre className="template-preview">{templatePreview}</pre>
+              {activeTemplate.kind === 'unsupported' && (
+                <p role="alert">
+                  此模板包含尚不支持的 Obsidian 脚本。请在仓库中另存为普通
+                  Markdown 后同步。
+                </p>
+              )}
+              <Button
+                disabled={
+                  activeTemplate.kind === 'unsupported' ||
+                  switching ||
+                  publishing ||
+                  opening ||
+                  uploading ||
+                  templateBusy
+                }
+                onClick={() => void useTemplate(activeTemplate)}
+              >
+                {activeTemplate.kind === 'snippet'
+                  ? '插入当前正文'
+                  : '保存当前文章并按模板新建'}
+              </Button>
             </>
           )}
         </DialogContent>

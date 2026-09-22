@@ -16,13 +16,17 @@ export const drafts = sqliteTable(
     body: text('body').notNull(),
     metadata: text('metadata').notNull(),
     sourcePath: text('source_path'),
+    filename: text('filename'),
     baseSha: text('base_sha'),
     firstPublishedAt: text('first_published_at'),
     deletedAt: text('deleted_at'),
     revision: integer('revision').notNull().default(1),
     updatedAt: text('updated_at').notNull(),
   },
-  (t) => [index('idx_drafts_owner_updated').on(t.owner, t.updatedAt)],
+  (t) => [
+    index('idx_drafts_owner_updated').on(t.owner, t.updatedAt),
+    uniqueIndex('idx_drafts_owner_filename').on(t.owner, t.filename),
+  ],
 );
 
 export const connections = sqliteTable('connections', {

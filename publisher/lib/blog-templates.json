@@ -1,0 +1,4 @@
+{
+  "yaml": "<%*\nconst date = tp.date.now(\"YYYY-MM-DD[T]HH:mm:ss+08:00\");\n\ntR += `---\ntitle: \"${tp.file.cursor(1)}\"\ndate: ${date}\ntags: ${tp.file.cursor(0)}\ndescription: ${tp.file.cursor(3)}\n---\n\n# ${tp.file.cursor(1)}\n\n${tp.file.cursor(2)}\n`;\n-%>\n",
+  "社群": "最近正在筹建一个「**终身学习与效率提升交流群**」。\n\n群内主要围绕以下内容展开：\n\n* AI 前沿动态与实用玩法\n* AI 编程与开发经验\n* 高效工作流搭建\n* 优质软件与工具分享\n* 学习方法、踩坑经验与不定期答疑\n\n希望聚集一群愿意长期学习、主动实践、共同成长的朋友。无论你是刚开始接触 AI，还是已经在使用 AI 提升学习和工作效率，都欢迎加入交流。\n\n目前社群**免费开放**，感兴趣的朋友可以添加我的微信：**mons688**\n\n添加时请备注「学习群」，我会拉你进群。"
+}

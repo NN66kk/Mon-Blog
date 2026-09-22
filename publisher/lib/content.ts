@@ -42,7 +42,7 @@ export function articleUrl(path: string) {
 export function relativeAsset(path: string, asset: string) {
   return '../'.repeat(path.split('/').length - 2) + asset.replace(/^docs\//, '');
 }
-export function newArticlePath(collection: string, id: string) {
-  if (!validCollection(collection) || !/^[a-f0-9-]{36}$/.test(id)) throw new Error('栏目或文章编号无效。');
-  return `docs/${collection}/${id}.md`;
+export function newArticlePath(collection: string, filename: string) {
+  if (!validCollection(collection) || !/^\d{12}\.md$/.test(filename)) throw new Error('栏目或文章编号无效。');
+  return `docs/${collection}/${filename}`;
 }

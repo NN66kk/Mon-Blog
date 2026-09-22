@@ -4,6 +4,7 @@ import { articleUrl, newArticlePath, REPO, splitMarkdown, validCollection, valid
 import { checkPublication, needsPublicationCheck } from '@/lib/publication';
 import { publishDraft } from '@/lib/publish';
 import { managementRequest, snapshotDraft } from '@/lib/management-server';
+import { ensureDraftFilename } from '@/lib/draft-filename';
 
 export const dynamic = 'force-dynamic';
 const UUID = /^[a-f0-9-]{36}$/;
@@ -52,7 +53,8 @@ async function handle(request: Request) {
         const results = await db.batch([snapshotDraft(owner, id), db.prepare('UPDATE drafts SET title=?,collection=?,body=?,metadata=?,revision=revision+1,updated_at=? WHERE id=? AND owner=? AND revision=? AND deleted_at IS NULL').bind(title, collection, body, metadata, now, id, owner, revision), snapshotDraft(owner, id)]);
         if (!results[1].meta.changes) throw new ApiError(409, '另一台设备已保存了新版本。请先导出当前内容备份，再刷新页面并重新打开云端草稿。');
       }
-      return response({ revision: revision + 1, updated_at: now });
+      const saved = await ensureDraftFilename(owner, id);
+      return response({ revision: revision + 1, updated_at: now, filename: saved.filename });
     }
     if (route.startsWith('drafts/') && request.method === 'GET') {
       const draft = await ownedDraft(owner, route.slice(7));
@@ -99,7 +101,7 @@ async function handle(request: Request) {
     }
     if (route === 'publish' && request.method === 'POST') {
       const { id, revision } = await jsonBody(request);
-      const draft = await ownedDraft(owner, id);
+      const draft = await ensureDraftFilename(owner, id);
       if (draft.deleted_at) throw new ApiError(409, '这篇草稿已移入回收站，请先恢复。');
       if (draft.revision !== revision) throw new ApiError(409, '草稿已更新，请保存最新内容后重新发布。');
       if (!draft.title.trim() || !draft.body.trim()) throw new ApiError(400, '请填写文章标题和正文。');
@@ -107,7 +109,7 @@ async function handle(request: Request) {
       const previous = await db.prepare('SELECT * FROM publications WHERE draft_id=? AND revision=? AND owner=?').bind(id, revision, owner).first<any>();
       if (previous) return response(previous);
       const release = crypto.randomUUID();
-      const path = draft.source_path || newArticlePath(draft.collection, id);
+      const path = draft.source_path || newArticlePath(draft.collection, draft.filename);
       const target = articleUrl(path);
       const inserted = await db.prepare('INSERT OR IGNORE INTO publications (id,owner,draft_id,revision,state,url,target_path,title,created_at) VALUES (?,?,?,?,?,?,?,?,?)').bind(release, owner, id, revision, 'preparing', target, path, draft.title, new Date().toISOString()).run();
       if (!inserted.meta.changes) return response(await db.prepare('SELECT * FROM publications WHERE draft_id=? AND revision=? AND owner=?').bind(id, revision, owner).first());

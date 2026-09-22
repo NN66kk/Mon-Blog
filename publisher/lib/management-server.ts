@@ -8,6 +8,7 @@ import {
 } from './server';
 import { ApiError, commitArticle, readArticle, removeArticle } from './github';
 import { articleUrl, REPO, splitMarkdown } from './content';
+import { describeTemplate, TEMPLATE_FOLDER } from './article-templates';
 import {
   duplicateMetadata,
   IMAGE_NAME,
@@ -40,6 +41,44 @@ export async function managementRequest(
 ): Promise<Response | null> {
   const db = database();
   const url = new URL(request.url);
+  if (route === 'templates' && request.method === 'GET') {
+    const call = await account(owner);
+    const encodedFolder = TEMPLATE_FOLDER.split('/')
+      .map(encodeURIComponent)
+      .join('/');
+    const entries = await call(
+      `/repos/${REPO}/contents/${encodedFolder}?ref=main`,
+    );
+    if (!Array.isArray(entries)) throw new ApiError(400, '模板目录不存在。');
+    const selected = entries.filter(
+      (item: any) =>
+        item.type === 'file' &&
+        item.path.startsWith(`${TEMPLATE_FOLDER}/`) &&
+        !item.path.slice(TEMPLATE_FOLDER.length + 1).includes('/') &&
+        item.name.endsWith('.md') &&
+        item.size <= 100000,
+    );
+    if (selected.length > 30)
+      throw new ApiError(400, '模板目录超过 30 个文件，请整理后再同步。');
+    const templates = await Promise.all(
+      selected.map(async (entry: any) => {
+        const path = entry.path.split('/').map(encodeURIComponent).join('/');
+        const file = await call(`/repos/${REPO}/contents/${path}?ref=main`);
+        if (
+          file.type !== 'file' ||
+          file.encoding !== 'base64' ||
+          !file.content ||
+          file.size > 100000
+        )
+          throw new ApiError(400, '模板文件暂时无法读取。');
+        return describeTemplate(
+          entry.path,
+          Buffer.from(file.content, 'base64').toString('utf8'),
+        );
+      }),
+    );
+    return response({ templates });
+  }
   if (route === 'article-history' && request.method === 'GET') {
     const path = url.searchParams.get('path');
     if (!managedPath(path)) throw new ApiError(400, '请选择有效的文章。');

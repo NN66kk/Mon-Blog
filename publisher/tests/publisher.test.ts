@@ -6,6 +6,7 @@ import {
   relativeAsset,
   validPath,
   articleUrl,
+  newArticlePath,
 } from '../lib/content';
 import { ApiError, commitArticle, github, removeArticle } from '../lib/github';
 import {
@@ -24,7 +25,107 @@ import {
   exportMarkdown,
   previewImageUrl,
   updateMetadata,
+  metadataFields,
+  metadataProblem,
+  normalizeYamlInput,
 } from '../lib/editor-content';
+import {
+  articleNumber,
+  BUILTIN_TEMPLATES,
+  chinaDate,
+  dateForInput,
+  describeTemplate,
+  materializeTemplate,
+  standardArticle,
+  syncHeading,
+} from '../lib/article-templates';
+
+test('blog template follows the latest article timestamp filenames and Shanghai front matter', () => {
+  const moment = new Date('2026-08-14T10:50:45Z');
+  const draft = standardArticle('D-Orginals', moment);
+  assert.equal(articleNumber(moment), '260814185045');
+  assert.equal(
+    newArticlePath('D-Orginals', articleNumber(moment) + '.md'),
+    'docs/D-Orginals/260814185045.md',
+  );
+  assert.equal(
+    chinaDate(new Date('2026-12-31T20:10:09Z')),
+    '2027-01-01T04:10:09+08:00',
+  );
+  assert.deepEqual(
+    splitMarkdown(exportMarkdown({ ...draft, title: '真正标题' })).data,
+    {
+      title: '真正标题',
+      date: '2026-08-14T18:50:45+08:00',
+      tags: '原创文章',
+      description: '',
+    },
+  );
+  assert.equal(draft.body, '# \n\n');
+  for (const filename of [
+    '../../x.md',
+    'title.md',
+    'abc-123.md',
+    '260814185045.md/extra',
+  ])
+    assert.throws(() => newArticlePath('D-Orginals', filename));
+});
+
+test('known Obsidian template is materialized without executing repository scripts', () => {
+  const moment = new Date('2026-08-14T10:50:45Z');
+  assert.deepEqual(
+    materializeTemplate(
+      BUILTIN_TEMPLATES.find((t) => t.name === 'yaml')!,
+      'B-Notes',
+      moment,
+    ),
+    standardArticle('B-Notes', moment),
+  );
+  const snippet = BUILTIN_TEMPLATES.find((t) => t.name === '社群')!;
+  assert.equal(snippet.kind, 'snippet');
+  assert.match(snippet.source, /终身学习与效率提升交流群/);
+  const executable = describeTemplate(
+    'template.md',
+    '<%* fetch("https://example.com") %>',
+  );
+  assert.equal(executable.kind, 'unsupported');
+  assert.throws(() => materializeTemplate(executable, 'D-Orginals'), /脚本/);
+  const plain = describeTemplate(
+    'plain.md',
+    '---\ntitle: 原创模板\naliases: [参考]\n---\n# 正文',
+  );
+  assert.equal(materializeTemplate(plain, 'A-Life').title, '原创模板');
+});
+
+test('form edits preserve custom YAML fields, quoted titles and original date conventions', () => {
+  const source =
+    '# 保留备注\ncdate: "2023-08-12 18:29"\naliases: [笔记]\ntitle: 旧标题\n';
+  const updated = updateMetadata(source, 'title', '冒号: "引号" # 标题');
+  assert.equal(metadataFields(updated).title, '冒号: "引号" # 标题');
+  assert.equal(metadataFields(updated).dateField, 'cdate');
+  assert.equal(
+    dateForInput(metadataFields(updated).date),
+    '2023-08-12T18:29:00',
+  );
+  assert.equal(dateForInput('2026-08-14T10:50:45Z'), '2026-08-14T18:50:45');
+  assert.match(updated, /保留备注/);
+  assert.deepEqual(splitMarkdown(`---\n${updated}---\n正文`).data.aliases, [
+    '笔记',
+  ]);
+  assert.equal(normalizeYamlInput('---\ntitle: 标题\n---'), 'title: 标题\n');
+  assert.equal(metadataProblem('title: 标题'), '');
+  assert.notEqual(metadataProblem('bad: ['), '');
+  assert.notEqual(metadataProblem('title: 123'), '');
+  assert.equal(
+    syncHeading('# 旧标题\n\n正文', '旧标题', '新标题'),
+    '# 新标题\n\n正文',
+  );
+  assert.equal(syncHeading('# \n\n', '', '新标题'), '# 新标题\n\n');
+  assert.equal(
+    syncHeading('# 手动独立标题\n\n正文', '旧标题', '新标题'),
+    '# 手动独立标题\n\n正文',
+  );
+});
 
 test('old metadata, wiki links and filename dates survive editing', () => {
   const parsed = splitMarkdown(

@@ -1,5 +1,19 @@
 # 写作室上线记录
 
+2026-09-22 18:08（北京时间）：模板、逐项 YAML 表单和数字文件名修正已部署成功，原写作室地址与私有访问权限不变。
+
+- 部署：`appgdep_6ab2536d8c3c8191aa3e5f69d1ac336d`，状态 `succeeded`。
+- 版本：`appgprj_6a9f59d312188191bd1d48fd1d9d1c74~appgver_812a9d445c90819191d7796b10d3fdcb`。
+- Sites 源码提交：`69eeba9875d1d21324b9a6eaf073e80d846b5014`。
+- 新文章按项目实际模板生成 `title / date / tags / description` 和正文一级标题；表单直接显示于标题下面，另有完整 YAML 编辑入口。
+- 文件名采用最新文章的 `YYMMDDHHmmss.md` 格式；首次保存分配并持久保存，同秒创建自动避让。旧文章沿用原路径。
+- 「模板」支持现有 `yaml.md`、`社群.md`，以及从仓库模板目录同步普通 Markdown。除已适配的现有 YAML 模板外，不执行任意 Templater 脚本。
+- 新增迁移 `0003_easy_hellcat.sql`：可空 `drafts.filename` 列及所有者范围内的唯一索引；未删除旧表或字段。
+- 验证：30 项单元测试、10 项本地 API 检查、TypeScript 检查及写作室生产构建通过；本地 `/write` 返回 200。浏览器操作由所有者手动验收，没有发布测试博客文章。
+- 部署环境修订仍为 1。指南见 [博客写作操作指南](BLOG-WRITING-GUIDE.md)。
+
+## 上一版管理平台
+
 2026-09-22 17:08（北京时间）：经所有者明确批准，管理平台已部署到原有私有写作室。
 
 - 线上地址：https://mon-blog-writer.monv587.chatgpt.site
