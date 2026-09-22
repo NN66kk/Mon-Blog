@@ -100,9 +100,19 @@ html {
 }
 
 body {
+  /* One continuous wash: fade to paper before the image ends, never tile it. */
   background:
-    radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--garden-moss-soft) 48%, transparent), transparent 26rem),
+    radial-gradient(ellipse 64rem 40rem at 0% 0%,
+      color-mix(in srgb, var(--garden-moss-soft) 32%, transparent) 0%,
+      color-mix(in srgb, var(--garden-moss-soft) 12%, transparent) 45%,
+      transparent 100%),
+    radial-gradient(ellipse 54rem 36rem at 100% 0%,
+      color-mix(in srgb, var(--garden-copper-soft) 18%, transparent) 0%,
+      color-mix(in srgb, var(--garden-copper-soft) 6%, transparent) 45%,
+      transparent 100%),
     var(--garden-paper);
+  background-repeat: no-repeat;
+  background-size: 100% 52rem;
   color: var(--garden-ink);
   font-family: var(--garden-sans);
   font-feature-settings: "kern", "liga";
