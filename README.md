@@ -32,6 +32,7 @@ node --test tests/*.test.js
 - `hooks/post_metadata.py`：统一解析发布日期、更新日期、标签和自动摘要，并排除草稿及私有文章。
 - `tests/`：Python 与 Node.js 回归测试。
 - `publisher/`：独立的网页写作后台，运行、托管和发布验收说明见 [publisher/README.md](publisher/README.md)。
+- 写作室已上线版本与部署检查见 [PUBLISHER-DEPLOYMENT.md](PUBLISHER-DEPLOYMENT.md)。
 
 ## 内容约定
 
