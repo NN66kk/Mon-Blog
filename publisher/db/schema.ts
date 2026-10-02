@@ -124,3 +124,23 @@ export const mediaEntries = sqliteTable(
   },
   (t) => [uniqueIndex('idx_media_entries_owner_name').on(t.owner, t.name)],
 );
+
+export const mcpKeys = sqliteTable(
+  'mcp_keys',
+  {
+    id: text('id').primaryKey(),
+    hash: text('hash').notNull(),
+    prefix: text('prefix').notNull(),
+    name: text('name').notNull(),
+    owner: text('owner').notNull(),
+    scopes: text('scopes').notNull(),
+    createdAt: text('created_at').notNull(),
+    expiresAt: text('expires_at').notNull(),
+    revokedAt: text('revoked_at'),
+    lastUsedAt: text('last_used_at'),
+  },
+  (t) => [
+    uniqueIndex('idx_mcp_keys_hash').on(t.hash),
+    index('idx_mcp_keys_owner_created').on(t.owner, t.createdAt),
+  ],
+);

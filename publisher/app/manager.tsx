@@ -55,6 +55,7 @@ import { BLOG, COLLECTIONS, REPO, splitMarkdown } from '@/lib/content';
 import { api, download, jobLabel, matches } from '@/lib/client-api';
 import { needsPublicationCheck } from '@/lib/publication';
 import { draftBackup } from '@/lib/backup';
+import McpSettings from './mcp-settings';
 
 type View = 'articles' | 'drafts' | 'media' | 'activity' | 'trash' | 'settings';
 type Draft = {
@@ -1508,6 +1509,7 @@ export default function Manager({
             )}
             {view === 'settings' && (
               <div className="manager-settings-grid">
+                <McpSettings />
                 <section className="manager-panel">
                   <span className="manager-panel-icon">
                     <Link2 />

@@ -94,6 +94,7 @@ function setup(t: TestContext) {
       },
     },
   };
+  mocks['./publish'] = mocks['@/lib/publish'];
   // Execute the real API handlers and publication checker. Only worker bindings,
   // authentication, unrelated management routes and GitHub writes are replaced.
   const modules = new Map<string, { exports: any }>();
@@ -107,6 +108,7 @@ function setup(t: TestContext) {
     const require = (name: string) => {
       if (Object.hasOwn(mocks, name)) return mocks[name];
       if (name.startsWith('@/')) return load(path.join(root, `${name.slice(2)}.ts`));
+      if (name.endsWith('.json')) return JSON.parse(readFileSync(path.resolve(path.dirname(file), name), 'utf8'));
       if (name.startsWith('.')) return load(path.resolve(path.dirname(file), `${name}.ts`));
       return nodeRequire(name);
     };
@@ -146,9 +148,34 @@ test('a late publish POST cannot replace a newer confirmed baseline', async (t) 
   assert.equal((await h.save()).status, 200);
   assert.equal((await h.post('publish', { id: draftId, revision: 2 })).status, 200);
   assert.equal(h.draft().base_sha, 'blob-2');
+  // A status query can finish before the older POST returns to its caller.
+  h.sqlite.prepare("UPDATE publications SET state='live' WHERE id=?").run(oldJob.id);
   release.resolve();
-  assert.equal((await first).status, 200);
+  const firstResult = await first;
+  assert.equal(firstResult.status, 200);
+  const firstJob = await firstResult.json() as { state: string };
+  assert.equal(firstJob.state, 'live');
   assert.equal(h.draft().base_sha, 'blob-2');
+});
+
+void test('a late publish error cannot replace a terminal publication state', async (t) => {
+  const h = setup(t);
+  const advanced = deferred();
+  const release = deferred();
+  h.remote.afterAdvance.set(1, async () => {
+    advanced.resolve();
+    await release.promise;
+    throw new Error('Synthetic late connection failure');
+  });
+  const publishing = h.post('publish', { id: draftId, revision: 1 });
+  await advanced.promise;
+  h.sqlite.prepare("UPDATE publications SET state='superseded',error=NULL WHERE revision=1").run();
+  release.resolve();
+  const result = await publishing;
+  assert.equal(result.status, 200);
+  const job = await result.json() as { state: string; error: string | null };
+  assert.equal(job.state, 'superseded');
+  assert.equal(job.error, null);
 });
 
 test('an old verification starting after a newer confirmation does not adopt its stale blob', async (t) => {

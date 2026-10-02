@@ -1,20 +1,17 @@
-import { account, credentialReady, database, encryptToken, files, identity, jsonBody, ownedDraft, response } from '@/lib/server';
-import { ApiError, github, readArticle } from '@/lib/github';
-import { articleUrl, newArticlePath, REPO, splitMarkdown, validCollection, validPath } from '@/lib/content';
-import { checkPublication, needsPublicationCheck } from '@/lib/publication';
-import { publishDraft } from '@/lib/publish';
-import { managementRequest, snapshotDraft } from '@/lib/management-server';
-import { ensureDraftFilename } from '@/lib/draft-filename';
-import { draftPublicationUpdate } from '@/lib/publication-baseline';
+import { account, credentialReady, database, encryptToken, files, identity, jsonBody, response } from '@/lib/server';
+import { ApiError, github } from '@/lib/github';
+import { REPO } from '@/lib/content';
+import { managementRequest } from '@/lib/management-server';
+import { createWritingService } from '@/lib/writing-service';
 
 export const dynamic = 'force-dynamic';
-const UUID = /^[a-f0-9-]{36}$/;
 async function handle(request: Request) {
   try {
     const owner = await identity(request);
     const url = new URL(request.url);
     const route = url.pathname.slice('/api/'.length);
     const db = database();
+    const writing = createWritingService({ db, getAccount: account, storage: files() });
     const managed = await managementRequest(route, request, owner);
     if (managed) return managed;
     if (route === 'state' && request.method === 'GET') {
@@ -40,42 +37,14 @@ async function handle(request: Request) {
       return response({ login: user.login });
     }
     if (route === 'drafts' && request.method === 'POST') {
-      const input = await jsonBody(request);
-      const { id, title, body, metadata, collection, revision } = input;
-      if (!UUID.test(id) || typeof title !== 'string' || title.length > 300 || typeof body !== 'string' || body.length > 300000 || typeof metadata !== 'string' || metadata.length > 30000 || !validCollection(collection) || !Number.isInteger(revision) || revision < 0) throw new ApiError(400, '草稿内容或栏目无效。');
-      const now = new Date().toISOString();
-      if (revision === 0) {
-        const results = await db.batch([db.prepare('INSERT OR IGNORE INTO drafts (id,owner,title,collection,body,metadata,revision,updated_at) VALUES (?,?,?,?,?,?,1,?)').bind(id, owner, title, collection, body, metadata, now), snapshotDraft(owner, id)]);
-        if (!results[0].meta.changes) throw new ApiError(409, '草稿已有新版本，请刷新草稿列表后重新打开。');
-      } else {
-        const existing = await ownedDraft(owner, id);
-        if (existing.deleted_at) throw new ApiError(409, '这篇草稿已移入回收站，请先恢复再编辑。');
-        if (existing.source_path && existing.collection !== collection) throw new ApiError(400, '已发布文章暂不支持移动栏目，以保持原有网址。');
-        const results = await db.batch([snapshotDraft(owner, id), db.prepare('UPDATE drafts SET title=?,collection=?,body=?,metadata=?,revision=revision+1,updated_at=? WHERE id=? AND owner=? AND revision=? AND deleted_at IS NULL').bind(title, collection, body, metadata, now, id, owner, revision), snapshotDraft(owner, id)]);
-        if (!results[1].meta.changes) throw new ApiError(409, '另一台设备已保存了新版本。请先导出当前内容备份，再刷新页面并重新打开云端草稿。');
-      }
-      const saved = await ensureDraftFilename(owner, id);
-      return response({ revision: revision + 1, updated_at: now, filename: saved.filename });
+      return response(await writing.saveDraft(owner, await jsonBody(request)));
     }
     if (route.startsWith('drafts/') && request.method === 'GET') {
-      const draft = await ownedDraft(owner, route.slice(7));
-      if (draft.deleted_at) throw new ApiError(409, '草稿已在回收站，请先恢复。');
-      return response(draft);
+      return response(await writing.getDraft(owner, route.slice(7)));
     }
     if (route === 'import' && request.method === 'POST') {
       const { path } = await jsonBody(request);
-      if (typeof path !== 'string' || !validPath(path)) throw new ApiError(400, '文章路径无效。');
-      const remote = await readArticle(await account(owner), path);
-      if (!remote.content || remote.encoding !== 'base64') throw new ApiError(400, '文章过大，暂不能导入。');
-      const parsed = splitMarkdown(Buffer.from(remote.content, 'base64').toString('utf8'));
-      if (parsed.data.status === 'redirect') throw new ApiError(400, '这是跳转页面，请选择普通文章。');
-      const existingDraft = await db.prepare('SELECT * FROM drafts WHERE owner=? AND source_path=? AND base_sha=? AND deleted_at IS NULL ORDER BY updated_at DESC LIMIT 1').bind(owner, path, remote.sha).first();
-      if (existingDraft) return response(existingDraft);
-      const id = crypto.randomUUID();
-      const title = String(parsed.data.title || parsed.body.match(/^#\s+(.+)$/m)?.[1] || path.split('/').pop()?.slice(0, -3));
-      await db.prepare('INSERT INTO drafts (id,owner,title,collection,body,metadata,source_path,base_sha,revision,updated_at) VALUES (?,?,?,?,?,?,?,?,1,?)').bind(id, owner, title, path.split('/')[1], parsed.body, parsed.metadata, path, remote.sha, new Date().toISOString()).run();
-      await snapshotDraft(owner, id).run();
-      return response(await ownedDraft(owner, id));
+      return response(await writing.importArticle(owner, path));
     }
     if (route === 'upload' && request.method === 'POST') {
       if (Number(request.headers.get('content-length') || 0) > 6 * 1024 * 1024) throw new ApiError(413, '图片请控制在 5 MB 以内。');
@@ -101,65 +70,10 @@ async function handle(request: Request) {
       return new Response(object.body, { headers: { 'Content-Type': object.httpMetadata?.contentType || 'application/octet-stream', 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'" } });
     }
     if (route === 'publish' && request.method === 'POST') {
-      const { id, revision } = await jsonBody(request);
-      const draft = await ensureDraftFilename(owner, id);
-      if (draft.deleted_at) throw new ApiError(409, '这篇草稿已移入回收站，请先恢复。');
-      if (draft.revision !== revision) throw new ApiError(409, '草稿已更新，请保存最新内容后重新发布。');
-      if (!draft.title.trim() || !draft.body.trim()) throw new ApiError(400, '请填写文章标题和正文。');
-      const call = await account(owner);
-      const previous = await db.prepare('SELECT * FROM publications WHERE draft_id=? AND revision=? AND owner=?').bind(id, revision, owner).first<any>();
-      if (previous) return response(previous);
-      const release = crypto.randomUUID();
-      const path = draft.source_path || newArticlePath(draft.collection, draft.filename);
-      const target = articleUrl(path);
-      const inserted = await db.prepare('INSERT OR IGNORE INTO publications (id,owner,draft_id,revision,state,url,target_path,title,created_at) VALUES (?,?,?,?,?,?,?,?,?)').bind(release, owner, id, revision, 'preparing', target, path, draft.title, new Date().toISOString()).run();
-      if (!inserted.meta.changes) return response(await db.prepare('SELECT * FROM publications WHERE draft_id=? AND revision=? AND owner=?').bind(id, revision, owner).first());
-      let advancedSha: string | null = null;
-      try {
-        const result = await publishDraft(draft, path, release, call,
-          name => files().get(`${encodeURIComponent(owner)}/${name}`), async sha => {
-          advancedSha = sha;
-          await db.prepare('UPDATE publications SET commit_sha=?,state=? WHERE id=? AND owner=?').bind(sha, 'verifying', release, owner).run();
-        });
-        await db.batch([
-          db.prepare('UPDATE publications SET state=? WHERE id=? AND owner=?').bind('submitted', release, owner),
-          draftPublicationUpdate(db, { owner, draftId: id, path, blobSha: result.blobSha, firstPublishedAt: result.firstPublishedAt, expectedBaseSha: draft.base_sha }),
-        ]);
-      } catch (error) {
-        const message = error instanceof ApiError || (error instanceof Error && error.message.startsWith('文章信息')) ? (error as Error).message : '发布请求未完成。草稿已保留，请检查发布记录。';
-        await db.prepare('UPDATE publications SET state=?,error=? WHERE id=? AND owner=?').bind(advancedSha ? 'verifying' : 'failed', message, release, owner).run();
-      }
-      return response(await db.prepare('SELECT * FROM publications WHERE id=? AND owner=?').bind(release, owner).first());
+      return response(await writing.publish(owner, await jsonBody(request)));
     }
     if (route.startsWith('publication/') && request.method === 'GET') {
-      const id = route.slice(12);
-      let job = await db.prepare('SELECT * FROM publications WHERE id=? AND owner=?').bind(id, owner).first<any>();
-      if (!job) throw new ApiError(404, '找不到发布记录。');
-      if (!needsPublicationCheck(job.state)) return response(job);
-      const draft = job.state === 'verifying' && job.action !== 'delete' && job.action !== 'restore'
-        ? await ownedDraft(owner, job.draft_id)
-        : null;
-      const successor = job.commit_sha && job.target_path
-        ? await db.prepare('SELECT id FROM publications WHERE owner=? AND target_path=? AND state=? AND created_at>? LIMIT 1').bind(owner, job.target_path, 'live', job.created_at).first()
-        : null;
-      const call = await account(owner);
-      job = await checkPublication(job, call, async (blobSha, publishedAt) => {
-        if (job.action === 'delete' || job.action === 'restore') {
-          await db.prepare('UPDATE article_trash SET state=?,restored_at=? WHERE id=? AND owner=?').bind(job.action === 'delete' ? 'removed' : 'restored', job.action === 'restore' ? new Date().toISOString() : null, job.trash_id, owner).run();
-        } else if (draft) {
-          // A late verification may begin after a newer publication already
-          // updated this draft. Its commit must still be the current article;
-          // the CAS also protects a newer confirmation arriving during this read.
-          let current;
-          try { current = await readArticle(call, job.target_path); }
-          catch (error) { if (error instanceof ApiError && error.status === 404) return; throw error; }
-          if (current.sha !== blobSha) return;
-          await draftPublicationUpdate(db, { owner, draftId: job.draft_id, path: job.target_path, blobSha, firstPublishedAt: publishedAt, expectedBaseSha: draft.base_sha }).run();
-        }
-      }, fetch, Date.now(), Boolean(successor));
-      await db.prepare('UPDATE publications SET state=?,error=? WHERE id=? AND owner=?').bind(job.state, job.error, job.id, owner).run();
-      if (job.state === 'failed' && job.action === 'delete') await db.prepare("UPDATE article_trash SET state='failed' WHERE id=? AND owner=? AND state='pending'").bind(job.trash_id, owner).run();
-      return response(job);
+      return response(await writing.getPublication(owner, route.slice(12)));
     }
     throw new ApiError(404, '接口不存在。');
   } catch (error) {
