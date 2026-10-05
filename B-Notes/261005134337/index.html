@@ -1,0 +1,1009 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="一款待办 App 到点发出任务通知，手机会响铃、会震动，通知栏也有完整内容。但手腕上的手环毫无反应，连消息列表里都找不到这条提醒。">
+      
+      
+        <meta name="author" content="Mon">
+      
+      
+        <link rel="canonical" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/">
+      
+      
+        <link rel="prev" href="../260924165703/">
+      
+      
+        <link rel="next" href="../AppleScript%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%99%B7%E9%98%B1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%AF%BC%E8%87%B4%E7%9A%84%E7%AC%A6%E5%8F%B7%E9%94%99%E8%AF%AF_20250907233250/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>一次 Android 通知转发故障复盘 - Mon's Digital Garden</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../css/00-tokens.css">
+    
+      <link rel="stylesheet" href="../../css/10-shell.css">
+    
+      <link rel="stylesheet" href="../../css/20-components.css">
+    
+      <link rel="stylesheet" href="../../css/30-article.css">
+    
+      <link rel="stylesheet" href="../../css/40-home.css">
+    
+      <link rel="stylesheet" href="../../css/50-archive.css">
+    
+      <link rel="stylesheet" href="../../css/60-collection.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Mon&#39;s Digital Garden">
+  <meta property="og:title" content="一次 Android 通知转发故障复盘 · Mon&#39;s Digital Garden">
+  <meta property="og:description" content="一款待办 App 到点发出任务通知，手机会响铃、会震动，通知栏也有完整内容。但手腕上的手环毫无反应，连消息列表里都找不到这条提醒。">
+  <meta property="og:url" content="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/">
+  <meta property="og:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mon 的个人花园品牌封面">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="一次 Android 通知转发故障复盘 · Mon&#39;s Digital Garden">
+  <meta name="twitter:description" content="一款待办 App 到点发出任务通知，手机会响铃、会震动，通知栏也有完整内容。但手腕上的手环毫无反应，连消息列表里都找不到这条提醒。">
+  <meta name="twitter:image" content="https://nn66kk.github.io/Mon-Blog/assets/images/og-garden.png">
+
+  
+    <meta property="article:published_time" content="2026-10-05T13:43:29+08:00">
+    <meta property="article:modified_time" content="2026-10-05T13:45:27.973000+08:00">
+    <meta property="article:section" content="格物札记">
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "\u683c\u7269\u672d\u8bb0", "author": {"@type": "Person", "name": "Mon"}, "dateModified": "2026-10-05T13:45:27.973000+08:00", "datePublished": "2026-10-05T13:43:29+08:00", "description": "\u4e00\u6b3e\u5f85\u529e App \u5230\u70b9\u53d1\u51fa\u4efb\u52a1\u901a\u77e5\uff0c\u624b\u673a\u4f1a\u54cd\u94c3\u3001\u4f1a\u9707\u52a8\uff0c\u901a\u77e5\u680f\u4e5f\u6709\u5b8c\u6574\u5185\u5bb9\u3002\u4f46\u624b\u8155\u4e0a\u7684\u624b\u73af\u6beb\u65e0\u53cd\u5e94\uff0c\u8fde\u6d88\u606f\u5217\u8868\u91cc\u90fd\u627e\u4e0d\u5230\u8fd9\u6761\u63d0\u9192\u3002", "headline": "\u4e00\u6b21 Android \u901a\u77e5\u8f6c\u53d1\u6545\u969c\u590d\u76d8", "inLanguage": "zh-CN", "mainEntityOfPage": "https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/", "publisher": {"@type": "Person", "name": "Mon"}, "url": "https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/"}</script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#android" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+<header class="md-header site-header" data-md-component="header">
+  <nav class="md-header__inner md-grid site-header__inner" aria-label="站点导航">
+    <button
+      type="button"
+      class="md-header__button md-icon site-header__menu"
+      aria-label="打开站点导航"
+      aria-controls="site-mobile-nav"
+      aria-expanded="false"
+      data-site-menu-button
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </button>
+
+    <a href="../.." class="site-brand" aria-label="Mon's Digital Garden 首页" data-md-component="logo">
+      <span class="site-brand__mark" aria-hidden="true">M</span>
+      <span class="site-brand__copy">
+        <strong>Mon 的个人花园</strong>
+        <small>独处 · 观察 · 前行</small>
+      </span>
+    </a>
+
+    <div class="site-header__nav" aria-label="主要导航">
+      <a data-site-nav="home" href="../..">首页</a>
+      <a data-site-nav="articles" href="../../archive/" class="is-active" aria-current="page">文章</a>
+      <a data-site-nav="about" href="../../about/">关于我</a>
+      <a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
+    </div>
+
+    <div class="site-header__actions">
+      
+        
+        
+          <button
+            type="button"
+            class="md-header__button md-icon site-header__search-trigger"
+            aria-label="打开搜索"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="搜索（⌘K / Ctrl+K）"
+            aria-controls="__search"
+            aria-expanded="false"
+            data-site-search-button
+          >
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+          </button>
+          <div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="没有找到符合条件的结果" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+  <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
+  <div class="md-search__inner" role="search">
+    <header class="garden-search__heading">
+      <div>
+        <span class="garden-search__eyebrow">搜索这座花园</span>
+        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
+        <p>查找文章标题、正文，或某个记得的片段。</p>
+      </div>
+      <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </header>
+
+    <form class="md-search__form" name="search">
+      <span class="garden-search__magnify md-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg></span>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索文章" placeholder="输入关键词，如 Obsidian、徒步…" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <nav class="md-search__options" aria-label="搜索操作">
+        <button type="reset" class="md-search__icon md-icon" title="清空关键词" aria-label="清空关键词">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41z"/></svg>
+        </button>
+      </nav>
+    </form>
+
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="garden-search__idle" data-search-idle>
+          <section class="garden-search__topics" aria-labelledby="search-topics-title">
+            <h3 id="search-topics-title">从这些关键词开始</h3>
+            <div>
+              
+                <button type="button" data-search-term="Obsidian">Obsidian <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="AI">AI <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="徒步">徒步 <span aria-hidden="true">↗</span></button>
+              
+                <button type="button" data-search-term="心理学">心理学 <span aria-hidden="true">↗</span></button>
+              
+            </div>
+          </section>
+          
+          
+            <section class="garden-search__recent" aria-labelledby="search-recent-title">
+              <header><h3 id="search-recent-title">最近写下</h3><a href="../../archive/">全部文章 <span aria-hidden="true">→</span></a></header>
+              
+                <a class="garden-search__recent-link" href="./">
+                  <span><small>格物札记<span aria-hidden="true"> · </span>2026-10-05</small><strong>一次 Android 通知转发故障复盘</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../D-Orginals/261002194957/">
+                  <span><small>原创手记<span aria-hidden="true"> · </span>2026-10-02</small><strong>吃了月饼，为什么还是没有过节的感觉？</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+                <a class="garden-search__recent-link" href="../../A-Life/260928233305/">
+                  <span><small>行旅札记<span aria-hidden="true"> · </span>2026-09-28</small><strong>老掌沟的秋</strong></span>
+                  <span class="garden-search__arrow" aria-hidden="true">→</span>
+                </a>
+              
+            </section>
+          
+        </div>
+
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta" role="status" aria-live="polite" aria-atomic="true">正在初始化搜索引擎</div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+        <div class="garden-search__empty" data-search-empty hidden>
+          <p>换个短一点的词，或试试相关的表达。</p>
+          <a href="../../archive/">去全部文章里逛逛 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+    <footer class="garden-search__footer">
+      <span><kbd>↑</kbd> <kbd>↓</kbd> 选择 <kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+    </footer>
+  </div>
+</div>
+        
+      
+
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「夜瓷星图」"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到「夜瓷星图」" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到「月光流釉」"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到「月光流釉」" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+
+    </div>
+  </nav>
+
+  <div class="site-mobile-nav" id="site-mobile-nav" data-site-menu-panel aria-hidden="true" inert>
+    <div class="site-mobile-nav__backdrop" data-site-menu-close></div>
+    <section class="site-mobile-nav__sheet" role="dialog" aria-modal="true" aria-labelledby="site-mobile-nav-title">
+      <header>
+        <div>
+          <span>MON'S GARDEN</span>
+          <h2 id="site-mobile-nav-title">从哪条小径开始？</h2>
+        </div>
+        <button type="button" aria-label="关闭站点导航" data-site-menu-close>×</button>
+      </header>
+      <nav aria-label="移动端导航">
+        <a data-site-nav="home" href="../.."><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
+        <a data-site-nav="archive" href="../../archive/" aria-current="page"><span>02</span><strong>全部文章</strong><small>249 篇记录</small></a>
+        
+          <a data-site-nav-collection="D" href="../../D-Orginals/000000原创文章目录/">
+            <span>思</span><strong>原创手记</strong><small>76 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="B" href="../000000学习笔记目录/">
+            <span>技</span><strong>格物札记</strong><small>139 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="A" href="../../A-Life/000000生活专栏目录/">
+            <span>行</span><strong>行旅札记</strong><small>18 篇</small>
+          </a>
+        
+          <a data-site-nav-collection="C" href="../../C-Highlights/000000优质内容目录/">
+            <span>拾</span><strong>人间拾遗</strong><small>16 篇</small>
+          </a>
+        
+        <a data-site-nav="about" href="../../about/"><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+      </nav>
+      <footer><a href="https://github.com/NN66kk/Mon-Blog" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
+    </section>
+  </div>
+
+  
+    <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+  
+    
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        先确定：通知在哪一段消失了
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一轮尝试：调整通知格式，结果没有解决
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        接上真机后，先排除安装身份和监听状态
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键证据：消息已经收到，随后被应用开关拒绝
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复过程：刷新配置，再验证新的提醒
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两个容易把调查带偏的线索
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="两个容易把调查带偏的线索">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        系统生成的合组摘要，不等于真正的任务通知
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常驻状态通知被过滤，不等于任务仍然失败
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        留下一套更短的排查路径
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        这次经验会如何改变后续开发
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考资料
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+        </div>
+      </div>
+    </div>
+  
+
+          
+  <div
+    class="md-content md-content--article"
+    data-md-component="content"
+    data-page-type="article"
+    data-page-collection="B"
+  >
+    
+      
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="导航栏" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    首页
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../000000%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    B Notes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+    
+    <article class="md-content__inner md-typeset md-content__inner--article">
+      
+  
+  
+  
+
+  
+  
+  
+
+  <div class="post-page" data-page-layout="article">
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <header class="post-header" id="article-top">
+    <div class="post-header-topline">
+      
+        <a class="post-header-kicker" href="../000000学习笔记目录/" aria-label="浏览格物札记全部内容">
+          技 · 格物札记 <span aria-hidden="true">↗</span>
+        </a>
+      
+      
+        <time class="post-header-date" datetime="2026-10-05T13:43:29+08:00">
+          2026-10-05
+        </time>
+      
+    </div>
+    <h1 class="post-header-title">一次 Android 通知转发故障复盘</h1>
+    <div class="post-header-meta">
+      <span class="post-header-attribution">Mon 的个人花园</span>
+      <span class="post-reading-stats" data-reading-stats>
+        <span data-reading-count>正在计算</span>
+        <span aria-hidden="true">·</span>
+        <span data-reading-minutes>阅读模式</span>
+      </span>
+      <button
+        type="button"
+        class="post-share-button"
+        aria-label="复制本文链接"
+        data-share-link-button
+        data-share-link-default-text="复制链接"
+        data-share-link-copying-text="复制中…"
+        data-share-link-success-text="已复制"
+        data-share-link-error-text="复制失败"
+        aria-live="polite"
+      ><span data-share-link-label>复制链接</span></button>
+    </div>
+    
+    
+      <p class="post-header-updated">最后修订于 <time datetime="2026-10-05T13:45:27.973000+08:00">2026-10-05</time></p>
+    
+  </header>
+
+  
+  <div class="post-body" data-post-body>
+    <p>一款待办 App 到点发出任务通知，手机会响铃、会震动，通知栏也有完整内容。但手腕上的手环毫无反应，连消息列表里都找不到这条提醒。</p>
+<p>同一台手机上的微信、QQ 邮箱却能正常提醒。更令人困惑的是，华为运动健康的应用通知列表里，这款待办 App 明明已经被勾选。</p>
+<p>最初，我们怀疑通知格式不兼容，为此发布了一版兼容性调整。结果仍然无效。直到连接真机，读取到华为运动健康自己的过滤日志，才找到当次通知的直接阻断原因：<strong>后台把这个应用的转发开关判定为关闭。</strong></p>
+<p>重新进入消息通知设置并刷新对应应用开关后，新的任务提醒成功出现在手环上，并触发震动。最终恢复时，手机仍然使用原来的 2.3.2，没有再次构建或安装 APK。</p>
+<p>这篇文章记录排查过程，也记录那些看上去合理、却没有被证据证实的猜测。</p>
+<blockquote>
+<p>脱敏说明：自研应用统一称为“待办 App”，示例包名使用 <code>com.example.todo.debug</code>。日志经过筛选、裁剪和标识替换，不包含真实设备序列号、账号、业务内容、任务标识、服务地址和本机路径。保留设备型号及相关软件版本，用于说明复现环境。文中的日志片段来自本次实测，不代表厂商公开承诺的稳定接口。</p>
+</blockquote>
+<h2 id="_1">先确定：通知在哪一段消失了<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>这次的设备组合是小米 14 Pro、华为手环 10，手机运行 HyperOS 3 / Android 16，配套应用为华为运动健康 17.0.8.300。</p>
+<p>待办 App 的提醒流程是：先把任务排程同步到手机，再由 Android 系统闹钟到点触发，最后发布系统通知。</p>
+<p>对这条经华为运动健康转发的链路，可以分成几个独立阶段：</p>
+<pre class="garden-mermaid"><code>flowchart TD
+    A[任务排程与系统闹钟] --&gt; B[App 发布 Android 通知]
+    B --&gt; C[华为运动健康接收通知]
+    C --&gt; D[检查应用开关及过滤条件]
+    D --&gt; E[向手环发送消息]
+    E --&gt; F[手环显示消息并按设置提醒]</code></pre>
+<p>华为官方的支持说明也描述了这一机制：运动健康与穿戴设备保持蓝牙连接时，会把手机通知栏产生的消息转发到设备。（参考资料 1）</p>
+<p>因此，“服务器把消息推送给微信”和“本地闹钟让待办 App 发出通知”属于上游实现差异。对本次故障来说，手机已经产生通知，调查重点应该转向后面的接收、过滤和转发。</p>
+<p>最有用的三个问题是：</p>
+<table>
+<thead>
+<tr>
+<th>需要确认的现象</th>
+<th>能缩小到的排查范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>手机通知栏有没有具体任务通知？</td>
+<td>如果没有，先查排程、闹钟、权限和通知发布</td>
+</tr>
+<tr>
+<td>手环消息列表有没有这条消息？</td>
+<td>如果有但不震动，重点查手环提醒模式；如果完全没有，继续查转发</td>
+</tr>
+<tr>
+<td>手机锁屏时能否复现？</td>
+<td>避免把“亮屏使用手机时不提醒”混入问题</td>
+</tr>
+</tbody>
+</table>
+<p>这次的答案很明确：手机锁屏时会显示任务通知并响铃或震动，手环消息列表完全没有记录。</p>
+<p>微信和邮件正常，是转发链路并未全面失效的线索，但它不能证明待办 App 也通过了自己的应用开关和过滤条件。</p>
+<h2 id="_2">第一轮尝试：调整通知格式，结果没有解决<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>在没有真机日志的时候，我们先检查了应用代码，并做了一次兼容性尝试。</p>
+<p>2.3.2 调整了以下内容：</p>
+<ul>
+<li>将通知类别从 <code>CATEGORY_REMINDER</code> 改为 <code>CATEGORY_MESSAGE</code>。</li>
+<li>补充 <code>tickerText</code> 摘要，保留标准标题、正文和展开文字。</li>
+<li>移除任务通知的 <code>FLAG_ONLY_ALERT_ONCE</code>，继续用应用自身的提交记录去重。</li>
+<li>从“固定数字 ID + 不同 tag”，改为“稳定的不同数字 ID + 完整 tag”。</li>
+</ul>
+<p>这些改动是在验证兼容性假设。当时没有证据证明华为会过滤 <code>CATEGORY_REMINDER</code>，也没有证据证明它忽略通知的 tag。</p>
+<p>原生测试和 Android 16 模拟器验证通过，说明修改后的通知能被系统发布、分别保留、正确去重和撤销。它们没有覆盖真实手机上的华为运动健康，更没有覆盖手环端的显示和震动。</p>
+<p>用户安装后，故障依然存在。</p>
+<p>这一轮最值得反思的是验证顺序：我们先修改了自己能控制的通知字段，之后才观察负责转发的组件。一次失败的兼容性试验可以缩小范围，但持续猜字段、改版本，不能替代对实际拒绝原因的读取。</p>
+<h2 id="_3">接上真机后，先排除安装身份和监听状态<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>读取实际运行状态后，我们确认了几件事：手机安装的是预期版本和包名；应用通知权限已授予；华为运动健康的通知监听组件既被授权，也处于在线状态。</p>
+<p>这里需要区分两种权限：待办 App 获准“发通知”，与运动健康获准“读取其他应用的通知”，分别属于通知链路的不同环节。Android 的 <code>NotificationListenerService</code> 就是通知监听服务的基础接口。（参考资料 2）</p>
+<p>安装包身份也不能只看桌面上的应用名称。内部 Debug 包和正式包可能具有相同名称，却使用不同包名。排查时应把“哪个包正在发通知”和“转发设置对应哪个包”对上。本次真机核验没有发现装错包。</p>
+<p>另一个细节是：<strong>不要只查看配套应用主进程的日志。</strong></p>
+<p>这次最初只检查了华为运动健康主进程，没有找到有用记录。继续定位服务后，才发现通知监听器运行在独立的 <code>:DaemonService</code> 进程中。切换到该进程的日志，过滤原因就出现了。</p>
+<p>这个进程名属于本次观察到的版本实现，其他版本应重新确认，不能直接假定相同。</p>
+<h2 id="_4">关键证据：消息已经收到，随后被应用开关拒绝<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>我们新建了一条未来触发的测试任务，锁屏等待，并要求触发后暂时保留手机通知。</p>
+<p>华为监听进程的日志先记录了这条任务通知，随后明确拒绝转发。下面保留了有诊断价值的字段，包名、通道名和提醒标识均已替换：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Start onNotificationPosted:
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  pkg=com.example.todo.debug
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  channel=task_reminders_v1
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  id=&lt;NOTIFICATION_ID&gt;
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  tag=&lt;REMINDER_TAG&gt;
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  flags=AUTO_CANCEL
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  category=msg
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>onNotificationPosted FILTERED because SUB_SWITCH_TURN_OFF,
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>pkg=com.example.todo.debug
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>com.example.todo.debug onNotificationPosted
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>isMeetPushConditions?(false=filtered): false
+</span></code></pre></div>
+<p>这组记录将当次失败定位到了很具体的位置：</p>
+<ol>
+<li>任务已触发，Android 已经产生通知。</li>
+<li>华为运动健康的监听器收到了这条通知。</li>
+<li>它以 <code>SUB_SWITCH_TURN_OFF</code> 为理由拒绝继续转发。</li>
+</ol>
+<p>此时再调整上游的任务同步、闹钟调度，或者通知标题的写法，都没有命中已经观察到的阻断点。</p>
+<p>但日志仍然没有解释全部问题。之后进入运动健康的消息通知页面检查时，待办 App 的开关显示为开启，与先前运行日志中的关闭判定不一致。</p>
+<p>这里应把结论写得准确：<strong>我们观察到了先前的后台关闭判定与随后界面开启状态之间的不一致。</strong>这还不足以证明两者在同一瞬间一定不一致，也不能直接断言厂商存在某一种缓存、数据库或跨进程同步缺陷。</p>
+<h2 id="_5">恢复过程：刷新配置，再验证新的提醒<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>实际操作很小：进入华为运动健康的设备消息通知页面，核对目标应用，把这一项关闭后重新开启，再确认界面状态。其他应用开关没有批量调整，也没有清空应用数据、重装配套应用或重置手环。</p>
+<p>不过，复盘不能省略一个重要的时序细节：<strong>在显式关闭再开启之前，重新进入设置的排查阶段就已经出现了后台放行记录。</strong></p>
+<p>按事件先后整理，过程是这样的：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>观察到的证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首次测试任务触发</td>
+<td>华为收到任务通知，以 <code>SUB_SWITCH_TURN_OFF</code> 拒绝</td>
+</tr>
+<tr>
+<td>重新进入设置的排查阶段</td>
+<td>后续通知开始通过应用开关检查；当时观察到的是常驻状态通知</td>
+</tr>
+<tr>
+<td>检查界面</td>
+<td>目标应用开关显示开启</td>
+</tr>
+<tr>
+<td>显式刷新开关</td>
+<td>只将目标应用关闭再开启，并核对状态</td>
+</tr>
+<tr>
+<td>新建任务复测</td>
+<td>任务通知通过检查，华为启动推送；手环显示消息并震动</td>
+</tr>
+</tbody>
+</table>
+<p>因此，不能把这次经历简化成“关开一次必然修好”。目前能确认的是：进入并刷新这组配置后，运行态恢复了放行，新提醒完成了端到端验证。究竟是重新进入页面、其中的配置刷新，还是多个动作共同促成恢复，没有单变量实验能够继续区分。</p>
+<p>复测时，华为日志从拒绝变成了以下记录：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>com.example.todo.debug onNotificationPosted
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>isMeetPushConditions?(false=filtered): true
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>onNotificationPosted startBroadcastToPhoneService method start!
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>onNotificationPosted reminderStatus is(15=0x000F=vibrate): 15
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>onNotificationPosted start to push notification msg
+</span></code></pre></div>
+<p>这里的 <code>15</code> 是本次厂商日志对振动状态的描述，不应被当成 Android 通用协议。日志中的“启动推送”也不能单独证明手环收到消息。</p>
+<p>最后一环来自实际使用者的确认：<strong>手环已显示消息，并且震动了。</strong>至此，系统通知、配套应用放行、发送动作和手环结果才对上。</p>
+<p>复测仍然使用 2.3.2。我们没有回退到之前的通知实现做对照，所以不能据此证明此前的兼容性改动“必不可少”，也不能证明它们“完全没有作用”。可以确认的是，本次恢复不需要继续改代码或再次发版。</p>
+<h2 id="_6">两个容易把调查带偏的线索<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">系统生成的合组摘要，不等于真正的任务通知<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>真机上还能看到 Android 自动生成的通知摘要，其中带有 <code>LOCAL_ONLY</code>、<code>GROUP_SUMMARY</code> 等标记。只看这一条，很容易怀疑系统禁止了手环转发。</p>
+<p>但这条摘要与应用真正发布的任务通知是不同的记录。Android 官方文档说明，系统可能自动合组，具体行为还会因设备而异。（参考资料 3）</p>
+<p>在本次失败样本中，华为已经记录了带任务通道、具体提醒标识和 <code>AUTO_CANCEL</code> 标记的原始通知，并给出了应用开关关闭的拒绝理由。因此，不能把摘要上的 <code>LOCAL_ONLY</code> 直接认定为这次任务漏转的根因。</p>
+<h3 id="_8">常驻状态通知被过滤，不等于任务仍然失败<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>待办 App 同时有两种通知：一种是任务到点提醒，另一种是后台同步服务的常驻状态通知。</p>
+<p>配置恢复后，常驻通知仍然出现过这样的日志：</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>isMeetPushConditions?(false=filtered): true
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>onNotificationPosted FILTERED because FLAG_NO_CLEAR,
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>pkg=com.example.todo.debug
+</span></code></pre></div>
+<p>它先通过应用开关检查，再因不可清除的常驻属性被过滤。在本次实现中，这与普通任务通知的处理结果不同。</p>
+<p>如果只搜索包名，看到一条 <code>FILTERED</code> 就宣布“还没修好”，会把两种通知混在一起。需要结合通道、通知 ID、tag、触发时间和处理线程，确认每条日志究竟对应哪个事件。</p>
+<p>同样，源码里配置了高重要性，也不能代替读取手机的实际通知通道设置。Android 通道创建后，用户能够修改其行为，应用重新创建同名通道不会把这些设置重置回源码中的默认值。（参考资料 4）</p>
+<h2 id="_9">留下一套更短的排查路径<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>今后遇到“手机正常、手环无提示”，我会先按下面的顺序取证，再决定是否修改代码。</p>
+<p><strong>第一步，固定一条测试消息。</strong>使用无隐私的测试标题，设置未来的触发时间；记录是否锁屏，并分别检查手机通知、手环消息列表和震动。应用可能对已提交提醒做去重，刷新转发开关后应新建提醒，不要等待旧通知自动重放。</p>
+<p><strong>第二步，核对实际安装包。</strong>下面的命令假设电脑只连接了一台已授权调试的设备；示例包名需要替换为实际包名。</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>adb<span class="w"> </span>devices<span class="w"> </span>-l
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">TASK_PACKAGE</span><span class="o">=</span><span class="s1">'com.example.todo.debug'</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>adb<span class="w"> </span>shell<span class="w"> </span>pm<span class="w"> </span>list<span class="w"> </span>packages<span class="w"> </span><span class="s2">"</span><span class="nv">$TASK_PACKAGE</span><span class="s2">"</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>adb<span class="w"> </span>shell<span class="w"> </span>dumpsys<span class="w"> </span>package<span class="w"> </span><span class="s2">"</span><span class="nv">$TASK_PACKAGE</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>rg<span class="w"> </span><span class="s1">'versionName=|versionCode=|User [0-9]|POST_NOTIFICATIONS'</span>
+</span></code></pre></div>
+<p><strong>第三步，核对通知监听是否获准且在线。</strong>启用名单和当前存活的服务要分别查看，不能只凭界面上的授权开关判断。</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>adb<span class="w"> </span>shell<span class="w"> </span>settings<span class="w"> </span>get<span class="w"> </span>secure<span class="w"> </span>enabled_notification_listeners
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>adb<span class="w"> </span>shell<span class="w"> </span>dumpsys<span class="w"> </span>notification<span class="w"> </span><span class="p">|</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'/^  Notification listeners:/,/^  Notification assistant services:/p'</span>
+</span></code></pre></div>
+<p><strong>第四步，定位真正处理通知的进程。</strong>本次版本使用下面的进程名；如果查询不到，应先检查服务所属进程，不要继续用空 PID 抓日志。</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">HEALTH_LISTENER_PID</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>adb<span class="w"> </span>shell<span class="w"> </span>pidof<span class="w"> </span><span class="s1">'com.huawei.health:DaemonService'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">'\r'</span><span class="k">)</span><span class="s2">"</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$HEALTH_LISTENER_PID</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>adb<span class="w"> </span>logcat<span class="w"> </span>-d<span class="w"> </span>--pid<span class="o">=</span><span class="s2">"</span><span class="nv">$HEALTH_LISTENER_PID</span><span class="s2">"</span><span class="w"> </span>-v<span class="w"> </span>threadtime<span class="w"> </span><span class="p">|</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span>rg<span class="w"> </span><span class="s1">'com\.example\.todo\.debug'</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="k">fi</span>
+</span></code></pre></div>
+<p>按包名筛选可以快速找到接收和拒绝记录，但不包含包名的后续发送日志也可能被筛掉。找到测试通知后，还应结合相邻时间与线程继续追踪。不能因为一次关键词搜索没有结果，就断定某个步骤没有执行；并非所有厂商或版本都会输出同样的诊断日志。</p>
+<p><strong>第五步，依据实际拒绝理由做最小修正。</strong>如果明确拒绝于目标应用的转发开关，就核对并刷新这一项；如果拒绝于其他条件，继续沿对应分支查。不要同时重装应用、清空数据、重置蓝牙和修改通知代码，否则即使恢复，也很难知道哪个动作起了作用。</p>
+<p><strong>第六步，用新通知完成验证。</strong>“应用调用成功”“系统里有通知”“华为开始推送”和“手环实际提醒”是四种不同的结果。记录时应分别命名，不能都写成“发送成功”。</p>
+<p>排查命令的原始输出可能包含设备标识、其他应用名称和通知内容。公开复盘时，只保留与测试事件有关的字段，用一致的示例包名和占位符替换可识别信息。本篇也没有附上全量系统日志或第三方应用程序文件。</p>
+<h2 id="_10">这次经验会如何改变后续开发<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>首先，通知诊断需要覆盖应用之外的接收方。我们自己的“已提交系统通知”状态是有用的，但它证明不了手环收到；界面上的勾选也证明不了当时运行中的过滤逻辑已经放行。应尽早把下一跳实际接收到什么、为什么拒绝，纳入排查。</p>
+<p>其次，开发者容易优先修改自己熟悉的部分。本次借助 AI 阅读代码、比对通知字段、整理日志，都能提高效率；但在没有真机证据的时候，把一个合理猜测迅速变成新版本，也可能让排查走得更远。让工具先找出具体拒绝点，通常比让它再猜一组兼容性参数更有价值。</p>
+<p>最后，修复记录应保留结论的边界。这次已经解决了连接设备上的问题，也确认了失败样本被应用开关拒绝。配置状态为什么出现差异、是否会在其他版本复现、旧通知实现是否同样能恢复，都没有完成验证。把这些问题留在记录里，后续再次遇到类似现象时，才不会把一次成功经验误用成普遍规则。</p>
+<p>这次最有价值的产物，是一段能说明通知在哪里被拒绝的日志，以及一条经过实际手环确认的成功提醒。有了这两端的证据，修复才有明确的起点和终点。</p>
+<h2 id="_11">参考资料<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>以下官方资料用于解释系统机制和常规检查项；本文关于具体失败原因与恢复结果的结论，来自本次真机日志和实际验收。</p>
+<ol>
+<li>华为官方：华为手表／手环连接华为或安卓手机后，收不到消息怎么办？</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>https://consumer.huawei.com/cn/support/content/zh-cn15958978/
+</span></code></pre></div>
+<ol>
+<li>Android Developers：NotificationListenerService。</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>https://developer.android.com/reference/android/service/notification/NotificationListenerService
+</span></code></pre></div>
+<ol>
+<li>Android Developers：Create a group of notifications。</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>https://developer.android.com/develop/ui/views/notifications/group
+</span></code></pre></div>
+<ol>
+<li>Android Developers：Create and manage notification channels。</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>https://developer.android.com/develop/ui/compose/notifications/channels
+</span></code></pre></div>
+<!-- publisher-release:b470672f-6ec9-443d-a563-ef774e6745ca -->
+  </div>
+
+  
+    <aside class="post-related" aria-labelledby="post-related-title">
+      <header><span>RELATED NOTES</span><h2 id="post-related-title">也许你还会想读</h2></header>
+      <div>
+        
+          <a href="../260924165703/">
+            <small>技 · 格物札记</small>
+            <strong>一次 macOS 代理配置排查</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260715215301/">
+            <small>技 · 格物札记</small>
+            <strong>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+          <a href="../260408092240/">
+            <small>技 · 格物札记</small>
+            <strong>把 AI 这些名词一次讲明白</strong>
+            <span aria-hidden="true">→</span>
+          </a>
+        
+      </div>
+    </aside>
+  
+
+  <nav class="post-neighbors" aria-label="相邻文章">
+    <span></span>
+    
+      <a href="../../D-Orginals/261002194957/"><small>更早一篇 →</small><strong>吃了月饼，为什么还是没有过节的感觉？</strong></a>
+    
+  </nav>
+
+  <footer class="post-end-nav" aria-label="文章尾部导航">
+    <div><span>读至此处</span><strong>愿这一页，成为下一次思考的起点。</strong></div>
+    <nav>
+      <a href="../000000学习笔记目录/">继续逛格物札记</a>
+      <a href="../../archive/">返回全部文章</a>
+      <a href="#article-top">回到顶部 ↑</a>
+    </nav>
+  </footer>
+
+  <div class="article-toc" data-article-toc hidden>
+    <button
+      type="button"
+      class="article-toc-fab"
+      data-article-toc-button
+      aria-label="打开本文目录"
+      aria-controls="article-toc-sheet"
+      aria-expanded="false"
+    >
+      <span class="article-toc-fab-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>
+
+    <section
+      id="article-toc-sheet"
+      class="article-toc-sheet"
+      role="dialog"
+      aria-labelledby="article-toc-title"
+      aria-modal="true"
+      aria-hidden="true"
+      inert
+    >
+      <header class="article-toc-sheet-header">
+        <h2 id="article-toc-title" class="article-toc-sheet-title">本文目录</h2>
+        <div class="article-toc-sheet-actions">
+          <button
+            type="button"
+            class="article-toc-search-toggle"
+            data-article-toc-search-toggle
+            aria-label="检索本文目录"
+            aria-controls="article-toc-search-panel"
+            aria-expanded="false"
+          >
+            <span class="article-toc-search-toggle-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            type="button"
+            class="article-toc-close"
+            data-article-toc-close
+            aria-label="关闭本文目录"
+          ></button>
+        </div>
+      </header>
+      <div
+        id="article-toc-search-panel"
+        class="article-toc-search"
+        data-article-toc-search-panel
+        hidden
+      >
+        <input
+          id="article-toc-search"
+          class="article-toc-search-input"
+          data-article-toc-search
+          type="search"
+          placeholder="检索目录"
+          aria-label="检索本文目录"
+          aria-controls="article-toc-content"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <output
+          class="article-toc-search-status"
+          data-article-toc-search-status
+          for="article-toc-search"
+          aria-live="polite"
+        ></output>
+      </div>
+      <nav
+        id="article-toc-content"
+        class="article-toc-content"
+        data-article-toc-content
+        aria-label="本文目录"
+      >
+        <p class="article-toc-empty" data-article-toc-empty hidden>未找到匹配的目录</p>
+      </nav>
+    </section>
+  </div>
+  </div>
+
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.path", "toc.follow", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/share-link.js"></script>
+      
+        <script src="../../javascripts/article-toc.js"></script>
+      
+        <script src="../../javascripts/archive-filter.js"></script>
+      
+        <script src="../../javascripts/site-ui.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/mermaid.js" type="module"></script>
+      
+    
+  </body>
+</html>
