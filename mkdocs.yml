@@ -112,7 +112,7 @@ markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
-          class: mermaid
+          class: garden-mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
 
 exclude_docs: |
@@ -127,6 +127,7 @@ plugins:
 
 hooks:
   - hooks/post_metadata.py
+  - hooks/mermaid_assets.py
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -135,7 +136,8 @@ extra_javascript:
   - javascripts/archive-filter.js
   - javascripts/site-ui.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://unpkg.com/mermaid/dist/mermaid.min.js
+  - path: javascripts/mermaid.js
+    type: module
 
 extra_css:
   - css/00-tokens.css

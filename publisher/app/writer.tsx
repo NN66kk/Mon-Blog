@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { MarkdownCodeBlock } from '@/components/markdown-code-block';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
@@ -1339,13 +1340,14 @@ export default function Writer({
               ) : (
                 <div className="preview-pane">
                   <p className="preview-note">
-                    Wiki Link、提示块和 Mermaid 以博客显示为准。
+                    Wiki Link 和提示块以博客显示为准。
                   </p>
                   <article className="prose">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm, remarkMath]}
                       rehypePlugins={[rehypeKatex]}
                       components={{
+                        pre: MarkdownCodeBlock,
                         img: ({ src, alt }) => {
                           const source = typeof src === 'string' ? src : '';
                           const resolved = previewImageUrl(

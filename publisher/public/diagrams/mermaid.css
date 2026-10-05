@@ -1,0 +1,82 @@
+.garden-diagram {
+  --diagram-paper: #faf8f2;
+  --diagram-ink: #253c2c;
+  --diagram-border: #d4dccd;
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 1.5em 0;
+  padding: 24px 12px;
+  border: 1px solid var(--diagram-border);
+  border-radius: 14px;
+  background: var(--diagram-paper);
+  color: var(--diagram-ink);
+  font:
+    16px/1.5 'LXGW WenKai',
+    'Kaiti SC',
+    'STKaiti',
+    'KaiTi',
+    serif;
+  letter-spacing: normal;
+  text-align: left;
+  white-space: normal;
+}
+[data-md-color-scheme='slate'] .garden-diagram,
+.dark .garden-diagram {
+  --diagram-paper: #1e221c;
+  --diagram-ink: #edf0e7;
+  --diagram-border: #465140;
+}
+.garden-diagram .diagram-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+.garden-diagram .diagram-viewport > svg {
+  display: block;
+  max-width: none;
+  height: auto;
+  margin: 0 auto;
+}
+.garden-diagram .diagram-status {
+  margin: 0;
+  color: var(--diagram-ink);
+  font-size: 14px;
+  text-align: center;
+}
+.garden-diagram .diagram-retry {
+  display: block;
+  margin: 12px auto;
+  padding: 5px 14px;
+  border: 1px solid var(--diagram-border);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.garden-diagram .diagram-source {
+  margin-top: 12px;
+  font-size: 14px;
+}
+.garden-diagram .diagram-source summary {
+  cursor: pointer;
+}
+.garden-diagram .diagram-source pre {
+  overflow: auto;
+  padding: 12px;
+  white-space: pre;
+}
+.diagram-stage {
+  position: fixed;
+  top: 0;
+  left: -100000px;
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .garden-diagram {
+    padding: 16px 8px;
+    border-radius: 10px;
+  }
+}
