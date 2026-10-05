@@ -6,7 +6,10 @@ import {
   Client,
   StreamableHTTPClientTransport,
 } from '@modelcontextprotocol/client';
-import { createBlogMcpEndpoint } from '../lib/mcp-server';
+import {
+  createBlogMcpEndpoint,
+  createSitesBlogMcpEndpoint,
+} from '../lib/mcp-server';
 import { createMcpKeyStore } from '../lib/mcp-keys';
 import { createWritingService } from '../lib/writing-service';
 
@@ -88,6 +91,7 @@ function setup(t: TestContext) {
     keys,
     writing,
     fetch,
+    sitesFetch: createSitesBlogMcpEndpoint(writing),
     client,
     remoteCalls: () => remoteCalls,
   };
@@ -301,4 +305,116 @@ void test('unexpected upstream failures are sanitized and publishing permission 
     JSON.stringify(result).includes('PRIVATE_SYNTHETIC_CONNECTION_DETAIL'),
     false,
   );
+});
+
+for (const mode of ['legacy', 'auto'] as const) {
+  void test(`Sites OAuth (${mode}) shares the web owner and enforces account isolation`, async (t) => {
+    const h = setup(t);
+    async function connect(owner?: string) {
+      const client = new Client(
+        { name: 'sites-oauth-test', version: '1.0.0' },
+        {
+          versionNegotiation: { mode },
+        },
+      );
+      await client.connect(
+        new StreamableHTTPClientTransport(new URL('https://blog.example/mcp'), {
+          requestInit: {
+            headers: owner
+              ? {
+                  'oai-authenticated-user-id': owner,
+                  'oai-authenticated-user-email': `${owner}@example.test`,
+                }
+              : {},
+          },
+          fetch: (url, init) => h.sitesFetch(new Request(url, init)),
+        }),
+      );
+      t.after(() => client.close());
+      return client;
+    }
+    const alice = await connect('alice');
+    assert.equal((await alice.listTools()).tools.length, 12);
+    const draft = data(
+      await alice.callTool({
+        name: 'create_draft',
+        arguments: {
+          title: 'OAuth private draft',
+          body: 'Only Alice can read this.',
+          collection: 'B-Notes',
+        },
+      }),
+    );
+    assert.equal(
+      (await h.writing.getDraft('alice', draft.id as string)).title,
+      draft.title,
+    );
+    const bob = await connect('bob');
+    const forbidden = await bob.callTool({
+      name: 'get_draft',
+      arguments: { id: draft.id },
+    });
+    assert.equal(forbidden.isError, true);
+    assert.equal(data(forbidden).status, 404);
+    const key = await h.keys.create('alice', { name: 'Same owner' });
+    const keyedClient = await h.client(key.key, mode);
+    assert.equal(
+      data(
+        await keyedClient.callTool({
+          name: 'get_draft',
+          arguments: { id: draft.id },
+        }),
+      ).title,
+      draft.title,
+    );
+    const anonymous = await connect();
+    assert.equal((await anonymous.listTools()).tools.length, 12);
+    await assert.rejects(
+      () => anonymous.callTool({ name: 'list_drafts', arguments: {} }),
+      /授权连接写作室/,
+    );
+    assert.equal(h.remoteCalls(), 0);
+  });
+}
+
+void test('Sites service access, API keys and partial identity never manufacture an OAuth owner', async (t) => {
+  const h = setup(t);
+  const issued = await h.keys.create('alice', { name: 'API only' });
+  const body = {
+    jsonrpc: '2.0',
+    id: 1,
+    method: 'tools/call',
+    params: { name: 'list_drafts', arguments: {} },
+  };
+  const headersToReject: Record<string, string>[] = [
+    {},
+    { 'OAI-Sites-Authorization': 'Bearer synthetic-platform-credential' },
+    { Authorization: `Bearer ${issued.key}` },
+    { 'oai-authenticated-user-id': 'alice' },
+    { 'oai-authenticated-user-email': 'alice@example.test' },
+  ];
+  for (const headers of headersToReject) {
+    const response = await h.sitesFetch(raw(undefined, body, headers));
+    assert.equal(response.status, 401);
+    assert.equal(response.headers.get('cache-control'), 'private, no-store');
+  }
+  assert.equal(h.remoteCalls(), 0);
+});
+
+void test('Sites discovery rejects cross-origin and oversized anonymous requests', async (t) => {
+  const h = setup(t);
+  assert.equal(
+    (
+      await h.sitesFetch(
+        raw(undefined, undefined, { origin: 'https://untrusted.example' }),
+      )
+    ).status,
+    403,
+  );
+  assert.equal((await h.sitesFetch(raw(undefined, '{'))).status, 400);
+  assert.equal(
+    (await h.sitesFetch(raw(undefined, ' '.repeat(1500001)))).status,
+    413,
+  );
+  assert.equal(h.remoteCalls(), 0);
 });

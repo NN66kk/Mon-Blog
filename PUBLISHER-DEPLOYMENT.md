@@ -1,3 +1,23 @@
+# MCP 上线：2026-10-02
+
+2026-10-02 21:58（北京时间）：MCP 已发布到原私有写作室，第 5 版部署成功。
+
+- 地址：https://mon-blog-writer.monv587.chatgpt.site
+- 部署：`appgdep_6abfb87a8e3c819196028c48925394aa`，状态 `succeeded`，`has_mcp: true`。
+- 版本：`appgprj_6a9f59d312188191bd1d48fd1d9d1c74~appgver_caf487525e288191ac2245e14e7fd5cb`。
+- Sites 源码：`2441f3ffea09798c42285f7d5e51acc869a083b9`。已推送写作室私有部署源码；未提交或推送博客仓库本轮本地修改。
+- 设置入口：「设置与备份 → 连接 AI 写作助手」。包含平台登录授权和 API Key 管理。
+- 推荐连接：`https://mon-blog-writer.monv587.chatgpt.site/mcp`，使用 Sites 原生 OAuth 与对应的「Mon · 写作室」插件。沿用同一站点用户身份与已有 GitHub 连接。
+- 高级 API Key 入口：`/api/mcp`。私有 Sites 网关还要求平台服务凭证，通过 `OAI-Sites-Authorization` 请求头提供；仅有应用 API Key 不足以通过平台网关。平台凭证不写入源码或网页。
+- 已应用新增迁移 `0004_mcp_keys.sql`；线上数据库显示 `mcp_keys` 和原有七张用户表。既有迁移未改写，未执行生产数据清理或测试文章发布。
+- 访问名单仍只有所有者，外部访问者为 0，运行时环境修订仍为 1；保留上一版源码与部署归档。
+- 验证：73 项测试、TypeScript 检查、生产构建通过。测试包含两代 MCP 协议、API Key 和 OAuth 身份隔离、跨账户草稿保护、无用户身份时拒绝数据调用。
+- 线上边界验证：`/mcp` 返回平台 OAuth challenge；`/api/mcp` 通过平台服务访问后仍要求应用 Key；密钥管理接口仍要求网页登录。普通 Python 请求会触发 Cloudflare 浏览器签名限制，该结果不代表 MCP 协议错误。
+- 尚需所有者完成客户端首次安装/授权后，执行一次真实只读 MCP 调用；没有把提供连接入口当成已连接。
+- 本地源码已与部署源码逐文件比对，部署包保存在 `publisher/outputs/mcp-release-20261002-v5.tar.gz`。
+
+---
+
 # 写作室上线记录
 
 2026-09-22 18:08（北京时间）：模板、逐项 YAML 表单和数字文件名修正已部署成功，原写作室地址与私有访问权限不变。

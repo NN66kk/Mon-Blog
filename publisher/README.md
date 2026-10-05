@@ -33,9 +33,15 @@ Sites 在开发模式提供本地测试身份；托管环境使用真实登录�
 
 MCP 新增迁移 `0004_mcp_keys.sql`，只增加密钥表和索引。部署时按顺序应用尚未执行的迁移，不重建数据库。
 
-## MCP：服务地址 + API Key
+## MCP：线上登录授权与 API Key
 
-首次在「设置与备份 → 连接 AI 写作助手」生成密钥，复制页面中的完整服务地址（`https://你的写作室域名/api/mcp`）和密钥到客户端。此后 MCP 请求独立使用 `Authorization: Bearer ...`，不需要进入协作空间或保持网页登录。博客连接沿用该账户已有的 GitHub 连接；MCP 密钥与 GitHub 令牌是两种不同凭证。
+线上推荐使用 Sites 原生 OAuth 入口 `/mcp`。站点声明 `mcp` capability 后，Sites 负责 OAuth 和仅所有者访问控制，并自动配置对应插件。在 Codex 的「插件 → 个人 → 由你创建」找到「Mon · 写作室」后安装、连接；支持 OAuth 的 MCP 客户端也可填写 `https://mon-blog-writer.monv587.chatgpt.site/mcp` 按提示授权。
+
+OAuth 连接使用平台转发的用户 ID，与网页共享草稿、图片和 GitHub 连接。它拥有读取、草稿编辑和发布工具，发布仍需用户明确要求。无用户身份的请求仅允许初始化、工具清单和 ping；平台服务凭证不生成用户身份，也不能通过此入口读取私人数据。用户数据按 owner 隔离。
+
+### API Key 高级连接
+
+首次在「设置与备份 → 连接 AI 写作助手」生成密钥，复制页面中的完整服务地址（`https://你的写作室域名/api/mcp`）和密钥到客户端。此后 `/api/mcp` 请求使用 `Authorization: Bearer ...`。私有 Sites 线上环境还要求平台提供的 `OAI-Sites-Authorization: Bearer ...` 服务凭证；仅有应用 API Key 无法通过外层网关。该额外凭证不得放入网页、源码或日志。日常连接优先使用上方 OAuth 入口，无需保持网页登录。博客连接沿用该账户已有的 GitHub 连接；MCP 密钥与 GitHub 令牌是两种不同凭证。
 
 密钥完整值仅在创建后显示一次；服务端仅存 SHA-256 摘要。默认 90 天有效，可选 7/30/365 天，可随时单独撤销。默认允许读取和编辑草稿，公开发布需要额外勾选。不要把真实密钥放进仓库、URL 查询参数或对话内容。
 
@@ -47,7 +53,7 @@ url = "https://你的写作室域名/api/mcp"
 bearer_token_env_var = "MON_BLOG_API_KEY"
 ```
 
-支持自定义请求头的客户端也可以直接配置服务 URL 和 `Authorization: Bearer <密钥>`；设置页提供 Cursor 示例。本轮使用 API Key，**ChatGPT 原生自定义 App 的 OAuth 接入尚未实现**，不能把 API Key 填入 OAuth Client Secret 当作替代。
+支持自定义请求头的客户端也可以直接配置服务 URL 和 `Authorization: Bearer <密钥>`；设置页提供 Cursor 示例。Sites 原生插件使用 `/mcp` 的平台 OAuth；API Key 只用于 `/api/mcp`，不能填入 OAuth Client Secret。
 
 | 权限 | MCP 工具 |
 | --- | --- |
@@ -61,7 +67,7 @@ bearer_token_env_var = "MON_BLOG_API_KEY"
 
 传输使用官方 TypeScript SDK 的无状态 HTTP 入口，兼容旧版初始化流程和新版逐请求协议，不需要 Durable Objects 或常驻 SSE 会话。接口逐请求验证 Key；Key 无权生成或撤销其他 Key。当前不提供 MCP 图片上传、文章删除或任意 Git/SQL 操作。
 
-上线前需验证托管入口：客户端不带网页 Cookie 访问 `/api/mcp` 时应得到 MCP 的 401/有效 Key 的协议响应，不能被平台登录页或所有者访问网关拦截。若现有 Sites 网关无法单独放行该路径，应先调整可达性或挂载独立 Worker；网页管理接口继续使用现有身份校验。仅新增路由不能证明已绕过平台网关，本地验收不代表公网接入已完成。
+上线验证：确认平台识别 `/mcp` 并提供 OAuth 连接信息；未授权请求不能读取用户数据。`/api/mcp` 必须同时通过平台服务访问与应用 API Key 两层验证，不得为了简化连接而公开站点或放宽网页接口权限。本地测试不能代替平台授权和实际外网验证。
 
 `npm run test:mcp` 使用临时 SQLite、官方 MCP 客户端与模拟 GitHub，覆盖密钥隔离、撤销/过期、权限、两代协议、版本冲突、索引、发布去重和异常恢复，不执行真实发布。
 

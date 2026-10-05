@@ -154,19 +154,28 @@ export default function McpSettings() {
       setBusy(false);
     }
   }
+  const oauthEndpoint = endpoint.replace(/\/api\/mcp$/, '/mcp');
+  const hostedSite = /^https:\/\/[^/]+\.chatgpt\.site\/api\/mcp$/.test(
+    endpoint,
+  );
   const cursorConfig = JSON.stringify(
     {
       mcpServers: {
         'mon-blog': {
           url: endpoint,
-          headers: { Authorization: 'Bearer <MON_BLOG_API_KEY>' },
+          headers: {
+            Authorization: 'Bearer <MON_BLOG_API_KEY>',
+            ...(hostedSite
+              ? { 'OAI-Sites-Authorization': 'Bearer <SITES_SERVICE_TOKEN>' }
+              : {}),
+          },
         },
       },
     },
     null,
     2,
   );
-  const codexConfig = `[mcp_servers.mon_blog]\nurl = ${JSON.stringify(endpoint)}\nhttp_headers = { Authorization = "Bearer <MON_BLOG_API_KEY>" }`;
+  const codexConfig = `[mcp_servers.mon_blog]\nurl = ${JSON.stringify(endpoint)}\nhttp_headers = { Authorization = "Bearer <MON_BLOG_API_KEY>"${hostedSite ? ', "OAI-Sites-Authorization" = "Bearer <SITES_SERVICE_TOKEN>"' : ''} }`;
 
   return (
     <section
@@ -178,13 +187,46 @@ export default function McpSettings() {
         <KeyRound />
       </span>
       <h2 id="mcp-settings-title">连接 AI 写作助手</h2>
-      <p>
-        在支持 MCP
-        的客户端填入服务地址和密钥，即可读取博客、整理草稿。需要直接发布时，单独开启发布权限。
-      </p>
+      <p>通过 MCP 让 AI 助手读取博客、整理草稿，并在你明确要求时发布文章。</p>
+      <div className="my-5 rounded-lg border border-primary/30 bg-secondary p-4">
+        <h3 className="mb-2 text-lg">通过 ChatGPT 登录连接（推荐）</h3>
+        <p className="manager-field-help">
+          在 Codex 的「插件 → 个人 → 由你创建」中找到「Mon ·
+          写作室」，安装并连接。 支持 OAuth 的 MCP
+          客户端也可使用下面的地址，按提示登录拥有此写作室的账号。
+          该连接可以读取内容、编辑草稿和发布文章，沿用网页中的博客连接。
+        </p>
+        <label className="manager-field" htmlFor="mcp-oauth-url">
+          登录授权服务地址
+          <div className="flex min-w-0 gap-2">
+            <Input
+              id="mcp-oauth-url"
+              readOnly
+              value={oauthEndpoint}
+              className="min-w-0 flex-1"
+            />
+            <Button
+              type="button"
+              variant="outline"
+              disabled={loading}
+              onClick={() =>
+                void copy(oauthEndpoint, '已复制登录授权服务地址。')
+              }
+            >
+              <Copy size={16} />
+              复制
+            </Button>
+          </div>
+        </label>
+        <p className="manager-field-help">
+          这种方式无需生成下方的 API Key，也无需保持写作室网页打开。
+        </p>
+      </div>
+      <h3 className="mb-2 text-lg">API Key（高级连接）</h3>
       <p className="manager-field-help">
-        目前可连接 Codex、Cursor 等支持请求头密钥的客户端。ChatGPT 原生 App
-        接入还需要 OAuth，后续再提供。
+        为支持自定义请求头的客户端生成独立密钥，可限制权限、设置有效期或单独撤销。
+        私有线上写作室还需要平台服务凭证，仅填写 API Key
+        无法通过登录网关；日常使用请优先选择上方的登录授权连接。
       </p>
       {error && (
         <div role="alert" className="manager-warning mb-4">
@@ -195,7 +237,7 @@ export default function McpSettings() {
         <output className="mb-4 block text-sm text-primary">{notice}</output>
       )}
       <label className="manager-field" htmlFor="mcp-server-url">
-        MCP 服务地址
+        API Key 服务地址
         <div className="flex min-w-0 gap-2">
           <Input
             id="mcp-server-url"
@@ -351,6 +393,8 @@ export default function McpSettings() {
             <p className="manager-field-help mt-3">
               将 &lt;MON_BLOG_API_KEY&gt;
               替换为刚生成的密钥，保存到客户端的个人配置即可。示例只包含占位符，请勿把真实密钥提交到博客仓库。
+              {hostedSite &&
+                '线上还需将 <SITES_SERVICE_TOKEN> 替换为平台服务凭证；它与这里生成的 API Key 不同。'}
             </p>
             <h3 className="mb-2 text-sm">Codex · 个人 config.toml</h3>
             <pre className="max-w-full overflow-x-auto rounded bg-secondary p-3 font-mono text-xs">

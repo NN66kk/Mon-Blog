@@ -7,7 +7,12 @@ import * as z from 'zod/v4';
 import { BLOG, COLLECTIONS, composeMarkdown, newArticlePath } from './content';
 import { standardArticle } from './article-templates';
 import { ApiError } from './github';
-import { readMcpBearerKey, type McpIdentity, type McpScope } from './mcp-keys';
+import {
+  MCP_SCOPES,
+  readMcpBearerKey,
+  type McpIdentity,
+  type McpScope,
+} from './mcp-keys';
 import type { createWritingService } from './writing-service';
 import { needsPublicationCheck } from './publication';
 
@@ -98,7 +103,7 @@ function publicationResult(job: PublicationView) {
 }
 
 export function createBlogMcpServer(
-  identity: McpIdentity,
+  identity: McpIdentity | null,
   writing: WritingService,
 ) {
   const server = new McpServer(
@@ -116,12 +121,14 @@ export function createBlogMcpServer(
     annotations: ToolAnnotations,
     call: (args: z.output<z.ZodObject<T>>) => unknown,
   ) {
-    if (!identity.scopes.includes(scope)) return;
+    if (!(identity?.scopes ?? MCP_SCOPES).includes(scope)) return;
     server.registerTool(
       name,
       { description, inputSchema: schema, annotations },
       async (args) => {
         try {
+          if (!identity)
+            throw new ApiError(401, '请先通过 ChatGPT 授权连接写作室。');
           const result = await call(args as z.output<z.ZodObject<T>>);
           const output = result as Record<string, unknown>;
           return {
@@ -145,17 +152,18 @@ export function createBlogMcpServer(
       },
     );
   }
-  const owner = identity.owner;
+  // Anonymous discovery registers the same schemas, but no tool can use this owner.
+  const owner = identity?.owner ?? '';
   tool(
     'get_blog_context',
-    '读取博客地址、栏目和当前密钥权限。开始操作时先调用。',
+    '读取博客地址、栏目和当前连接权限。开始操作时先调用。',
     'content:read',
     z.object({}).strict(),
     read,
     () => ({
       blog_url: BLOG,
       collections: COLLECTIONS,
-      scopes: identity.scopes,
+      scopes: identity!.scopes,
       workflow:
         '搜索 → 读取文章 → 导入草稿 → 修改 → 按用户要求发布 → 查询上线状态。搜索索引不完整时调用 refresh_article_index，无需打开写作室。',
     }),
@@ -335,6 +343,83 @@ export function createBlogMcpEndpoint({
   authenticate,
   writing,
 }: BlogMcpDependencies) {
+  return createAuthenticatedMcpEndpoint({
+    authenticate: (request) => authenticate(readMcpBearerKey(request)),
+    writing,
+  });
+}
+
+/** Sites authenticates OAuth at dispatch and supplies the same owner as the web UI. */
+export function createSitesBlogMcpEndpoint(writing: WritingService) {
+  return createAuthenticatedMcpEndpoint({
+    authenticate: async (request) => {
+      const owner = request.headers.get('oai-authenticated-user-id');
+      const email = request.headers.get('oai-authenticated-user-email');
+      if (!owner || !email) return null;
+      return { owner, keyId: 'sites-oauth', scopes: [...MCP_SCOPES] };
+    },
+    writing,
+  });
+}
+
+const DISCOVERY_METHODS = new Set([
+  'initialize',
+  'server/discover',
+  'notifications/initialized',
+  'ping',
+  'tools/list',
+]);
+
+async function discoveryRequest(request: Request) {
+  if (request.method !== 'POST') return request;
+  const reader = request.body?.getReader();
+  const chunks: Uint8Array[] = [];
+  let length = 0;
+  if (reader) {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > 1500000) {
+        await reader.cancel();
+        throw new ApiError(413, 'MCP 请求过大。');
+      }
+      chunks.push(value);
+    }
+  }
+  const bytes = new Uint8Array(length);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  let message;
+  try {
+    message = JSON.parse(new TextDecoder().decode(bytes));
+  } catch {
+    throw new ApiError(400, 'MCP 请求格式无效。');
+  }
+  if (
+    !message ||
+    Array.isArray(message) ||
+    !DISCOVERY_METHODS.has(message.method)
+  )
+    throw new ApiError(401, '请先通过 ChatGPT 授权连接写作室。');
+  return new Request(request.url, {
+    method: request.method,
+    headers: request.headers,
+    body: bytes,
+    signal: request.signal,
+  });
+}
+
+function createAuthenticatedMcpEndpoint({
+  authenticate,
+  writing,
+}: {
+  authenticate: (request: Request) => Promise<McpIdentity | null>;
+  writing: WritingService;
+}) {
   return async (request: Request): Promise<Response> => {
     try {
       const url = new URL(request.url);
@@ -344,7 +429,10 @@ export function createBlogMcpEndpoint({
         request.headers.get('sec-fetch-site') === 'cross-site'
       )
         throw new ApiError(403, '请求来源无效。');
-      const identity = await authenticate(readMcpBearerKey(request));
+      const identity = await authenticate(request);
+      // Provisioning may inspect public tool schemas without a user. Service
+      // access alone must never acquire the owner's drafts or GitHub connection.
+      if (!identity) request = await discoveryRequest(request);
       const handler = createMcpHandler(
         () => createBlogMcpServer(identity, writing),
         {
