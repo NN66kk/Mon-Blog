@@ -1,0 +1,21 @@
+[
+  {"path":"docs/D-Orginals/中文 名称.md","valid":true},
+  {"path":"docs/B-Notes/数学/微积分.md","valid":true},
+  {"path":"docs/A-Life/260101123456.md","valid":true},
+  {"path":"docs/C-Highlights/example.md","valid":true},
+  {"path":"docs/unknown/example.md","valid":false},
+  {"path":"docs/B-Notes/superpowers/example.md","valid":false},
+  {"path":"docs/A-Life/nested/superpowers/example.md","valid":false},
+  {"path":"docs/B-Notes/003英语/总结.md","valid":false},
+  {"path":"docs/D-Orginals/苹果电脑自动化脚本教程_2025070215169.md","valid":false},
+  {"path":"docs/A-Life/000000生活专栏目录.md","valid":false},
+  {"path":"docs/A-Life/.hidden/article.md","valid":false},
+  {"path":"docs/A-Life/../secret.md","valid":false},
+  {"path":"docs/A-Life//article.md","valid":false},
+  {"path":"docs/A-Life/article.md?query","valid":false},
+  {"path":"docs/A-Life/article#anchor.md","valid":false},
+  {"path":"docs/A-Life/back\\slash.md","valid":false},
+  {"path":"docs/A-Life/null\u0000.md","valid":false},
+  {"path":"/docs/A-Life/article.md","valid":false},
+  {"path":"docs/A-Life/article.txt","valid":false}
+]

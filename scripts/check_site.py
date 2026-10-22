@@ -40,6 +40,32 @@ ConfigLoader.add_constructor("!ENV", _env_default)
 ConfigLoader.add_multi_constructor("tag:yaml.org,2002:python/name:", lambda *_: None)
 
 
+def load_config_data(path, seen=()):
+    """Read MkDocs inheritance as data, without imports or environment expansion."""
+    path = Path(path).resolve()
+    if path in seen or len(seen) >= 16:
+        raise ValueError("Cyclic or excessive config inheritance")
+    config = yaml.load(path.read_text(encoding="utf-8"), Loader=ConfigLoader)
+    if not isinstance(config, dict):
+        raise ValueError("config must be a YAML mapping")
+    inherited = config.pop("INHERIT", None)
+    if inherited is None:
+        return config
+    if not isinstance(inherited, str):
+        raise ValueError("INHERIT must be a file path")
+    base = load_config_data(path.parent / inherited, (*seen, path))
+
+    def merge(target, updates):
+        for key, value in updates.items():
+            if isinstance(value, dict) and isinstance(target.get(key), dict):
+                merge(target[key], value)
+            else:
+                target[key] = value
+        return target
+
+    return merge(base, config)
+
+
 class Page(HTMLParser):
     def __init__(self, html):
         super().__init__(convert_charrefs=True)
@@ -148,6 +174,7 @@ class SiteCheck:
             sys.path.insert(0, str(ROOT))
         from hooks.dataview_static import count_supported_queries, enabled_for_page
         from hooks.post_metadata import _collection_for_src, _publish_parts_from_value, _publish_parts_from_src_uri, BLOG_TIMEZONE
+        from shared.content_contract import RULES
 
         for path in sorted(docs_dir.rglob("*.md")):
             text = path.read_text(encoding="utf-8-sig")
@@ -163,9 +190,9 @@ class SiteCheck:
             output = File(src_uri, str(docs_dir), str(self.site_dir), config.get("use_directory_urls", True))
             target = Path(output.abs_dest_path).resolve()
             status = str(metadata.get("status") or "").strip().casefold()
-            if status in {"draft", "private", "hidden", "redirect"} or (not status and metadata.get("draft") is True):
+            if status in RULES["unlisted_statuses"] or (not status and metadata.get("draft") is True):
                 self.feed_excluded_targets.add(target)
-            if status in {"draft", "private"} or (not status and metadata.get("draft") is True):
+            if status in RULES["non_public_statuses"] or (not status and metadata.get("draft") is True):
                 self.private_targets.add(target)
                 if target.exists():
                     self.error(src_uri, f"draft/private HTML exists: {target.relative_to(self.site_dir)}")
@@ -340,9 +367,7 @@ def main(argv=None):
     parser.add_argument("--max-errors", type=int, default=40)
     args = parser.parse_args(argv)
     try:
-        config = yaml.load(args.config.read_text(encoding="utf-8"), Loader=ConfigLoader)
-        if not isinstance(config, dict):
-            raise ValueError("config must be a YAML mapping")
+        config = load_config_data(args.config)
         docs_dir = args.docs_dir or args.config.resolve().parent / config.get("docs_dir", "docs")
         check = SiteCheck(args.site_dir, args.site_url or config.get("site_url", ""))
         errors = check.run(docs_dir, config)

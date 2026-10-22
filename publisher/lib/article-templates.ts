@@ -1,24 +1,21 @@
 import { parseDocument, isMap } from 'yaml';
-import { splitMarkdown } from './content';
+import { COLLECTIONS, COLLECTION_TAGS, CONTENT_RULES, splitMarkdown } from './content';
 import sources from './blog-templates.json';
 
-export const TEMPLATE_FOLDER = '002-project/005-template';
-export const COLLECTION_TAGS: Record<string, string> = {
-  'D-Orginals': '原创文章',
-  'B-Notes': '学习笔记',
-  'A-Life': '生活专栏',
-  'C-Highlights': '优质内容',
-};
+export const TEMPLATE_FOLDER = CONTENT_RULES.template_folder;
+export { COLLECTION_TAGS } from './content';
+const offset = CONTENT_RULES.timezone_offset_minutes;
+const timezoneSuffix = `${offset < 0 ? '-' : '+'}${String(Math.floor(Math.abs(offset) / 60)).padStart(2, '0')}:${String(Math.abs(offset) % 60).padStart(2, '0')}`;
 
 export function chinaDate(now = new Date()) {
   return (
-    new Date(now.getTime() + 8 * 3600000).toISOString().slice(0, 19) + '+08:00'
+    new Date(now.getTime() + offset * 60000).toISOString().slice(0, 19) + timezoneSuffix
   );
 }
 export function articleNumber(now = new Date()) {
   return chinaDate(now).slice(2, 19).replace(/\D/g, '');
 }
-export function standardArticle(collection = 'D-Orginals', now = new Date()) {
+export function standardArticle(collection = COLLECTIONS[0].id, now = new Date()) {
   const document = parseDocument(
     'title: ""\ndate: ""\ntags: ""\ndescription: ""\n',
   );
@@ -101,7 +98,7 @@ export function dateForInput(value: string) {
     ? value
     : value.replace(' ', 'T') +
       (value.length === 10 ? 'T00:00:00' : '') +
-      '+08:00';
+      timezoneSuffix;
   const date = new Date(withZone);
   return Number.isNaN(date.getTime()) ? '' : chinaDate(date).slice(0, 19);
 }

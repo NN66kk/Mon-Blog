@@ -1,0 +1,81 @@
+{
+  "site_name": "Mon's Digital Garden",
+  "site_description": "Mon 的学习笔记、生活记录与行旅札记。",
+  "site_author": "Mon",
+  "site_url": "https://nn66kk.github.io/Mon-Blog/",
+  "repo_url": "https://github.com/NN66kk/Mon-Blog",
+  "repo_name": "NN66kk/Mon-Blog",
+  "edit_uri": "edit/main/docs/",
+  "exclude_docs": "superpowers\nB-Notes/003英语/总结.md\nD-Orginals/苹果电脑自动化脚本教程_2025070215169.md\n",
+  "extra": {
+    "rss_feed": "feed.xml",
+    "dataview_static_paths": [
+      "B-Notes/003英语/英语一真题/*/Text[1-4].md"
+    ],
+    "about_page": "about.md",
+    "legacy_about_page": "D-Orginals/2024070515116.md",
+    "about_url": "about/",
+    "collection_order": [
+      "D",
+      "B",
+      "A",
+      "C"
+    ],
+    "collections": {
+      "A": {
+        "mark": "行",
+        "label": "行旅札记",
+        "description": "训练、饮食、出行与日常生活里反复验证的小经验。",
+        "index": "A-Life/000000生活专栏目录/",
+        "index_src": "A-Life/000000生活专栏目录.md",
+        "source_dir": "A-Life",
+        "legacy_tag": "生活专栏"
+      },
+      "B": {
+        "mark": "技",
+        "label": "格物札记",
+        "description": "技术、数学、英语与 AI 学习过程中留下的方法和推演。",
+        "index": "B-Notes/000000学习笔记目录/",
+        "index_src": "B-Notes/000000学习笔记目录.md",
+        "source_dir": "B-Notes",
+        "legacy_tag": "学习笔记"
+      },
+      "C": {
+        "mark": "拾",
+        "label": "人间拾遗",
+        "description": "值得保存的网站、文章、故事与那些让人会心一笑的片段。",
+        "index": "C-Highlights/000000优质内容目录/",
+        "index_src": "C-Highlights/000000优质内容目录.md",
+        "source_dir": "C-Highlights",
+        "legacy_tag": "优质内容"
+      },
+      "D": {
+        "mark": "思",
+        "label": "原创手记",
+        "description": "对工具、旅行、成长与现实问题的亲历、判断和复盘。",
+        "index": "D-Orginals/000000原创文章目录/",
+        "index_src": "D-Orginals/000000原创文章目录.md",
+        "source_dir": "D-Orginals",
+        "legacy_tag": "原创文章"
+      }
+    },
+    "content_rules": {
+      "schema_version": 1,
+      "template_folder": "002-project/005-template",
+      "timezone_offset_minutes": 480,
+      "non_public_statuses": [
+        "draft",
+        "private"
+      ],
+      "unlisted_statuses": [
+        "draft",
+        "hidden",
+        "redirect",
+        "private"
+      ],
+      "generic_tags": [
+        "zettelkasten"
+      ]
+    }
+  }
+}

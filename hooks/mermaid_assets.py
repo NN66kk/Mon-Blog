@@ -5,7 +5,7 @@ from pathlib import Path
 from mkdocs.structure.files import File
 
 
-ASSETS = Path(__file__).resolve().parents[1] / "publisher/public/diagrams"
+ASSETS = Path(__file__).resolve().parents[1] / "shared/diagrams"
 
 
 def on_files(files, config):

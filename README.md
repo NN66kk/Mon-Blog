@@ -54,6 +54,7 @@ GitHub Actions 对 PR、`main` 推送和手动触发运行博客检查与写作�
 - `docs/javascripts/`：目录、分享、文章筛选与阅读状态等渐进增强。
 - `hooks/post_metadata.py`：统一解析发布日期、更新日期、标签和自动摘要，并排除草稿及私有文章。
 - `hooks/dataview_static.py`：将明确启用的有限 Dataview 查询转换为静态任务列表。
+- `shared/`：博客与写作室共用的内容规则和 Mermaid 源文件，维护方法见 [shared/README.md](shared/README.md)。
 - `scripts/check_site.py`：检查实际构建产物，在发现错误时返回非零状态。
 - `scripts/preview_draft.py`：仅在本机构建写作室草稿快照。
 - `scripts/split_backup.py`：离线拆分超过恢复上限的旧写作室备份。
@@ -82,9 +83,11 @@ series_order: 1
 
 `extra.rss_feed: feed.xml` 开启全站 RSS，顶部、文章底部和页面 head 均提供订阅入口。订阅仅包含有可靠发布日期的公开文章，并使用摘要；草稿、私密、隐藏、重定向文章不进入 RSS。日期未知的旧文仍出现在站内列表与主题页，不使用考试年份、文件修改时间或构建时间代替发表日期。
 
+站点地址、栏目、排除路径和上述 `extra` 规则统一维护在 `shared/blog.json`，由 `mkdocs.yml` 继承。修改后运行 `python3 scripts/sync_shared.py --write` 同步写作室的生成副本；现有 Python 测试会阻止过期副本通过检查。Mermaid 也以 `shared/diagrams/` 为源，两端保留原有资源地址。
+
 ### Dataview 的网站显示
 
-Obsidian 的原始 Markdown 保持不变。当前仅为英语一真题的 `Text1.md` 至 `Text4.md` 启用静态转换，范围在 `mkdocs.yml` 的 `extra.dataview_static_paths` 中定义。其他文章默认保留 Dataview 代码示例；单篇文章可用 front matter `dataview_static: true` 启用，或用 `dataview_static: false` 显式保留示例。
+Obsidian 的原始 Markdown 保持不变。当前仅为英语一真题的 `Text1.md` 至 `Text4.md` 启用静态转换，范围在 `shared/blog.json` 的 `extra.dataview_static_paths` 中定义。其他文章默认保留 Dataview 代码示例；单篇文章可用 front matter `dataview_static: true` 启用，或用 `dataview_static: false` 显式保留示例。
 
 目前支持的查询是：
 

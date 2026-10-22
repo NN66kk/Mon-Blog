@@ -4,7 +4,7 @@ import {
   type ToolAnnotations,
 } from '@modelcontextprotocol/server';
 import * as z from 'zod/v4';
-import { BLOG, COLLECTIONS, composeMarkdown, newArticlePath } from './content';
+import { BLOG, COLLECTIONS, COLLECTION_IDS, composeMarkdown, newArticlePath } from './content';
 import { standardArticle } from './article-templates';
 import { ApiError } from './github';
 import {
@@ -21,7 +21,7 @@ export type BlogMcpDependencies = {
   authenticate: (key: string) => Promise<McpIdentity>;
   writing: WritingService;
 };
-const collection = z.enum(['D-Orginals', 'B-Notes', 'A-Life', 'C-Highlights']);
+const collection = z.enum(COLLECTION_IDS);
 const id = z.uuid();
 const revision = z.number().int().min(1).max(Number.MAX_SAFE_INTEGER);
 const page = {

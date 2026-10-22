@@ -28,11 +28,14 @@ import zipfile
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from shared.content_contract import COLLECTION_IDS, valid_article_path
 MAX_ARCHIVE = 32 * 1024 * 1024
 MAX_CONTENT = 128 * 1024 * 1024
 UUID = re.compile(r"[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\Z")
 MEDIA = re.compile(r"/api/media/([a-f0-9-]{36}\.(?:png|jpg|webp|gif))")
-COLLECTIONS = {"A-Life", "B-Notes", "C-Highlights", "D-Orginals"}
+COLLECTIONS = set(COLLECTION_IDS)
 
 
 def read_bundle(path: Path, draft_id: str | None = None):
@@ -102,10 +105,7 @@ def target_path(draft):
         if not isinstance(filename, str) or "/" in filename:
             raise ValueError("草稿文件名无效。")
         target = f"{collection}/{filename}"
-    parts = target.split("/")
-    if (parts[0] not in COLLECTIONS or len(parts) < 2 or not target.endswith(".md")
-            or any(not part or part.startswith(".") or part.startswith("000000") for part in parts)
-            or re.search(r"[\\\x00-\x1f?#]", target)):
+    if not valid_article_path("docs/" + target):
         raise ValueError("草稿原文路径无效。")
     return PurePosixPath(target)
 

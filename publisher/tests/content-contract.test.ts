@@ -5,6 +5,22 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import { composeMarkdown, splitMarkdown } from '../lib/content';
 import { metadataForArticle, portableImages } from '../lib/management';
+import { BLOG, REPO, COLLECTIONS, validPath, articleUrl } from '../lib/content';
+import contract from '../lib/blog-contract.json';
+import pathCases from './fixtures/path-cases.json';
+
+void test('publisher mirrors shared routes, collections and publishing boundaries', () => {
+  assert.equal(BLOG, contract.site_url);
+  assert.equal(REPO, contract.repo_name);
+  assert.deepEqual(COLLECTIONS.map(value => value.id), contract.extra.collection_order.map(key => contract.extra.collections[key as keyof typeof contract.extra.collections].source_dir));
+  for (const fixture of pathCases) {
+    assert.equal(validPath(fixture.path), fixture.valid, fixture.path);
+  }
+  for (const invalid of [undefined, null, 42, {}, []]) {
+    assert.equal(validPath(invalid as string), false);
+  }
+  assert.equal(articleUrl('docs/D-Orginals/中文 名称.md'), BLOG + 'D-Orginals/%E4%B8%AD%E6%96%87%20%E5%90%8D%E7%A7%B0/');
+});
 
 const articlePath = 'docs/D-Orginals/article.md';
 const assetRoot =

@@ -4,6 +4,7 @@ import os
 import re
 import hashlib
 import logging
+import sys
 from collections import Counter
 from collections.abc import Mapping
 from datetime import date, datetime, timedelta, timezone
@@ -15,6 +16,12 @@ from urllib.parse import quote, urljoin, urlsplit
 from xml.etree import ElementTree as ET
 
 import yaml
+
+# MkDocs loads hooks by filename; its CLI need not put the repository on sys.path.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+from shared.content_contract import CONTRACT, RULES
 
 FRONT_MATTER_RE = re.compile(r"\A---\s*\r?\n(.*?)\r?\n---\s*(?:\r?\n|$)", re.DOTALL)
 FENCED_CODE_RE = re.compile(r"^\s*(```|~~~).*?^\s*\1\s*$", re.MULTILINE | re.DOTALL)
@@ -32,11 +39,11 @@ LEADING_H1_RE = re.compile(r"\A\s*<h1\b[^>]*>.*?</h1>\s*", re.DOTALL)
 H1_OPEN_RE = re.compile(r"<h1(?P<attributes>\b[^>]*)>")
 ATX_H1_RE = re.compile(r"^(?P<indent>\s*)#(?!#)(?P<space>\s+)")
 FENCE_START_RE = re.compile(r"^\s*(?P<fence>`{3,}|~{3,})")
-COLLECTION_KEYS = ("A", "B", "C", "D")
-NON_PUBLIC_STATUSES = {"draft", "private"}
-UNLISTED_STATUSES = {"draft", "hidden", "redirect", "private"}
-GENERIC_TAGS = {"zettelkasten"}
-BLOG_TIMEZONE = timezone(timedelta(hours=8))
+COLLECTION_KEYS = tuple(CONTRACT["extra"]["collections"])
+NON_PUBLIC_STATUSES = set(RULES["non_public_statuses"])
+UNLISTED_STATUSES = set(RULES["unlisted_statuses"])
+GENERIC_TAGS = set(RULES["generic_tags"])
+BLOG_TIMEZONE = timezone(timedelta(minutes=RULES["timezone_offset_minutes"]))
 LOG = logging.getLogger("mkdocs.plugins.post_metadata")
 _feed_pages: list[Any] = []
 

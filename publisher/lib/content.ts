@@ -1,18 +1,28 @@
 import { parseDocument } from 'yaml';
+import contract from './blog-contract.json';
 
-export const COLLECTIONS = [
-  { id: 'D-Orginals', name: '原创手记', mark: '思' },
-  { id: 'B-Notes', name: '格物札记', mark: '技' },
-  { id: 'A-Life', name: '行旅札记', mark: '行' },
-  { id: 'C-Highlights', name: '人间拾遗', mark: '拾' },
-] as const;
-export const BLOG = 'https://nn66kk.github.io/Mon-Blog/';
-export const REPO = 'NN66kk/Mon-Blog';
+const definitions: Record<string, (typeof contract.extra.collections)[keyof typeof contract.extra.collections]> = contract.extra.collections;
+export const COLLECTIONS = contract.extra.collection_order.map(key => ({
+  id: definitions[key].source_dir, name: definitions[key].label, mark: definitions[key].mark,
+}));
+export const COLLECTION_IDS = COLLECTIONS.map(collection => collection.id);
+export const COLLECTION_TAGS: Record<string, string> = Object.fromEntries(
+  Object.values(definitions).map(collection => [collection.source_dir, collection.legacy_tag]),
+);
+export const CONTENT_RULES = contract.extra.content_rules;
+export const BLOG = contract.site_url;
+export const REPO = contract.repo_name;
+const EXCLUDED_PATHS = contract.exclude_docs.trim().split(/\r?\n/);
 export function validCollection(value: string) { return COLLECTIONS.some(c => c.id === value); }
 export function validPath(path: string) {
-  return /^docs\/(A-Life|B-Notes|C-Highlights|D-Orginals)\/.+\.md$/.test(path)
-    && !['docs/B-Notes/003英语/总结.md', 'docs/D-Orginals/苹果电脑自动化脚本教程_2025070215169.md'].includes(path)
-    && !path.split('/').some(p => p === '..' || p === '.' || p.startsWith('.') || p.startsWith('000000'))
+  if (typeof path !== 'string') return false;
+  const parts = path.split('/');
+  const relative = path.slice(5);
+  return parts.length >= 3 && parts[0] === 'docs' && validCollection(parts[1]) && path.endsWith('.md')
+    && !EXCLUDED_PATHS.some(excluded => excluded.includes('/')
+      ? relative === excluded || relative.startsWith(excluded + '/')
+      : relative.split('/').includes(excluded))
+    && !parts.some(p => !p || p.startsWith('.') || p.startsWith('000000'))
     && !/[\\\u0000-\u001f?#]/.test(path);
 }
 export function splitMarkdown(source: string) {
