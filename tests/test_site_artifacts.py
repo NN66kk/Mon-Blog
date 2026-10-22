@@ -123,6 +123,44 @@ class SiteArtifactTests(unittest.TestCase):
             self.search(["#missing"])
             self.assertEqual(main(argv), 1)
 
+    def rss_fixture(self, *, status="published", date="2026-01-02", link=None, pub_date="Fri, 02 Jan 2026 00:00:00 +0800"):
+        (self.docs / "B-Notes").mkdir(exist_ok=True)
+        (self.docs / "B-Notes/note.md").write_text(f"---\nstatus: {status}\ndate: '{date}'\n---\n# Note", encoding="utf-8")
+        discovery = '<link rel="alternate" type="application/rss+xml" href="' + BASE + 'feed.xml">'
+        self.write("index.html", f'<link rel="canonical" href="{BASE}">{discovery}<h1>Home</h1>')
+        self.write("B-Notes/note/index.html", f'<link rel="canonical" href="{BASE}B-Notes/note/">{discovery}<h1>Note</h1>')
+        link = link or BASE + "B-Notes/note/"
+        self.write("feed.xml", f'<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog</title><description>Notes</description><link>{BASE}</link><atom:link href="{BASE}feed.xml" rel="self"/><item><title>Note</title><link>{link}</link><guid>{link}</guid><pubDate>{pub_date}</pubDate></item></channel></rss>')
+        return {"extra": {"rss_feed": "feed.xml", "collections": {"B": {"source_dir": "B-Notes", "index_src": "B-Notes/index.md"}}}}
+
+    def test_rss_matches_source_dates_and_site_base(self):
+        self.assertEqual(self.check(self.rss_fixture()), [])
+
+    def test_rss_accepts_publisher_millisecond_timestamps_at_second_precision(self):
+        config = self.rss_fixture(date="2026-10-22T01:02:03.456Z", pub_date="Thu, 22 Oct 2026 01:02:03 +0000")
+        self.assertEqual(self.check(config), [])
+
+    def test_rss_rejects_unlisted_and_undated_articles(self):
+        for status, date in (("hidden", "2026-01-02"), ("published", "unknown")):
+            errors = self.check(self.rss_fixture(status=status, date=date))
+            self.assertTrue(any("undated or non-article" in e for e in errors), errors)
+
+    def test_rss_rejects_wrong_publication_dates_and_missing_articles(self):
+        errors = self.check(self.rss_fixture(pub_date="Sat, 03 Jan 2026 00:00:00 +0800"))
+        self.assertTrue(any("differs from the source" in e for e in errors), errors)
+        config = self.rss_fixture()
+        feed = self.site / "feed.xml"
+        source = feed.read_text()
+        feed.write_text(source[:source.index("<item>")] + "</channel></rss>")
+        self.assertTrue(any("missing from RSS" in e for e in self.check(config)))
+
+    def test_rss_requires_discovery_and_real_item_destination(self):
+        errors = self.check(self.rss_fixture(link="https://example.test/B-Notes/note/"))
+        self.assertTrue(any("outside site base" in e for e in errors), errors)
+        config = self.rss_fixture()
+        self.write("index.html", f'<link rel="canonical" href="{BASE}">')
+        self.assertTrue(any("RSS discovery" in e for e in self.check(config)))
+
 
 if __name__ == "__main__":
     unittest.main()

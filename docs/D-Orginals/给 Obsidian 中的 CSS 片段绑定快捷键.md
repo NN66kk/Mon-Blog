@@ -1,3 +1,8 @@
+---
+tags:
+- Obsidian
+- CSS
+---
 # 给 Obsidian 中的 CSS 片段绑定快捷键
 
 ## 前言

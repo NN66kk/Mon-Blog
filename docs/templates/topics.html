@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="garden-topics" data-page-layout="topics">
+  <header class="archive-hero">
+    <span class="garden-eyebrow"><i aria-hidden="true"></i> TOPICS &amp; SERIES</span>
+    <div class="archive-hero__heading">
+      <h1{% if page.blog_title_id %} id="{{ page.blog_title_id|e }}" tabindex="-1"{% endif %}>主题与系列</h1>
+      <p>从一个问题出发，让零散的笔记连成一条阅读小径。</p>
+    </div>
+    <nav class="topics-jump" aria-label="主题页导航"><a href="#topics-list">{{ blog.topics|length }} 个主题</a><a href="#series-list">{{ blog.series|length }} 个系列</a>{% if config.extra.rss_feed %}<a href="{{ config.extra.rss_feed|url|e }}">RSS 订阅 ↗</a>{% endif %}</nav>
+  </header>
+
+  <section class="topics-section" aria-labelledby="topics-list">
+    <header><span class="garden-kicker">FOLLOW YOUR CURIOSITY</span><h2 id="topics-list">按主题探索</h2></header>
+    <nav class="topic-chips" aria-label="主题目录">{% for topic in blog.topics %}<a href="#{{ topic.id|e }}">{{ topic.name|e }} <small>{{ topic.posts|length }}</small></a>{% endfor %}</nav>
+    <div class="topics-grid">
+      {% for topic in blog.topics %}
+        <section class="topic-group" aria-labelledby="{{ topic.id|e }}">
+          <header><h3 id="{{ topic.id|e }}">{{ topic.name|e }}</h3><span>{{ topic.posts|length }} 篇</span></header>
+          <ul>{% for post in topic.posts[:5] %}<li><a href="{{ post.url|url|e }}">{{ post.title|striptags|e }}</a>{% if post.blog_publish_iso %}<time datetime="{{ post.blog_publish_iso|e }}">{{ post.blog_publish_label[:10]|e }}</time>{% endif %}</li>{% endfor %}</ul>
+          {% if topic.posts|length > 5 %}<details><summary>展开其余 {{ topic.posts|length - 5 }} 篇</summary><ul>{% for post in topic.posts[5:] %}<li><a href="{{ post.url|url|e }}">{{ post.title|striptags|e }}</a>{% if post.blog_publish_iso %}<time datetime="{{ post.blog_publish_iso|e }}">{{ post.blog_publish_label[:10]|e }}</time>{% endif %}</li>{% endfor %}</ul></details>{% endif %}
+        </section>
+      {% else %}<p>主题正在整理中，你也可以先浏览<a href="{{ 'archive/'|url|e }}">全部文章</a>。</p>{% endfor %}
+    </div>
+  </section>
+
+  <section class="topics-section" aria-labelledby="series-list">
+    <header><span class="garden-kicker">READ IN ORDER</span><h2 id="series-list">按系列阅读</h2></header>
+    <div class="topics-grid">
+      {% for series in blog.series %}
+        <section class="topic-group" aria-labelledby="{{ series.id|e }}">
+          <header><h3 id="{{ series.id|e }}">{{ series.name|e }}</h3><span>{{ series.posts|length }} 篇</span></header>
+          <ol>{% for post in series.posts %}<li><a href="{{ post.url|url|e }}">{{ post.title|striptags|e }}</a></li>{% endfor %}</ol>
+        </section>
+      {% else %}<p>系列正在整理中，先从感兴趣的主题开始吧。</p>{% endfor %}
+    </div>
+  </section>
+  {% if config.extra.rss_feed %}<footer class="topics-subscribe"><strong>把花园带进你的阅读器</strong><p>用 RSS 订阅有发布日期的公开文章，按自己的节奏阅读。</p><a href="{{ config.extra.rss_feed|url|e }}">订阅 {{ blog.feed_count }} 篇文章 →</a></footer>{% endif %}
+</div>
+{% endblock %}

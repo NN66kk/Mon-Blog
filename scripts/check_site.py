@@ -10,6 +10,8 @@ from __future__ import annotations
 import argparse
 from html.parser import HTMLParser
 from functools import lru_cache
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 import json
 from pathlib import Path
 import re
@@ -45,6 +47,7 @@ class Page(HTMLParser):
         self.references = []
         self.canonicals = []
         self.dataview_count = 0
+        self.rss_feeds = []
         self.feed(html)
         self.close()
 
@@ -56,6 +59,8 @@ class Page(HTMLParser):
             self.anchors.add(attrs["name"])
         if attrs.get("data-dataview-static") == "incomplete-tasks":
             self.dataview_count += 1
+        if tag == "link" and "alternate" in attrs.get("rel", "").split() and attrs.get("type") == "application/rss+xml":
+            self.rss_feeds.append(attrs.get("href", ""))
         if tag == "link" and "canonical" in attrs.get("rel", "").split():
             self.canonicals.append(attrs.get("href", ""))
             return
@@ -89,6 +94,8 @@ class SiteCheck:
         self.errors = []
         self.pages = {}
         self.private_targets = set()
+        self.feed_excluded_targets = set()
+        self.feed_expected_dates = {}
 
     def error(self, source, message):
         item = f"{source}: {message}"
@@ -140,6 +147,7 @@ class SiteCheck:
         if str(ROOT) not in sys.path:
             sys.path.insert(0, str(ROOT))
         from hooks.dataview_static import count_supported_queries, enabled_for_page
+        from hooks.post_metadata import _collection_for_src, _publish_parts_from_value, _publish_parts_from_src_uri, BLOG_TIMEZONE
 
         for path in sorted(docs_dir.rglob("*.md")):
             text = path.read_text(encoding="utf-8-sig")
@@ -155,11 +163,20 @@ class SiteCheck:
             output = File(src_uri, str(docs_dir), str(self.site_dir), config.get("use_directory_urls", True))
             target = Path(output.abs_dest_path).resolve()
             status = str(metadata.get("status") or "").strip().casefold()
+            if status in {"draft", "private", "hidden", "redirect"} or (not status and metadata.get("draft") is True):
+                self.feed_excluded_targets.add(target)
             if status in {"draft", "private"} or (not status and metadata.get("draft") is True):
                 self.private_targets.add(target)
                 if target.exists():
                     self.error(src_uri, f"draft/private HTML exists: {target.relative_to(self.site_dir)}")
                 continue
+            collections = config.get("extra", {}).get("collections", {})
+            collection, _, is_index = _collection_for_src(src_uri, collections)
+            if target in self.pages and collection and not is_index and target not in self.feed_excluded_targets:
+                parts = _publish_parts_from_value(metadata.get("published_at") or metadata.get("cdate") or metadata.get("date")) or _publish_parts_from_src_uri(src_uri)
+                if parts:
+                    stamp = datetime.fromisoformat(parts[2])
+                    self.feed_expected_dates[target] = stamp.replace(tzinfo=BLOG_TIMEZONE) if stamp.tzinfo is None else stamp
             # Excluded source documents have no output. Strict MkDocs checks their
             # inclusion; this check concerns queries on pages actually published.
             if target not in self.pages or not enabled_for_page(src_uri, metadata, config):
@@ -226,6 +243,76 @@ class SiteCheck:
             if target is not None and target not in self.pages:
                 self.error("sitemap.xml", f"URL is not an HTML page: {ref!r}")
 
+    def inspect_feed(self, config):
+        feed_path = config.get("extra", {}).get("rss_feed")
+        if not feed_path:
+            return
+        if not isinstance(feed_path, str) or feed_path.startswith("/") or ".." in Path(feed_path).parts or urlsplit(feed_path).scheme:
+            self.error("rss", "rss_feed must be a relative file path inside the build")
+            return
+        feed_url = urljoin(self.site_url, feed_path)
+        try:
+            root = ET.parse(self.site_dir / feed_path).getroot()
+        except (OSError, ET.ParseError) as exc:
+            self.error(feed_path, f"cannot read RSS: {exc}")
+            return
+        channel = root.find("channel")
+        if root.tag != "rss" or root.get("version") != "2.0" or channel is None:
+            self.error(feed_path, "expected RSS 2.0 channel")
+            return
+        if channel.findtext("link") != self.site_url:
+            self.error(feed_path, "channel link must equal site_url")
+        if not channel.findtext("title") or not channel.findtext("description"):
+            self.error(feed_path, "channel title and description are required")
+        atom_link = channel.find("{http://www.w3.org/2005/Atom}link")
+        if atom_link is None or atom_link.get("href") != feed_url or atom_link.get("rel") != "self":
+            self.error(feed_path, "RSS self link must point to the configured feed")
+        targets = set()
+        previous = None
+        for index, item in enumerate(channel.findall("item")):
+            source = f"{feed_path} item[{index}]"
+            link = item.findtext("link") or ""
+            parsed = urlsplit(link)
+            if not parsed.netloc or parsed.scheme != self.base.scheme or parsed.query or parsed.fragment:
+                self.error(source, "item link must be an absolute page URL")
+            target = self.target(link, self.site_url, source, required=True)
+            if target is not None:
+                if target not in self.pages:
+                    self.error(source, "RSS item does not point to an HTML page")
+                if target in targets:
+                    self.error(source, "duplicate RSS article")
+                if target in self.feed_excluded_targets:
+                    self.error(source, "unlisted article must not appear in RSS")
+                targets.add(target)
+            if not item.findtext("title") or item.findtext("guid") != link:
+                self.error(source, "item needs a title and a stable URL guid")
+            try:
+                published = parsedate_to_datetime(item.findtext("pubDate") or "")
+                if published.tzinfo is None:
+                    raise ValueError("timezone missing")
+                published = published.astimezone(timezone.utc)
+                if previous is not None and published > previous:
+                    self.error(source, "RSS articles must be newest first")
+                previous = published
+                # RSS dates carry seconds; writing-room ISO timestamps may
+                # contain milliseconds, which format_datetime cannot retain.
+                if target in self.feed_expected_dates and published != self.feed_expected_dates[target].replace(microsecond=0):
+                    self.error(source, "pubDate differs from the source publication date")
+            except (TypeError, ValueError, OverflowError):
+                self.error(source, "invalid RSS pubDate")
+        if config.get("extra", {}).get("collections"):
+            expected = set(self.feed_expected_dates)
+            for target in sorted(expected - targets):
+                self.error(feed_path, f"dated public article missing from RSS: {target.relative_to(self.site_dir)}")
+            for target in sorted(targets - expected):
+                self.error(feed_path, f"RSS contains undated or non-article page: {target.relative_to(self.site_dir)}")
+        for path, page in self.pages.items():
+            if path.name == "404.html":
+                continue
+            current = urljoin(self.site_url, quote(page_url(path.relative_to(self.site_dir))))
+            if len(page.rss_feeds) != 1 or urljoin(current, page.rss_feeds[0]) != feed_url:
+                self.error(path.relative_to(self.site_dir), "expected one RSS discovery link to the configured feed")
+
     def run(self, docs_dir, config):
         if not self.site_dir.is_dir():
             self.error("site", f"build directory does not exist: {self.site_dir}")
@@ -240,6 +327,7 @@ class SiteCheck:
         self.inspect_html()
         self.inspect_search()
         self.inspect_sitemap()
+        self.inspect_feed(config)
         return self.errors
 
 
@@ -268,7 +356,7 @@ def main(argv=None):
             print(f"... {len(errors) - max(1, args.max_errors)} additional errors", file=sys.stderr)
         print(f"Site artifact check failed: {len(errors)} errors across {len(check.pages)} HTML pages.", file=sys.stderr)
         return 1
-    print(f"Site artifact check passed: {len(check.pages)} HTML pages; links, anchors, search, sitemap, canonical, draft/private exclusion and static Dataview.")
+    print(f"Site artifact check passed: {len(check.pages)} HTML pages; links, anchors, search, sitemap, canonical, draft/private exclusion, static Dataview and configured RSS.")
     return 0
 
 

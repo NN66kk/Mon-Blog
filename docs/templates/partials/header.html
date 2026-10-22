@@ -26,7 +26,9 @@
     <div class="site-header__nav" aria-label="主要导航">
       <a data-site-nav="home" href="{{ nav.homepage.url | url }}"{% if page.is_homepage %} class="is-active" aria-current="page"{% endif %}>首页</a>
       <a data-site-nav="articles" href="{{ 'archive/' | url }}"{% if articles_active %} class="is-active" aria-current="page"{% endif %}>文章</a>
+      <a data-site-nav="topics" href="{{ 'topics/'|url }}"{% if src_uri == 'topics.md' %} class="is-active" aria-current="page"{% endif %}>主题与系列</a>
       <a data-site-nav="about" href="{{ config.extra.about_url | url }}"{% if page.blog_is_about|default(false) %} class="is-active" aria-current="page"{% endif %}>关于我</a>
+      {% if config.extra.rss_feed %}<a href="{{ config.extra.rss_feed|url|e }}" aria-label="RSS 订阅">RSS</a>{% endif %}
       <a href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a>
     </div>
 
@@ -71,12 +73,14 @@
       <nav aria-label="移动端导航">
         <a data-site-nav="home" href="{{ nav.homepage.url|url }}"{% if page.is_homepage %} aria-current="page"{% endif %}><span>01</span><strong>首页</strong><small>回到花园入口</small></a>
         <a data-site-nav="archive" href="{{ 'archive/'|url }}"{% if articles_active and not page.blog_is_collection_index|default(false) %} aria-current="page"{% endif %}><span>02</span><strong>全部文章</strong><small>{{ blog_context.count }} 篇记录</small></a>
+        <a data-site-nav="topics" href="{{ 'topics/'|url }}"{% if src_uri == 'topics.md' %} aria-current="page"{% endif %}><span>03</span><strong>主题与系列</strong><small>沿着兴趣阅读</small></a>
         {% for collection in blog_context.collections %}
           <a data-site-nav-collection="{{ collection.key }}" href="{{ collection.index|url }}"{% if page.blog_collection_key|default('') == collection.key and page.blog_is_collection_index|default(false) %} aria-current="page"{% endif %}>
             <span>{{ collection.mark }}</span><strong>{{ collection.label }}</strong><small>{{ collection.count }} 篇</small>
           </a>
         {% endfor %}
         <a data-site-nav="about" href="{{ config.extra.about_url|url }}"{% if page.blog_is_about|default(false) %} aria-current="page"{% endif %}><span>我</span><strong>关于我</strong><small>认识花园的主人</small></a>
+        {% if config.extra.rss_feed %}<a href="{{ config.extra.rss_feed|url|e }}"><span>订</span><strong>RSS 订阅</strong><small>在阅读器中接收新文章</small></a>{% endif %}
       </nav>
       <footer><a href="{{ config.repo_url }}" target="_blank" rel="noopener noreferrer">在 GitHub 查看花园 <span aria-hidden="true">↗</span><span class="sr-only">（新窗口）</span></a></footer>
     </section>

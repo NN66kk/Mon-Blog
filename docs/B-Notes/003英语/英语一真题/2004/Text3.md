@@ -1,3 +1,11 @@
+---
+title: 2004 考研英语一：阅读 Text 3
+series: 2004 考研英语一
+series_order: 3
+tags:
+- 英语
+- 考研英语
+---
 
 # 2004 T3
 

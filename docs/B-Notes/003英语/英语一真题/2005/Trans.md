@@ -1,6 +1,12 @@
 ---
 langr : xxx
 langr-origin: 2005-英语一-Trans
+title: 2005 考研英语一：翻译
+series: 2005 考研英语一
+series_order: 6
+tags:
+- 英语
+- 考研英语
 ---
 
 ^^^article

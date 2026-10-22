@@ -6,6 +6,7 @@
 
 {% block extrahead %}
   {{ super() }}
+  {% if config.extra.rss_feed %}<link rel="alternate" type="application/rss+xml" title="{{ config.site_name|e }} · RSS" href="{{ config.extra.rss_feed|url|e }}">{% endif %}
   {% set social_title = page.title ~ " · " ~ config.site_name if page and page.title and page.title != config.site_name else config.site_name %}
   {% set social_description = page.blog_description_text|default(config.site_description, true) if page else config.site_description %}
 

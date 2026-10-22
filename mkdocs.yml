@@ -9,6 +9,7 @@ repo_name: NN66kk/Mon-Blog
 edit_uri: edit/main/docs/
 
 extra:
+  rss_feed: feed.xml
   # Opt in only actual vocabulary queries; Dataview tutorials stay code samples.
   dataview_static_paths:
     - "B-Notes/003英语/英语一真题/*/Text[1-4].md"
@@ -151,3 +152,4 @@ extra_css:
   - css/40-home.css
   - css/50-archive.css
   - css/60-collection.css
+  - css/70-discovery.css

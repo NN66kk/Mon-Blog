@@ -139,6 +139,7 @@ const PAGE_LAYOUT_CLASSES = [
   "layout-about",
   "layout-redirect",
   "layout-page",
+  "layout-topics",
 ];
 
 function syncPageLayout(root = document) {
@@ -159,6 +160,7 @@ function syncPageLayout(root = document) {
       || (target === "articles" && ["archive", "article", "collection"].includes(layout))
       || (target === "archive" && ["archive", "article"].includes(layout))
       || (target === "about" && layout === "about")
+      || (target === "topics" && layout === "topics")
       || (targetCollection && layout === "collection" && targetCollection === collection)
     );
 

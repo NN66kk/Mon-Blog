@@ -57,6 +57,7 @@ class GardenThemeTests(unittest.TestCase):
                 "- css/40-home.css",
                 "- css/50-archive.css",
                 "- css/60-collection.css",
+                "- css/70-discovery.css",
             ],
         )
         self.assertNotIn("css/garden-v2.css", config)

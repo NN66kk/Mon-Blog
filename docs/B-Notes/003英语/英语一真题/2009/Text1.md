@@ -1,6 +1,12 @@
 ---
 langr : xxx
 langr-origin: 2009-英语一-Text1
+title: 2009 考研英语一：阅读 Text 1
+series: 2009 考研英语一
+series_order: 1
+tags:
+- 英语
+- 考研英语
 ---
 
 ^^^article

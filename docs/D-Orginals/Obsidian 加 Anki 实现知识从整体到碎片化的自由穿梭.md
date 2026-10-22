@@ -1,3 +1,9 @@
+---
+tags:
+- Obsidian
+- Anki
+- 学习方法
+---
 # Obsidian 加 Anki 实现知识从整体到碎片化的自由穿梭
 
 ## 开场白

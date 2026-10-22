@@ -1,5 +1,11 @@
 ---
-tags: 写作应用
+tags:
+- 写作应用
+- 英语
+- 考研英语
+title: 2004 考研英语一：阅读 Text 4
+series: 2004 考研英语一
+series_order: 4
 ---
 
 # 2004 T4

@@ -1,6 +1,12 @@
 ---
 langr : xxx
 langr-origin: 2008-英语一-Text5
+title: 2008 考研英语一：新题型 Text 5
+series: 2008 考研英语一
+series_order: 5
+tags:
+- 英语
+- 考研英语
 ---
 
 ^^^article

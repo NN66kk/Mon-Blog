@@ -2,12 +2,17 @@ from __future__ import annotations
 
 import os
 import re
+import hashlib
+import logging
 from collections import Counter
 from collections.abc import Mapping
 from datetime import date, datetime, timedelta, timezone
+from email.utils import format_datetime
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote, urljoin, urlsplit
+from xml.etree import ElementTree as ET
 
 import yaml
 
@@ -32,6 +37,8 @@ NON_PUBLIC_STATUSES = {"draft", "private"}
 UNLISTED_STATUSES = {"draft", "hidden", "redirect", "private"}
 GENERIC_TAGS = {"zettelkasten"}
 BLOG_TIMEZONE = timezone(timedelta(hours=8))
+LOG = logging.getLogger("mkdocs.plugins.post_metadata")
+_feed_pages: list[Any] = []
 
 
 def _normalize_text(value: Any) -> str:
@@ -361,6 +368,72 @@ def _publish_parts_from_src_uri(src_uri: str) -> tuple[str, str, str] | None:
     return _publish_parts_from_value(raw)
 
 
+def _discovery_anchor(kind: str, name: str) -> str:
+    """Stable, URL-safe IDs, including for Chinese names and punctuation."""
+
+    digest = hashlib.sha256(name.casefold().encode("utf-8")).hexdigest()[:16]
+    return f"{kind}-{digest}"
+
+
+def _series_order(value: Any, src_uri: str) -> int | None:
+    if value is None or value == "":
+        return None
+    if not isinstance(value, bool) and isinstance(value, (int, str)):
+        text = str(value).strip()
+        if text.isdecimal() and int(text) > 0:
+            return int(text)
+    LOG.warning("%s: series_order must be a positive integer", src_uri)
+    return None
+
+
+def _discovery_views(posts: list[Any]) -> tuple[list[dict], list[dict]]:
+    topics: dict[str, dict] = {}
+    series: dict[str, dict] = {}
+    for page in posts:
+        for tag in page.blog_topic_tags:
+            key = tag.casefold()
+            topic = topics.setdefault(key, {
+                "name": tag, "id": _discovery_anchor("topic", tag), "posts": [],
+            })
+            topic["posts"].append(page)
+            page.blog_topic_links.append(topic)
+        if page.blog_series_name:
+            key = page.blog_series_name.casefold()
+            group = series.setdefault(key, {
+                "name": page.blog_series_name,
+                "id": _discovery_anchor("series", page.blog_series_name),
+                "posts": [],
+            })
+            group["posts"].append(page)
+
+    for group in series.values():
+        group["posts"].sort(key=lambda page: (
+            page.blog_series_order is None,
+            page.blog_series_order or 0,
+            page.blog_publish_key,
+            str(page.title).casefold(),
+            page.blog_src_uri,
+        ))
+        orders: set[int] = set()
+        for index, page in enumerate(group["posts"]):
+            if page.blog_series_order is not None:
+                if page.blog_series_order in orders:
+                    LOG.warning("%s: duplicate series_order %s in series %s",
+                                page.blog_src_uri, page.blog_series_order, group["name"])
+                orders.add(page.blog_series_order)
+            page.blog_series = group
+            page.blog_series_position = index + 1
+            page.blog_series_previous = group["posts"][index - 1] if index else None
+            page.blog_series_next = (
+                group["posts"][index + 1] if index + 1 < len(group["posts"]) else None
+            )
+
+    return (
+        sorted(topics.values(), key=lambda item: (-len(item["posts"]), item["name"].casefold())),
+        sorted(series.values(), key=lambda item: item["name"].casefold()),
+    )
+
+
 def on_files(files, config):
     """Keep explicit drafts out of navigation, search and the generated site."""
 
@@ -381,6 +454,9 @@ def on_files(files, config):
 def on_nav(nav, config, files):
     """Build one stable view model for every editorial template."""
 
+    global _feed_pages
+    # Replaced on every live rebuild; never retain entries from a previous build.
+    _feed_pages = []
     docs_dir = Path(str(config["docs_dir"]))
     extra = _config_extra(config)
     collections = extra.get("collections", {})
@@ -415,6 +491,8 @@ def on_nav(nav, config, files):
             "draft",
             "template",
             "collection",
+            "series",
+            "series_order",
         ):
             if key not in meta and key in front_matter:
                 meta[key] = front_matter[key]
@@ -509,6 +587,8 @@ def on_nav(nav, config, files):
             if is_article
             else "archive"
             if src_uri == "archive.md"
+            else "topics"
+            if src_uri == "topics.md"
             else "page"
         )
         page.blog_collection_key = collection_key
@@ -518,10 +598,21 @@ def on_nav(nav, config, files):
         page.blog_auto_description_text = auto_description
         page.blog_tags = tags
         page.blog_topic_tags = topic_tags
+        page.blog_topic_links = []
+        page.blog_series_name = _normalize_text(meta.get("series"))
+        page.blog_series_order = (
+            _series_order(meta.get("series_order"), src_uri)
+            if is_listed and page.blog_series_name else None
+        )
+        page.blog_series = None
+        page.blog_series_position = None
+        page.blog_series_previous = None
+        page.blog_series_next = None
         page.blog_tags_text = " ".join(tags)
         page.blog_newer_page = None
         page.blog_older_page = None
         page.blog_related_pages = []
+        page.blog_related_by_topic = bool(topic_tags)
 
         if is_listed:
             posts.append(page)
@@ -549,12 +640,15 @@ def on_nav(nav, config, files):
             same_collection = (
                 page.blog_collection_key == candidate.blog_collection_key
             )
-            if shared == 0 and not same_collection:
+            if shared == 0 and (page_topics or not same_collection):
                 continue
             score = shared * 100 + (10 if same_collection else 0)
             candidates.append((score, -candidate_index, candidate))
         candidates.sort(key=lambda item: (item[0], item[1]), reverse=True)
         page.blog_related_pages = [item[2] for item in candidates[:3]]
+
+    topics, series = _discovery_views(posts)
+    _feed_pages = list(posts)
 
     collection_order = [
         key
@@ -598,9 +692,72 @@ def on_nav(nav, config, files):
         "collections": collection_views,
         "collection_counts": collection_counts,
         "posts_by_collection": posts_by_collection,
+        "topics": topics,
+        "series": series,
+        "feed_count": sum(bool(page.blog_publish_iso) for page in posts),
     }
     nav.blog = blog
     return nav
+
+
+def _feed_datetime(value: str) -> datetime | None:
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return parsed.replace(tzinfo=BLOG_TIMEZONE) if parsed.tzinfo is None else parsed
+
+
+def on_post_build(config):
+    """Write RSS from the same public model, without inventing publication dates."""
+
+    feed_path = _normalize_text(_config_extra(config).get("rss_feed"))
+    if not feed_path:
+        return
+    if (Path(feed_path).is_absolute() or ".." in Path(feed_path).parts
+            or any(char in feed_path for char in "?#\\")):
+        raise ValueError("rss_feed must be a relative output path")
+    base = str(config.get("site_url", "")).rstrip("/") + "/"
+    parsed_base = urlsplit(base)
+    if parsed_base.scheme not in {"http", "https"} or not parsed_base.netloc:
+        raise ValueError("RSS requires an absolute HTTP(S) site_url")
+    atom = "http://www.w3.org/2005/Atom"
+    ET.register_namespace("atom", atom)
+    rss = ET.Element("rss", {"version": "2.0"})
+    channel = ET.SubElement(rss, "channel")
+    ET.SubElement(channel, "title").text = str(config.get("site_name", ""))
+    ET.SubElement(channel, "link").text = base
+    ET.SubElement(channel, "description").text = str(config.get("site_description", ""))
+    ET.SubElement(channel, "language").text = "zh-CN"
+    ET.SubElement(channel, f"{{{atom}}}link", {
+        "href": urljoin(base, quote(feed_path, safe="/%")), "rel": "self", "type": "application/rss+xml",
+    })
+    updates: list[datetime] = []
+    for page in _feed_pages:
+        if not page.blog_is_listed or page.blog_status in UNLISTED_STATUSES:
+            continue
+        published = _feed_datetime(page.blog_publish_iso)
+        if published is None:
+            # An undated note stays discoverable on the site, not in a dated feed.
+            continue
+        link = urljoin(base, quote(str(page.url).lstrip("/"), safe="/%:@"))
+        item = ET.SubElement(channel, "item")
+        ET.SubElement(item, "title").text = HTML_TAG_RE.sub("", str(page.title))
+        ET.SubElement(item, "link").text = link
+        ET.SubElement(item, "guid", {"isPermaLink": "true"}).text = link
+        ET.SubElement(item, "pubDate").text = format_datetime(published)
+        ET.SubElement(item, "description").text = page.blog_description_text
+        for tag in page.blog_topic_tags:
+            ET.SubElement(item, "category").text = tag
+        updates.append(_feed_datetime(page.blog_updated_iso) or published)
+    if updates:
+        ET.SubElement(channel, "lastBuildDate").text = format_datetime(max(updates))
+    target = Path(str(config["site_dir"])) / feed_path
+    target.parent.mkdir(parents=True, exist_ok=True)
+    ET.indent(rss, space="  ")
+    ET.ElementTree(rss).write(target, encoding="utf-8", xml_declaration=True)
 
 
 def on_page_context(context, page, config, nav):

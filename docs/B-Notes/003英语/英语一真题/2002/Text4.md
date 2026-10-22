@@ -1,6 +1,12 @@
 ---
-tags: 写作应用
+tags:
+- 写作应用
+- 英语
+- 考研英语
 aliases: 2022 Text 4
+title: 2002 考研英语一：阅读 Text 4
+series: 2002 考研英语一
+series_order: 4
 ---
 
 # 2002 Text 4
