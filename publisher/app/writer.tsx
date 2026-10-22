@@ -29,6 +29,7 @@ import {
   Images,
   ArrowLeft,
   LayoutTemplate,
+  Eye,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -150,6 +151,10 @@ export default function Writer({
   const [switching, setSwitching] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [mode, setMode] = useState('write');
+  const [finalPreviewOpen, setFinalPreviewOpen] = useState(false);
+  const [previewExporting, setPreviewExporting] = useState(false);
+  const [previewFilename, setPreviewFilename] = useState('');
+  const [previewMessage, setPreviewMessage] = useState('');
   const [templatesOpen, setTemplatesOpen] = useState(false);
   const [templates, setTemplates] =
     useState<ArticleTemplate[]>(BUILTIN_TEMPLATES);
@@ -351,6 +356,30 @@ export default function Writer({
       setError(error.message);
     } finally {
       setPanelBusy(false);
+    }
+  }
+
+  async function exportFinalPreview() {
+    if (opening || switching || uploading || publishing || previewExporting) return;
+    const snapshot = { ...latest.current };
+    const problem = metadataProblem(snapshot.metadata);
+    if (!snapshot.id || problem) {
+      setPreviewMessage(problem || '编辑器正在准备，请稍后重试。');
+      return;
+    }
+    setPreviewExporting(true);
+    setPreviewFilename('');
+    setPreviewMessage('正在导出当前编辑内容…');
+    try {
+      const blob = await draftBackup([snapshot], fetch, setPreviewMessage);
+      const filename = `mon-preview-${snapshot.id}.zip`;
+      download(blob, filename);
+      setPreviewFilename(filename);
+      setPreviewMessage(`已下载“${snapshot.title || '未命名文章'}”的编辑内容和私有图片，包括点击导出时尚未保存的修改。`);
+    } catch (error: any) {
+      setPreviewMessage(error.message);
+    } finally {
+      setPreviewExporting(false);
     }
   }
 
@@ -961,6 +990,20 @@ export default function Writer({
             <div className="editor-actions">
               <Button
                 variant="outline"
+                onClick={() => {
+                  if (!previewExporting) {
+                    setPreviewFilename('');
+                    setPreviewMessage('');
+                  }
+                  setFinalPreviewOpen(true);
+                }}
+                disabled={opening || switching || publishing || uploading}
+              >
+                <Eye size={17} />
+                最终页面预览
+              </Button>
+              <Button
+                variant="outline"
                 onClick={() => setTemplatesOpen(true)}
                 disabled={opening || switching || publishing}
               >
@@ -1289,7 +1332,7 @@ export default function Writer({
                   <TabsList>
                     <TabsTrigger value="write">写作</TabsTrigger>
                     <TabsTrigger value="yaml">YAML</TabsTrigger>
-                    <TabsTrigger value="preview">预览</TabsTrigger>
+                    <TabsTrigger value="preview">即时预览</TabsTrigger>
                   </TabsList>
                 </Tabs>
               </div>
@@ -1340,7 +1383,7 @@ export default function Writer({
               ) : (
                 <div className="preview-pane">
                   <p className="preview-note">
-                    Wiki Link 和提示块以博客显示为准。
+                    即时预览用于边写边看。Wiki Link、提示块和整页样式可通过“最终页面预览”在本机构建核验。
                   </p>
                   <article className="prose">
                     <ReactMarkdown
@@ -1735,6 +1778,42 @@ export default function Writer({
               )}
             </>
           )}
+        </DialogContent>
+      </Dialog>
+      <Dialog open={finalPreviewOpen} onOpenChange={setFinalPreviewOpen}>
+        <DialogContent className="template-dialog">
+          <DialogHeader>
+            <DialogTitle>最终页面预览</DialogTitle>
+            <DialogDescription>
+              导出当前编辑内容，在本机使用博客的 MkDocs 主题、链接规则与扩展构建完整页面。
+            </DialogDescription>
+          </DialogHeader>
+          <p>
+            预览包包含点击导出时的正文、YAML 和私有图片，包括尚未保存的修改。它是该时刻的快照；继续编辑后需重新导出。
+          </p>
+          <Button
+            onClick={() => void exportFinalPreview()}
+            disabled={previewExporting || opening || switching || publishing || uploading}
+          >
+            {previewExporting ? <LoaderCircle className="spin" /> : <Download size={17} />}
+            {previewExporting ? '正在打包…' : '导出当前内容的预览包'}
+          </Button>
+          {previewMessage && <p role="status">{previewMessage}</p>}
+          <p>
+            在已安装博客 Python 依赖的本机仓库目录运行以下命令，将 ZIP 路径改为实际下载位置：
+          </p>
+          <pre className="template-preview">
+            {`.venv/bin/python scripts/preview_draft.py ~/Downloads/${previewFilename || 'mon-preview-草稿ID.zip'}`}
+          </pre>
+          <p>
+            构建通过后，打开终端显示的本机链接。副本仅在临时目录生成，原笔记与发布状态保持不变，预览仅允许本机访问。
+          </p>
+          <small>
+            页面使用本机仓库当前版本，核验当前正文和主题排版。尚未分配文件名的新草稿使用临时链接，正式链接、首发与修订时间以之后的保存、发布结果为准。
+          </small>
+          <small>
+            仓库已有图片及 Wiki Link 使用本机内容；外链图片和 CDN 脚本仍需联网。预览包和临时副本含私有内容，请保存在自己的设备上。
+          </small>
         </DialogContent>
       </Dialog>
       <Dialog open={templatesOpen} onOpenChange={setTemplatesOpen}>
