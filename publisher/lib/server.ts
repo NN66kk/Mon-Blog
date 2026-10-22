@@ -1,3 +1,4 @@
+import { createDraftStore } from './draft-store';
 import { env } from 'cloudflare:workers';
 import { getChatGPTUser } from '@/app/chatgpt-auth';
 import { ApiError, github } from './github';
@@ -41,8 +42,6 @@ export async function account(owner: string) {
   } catch (error) { if (error instanceof ApiError) throw error; throw new ApiError(428, '连接已失效，请重新连接 GitHub。'); }
 }
 export async function ownedDraft(owner: string, id: string) {
-  const row = await database().prepare('SELECT * FROM drafts WHERE id = ? AND owner = ?').bind(id, owner).first<any>();
-  if (!row) throw new ApiError(404, '找不到这篇草稿。');
-  return row;
+  return createDraftStore(database()).ownedDraft(owner, id);
 }
 export function response(data: unknown, status = 200) { return Response.json(data, { status, headers: { 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff' } }); }

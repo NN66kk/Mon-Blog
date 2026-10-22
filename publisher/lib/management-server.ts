@@ -1,3 +1,5 @@
+import { createArticleIndex } from './article-index';
+import { createDraftStore } from './draft-store';
 import {
   account,
   database,
@@ -25,11 +27,7 @@ import {
 } from './management';
 
 export function snapshotDraft(owner: string, id: string) {
-  return database()
-    .prepare(
-      'INSERT OR IGNORE INTO draft_versions (id,owner,draft_id,revision,title,collection,body,metadata,created_at) SELECT ?,owner,id,revision,title,collection,body,metadata,updated_at FROM drafts WHERE owner=? AND id=?',
-    )
-    .bind(crypto.randomUUID(), owner, id);
+  return createDraftStore(database()).snapshotDraft(owner, id);
 }
 const activeJob = (owner: string, path: string) =>
   database()
@@ -45,6 +43,7 @@ export async function managementRequest(
   owner: string,
 ): Promise<Response | null> {
   const db = database();
+  const articleIndex = createArticleIndex({ db, getAccount: account });
   const url = new URL(request.url);
   if (route === 'backup/preview' && request.method === 'POST') {
     return response(await previewBackup(await readBackupRequest(request)));
@@ -174,122 +173,26 @@ export async function managementRequest(
     });
   }
   if (route === 'articles' && request.method === 'GET') {
-    const call = await account(owner);
-    const tree = await call(`/repos/${REPO}/git/trees/main?recursive=1`);
-    if (tree.truncated)
-      throw new ApiError(502, '文章目录超出读取范围，请联系管理员。');
-    const [cached, draftRows] = await Promise.all([
-      db
-        .prepare('SELECT * FROM article_cache WHERE owner=?')
-        .bind(owner)
-        .all<any>(),
+    const [catalog, draftRows] = await Promise.all([
+      articleIndex.list(owner),
       db
         .prepare(
           'SELECT id,source_path,updated_at FROM drafts WHERE owner=? AND deleted_at IS NULL AND source_path IS NOT NULL ORDER BY updated_at DESC',
         )
         .bind(owner)
-        .all<any>(),
+        .all<{ id: string; source_path: string; updated_at: string }>(),
     ]);
-    const index = new Map(cached.results.map((row) => [row.path, row]));
-    const articles = tree.tree
-      .filter((item: any) => item.type === 'blob' && managedPath(item.path))
-      .map((item: any) => {
-        const cached = index.get(item.path);
-        const valid = cached?.sha === item.sha;
-        return {
-          ...metadataForArticle(item.path, ''),
-          ...(cached
-            ? {
-                title: cached.title,
-                tags: JSON.parse(cached.tags),
-                description: cached.description,
-                published_at: cached.published_at,
-                updated_at: cached.updated_at,
-              }
-            : {}),
-          sha: item.sha,
-          indexed: valid,
-          draft_id:
-            draftRows.results.find((row) => row.source_path === item.path)
-              ?.id || null,
-        };
-      });
+    const articles = catalog.map((article) => ({
+      ...article,
+      draft_id:
+        draftRows.results.find((draft) => draft.source_path === article.path)
+          ?.id || null,
+    }));
     return response({ articles, synced_at: new Date().toISOString() });
   }
   if (route === 'article-details' && request.method === 'POST') {
     const { articles } = await jsonBody(request);
-    if (
-      !Array.isArray(articles) ||
-      articles.length > 12 ||
-      articles.some(
-        (x) =>
-          !managedPath(x?.path) ||
-          typeof x.sha !== 'string' ||
-          !/^[a-f0-9]{40}$/.test(x.sha),
-      )
-    )
-      throw new ApiError(400, '文章同步参数无效。');
-    const call = await account(owner);
-    const result: any[] = [];
-    // Limit each request to four in-flight GitHub reads; return partial indexing errors explicitly.
-    for (let i = 0; i < articles.length; i += 4) {
-      const batch = await Promise.all(
-        articles.slice(i, i + 4).map(async (item) => {
-          const old = await db
-            .prepare('SELECT sha FROM article_cache WHERE owner=? AND path=?')
-            .bind(owner, item.path)
-            .first<any>();
-          if (old?.sha === item.sha) {
-            const cache = await db
-              .prepare('SELECT * FROM article_cache WHERE owner=? AND path=?')
-              .bind(owner, item.path)
-              .first<any>();
-            return {
-              ...cache,
-              collection: item.path.split('/')[1],
-              url: articleUrl(item.path),
-              tags: JSON.parse(cache.tags),
-              indexed: true,
-            };
-          }
-          const remote = await call(`/repos/${REPO}/git/blobs/${item.sha}`);
-          if (remote.encoding !== 'base64' || remote.size > 1000000)
-            return { path: item.path, index_error: '文章过大，暂未索引。' };
-          let meta;
-          try {
-            meta = metadataForArticle(
-              item.path,
-              Buffer.from(remote.content, 'base64').toString('utf8'),
-            );
-          } catch {
-            return {
-              path: item.path,
-              index_error: '文章信息格式有误，可在 GitHub 修正。',
-            };
-          }
-          await db
-            .prepare(
-              'INSERT INTO article_cache (id,owner,path,sha,title,tags,description,published_at,updated_at,synced_at) VALUES (?,?,?,?,?,?,?,?,?,?) ON CONFLICT(owner,path) DO UPDATE SET sha=excluded.sha,title=excluded.title,tags=excluded.tags,description=excluded.description,published_at=excluded.published_at,updated_at=excluded.updated_at,synced_at=excluded.synced_at',
-            )
-            .bind(
-              crypto.randomUUID(),
-              owner,
-              item.path,
-              item.sha,
-              meta.title,
-              JSON.stringify(meta.tags),
-              meta.description,
-              meta.published_at,
-              meta.updated_at,
-              new Date().toISOString(),
-            )
-            .run();
-          return { ...meta, sha: item.sha, indexed: true };
-        }),
-      );
-      result.push(...batch);
-    }
-    return response({ articles: result });
+    return response({ articles: await articleIndex.details(owner, articles) });
   }
   if (route === 'trash' && request.method === 'GET') {
     const [drafts, articles] = await Promise.all([

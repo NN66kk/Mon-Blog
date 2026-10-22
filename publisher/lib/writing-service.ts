@@ -1,7 +1,9 @@
-import { articleNumber } from './article-templates';
-import { articleUrl, newArticlePath, REPO, splitMarkdown, validCollection, validPath } from './content';
+import { createDraftStore, type DraftInput, type DraftRecord } from './draft-store';
+import { createArticleIndex } from './article-index';
+export type { DraftInput } from './draft-store';
+import { articleUrl, newArticlePath, splitMarkdown, validCollection, validPath } from './content';
 import { ApiError, readArticle, type GitCall } from './github';
-import { managedPath, metadataForArticle } from './management';
+import { metadataForArticle } from './management';
 import { checkPublication, needsPublicationCheck, type Publication } from './publication';
 import { draftPublicationUpdate } from './publication-baseline';
 import { publishDraft } from './publish';
@@ -14,25 +16,8 @@ export type WritingServiceDependencies = {
   request?: typeof fetch;
 };
 
-export type DraftInput = {
-  id: string;
-  title: string;
-  body: string;
-  metadata: string;
-  collection: string;
-  revision: number;
-};
 export type ListOptions = { query?: string; limit?: number; offset?: number };
 export type ArticleSearchOptions = ListOptions & { collection?: string };
-type DraftRecord = DraftInput & {
-  owner: string;
-  source_path: string | null;
-  filename: string | null;
-  base_sha: string | null;
-  first_published_at: string | null;
-  deleted_at: string | null;
-  updated_at: string;
-};
 type PublicationRecord = Publication & {
   owner: string;
   draft_id: string;
@@ -43,16 +28,6 @@ type PublicationRecord = Publication & {
   title: string | null;
   trash_id: string | null;
 };
-type ArticleCacheRecord = {
-  path: string;
-  sha: string;
-  title: string;
-  tags: string;
-  description: string;
-  published_at: string | null;
-  updated_at: string | null;
-};
-
 const UUID = /^[a-f0-9-]{36}$/;
 function pagination(options: ListOptions) {
   const { query = '', limit = 20, offset = 0 } = options;
@@ -65,36 +40,13 @@ function pagination(options: ListOptions) {
 // Both the website and MCP authenticate their caller before entering this layer.
 // The owner always comes from that authenticated identity, never tool arguments.
 export function createWritingService({ db, getAccount, storage, request = fetch }: WritingServiceDependencies) {
-  async function ownedDraft(owner: string, id: string) {
-    const row = await db.prepare('SELECT * FROM drafts WHERE id = ? AND owner = ?').bind(id, owner).first<DraftRecord>();
-    if (!row) throw new ApiError(404, '找不到这篇草稿。');
-    return row;
-  }
+  const { ownedDraft, snapshotDraft, ensureDraftFilename } = createDraftStore(db);
+  const articleIndex = createArticleIndex({ db, getAccount });
 
   async function ownedPublication(owner: string, id: string) {
     const row = await db.prepare('SELECT * FROM publications WHERE id=? AND owner=?').bind(id, owner).first<PublicationRecord>();
     if (!row) throw new ApiError(404, '找不到发布记录。');
     return row;
-  }
-
-  function snapshotDraft(owner: string, id: string) {
-    return db.prepare('INSERT OR IGNORE INTO draft_versions (id,owner,draft_id,revision,title,collection,body,metadata,created_at) SELECT ?,owner,id,revision,title,collection,body,metadata,updated_at FROM drafts WHERE owner=? AND id=?').bind(crypto.randomUUID(), owner, id);
-  }
-
-  async function ensureDraftFilename(owner: string, id: string) {
-    let draft = await ownedDraft(owner, id);
-    if (draft.source_path || draft.filename) return draft;
-    const now = Date.now();
-    for (let offset = 0; offset < 120; offset++) {
-      const filename = `${articleNumber(new Date(now + offset * 1000))}.md`;
-      const path = `docs/${draft.collection}/${filename}`;
-      const occupied = await db.prepare('SELECT 1 FROM article_cache WHERE owner=? AND path=? UNION ALL SELECT 1 FROM drafts WHERE owner=? AND source_path=? LIMIT 1').bind(owner, path, owner, path).first();
-      if (occupied) continue;
-      await db.prepare('UPDATE OR IGNORE drafts SET filename=? WHERE owner=? AND id=? AND filename IS NULL AND source_path IS NULL').bind(filename, owner, id).run();
-      draft = await ownedDraft(owner, id);
-      if (draft.filename || draft.source_path) return draft;
-    }
-    throw new ApiError(409, '暂时无法分配文章编号，内容已保存，请稍后重试。');
   }
 
   async function saveDraft(owner: string, input: DraftInput) {
@@ -177,24 +129,7 @@ export function createWritingService({ db, getAccount, storage, request = fetch 
   async function searchArticles(owner: string, options: ArticleSearchOptions = {}) {
     const { query, limit, offset } = pagination(options);
     if (options.collection !== undefined && !validCollection(options.collection)) throw new ApiError(400, '栏目无效。');
-    const call = await getAccount(owner);
-    const [tree, cached] = await Promise.all([
-      call(`/repos/${REPO}/git/trees/main?recursive=1`),
-      db.prepare('SELECT * FROM article_cache WHERE owner=?').bind(owner).all<ArticleCacheRecord>(),
-    ]);
-    if (tree.truncated) throw new ApiError(502, '文章目录超出读取范围，请联系管理员。');
-    const index = new Map(cached.results.map((row) => [row.path, row]));
-    const articles = (tree.tree as { type: string; path: string; sha: string }[])
-      .filter((item) => item.type === 'blob' && managedPath(item.path) && (!options.collection || item.path.split('/')[1] === options.collection))
-      .map((item) => {
-        const row = index.get(item.path);
-        return {
-          ...metadataForArticle(item.path, ''),
-          ...(row ? { title: row.title, tags: JSON.parse(row.tags) as string[], description: row.description, published_at: row.published_at, updated_at: row.updated_at } : {}),
-          sha: item.sha,
-          indexed: row?.sha === item.sha,
-        };
-      });
+    const articles = await articleIndex.list(owner, options.collection);
     const needle = query.toLocaleLowerCase();
     const matches = articles.filter((article) => [article.title, article.path, article.description, ...article.tags].some((value) => value.toLocaleLowerCase().includes(needle)))
       .sort((a, b) => (b.published_at || '').localeCompare(a.published_at || '') || a.path.localeCompare(b.path));
@@ -209,40 +144,7 @@ export function createWritingService({ db, getAccount, storage, request = fetch 
   }
 
   async function refreshArticleIndex(owner: string, options: { limit?: number } = {}) {
-    const limit = options.limit ?? 12;
-    if (!Number.isInteger(limit) || limit < 1 || limit > 12) throw new ApiError(400, '每次可同步 1 至 12 篇文章。');
-    const call = await getAccount(owner);
-    const [tree, cached] = await Promise.all([
-      call(`/repos/${REPO}/git/trees/main?recursive=1`),
-      db.prepare('SELECT path,sha FROM article_cache WHERE owner=?').bind(owner).all<{ path: string; sha: string }>(),
-    ]);
-    if (tree.truncated) throw new ApiError(502, '文章目录超出读取范围，请联系管理员。');
-    const index = new Map(cached.results.map((row) => [row.path, row.sha]));
-    const pending = (tree.tree as { type: string; path: string; sha: string }[])
-      .filter((item) => item.type === 'blob' && managedPath(item.path) && index.get(item.path) !== item.sha);
-    const selected = pending.slice(0, limit);
-    const errors: { path: string; error: string }[] = [];
-    let indexed = 0;
-    for (let offset = 0; offset < selected.length; offset += 4) {
-      await Promise.all(selected.slice(offset, offset + 4).map(async (item) => {
-        const remote = await call(`/repos/${REPO}/git/blobs/${item.sha}`);
-        if (remote.encoding !== 'base64' || !remote.content || remote.size > 1000000) {
-          errors.push({ path: item.path, error: '文章过大或格式无效，暂未索引。' });
-          return;
-        }
-        let meta;
-        try { meta = metadataForArticle(item.path, Buffer.from(remote.content, 'base64').toString('utf8')); }
-        catch {
-          errors.push({ path: item.path, error: '文章信息中的 YAML 格式有误，暂未索引。' });
-          return;
-        }
-        await db.prepare('INSERT INTO article_cache (id,owner,path,sha,title,tags,description,published_at,updated_at,synced_at) VALUES (?,?,?,?,?,?,?,?,?,?) ON CONFLICT(owner,path) DO UPDATE SET sha=excluded.sha,title=excluded.title,tags=excluded.tags,description=excluded.description,published_at=excluded.published_at,updated_at=excluded.updated_at,synced_at=excluded.synced_at')
-          .bind(crypto.randomUUID(), owner, item.path, item.sha, meta.title, JSON.stringify(meta.tags), meta.description, meta.published_at, meta.updated_at, new Date().toISOString()).run();
-        indexed++;
-      }));
-    }
-    const remaining = pending.length - indexed;
-    return { indexed, remaining, complete: remaining === 0, errors };
+    return articleIndex.refresh(owner, options);
   }
 
   async function publish(owner: string, input: { id: string; revision: number }) {
