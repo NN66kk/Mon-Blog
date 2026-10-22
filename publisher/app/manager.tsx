@@ -56,6 +56,7 @@ import { api, download, jobLabel, matches } from '@/lib/client-api';
 import { needsPublicationCheck } from '@/lib/publication';
 import { draftBackup } from '@/lib/backup';
 import McpSettings from './mcp-settings';
+import BackupRestore from './backup-restore';
 
 type View = 'articles' | 'drafts' | 'media' | 'activity' | 'trash' | 'settings';
 type Draft = {
@@ -1613,7 +1614,7 @@ export default function Manager({
                     <h2>保留一份自己的备份</h2>
                     <p>
                       导出全部草稿、回收站草稿和引用的私有图片，打包成一个 ZIP
-                      文件。已发布文章的历史版本保存在 GitHub。
+                      文件。单包最多 32 MB、100 篇草稿；超过时请在草稿箱选择文章分批备份。已发布文章的历史版本保存在 GitHub。
                     </p>
                     <Button disabled={busy} onClick={() => void backup()}>
                       <Download size={17} />
@@ -1628,6 +1629,7 @@ export default function Manager({
                       打开博客仓库 <ArrowUpRight size={15} />
                     </a>
                   </section>
+                  <BackupRestore disabled={busy} onRestored={loadState} />
                   <section className="manager-panel">
                     <h2>从 Markdown 开始</h2>
                     <p>

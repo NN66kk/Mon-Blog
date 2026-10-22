@@ -10,6 +10,11 @@ import { ApiError, commitArticle, readArticle, removeArticle } from './github';
 import { articleUrl, REPO, splitMarkdown } from './content';
 import { describeTemplate, TEMPLATE_FOLDER } from './article-templates';
 import {
+  createBackupRestoreService,
+  previewBackup,
+  readBackupRequest,
+} from './backup-restore';
+import {
   duplicateMetadata,
   IMAGE_NAME,
   managedPath,
@@ -41,6 +46,18 @@ export async function managementRequest(
 ): Promise<Response | null> {
   const db = database();
   const url = new URL(request.url);
+  if (route === 'backup/preview' && request.method === 'POST') {
+    return response(await previewBackup(await readBackupRequest(request)));
+  }
+  if (route === 'backup/restore' && request.method === 'POST') {
+    const restore = createBackupRestoreService({ db, storage: files() });
+    return response(
+      await restore(owner, await readBackupRequest(request), {
+        sha256: request.headers.get('x-backup-sha256') || '',
+        restore_id: request.headers.get('x-restore-id') || '',
+      }),
+    );
+  }
   if (route === 'templates' && request.method === 'GET') {
     const call = await account(owner);
     const encodedFolder = TEMPLATE_FOLDER.split('/')
