@@ -3,26 +3,93 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
-  group: github-pages
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  deploy:
+  site-checks:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: requirements.txt
-      - uses: actions/cache@v4
+      - uses: actions/setup-node@v7
         with:
-          key: mkdocs-${{ runner.os }}-${{ hashFiles('mkdocs.yml', 'requirements.txt') }}
-          path: .cache
-      - run: python -m pip install --upgrade pip
+          node-version: "24"
+          package-manager-cache: false
+      - name: Install blog dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run blog regression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py' -v
+          node --test tests/*.test.js
+      - name: Build the blog strictly
+        run: mkdocs build --strict
+      - name: Check generated pages, links and indexes
+        run: python scripts/check_site.py --site-dir site
+      - name: Preserve the validated site
+        uses: actions/upload-artifact@v7
+        with:
+          name: validated-site
+          path: site/
+          if-no-files-found: error
+          retention-days: 7
+
+  publisher-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: publisher
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: publisher/package-lock.json
+      - name: Install locked writing-room dependencies
+        run: npm ci
+      - name: Run writing-room regression tests
+        run: npm test
+      - name: Check writing-room types
+        run: npx --no-install tsc --noEmit --incremental false
+
+  deploy:
+    # PRs validate only. Keep the existing gh-pages publishing source.
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [site-checks, publisher-checks]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
       - run: python -m pip install -r requirements.txt
-      - run: mkdocs gh-deploy --force
+      - uses: actions/download-artifact@v8
+        with:
+          name: validated-site
+          path: site/
+      # ghp-import is also used by mkdocs gh-deploy. Publish the exact checked
+      # files instead of rebuilding after validation; no Pages settings change.
+      - name: Publish the validated site
+        run: python -m ghp_import -n -p -f -b gh-pages -m "Deploy validated site from ${GITHUB_SHA}" site

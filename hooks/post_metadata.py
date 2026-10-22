@@ -5,6 +5,7 @@ import re
 from collections import Counter
 from collections.abc import Mapping
 from datetime import date, datetime, timedelta, timezone
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
@@ -655,7 +656,20 @@ def on_page_markdown(markdown, page, config, files):
 
 
 def on_page_content(html, page, config, files):
-    """Reserve the single page-level H1 for the editorial page header."""
+    """Preserve title anchors when templates replace Markdown page headers."""
+
+    # MkDocs can reuse Page instances during live rebuilds. A page that no
+    # longer begins with an H1 must not retain its previous title anchor.
+    page.blog_title_id = ""
+    leading_h1 = LEADING_H1_RE.match(html)
+    if leading_h1:
+        # The TOC (and Material's skip link) already points at this heading.
+        # Move its decoded ID onto the template's replacement H1 rather than
+        # dropping the target. HTMLParser handles both quote styles/entities;
+        # the template escapes the value when writing it back to HTML.
+        parser = _TitleAnchorParser()
+        parser.feed(leading_h1.group(0))
+        page.blog_title_id = parser.title_id
 
     if not (
         getattr(page, "blog_is_article", False)
@@ -663,6 +677,21 @@ def on_page_content(html, page, config, files):
     ):
         return html
 
-    content = LEADING_H1_RE.sub("", html, count=1)
+    if leading_h1:
+        content = html[leading_h1.end():]
+    else:
+        content = html
     content = H1_OPEN_RE.sub(r"<h2\g<attributes>>", content)
     return content.replace("</h1>", "</h2>")
+
+
+class _TitleAnchorParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.title_id = ""
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "h1":
+            self.title_id = next(
+                (value for name, value in attrs if name == "id" and value), ""
+            )

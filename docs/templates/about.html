@@ -2,16 +2,12 @@
 
 {% block content %}
   {% set body_html = page.content %}
-  {% set stripped = body_html.lstrip() %}
-  {% if stripped.startswith("<h1") and "</h1>" in stripped %}
-    {% set body_html = stripped.split("</h1>", 1)[1] %}
-  {% endif %}
 
   <div class="about-page" data-page-layout="about">
     <header class="about-hero">
       <div class="about-hero__copy">
         <span class="garden-eyebrow"><i aria-hidden="true"></i> ABOUT THE GARDENER</span>
-        <h1>关于我</h1>
+        <h1{% if page.blog_title_id %} id="{{ page.blog_title_id|e }}" tabindex="-1"{% endif %}>关于我</h1>
         <p>一些兴趣，也有一些不太好改的习惯。</p>
       </div>
       <div class="about-portrait" aria-hidden="true">

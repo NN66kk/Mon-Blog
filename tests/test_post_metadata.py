@@ -2,8 +2,11 @@ from pathlib import Path
 from types import SimpleNamespace
 from tempfile import TemporaryDirectory
 from datetime import date, datetime, timezone
+from html.parser import HTMLParser
 import importlib.util
 import unittest
+
+from jinja2 import ChoiceLoader, DictLoader, Environment, FileSystemLoader
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +16,28 @@ SPEC = importlib.util.spec_from_file_location(
 POST_METADATA = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(POST_METADATA)
+
+
+class HeadingParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.headings = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in {"h1", "h2"}:
+            self.headings.append((tag, dict(attrs)))
+
+
+def render_page_template(template_name, page):
+    env = Environment(loader=ChoiceLoader([
+        DictLoader({"main.html": "{% block content %}{% endblock %}"}),
+        FileSystemLoader(ROOT / "docs/templates"),
+    ]))
+    env.filters["url"] = lambda value: value
+    return env.get_template(template_name).render(page=page, blog={
+        "recent": [], "collections": [], "posts_by_collection": {},
+        "posts": [], "count": 0,
+    })
 
 
 def blog_config(docs_dir):
@@ -229,6 +254,99 @@ tags:
 
         self.assertNotIn('<h1', content)
         self.assertIn('<h2 id="section">Section</h2>', content)
+        self.assertEqual(page.blog_title_id, "title")
+
+    def test_article_and_about_templates_preserve_the_title_target(self):
+        for template_name in ("post.html", "about.html"):
+            with self.subTest(template=template_name):
+                page = SimpleNamespace(
+                    blog_is_article=template_name == "post.html",
+                    blog_is_about=template_name == "about.html",
+                    title="Title", meta={},
+                )
+                page.content = POST_METADATA.on_page_content(
+                    '<h1 id="title">Title</h1><p>Lead</p>'
+                    '<h1 id="section">Section</h1>', page, {}, [],
+                )
+
+                parser = HeadingParser()
+                parser.feed(render_page_template(template_name, page))
+                h1s = [attrs for tag, attrs in parser.headings if tag == "h1"]
+
+                self.assertEqual(len(h1s), 1)
+                self.assertEqual(h1s[0]["id"], "title")
+                self.assertEqual(h1s[0]["tabindex"], "-1")
+                self.assertEqual(sum(
+                    attrs.get("id") == "title" for _, attrs in parser.headings
+                ), 1)
+                self.assertIn(("h2", {"id": "section"}), parser.headings)
+
+    def test_title_anchor_is_decoded_and_safely_escaped_in_templates(self):
+        for template_name in ("post.html", "about.html"):
+            with self.subTest(template=template_name):
+                page = SimpleNamespace(
+                    blog_is_article=template_name == "post.html",
+                    blog_is_about=template_name == "about.html",
+                    title="Title", meta={},
+                )
+                page.content = POST_METADATA.on_page_content(
+                    "<h1 id='title&amp;&quot; data-extra=&quot;value'>Title</h1>"
+                    "<p>Body</p>", page, {}, [],
+                )
+
+                self.assertEqual(page.blog_title_id, 'title&" data-extra="value')
+                parser = HeadingParser()
+                parser.feed(render_page_template(template_name, page))
+                h1 = next(attrs for tag, attrs in parser.headings if tag == "h1")
+                self.assertEqual(h1["id"], page.blog_title_id)
+                self.assertNotIn("data-extra", h1)
+
+    def test_content_without_leading_h1_preserves_existing_heading_targets(self):
+        page = SimpleNamespace(blog_is_article=True, blog_is_about=False)
+        for html, expected in (
+            ('<h2 id="section">Section</h2>', '<h2 id="section">Section</h2>'),
+            ('<p>Lead</p><h1 id="section">Section</h1>',
+             '<p>Lead</p><h2 id="section">Section</h2>'),
+            ('<p>No headings</p>', '<p>No headings</p>'),
+        ):
+            with self.subTest(html=html):
+                content = POST_METADATA.on_page_content(html, page, {}, [])
+                self.assertEqual(content, expected)
+                self.assertEqual(page.blog_title_id, "")
+
+    def test_title_anchor_is_reset_between_builds(self):
+        page = SimpleNamespace(blog_is_article=True, blog_is_about=False)
+        POST_METADATA.on_page_content('<h1 id="old">Old</h1>', page, {}, [])
+        self.assertEqual(page.blog_title_id, "old")
+
+        POST_METADATA.on_page_content('<h1>New title without ID</h1>', page, {}, [])
+        self.assertEqual(page.blog_title_id, "")
+        POST_METADATA.on_page_content('<h1 id="new">New</h1>', page, {}, [])
+        self.assertEqual(page.blog_title_id, "new")
+        POST_METADATA.on_page_content('<p>No leading title anymore</p>', page, {}, [])
+        self.assertEqual(page.blog_title_id, "")
+
+    def test_other_page_types_keep_their_h1_and_anchor(self):
+        page = SimpleNamespace(blog_is_article=False, blog_is_about=False)
+        html = '<h1 id="collection">Collection</h1>'
+        self.assertEqual(POST_METADATA.on_page_content(html, page, {}, []), html)
+        self.assertEqual(page.blog_title_id, "collection")
+
+    def test_listing_and_redirect_templates_preserve_the_title_target(self):
+        for template_name in ("collection.html", "archive.html", "redirect.html"):
+            with self.subTest(template=template_name):
+                page = SimpleNamespace(
+                    blog_is_article=False, blog_is_about=False, title="Title",
+                    blog_collection_key="B", blog_collection={"label": "Notes"},
+                    meta={"redirect_to": "about/"},
+                )
+                page.content = POST_METADATA.on_page_content(
+                    '<h1 id="title">Title</h1>', page, {}, [],
+                )
+                parser = HeadingParser()
+                parser.feed(render_page_template(template_name, page))
+                h1s = [attrs for tag, attrs in parser.headings if tag == "h1"]
+                self.assertEqual(h1s, [{"id": "title", "tabindex": "-1"}])
 
     def test_repeated_markdown_h1s_are_demoted_outside_code_fences(self):
         page = SimpleNamespace(blog_is_article=True, blog_is_about=False)

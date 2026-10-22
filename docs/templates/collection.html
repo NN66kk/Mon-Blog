@@ -15,7 +15,7 @@
       <div class="collection-hero__mark" aria-hidden="true">{{ view.collection.mark }}</div>
       <div class="collection-hero__copy">
         <span class="garden-eyebrow"><i aria-hidden="true"></i> COLLECTION {{ page.blog_collection_key }}</span>
-        <h1>{{ view.collection.label }}</h1>
+        <h1{% if page.blog_title_id %} id="{{ page.blog_title_id|e }}" tabindex="-1"{% endif %}>{{ view.collection.label }}</h1>
         <p>{{ view.collection.description }}</p>
       </div>
       <div class="collection-hero__meta">

@@ -2,10 +2,6 @@
 
 {% block content %}
   {% set body_html = page.content %}
-  {% set stripped = body_html.lstrip() %}
-  {% if stripped.startswith("<h1") and "</h1>" in stripped %}
-    {% set body_html = stripped.split("</h1>", 1)[1] %}
-  {% endif %}
 
   {% set collection = page.blog_collection %}
   {% set section_index = collection.mark if collection else "记" %}
@@ -31,7 +27,7 @@
         <span class="post-header-date">持续更新</span>
       {% endif %}
     </div>
-    <h1 class="post-header-title">{{ page.title|striptags|e }}</h1>
+    <h1 class="post-header-title"{% if page.blog_title_id %} id="{{ page.blog_title_id|e }}" tabindex="-1"{% endif %}>{{ page.title|striptags|e }}</h1>
     <div class="post-header-meta">
       <span class="post-header-attribution">Mon 的个人花园</span>
       <span class="post-reading-stats" data-reading-stats>

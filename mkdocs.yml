@@ -9,6 +9,9 @@ repo_name: NN66kk/Mon-Blog
 edit_uri: edit/main/docs/
 
 extra:
+  # Opt in only actual vocabulary queries; Dataview tutorials stay code samples.
+  dataview_static_paths:
+    - "B-Notes/003英语/英语一真题/*/Text[1-4].md"
   about_page: "about.md"
   legacy_about_page: "D-Orginals/2024070515116.md"
   about_url: "about/"
@@ -127,6 +130,7 @@ plugins:
 
 hooks:
   - hooks/post_metadata.py
+  - hooks/dataview_static.py
   - hooks/mermaid_assets.py
 
 extra_javascript:

@@ -5,7 +5,7 @@
     <header class="archive-hero">
       <span class="garden-eyebrow"><i aria-hidden="true"></i> ARCHIVE / {{ blog.count }} NOTES</span>
       <div class="archive-hero__heading">
-        <h1>全部文章</h1>
+        <h1{% if page.blog_title_id %} id="{{ page.blog_title_id|e }}" tabindex="-1"{% endif %}>全部文章</h1>
         <p>学习、生活、行旅与收藏，按时间收在这里。</p>
       </div>
       <nav class="archive-filters" aria-label="按专栏筛选" data-archive-collections>

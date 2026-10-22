@@ -9,7 +9,7 @@
 {% block content %}
   <div class="redirect-page" data-page-layout="redirect">
     <span class="garden-eyebrow"><i aria-hidden="true"></i> PAGE MOVED</span>
-    <h1>页面已经迁移</h1>
+    <h1{% if page.blog_title_id %} id="{{ page.blog_title_id|e }}" tabindex="-1"{% endif %}>页面已经迁移</h1>
     <p>正在前往新的「关于我」页面。</p>
     <a class="garden-button garden-button--primary" href="{{ page.meta.redirect_to|url }}">立即前往 <span aria-hidden="true">→</span></a>
   </div>
