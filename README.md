@@ -55,6 +55,7 @@ GitHub Actions 对 PR、`main` 推送和手动触发运行博客检查与写作�
 - `hooks/post_metadata.py`：统一解析发布日期、更新日期、标签和自动摘要，并排除草稿及私有文章。
 - `hooks/dataview_static.py`：将明确启用的有限 Dataview 查询转换为静态任务列表。
 - `shared/`：博客与写作室共用的内容规则和 Mermaid 源文件，维护方法见 [shared/README.md](shared/README.md)。
+- `experiments/`：隔离的生成器兼容性试验与复现工具，结论见 [第三阶段验证报告](experiments/README.md)。
 - `scripts/check_site.py`：检查实际构建产物，在发现错误时返回非零状态。
 - `scripts/preview_draft.py`：仅在本机构建写作室草稿快照。
 - `scripts/split_backup.py`：离线拆分超过恢复上限的旧写作室备份。
