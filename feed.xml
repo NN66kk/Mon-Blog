@@ -1,0 +1,1337 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Mon's Digital Garden</title>
+    <link>https://nn66kk.github.io/Mon-Blog/</link>
+    <description>Mon 的学习笔记、生活记录与行旅札记。</description>
+    <language>zh-CN</language>
+    <atom:link href="https://nn66kk.github.io/Mon-Blog/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我给 Excalidraw 加上了纸张：用 Baiban 整理讲义、笔记和方案</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/261023204646/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/261023204646/</guid>
+      <pubDate>Fri, 23 Oct 2026 20:46:35 +0800</pubDate>
+      <description>无限白板适合展开思路，但要把画布上的内容整理成一份可以打印、分享的资料，还需要考虑纸张尺寸、分页和阅读顺序。</description>
+    </item>
+    <item>
+      <title>一个底层漏洞，为什么会让政府网站暂时“关门”？</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/261022120840/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/261022120840/</guid>
+      <pubDate>Thu, 22 Oct 2026 12:08:33 +0800</pubDate>
+      <description>2026 年 10 月，一批网站紧急维护，部分政府机构也暂停了网上服务。引发这场应急行动的，是一组被称为“PHP2Shell”的严重安全漏洞。</description>
+    </item>
+    <item>
+      <title>一次 Android 通知转发故障复盘</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/</guid>
+      <pubDate>Mon, 05 Oct 2026 13:43:29 +0800</pubDate>
+      <description>一款待办 App 到点发出任务通知，手机会响铃、会震动，通知栏也有完整内容。但手腕上的手环毫无反应，连消息列表里都找不到这条提醒。</description>
+    </item>
+    <item>
+      <title>吃了月饼，为什么还是没有过节的感觉？</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/261002194957/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/261002194957/</guid>
+      <pubDate>Fri, 02 Oct 2026 19:49:48 +0800</pubDate>
+      <description>今年中秋，我吃了月饼，也给家里打了电话。可这些事情做完，心里还是觉得，这个节似乎没有真正过起来。</description>
+    </item>
+    <item>
+      <title>老掌沟的秋</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/260928233305/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/260928233305/</guid>
+      <pubDate>Mon, 28 Sep 2026 23:32:56 +0800</pubDate>
+      <description>走完全程之后，我最大的感受只有一个：这里大概是目前为止，我在北京周边见过最漂亮的秋景。</description>
+    </item>
+    <item>
+      <title>一次 macOS 代理配置排查</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/260924165703/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/260924165703/</guid>
+      <pubDate>Thu, 24 Sep 2026 16:56:57 +0800</pubDate>
+      <description>本文记录一次 macOS 代理排查过程，分析浏览器正常而 Codex 连接失败的原因，并通过统一系统代理与终端环境变量配置解决问题。</description>
+    </item>
+    <item>
+      <title>西南灵徒步记忆</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/260922221928/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/260922221928/</guid>
+      <pubDate>Tue, 22 Sep 2026 22:19:12 +0800</pubDate>
+      <description>前几天和三位朋友一起去了张家口涿鹿县的西南灵徒步，我们一行四人报了个旅行团不到七点就出发了，全程大约 18～19 公里，累计爬升 1200～1400 米，整体算是中等强度。</description>
+    </item>
+    <item>
+      <title>关于不同处事风格的思考</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260922190320/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260922190320/</guid>
+      <pubDate>Tue, 22 Sep 2026 19:03:06 +0800</pubDate>
+      <description>这些年的学习和实践中，我逐渐发现，人面对问题时，似乎存在两种比较典型的处事风格。</description>
+    </item>
+    <item>
+      <title>一键修复 ChatGPT 复制到 Obsidian 后的公式和 Markdown</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260814185045/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260814185045/</guid>
+      <pubDate>Fri, 14 Aug 2026 18:50:45 +0800</pubDate>
+      <description>分享一个通过 Obsidian QuickAdd 调用的 Markdown 修复脚本，可一键清理 ChatGPT 网页复制产生的公式、表格、转义符和标题格式问题，让内容快速恢复为规范、可直接使用的 Obsidian 笔记。</description>
+    </item>
+    <item>
+      <title>Codex 频繁闪退怎么办？让另一个 AI 编程工具帮你修复</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260805095251/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260805095251/</guid>
+      <pubDate>Wed, 05 Aug 2026 09:52:51 +0800</pubDate>
+      <description>本文介绍 Codex 闪退的通用排查思路：用另一款 AI 编程工具协助修复，或借助 VS Code 官方插件检查配置、缓存与日志。</description>
+    </item>
+    <item>
+      <title>Windows 卸载神器 BCU：开源免费，还能批量清理软件残留</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260805092845/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260805092845/</guid>
+      <pubDate>Wed, 05 Aug 2026 09:28:46 +0800</pubDate>
+      <description>BCU 是一款开源免费的 Windows 卸载工具，支持批量卸载、残留扫描和强制清理，可作为 Geek 的实用平替。</description>
+    </item>
+    <item>
+      <title>macOS 关闭软件更新提醒的终极方案</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260802232926/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260802232926/</guid>
+      <pubDate>Sun, 02 Aug 2026 23:29:26 +0800</pubDate>
+      <description>介绍 macOS 关闭软件更新提醒的可靠方案，通过通知描述文件屏蔽弹窗、声音和角标，同时保留手动检查与安装更新功能。</description>
+    </item>
+    <item>
+      <title>Claude Code Write 权限规则与 cc-switch 模板的坑</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260801090921/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260801090921/</guid>
+      <pubDate>Sat, 01 Aug 2026 09:09:21 +0800</pubDate>
+      <description>Claude Code 启动报错排障：Write 权限规则需改为 Edit，根因是 cc-switch 模板反复覆盖配置，附完整修复与验证方法。</description>
+    </item>
+    <item>
+      <title>CodexView：在 macOS 菜单栏和 Codex 标题栏查看额度</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260719222321/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260719222321/</guid>
+      <pubDate>Sun, 19 Jul 2026 22:23:21 +0800</pubDate>
+      <description>CodexView 是一款 macOS 菜单栏工具，用于查看 Codex 额度、重置时间与连接状态，并支持标题栏显示，数据全程留在本机。</description>
+    </item>
+    <item>
+      <title>邓紫棋天津场演唱会最可能唱的五十首歌歌词及背景故事分享</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/260715215301/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/260715215301/</guid>
+      <pubDate>Wed, 15 Jul 2026 21:53:01 +0800</pubDate>
+      <description>文章结合邓紫棋历次演出曲目，预测天津演唱会可能演唱的五十首歌曲，并汇总歌词、创作背景与作品故事，供观众提前熟悉歌单。</description>
+    </item>
+    <item>
+      <title>AI 编程时代，为什么“SDD 开发”越来越重要？</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260615205353/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260615205353/</guid>
+      <pubDate>Mon, 15 Jun 2026 20:53:53 +0800</pubDate>
+      <description>本文介绍 SDD 开发理念，说明其如何通过规范、拆解和验收提升 AI 编程质量，并展望未来趋势。</description>
+    </item>
+    <item>
+      <title>一文讲懂 Skill 和 Agent 的区别与联系</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260610193423/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260610193423/</guid>
+      <pubDate>Wed, 10 Jun 2026 19:34:23 +0800</pubDate>
+      <description>在学习 Hermes Agent、OpenManus、LangGraph、AutoGPT 这类 AI Agent 框架时，很多人都会遇到一个很容易混淆的问题：</description>
+    </item>
+    <item>
+      <title>Obsidian 记账系统原理与应用场景</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260604193923/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260604193923/</guid>
+      <pubDate>Thu, 04 Jun 2026 19:39:23 +0800</pubDate>
+      <description>这套 Obsidian 记账系统以 YAML 中的 Consum 字段为核心，通过 QuickAdd 快捷录入消费，JavaScript 自动累加金额并写入日记，Dataview 实时展示预算进度，Tracker 跨日统计生成消费趋势图，实现轻量化、可扩展的个人财务管理。</description>
+    </item>
+    <item>
+      <title>Obsidian 中按星期自动切换日记模板的实现方案</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260508204650/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260508204650/</guid>
+      <pubDate>Fri, 08 May 2026 20:46:50 +0800</pubDate>
+      <description>文章介绍了如何利用 Templater 将 Obsidian 日记模板改造成“模板路由器”，实现按星期自动切换不同日记模板，同时保留 Calendar 原有的使用体验与扩展性。</description>
+    </item>
+    <item>
+      <title>RAG 与 LLM Wiki</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260419093410/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260419093410/</guid>
+      <pubDate>Sun, 19 Apr 2026 11:19:45 +0800</pubDate>
+      <description>RAG 是“边问边查”，LLM Wiki 是“先学后答”。前者重检索，后者重知识组织，分别适合原始资料问答与长期知识沉淀。</description>
+    </item>
+    <item>
+      <title>以 CLAUDE.MD 文件为例说明 AI 代码生成中的作用域控制机制</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260411231236/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260411231236/</guid>
+      <pubDate>Sun, 19 Apr 2026 09:39:07 +0800</pubDate>
+      <description>claude.md 通过所在目录决定作用范围，根目录用于全局约束，子目录用于模块控制，且子目录规则优先级更高。本质上是通过“作用域”机制，让 AI 在不同层级按不同规则生成代码，从而实现工程级稳定与可控。</description>
+    </item>
+    <item>
+      <title>CLI 与 REPL 的区别</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260411230448/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260411230448/</guid>
+      <pubDate>Sat, 11 Apr 2026 23:04:49 +0800</pubDate>
+      <description>CLI 是一次性执行，没有记忆；REPL 是持续对话，有上下文。前者用于快速执行，后者用于连续协作。</description>
+    </item>
+    <item>
+      <title>Whisper 三模型（base / small / medium）中文转写性能对比与选型实践</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260410113132/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260410113132/</guid>
+      <pubDate>Fri, 10 Apr 2026 11:31:32 +0800</pubDate>
+      <description>本次对比表明，Whisper 的 `base`、`small`、`medium` 三模型在速度与精度上呈现明确梯度关系：`base` 适合快速预览，`small` 在效率与质量之间取得最佳平衡，`medium` 则在专有名词等关键语义上表现更优。工程实践中，应以 `small` 作为默认方案，并根据精度需求…</description>
+    </item>
+    <item>
+      <title>一次 Git 与 rsync 同步翻车的复盘</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260410112442/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260410112442/</guid>
+      <pubDate>Fri, 10 Apr 2026 11:24:42 +0800</pubDate>
+      <description>在 Git 与 rsync 的双目录同步方案中，若未明确唯一数据源，并在本地改动未纳入版本控制前执行覆盖型同步，容易导致数据丢失。应以 Git 仓库为唯一真源，将变更统一纳入版本控制后再同步，从结构上规避风险。</description>
+    </item>
+    <item>
+      <title>把 AI 这些名词一次讲明白</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/260408092240/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/260408092240/</guid>
+      <pubDate>Wed, 08 Apr 2026 09:22:41 +0800</pubDate>
+      <description>系统梳理了 Skill、Harness Engineering、RAG 等 AI 核心概念，解释其定义、作用、区别与工程关系，帮助建立完整技术认知框架。</description>
+    </item>
+    <item>
+      <title>IELTS-Academic-TestOne-Listening-PartOne</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/260326204122/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/260326204122/</guid>
+      <pubDate>Thu, 26 Mar 2026 20:41:23 +0800</pubDate>
+      <description>剑雅二十测试一的第一个听力版块，自主学习使用，刚开始准备还是挺困难的，慢慢啃吧。</description>
+    </item>
+    <item>
+      <title>Git 跨 Mac / Win 同步时 .DS_Store 处理</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260323165828/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260323165828/</guid>
+      <pubDate>Mon, 23 Mar 2026 16:58:28 +0800</pubDate>
+      <description>`.DS_Store` 是 macOS 自动生成的无关缓存文件，应通过 `.gitignore` 忽略；若已被提交，需要清理 Git 索引。处理后历史文件会被删除，后续生成的也不会再进入仓库。</description>
+    </item>
+    <item>
+      <title>华哥使用吕布对线孙策的恐怖细节</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/260323143157/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/260323143157/</guid>
+      <pubDate>Mon, 23 Mar 2026 14:31:57 +0800</pubDate>
+      <description>逐帧解析华哥对线孙策的操作细节，看后令人叹为观止，脊背发凉！请永远铭记 2568 这四个数字！~</description>
+    </item>
+    <item>
+      <title>听《孤独》</title>
+      <link>https://nn66kk.github.io/Mon-Blog/C-Highlights/20251119222654/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/C-Highlights/20251119222654/</guid>
+      <pubDate>Sat, 21 Mar 2026 08:28:59 +0800</pubDate>
+      <description>借邓紫棋《孤独》，分析自律与压抑的边界，以及长期清醒、自我控制背后的疲惫与疏离。</description>
+    </item>
+    <item>
+      <title>杠铃卧推运动细节</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/260320184526/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/260320184526/</guid>
+      <pubDate>Fri, 20 Mar 2026 18:45:26 +0800</pubDate>
+      <description>系统梳理杠铃卧推动作细节，涵盖起始姿势、握距发力路径、呼吸节奏与核心稳定。强调肩胛控制、避免常见错误、提升训练效果与安全性。</description>
+    </item>
+    <item>
+      <title>项目进度自动更新脚本源码</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260318194608/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260318194608/</guid>
+      <pubDate>Wed, 18 Mar 2026 19:46:08 +0800</pubDate>
+      <description>自动扫描任务文件，统计完成情况并写入元数据；结合 Dataview 实现进度可视化与统一管理，从而提升项目执行效率与可追踪性。</description>
+    </item>
+    <item>
+      <title>时间管理示例库源码</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260317095640/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260317095640/</guid>
+      <pubDate>Tue, 17 Mar 2026 09:56:40 +0800</pubDate>
+      <description>提供一套基于 Obsidian 的时间管理示例库：通过 QuickAdd 脚本自动记录学习、运动、娱乐与日常时间，并生成进度统计与状态日志。</description>
+    </item>
+    <item>
+      <title>微软商店无法访问时的替代方案</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260315095504/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260315095504/</guid>
+      <pubDate>Sun, 15 Mar 2026 09:55:05 +0800</pubDate>
+      <description>关闭 Windows 更新后无法使用微软商店时，可通过解析商店页面获取官方离线安装包，实现绕过商店直接下载安装应用。</description>
+    </item>
+    <item>
+      <title>潭柘寺天坑徒步记录</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260314075620/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260314075620/</guid>
+      <pubDate>Sat, 14 Mar 2026 23:29:26 +0800</pubDate>
+      <description>记录一次北京潭柘寺周边天坑环线徒步体验。路线约10公里，整体难度较低但趣味性较强，沿途包含天坑、岩壁与山顶视野等多个拍照点，并简要记录交通方式与季节景观。</description>
+    </item>
+    <item>
+      <title>上学的意义，远不只是为了找一份工作</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/20260308114756/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/20260308114756/</guid>
+      <pubDate>Thu, 12 Mar 2026 23:55:37 +0800</pubDate>
+      <description>文章反思“为什么要上学”。认为教育不应只服务于就业，更重要的是拓展认知、认识他人、培养学习能力与独立思考，并在相对宽松的环境中完成自我探索与人格成长。</description>
+    </item>
+    <item>
+      <title>用 QuickAdd 一键更新 Obsidian 笔记的 YAML date 时间戳</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/20260309215342/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/20260309215342/</guid>
+      <pubDate>Thu, 12 Mar 2026 11:57:28 +0800</pubDate>
+      <description>文章介绍利用 Obsidian 的 QuickAdd 插件与 JavaScript 脚本，一键更新当前笔记 YAML 中的 date 时间戳。脚本可自动创建或修改 date 字段，统一为东八区时间，避免手动修改带来的遗漏与格式错误。</description>
+    </item>
+    <item>
+      <title>在 Android 手机上用 Termux + Git 同步 Obsidian 笔记的一种更稳定的实践方案</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/20260310154048/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/20260310154048/</guid>
+      <pubDate>Thu, 12 Mar 2026 11:56:28 +0800</pubDate>
+      <description>文章介绍一种在 Android 上使用 Termux 与 Git 同步 Obsidian 笔记的稳定方案：通过在 Termux 中维护独立 Git 仓库，并用 rsync 脚本与手机编辑目录双向同步，从而隔离 .git、减少冲突并提升仓库稳定性。</description>
+    </item>
+    <item>
+      <title>为什么 Claude Code 放弃 RAG，转向 Agentic Search</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/260311211821/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/260311211821/</guid>
+      <pubDate>Wed, 11 Mar 2026 21:18:21 +0800</pubDate>
+      <description>在代码理解场景中，传统 RAG 往往因为检索噪声与上下文污染导致回答不稳定。本文结合 Claude Code 的实践经验，分析 Agentic Search 的工作机制及其优势。</description>
+    </item>
+    <item>
+      <title>用脚本打造更安全的 Git 工作流</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/260311163709/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/260311163709/</guid>
+      <pubDate>Wed, 11 Mar 2026 16:37:09 +0800</pubDate>
+      <description>文章介绍通过编写 vaultpullsafe 与 vaultpushsafe 脚本封装 Git 操作，在执行 pull 与 push 前自动检测仓库状态、分支关系和未提交修改，从而避免分叉、冲突与误操作，构建更安全稳定的 Git 工作流。</description>
+    </item>
+    <item>
+      <title>gitignore 实战案例整理</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/20260308161738/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/20260308161738/</guid>
+      <pubDate>Sun, 08 Mar 2026 16:17:49 +0800</pubDate>
+      <description>下面通过一组典型案例，展示 .gitignore 在实际项目中的常见使用方式。每个案例都只关注实际场景和写法，帮助快速理解规则的应用。</description>
+    </item>
+    <item>
+      <title>关于 gitignore 文件中的语法规则</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/20260308160440/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/20260308160440/</guid>
+      <pubDate>Sun, 08 Mar 2026 16:04:49 +0800</pubDate>
+      <description>.gitignore 用来告诉 Git：哪些未被跟踪的文件或目录，不要纳入版本管理。</description>
+    </item>
+    <item>
+      <title>用 Termux 在手机上管理 Git 和 GitHub</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%94%A8%20Termux%20%E5%9C%A8%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%AE%A1%E7%90%86%20Git%20%E5%92%8C%20GitHub_20260307232547/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%94%A8%20Termux%20%E5%9C%A8%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%AE%A1%E7%90%86%20Git%20%E5%92%8C%20GitHub_20260307232547/</guid>
+      <pubDate>Sat, 07 Mar 2026 23:25:00 +0800</pubDate>
+      <description>很多人一听到 Git、GitHub、命令行，就会觉得这些东西只能在电脑上操作。其实并不是这样。只要装好 Termux，安卓手机也能完成很多基础的 Git 操作，比如下载仓库、修改文件、提交内容、同步到 GitHub。</description>
+    </item>
+    <item>
+      <title>一周健身训练计划</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%B8%80%E5%91%A8%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92_20260307095200/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%B8%80%E5%91%A8%E5%81%A5%E8%BA%AB%E8%AE%AD%E7%BB%83%E8%AE%A1%E5%88%92_20260307095200/</guid>
+      <pubDate>Sat, 07 Mar 2026 09:52:00 +0800</pubDate>
+      <description>整体结构采用 Upper / Lower Split（上下肢分化）。这样每个肌群一周刺激 2 次，恢复时间约 48–72 小时，比较合理。</description>
+      <category>健身</category>
+    </item>
+    <item>
+      <title>现阶段我们应该培养自己什么样的能力</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E7%8E%B0%E9%98%B6%E6%AE%B5%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E5%9F%B9%E5%85%BB%E8%87%AA%E5%B7%B1%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%83%BD%E5%8A%9B_20260306234735/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E7%8E%B0%E9%98%B6%E6%AE%B5%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E5%9F%B9%E5%85%BB%E8%87%AA%E5%B7%B1%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%83%BD%E5%8A%9B_20260306234735/</guid>
+      <pubDate>Fri, 06 Mar 2026 23:47:00 +0800</pubDate>
+      <description>在技术快速发展的时代，个人能力的结构正在发生明显变化。过去，一个人只需要掌握某一项专业技能，往往就可以在一个行业中长期稳定发展。但在今天，知识更新的速度越来越快，工具与技术不断迭代，单一技能已经很难支撑长期竞争力。相比之下，那些能够持续学习、善于利用工具、具备结构化思维的人，更容易适应变化并创造价值。</description>
+    </item>
+    <item>
+      <title>conda 与 Anaconda：你需要知道的一切</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/conda%20%E4%B8%8E%20Anaconda%20%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87_20260304151922/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/conda%20%E4%B8%8E%20Anaconda%20%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87_20260304151922/</guid>
+      <pubDate>Wed, 04 Mar 2026 15:19:00 +0800</pubDate>
+      <description>在 Python 数据科学和机器学习领域，conda 和 Anaconda 是两个经常被提及的概念。然而，很多初学者会将它们混为一谈，认为两者是同一个东西。实际上，它们处于完全不同的概念层级，理解它们的区别对于构建高效的开发环境至关重要。</description>
+    </item>
+    <item>
+      <title>Python 虚拟环境到底是什么？venv、conda、uv 三种方案全面讲清楚</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/Python%20%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fvenv%E3%80%81conda%E3%80%81uv%20%E4%B8%89%E7%A7%8D%E6%96%B9%E6%A1%88%E5%85%A8%E9%9D%A2%E8%AE%B2%E6%B8%85%E6%A5%9A_20260304145227/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/Python%20%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fvenv%E3%80%81conda%E3%80%81uv%20%E4%B8%89%E7%A7%8D%E6%96%B9%E6%A1%88%E5%85%A8%E9%9D%A2%E8%AE%B2%E6%B8%85%E6%A5%9A_20260304145227/</guid>
+      <pubDate>Wed, 04 Mar 2026 14:52:00 +0800</pubDate>
+      <description>为什么 Python 项目总是要创建“虚拟环境”？</description>
+    </item>
+    <item>
+      <title>RAG 与 n8n 的关系分析</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/RAG_%E4%B8%8E_n8n_%E7%9A%84%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90_20260130195623/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/RAG_%E4%B8%8E_n8n_%E7%9A%84%E5%85%B3%E7%B3%BB%E5%88%86%E6%9E%90_20260130195623/</guid>
+      <pubDate>Fri, 30 Jan 2026 19:56:00 +0800</pubDate>
+      <description>很多人在接触 RAG（Retrieval-Augmented Generation）之后，会下意识地联想到 n8n、Zapier 这类自动化工具，觉得二者“思路很像”。这种直觉并不是表层误判，而是触及到了一个更深层的共性：它们都在用“可编排流程”重构系统能力的边界。</description>
+      <category>AI</category>
+      <category>RAG</category>
+      <category>自动化</category>
+    </item>
+    <item>
+      <title>什么是 n8n？一篇把 AI 工作流讲清楚的科普文章</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BB%80%E4%B9%88%E6%98%AF%20n8n%EF%BC%9F%E4%B8%80%E7%AF%87%E6%8A%8A%20AI%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%B2%E6%B8%85%E6%A5%9A%E7%9A%84%E7%A7%91%E6%99%AE%E6%96%87%E7%AB%A0_20260130192258/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BB%80%E4%B9%88%E6%98%AF%20n8n%EF%BC%9F%E4%B8%80%E7%AF%87%E6%8A%8A%20AI%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%AE%B2%E6%B8%85%E6%A5%9A%E7%9A%84%E7%A7%91%E6%99%AE%E6%96%87%E7%AB%A0_20260130192258/</guid>
+      <pubDate>Fri, 30 Jan 2026 19:22:00 +0800</pubDate>
+      <description>很多人第一次接触 n8n，都会有一种感觉： “这东西看起来好像很强，但我一时说不清它到底是干嘛的。”</description>
+      <category>AI</category>
+      <category>自动化</category>
+    </item>
+    <item>
+      <title>珍珠湖游记</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%8F%8D%E7%8F%A0%E6%B9%96%E6%B8%B8%E8%AE%B0_20260128232137/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%8F%8D%E7%8F%A0%E6%B9%96%E6%B8%B8%E8%AE%B0_20260128232137/</guid>
+      <pubDate>Wed, 28 Jan 2026 23:21:00 +0800</pubDate>
+      <description>珍珠湖，是我们小学五年级语文课本封面上的取景地。很多人来这里，其实多少都带着一点“课本滤镜”。整体来说，这条路线难度不高，风景也在线，算是一趟轻松不累、性价比不错的小旅行，下面简单说说我的真实感受。</description>
+    </item>
+    <item>
+      <title>颐和园滑冰初体验</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E9%A2%90%E5%92%8C%E5%9B%AD%E6%BB%91%E5%86%B0%E5%88%9D%E4%BD%93%E9%AA%8C_20260123232021/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E9%A2%90%E5%92%8C%E5%9B%AD%E6%BB%91%E5%86%B0%E5%88%9D%E4%BD%93%E9%AA%8C_20260123232021/</guid>
+      <pubDate>Fri, 23 Jan 2026 23:20:00 +0800</pubDate>
+      <description>[ ] 资费详情 [ ] 玩法总结 [ ] 整体体验（评分）</description>
+    </item>
+    <item>
+      <title>研究生心理观察</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%A0%94%E7%A9%B6%E7%94%9F%E5%BF%83%E7%90%86%E8%A7%82%E5%AF%9F_20260112224858/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%A0%94%E7%A9%B6%E7%94%9F%E5%BF%83%E7%90%86%E8%A7%82%E5%AF%9F_20260112224858/</guid>
+      <pubDate>Mon, 12 Jan 2026 22:48:00 +0800</pubDate>
+      <description>21 世纪 20 年代，中国高等教育正经历剧烈的结构性变革。截至 2023 年，在读硕士和博士研究生总数突破 365.36 万人，这庞大的高知群体承载着国家创新驱动发展的厚望。然而，随着“研究生教育大众化”进程加速，学历稀缺性逐渐被稀释，社会学意义上的“学历通胀”愈发明显。当代研究生身处一个充满悖论的生存夹…</description>
+    </item>
+    <item>
+      <title>停更笔记</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%81%9C%E6%9B%B4%E7%AC%94%E8%AE%B0_20260105131723/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%81%9C%E6%9B%B4%E7%AC%94%E8%AE%B0_20260105131723/</guid>
+      <pubDate>Mon, 05 Jan 2026 13:17:00 +0800</pubDate>
+      <description>📌github push 问题汇总 📌 obsidian 问题解决记录 📌ONE 冠军赛事 📌zotero 系列教程 📌全身肌肉训练笔记 📌GET 研究生英语学位考试 📌金铲铲从入门到精通 Entity Framework Tutorial</description>
+    </item>
+    <item>
+      <title>三峰大环线挑战成功</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E4%B8%89%E5%B3%B0%E5%A4%A7%E7%8E%AF%E7%BA%BF%E6%8C%91%E6%88%98%E6%88%90%E5%8A%9F_20260105131044/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E4%B8%89%E5%B3%B0%E5%A4%A7%E7%8E%AF%E7%BA%BF%E6%8C%91%E6%88%98%E6%88%90%E5%8A%9F_20260105131044/</guid>
+      <pubDate>Mon, 05 Jan 2026 13:10:00 +0800</pubDate>
+      <description>新年的第一天，我决定给自己的这一年开个硬核的头——挑战北京户外圈著名的“三峰大环线”。在这一天完成一项高难度的体能挑战并最终成功，对我来说不仅是一次徒步，更是一个极好的寓意，象征着新的一年无论面对多大的困难，只要步履不停，终能抵达终点。</description>
+    </item>
+    <item>
+      <title>二零二五年度总结</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E4%BA%8C%E9%9B%B6%E4%BA%8C%E4%BA%94%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93_20260105130940/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E4%BA%8C%E9%9B%B6%E4%BA%8C%E4%BA%94%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93_20260105130940/</guid>
+      <pubDate>Mon, 05 Jan 2026 13:09:00 +0800</pubDate>
+      <description>体验了研究生助管，结识了一批朋友。跟着老师们学会了很多为人处事的道理。</description>
+    </item>
+    <item>
+      <title>开源笔记目录</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%BC%80%E6%BA%90%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95_20260105130736/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%BC%80%E6%BA%90%E7%AC%94%E8%AE%B0%E7%9B%AE%E5%BD%95_20260105130736/</guid>
+      <pubDate>Mon, 05 Jan 2026 13:07:00 +0800</pubDate>
+      <description>人工智能相关 降压减脂菜谱</description>
+    </item>
+    <item>
+      <title>二零二五年博客内容汇总</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E4%BA%8C%E9%9B%B6%E4%BA%8C%E4%BA%94%E5%B9%B4%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E6%B1%87%E6%80%BB_20260105125725/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E4%BA%8C%E9%9B%B6%E4%BA%8C%E4%BA%94%E5%B9%B4%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E6%B1%87%E6%80%BB_20260105125725/</guid>
+      <pubDate>Mon, 05 Jan 2026 12:57:00 +0800</pubDate>
+      <description>12-14：王阳明心学总结 12-14：【桦皮岭实测】绝美雾凇+刺激屁降 12-06：军博馆心得 12-03：示范文章</description>
+    </item>
+    <item>
+      <title>王阳明心学总结</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/20251214204319/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/20251214204319/</guid>
+      <pubDate>Sun, 14 Dec 2025 20:43:00 +0800</pubDate>
+      <description>最近，我刚刚修完了一门关于王阳明“心学”的九节深度课程。</description>
+    </item>
+    <item>
+      <title>【桦皮岭实测】绝美雾凇+刺激屁降</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E3%80%90%E6%A1%A6%E7%9A%AE%E5%B2%AD%E5%AE%9E%E6%B5%8B%E3%80%91%E7%BB%9D%E7%BE%8E%E9%9B%BE%E5%87%87%2B%E5%88%BA%E6%BF%80%E5%B1%81%E9%99%8D_20251214200735/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E3%80%90%E6%A1%A6%E7%9A%AE%E5%B2%AD%E5%AE%9E%E6%B5%8B%E3%80%91%E7%BB%9D%E7%BE%8E%E9%9B%BE%E5%87%87%2B%E5%88%BA%E6%BF%80%E5%B1%81%E9%99%8D_20251214200735/</guid>
+      <pubDate>Sun, 14 Dec 2025 20:07:00 +0800</pubDate>
+      <description>刚从桦皮岭回来，后劲太大！给大家整理了一份新鲜出炉的游玩心得，想去的朋友建议收藏。</description>
+    </item>
+    <item>
+      <title>军博馆心得</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%86%9B%E5%8D%9A%E9%A6%86%E5%BF%83%E5%BE%97_20251206213749/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%86%9B%E5%8D%9A%E9%A6%86%E5%BF%83%E5%BE%97_20251206213749/</guid>
+      <pubDate>Sat, 06 Dec 2025 21:37:00 +0800</pubDate>
+      <description>如果没带身份证可以走人工通道，然后直接报身份证号就可以直接通过了。（需要提前在小程序上面预约）</description>
+    </item>
+    <item>
+      <title>示范文章</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%A4%BA%E8%8C%83%E6%96%87%E7%AB%A0_20251203075029/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%A4%BA%E8%8C%83%E6%96%87%E7%AB%A0_20251203075029/</guid>
+      <pubDate>Wed, 03 Dec 2025 07:50:00 +0800</pubDate>
+      <description>In the modern fast-paced society, people are increasingly aware of the importance of social harmony. Meanwhile, listening plays a significant role in it.…</description>
+    </item>
+    <item>
+      <title>等高线地形图</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%AD%89%E9%AB%98%E7%BA%BF%E5%9C%B0%E5%BD%A2%E5%9B%BE_20251130101423/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%AD%89%E9%AB%98%E7%BA%BF%E5%9C%B0%E5%BD%A2%E5%9B%BE_20251130101423/</guid>
+      <pubDate>Sun, 30 Nov 2025 10:14:00 +0800</pubDate>
+      <description>我们可以把等高线地形图想象成一个“切土豆”的过程。</description>
+    </item>
+    <item>
+      <title>这一次，我选择助跑冲向深渊</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E8%BF%99%E4%B8%80%E6%AC%A1%EF%BC%8C%E6%88%91%E9%80%89%E6%8B%A9%E5%8A%A9%E8%B7%91%E5%86%B2%E5%90%91%E6%B7%B1%E6%B8%8A_20251122222052/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E8%BF%99%E4%B8%80%E6%AC%A1%EF%BC%8C%E6%88%91%E9%80%89%E6%8B%A9%E5%8A%A9%E8%B7%91%E5%86%B2%E5%90%91%E6%B7%B1%E6%B8%8A_20251122222052/</guid>
+      <pubDate>Sat, 22 Nov 2025 22:20:00 +0800</pubDate>
+      <description>从“求生”走向“生活”，也学着主动奔向未知。</description>
+    </item>
+    <item>
+      <title>集体沉默的时代：没人牵头，事情就注定烂尾吗？</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E9%9B%86%E4%BD%93%E6%B2%89%E9%BB%98%E7%9A%84%E6%97%B6%E4%BB%A3%EF%BC%9A%E6%B2%A1%E4%BA%BA%E7%89%B5%E5%A4%B4%EF%BC%8C%E4%BA%8B%E6%83%85%E5%B0%B1%E6%B3%A8%E5%AE%9A%E7%83%82%E5%B0%BE%E5%90%97%EF%BC%9F_20251025224028/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E9%9B%86%E4%BD%93%E6%B2%89%E9%BB%98%E7%9A%84%E6%97%B6%E4%BB%A3%EF%BC%9A%E6%B2%A1%E4%BA%BA%E7%89%B5%E5%A4%B4%EF%BC%8C%E4%BA%8B%E6%83%85%E5%B0%B1%E6%B3%A8%E5%AE%9A%E7%83%82%E5%B0%BE%E5%90%97%EF%BC%9F_20251025224028/</guid>
+      <pubDate>Sat, 25 Oct 2025 22:40:00 +0800</pubDate>
+      <description>一个任务被布置给团队，会议室里一片寂静。老板说：“大家谁来牵个头？” 空气仿佛凝固了，每个人都低头看着自己的笔记本，或是在屏幕上漫无目的地移动着鼠标。时间一分一秒过去，那种“群体性沉默”的尴尬让你如坐针毡。</description>
+    </item>
+    <item>
+      <title>密集检索：让搜索更懂你的技术</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%AF%86%E9%9B%86%E6%A3%80%E7%B4%A2%EF%BC%9A%E8%AE%A9%E6%90%9C%E7%B4%A2%E6%9B%B4%E6%87%82%E4%BD%A0%E7%9A%84%E6%8A%80%E6%9C%AF_20251016192836/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%AF%86%E9%9B%86%E6%A3%80%E7%B4%A2%EF%BC%9A%E8%AE%A9%E6%90%9C%E7%B4%A2%E6%9B%B4%E6%87%82%E4%BD%A0%E7%9A%84%E6%8A%80%E6%9C%AF_20251016192836/</guid>
+      <pubDate>Thu, 16 Oct 2025 19:28:00 +0800</pubDate>
+      <description>当我们向搜索引擎提出一个问题时，我们期望它能像一个聪明的助手那样，理解我们话语背后的真实意图，而不仅仅是识别出几个孤立的关键词。这项让我们得以实现的魔法，就是“密集检索”（Dense Retrieval）技术。</description>
+    </item>
+    <item>
+      <title>BM25算法</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/BM25%E7%AE%97%E6%B3%95_20251012115917/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/BM25%E7%AE%97%E6%B3%95_20251012115917/</guid>
+      <pubDate>Sun, 12 Oct 2025 11:59:00 +0800</pubDate>
+      <description>它的名字叫 BM25，全称是 “Best Match 25”，你可以把它理解成一个非常经典的、经过了20多次迭代优化后诞生的“最佳匹配”算法。 它的本质是一个排名函数或评分函数。</description>
+      <category>AI</category>
+      <category>RAG</category>
+      <category>信息检索</category>
+    </item>
+    <item>
+      <title>AppleScript 自动化陷阱：如何解决中英文输入法导致的符号错误</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/AppleScript%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%99%B7%E9%98%B1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%AF%BC%E8%87%B4%E7%9A%84%E7%AC%A6%E5%8F%B7%E9%94%99%E8%AF%AF_20250907233250/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/AppleScript%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%99%B7%E9%98%B1%EF%BC%9A%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%AD%E8%8B%B1%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95%E5%AF%BC%E8%87%B4%E7%9A%84%E7%AC%A6%E5%8F%B7%E9%94%99%E8%AF%AF_20250907233250/</guid>
+      <pubDate>Sun, 07 Sep 2025 23:32:00 +0800</pubDate>
+      <description>在使用 AppleScript 进行文本自动化处理时，一个常见且令人头疼的问题是符号输入的不确定性。你可能希望脚本输入一个半角的英文符号（如 ），但由于执行时系统恰好处于中文输入法状态，结果输入的却是全角符号（｜）。这个问题虽小，却能让整个自动化流程失败。本文将从一个真实案例出发，层层递进，为你展示如何编写…</description>
+    </item>
+    <item>
+      <title>深度解析墨菲定律</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%A2%A8%E8%8F%B2%E5%AE%9A%E5%BE%8B_20250905213828/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E5%A2%A8%E8%8F%B2%E5%AE%9A%E5%BE%8B_20250905213828/</guid>
+      <pubDate>Fri, 05 Sep 2025 21:38:00 +0800</pubDate>
+      <description>你是否有过这样的经历：在一条空旷的马路上开车，却偏偏在唯一有坑的地方爆了胎；或者你越是担心新买的白衬衫被弄脏，就越有可能在午餐时把酱汁滴在上面。这种仿佛被诅咒一般，“怕什么来什么”的现象，其实可以用一个著名的定律来解释——墨菲定律。</description>
+    </item>
+    <item>
+      <title>理解计算机中的数制、补码与减法实现</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E6%95%B0%E5%88%B6%E3%80%81%E8%A1%A5%E7%A0%81%E4%B8%8E%E5%87%8F%E6%B3%95%E5%AE%9E%E7%8E%B0_20250904214148/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E7%9A%84%E6%95%B0%E5%88%B6%E3%80%81%E8%A1%A5%E7%A0%81%E4%B8%8E%E5%87%8F%E6%B3%95%E5%AE%9E%E7%8E%B0_20250904214148/</guid>
+      <pubDate>Thu, 04 Sep 2025 21:41:00 +0800</pubDate>
+      <description>这篇文章的核心始于计算机世界的基本沟通方式——数制。首先，我们需要理解我们日常使用的十进制，它基于“逢十进一”的规则，是我们与世界互动的自然语言。然而，计算机的硬件由无数个微小的开关构成，只能表示“开”和“关”两种状态，这对应着二进制中的 1 和 0。二进制是计算机能够直接理解的“母语”，其规则是“逢二进一…</description>
+    </item>
+    <item>
+      <title>Transformer Encoder 通俗化解读</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/Transformer%20Encoder%20%E9%80%9A%E4%BF%97%E5%8C%96%E8%A7%A3%E8%AF%BB_2025090318229/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/Transformer%20Encoder%20%E9%80%9A%E4%BF%97%E5%8C%96%E8%A7%A3%E8%AF%BB_2025090318229/</guid>
+      <pubDate>Wed, 03 Sep 2025 18:22:00 +0800</pubDate>
+      <description>本文针对讲解的是 VIT 文献中的一张图，目的是为了用简单的语言说明白这样图的原理：</description>
+    </item>
+    <item>
+      <title>全网最详尽英雄“影”终极攻略：从入门到精通，一篇就够</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%A8%E7%BD%91%E6%9C%80%E8%AF%A6%E5%B0%BD%E8%8B%B1%E9%9B%84%E2%80%9C%E5%BD%B1%E2%80%9D%E7%BB%88%E6%9E%81%E6%94%BB%E7%95%A5%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%8C%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F_20250810100730/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%A8%E7%BD%91%E6%9C%80%E8%AF%A6%E5%B0%BD%E8%8B%B1%E9%9B%84%E2%80%9C%E5%BD%B1%E2%80%9D%E7%BB%88%E6%9E%81%E6%94%BB%E7%95%A5%EF%BC%9A%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A%EF%BC%8C%E4%B8%80%E7%AF%87%E5%B0%B1%E5%A4%9F_20250810100730/</guid>
+      <pubDate>Sun, 10 Aug 2025 10:07:00 +0800</pubDate>
+      <description>新英雄“影”以其独特的双形态机制、两条命的设定和极高的操作上限，吸引了无数玩家的目光，但其复杂的机制也劝退了不少初学者。今天，这篇攻略将融合多位顶尖玩家数百小时的研究成果，为你彻底揭开“影”的神秘面纱，带你从入门设置到顶尖博弈，全面征服这个强大的英雄。</description>
+    </item>
+    <item>
+      <title>开锅技术与原理指南</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%BC%80%E9%94%85%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%8E%9F%E7%90%86%E6%8C%87%E5%8D%97_20250805105752/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%BC%80%E9%94%85%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%8E%9F%E7%90%86%E6%8C%87%E5%8D%97_20250805105752/</guid>
+      <pubDate>Tue, 05 Aug 2025 10:57:00 +0800</pubDate>
+      <description>对于许多烹饪新手而言，“开锅”是一个既熟悉又陌生的词汇。为什么要给一口新买的炒菜锅，尤其是铁锅，进行这道看似充满仪式感的工序？这背后其实蕴藏着朴素的科学原理和实用的烹饪智慧。本文将为您详细解读开锅的原理和步骤，确保即便是零基础的厨房小白也能轻松掌握。</description>
+    </item>
+    <item>
+      <title>langchain 技术架构解读</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/langchain%20%E6%8A%80%E6%9C%AF%E8%A7%A3%E8%AF%BB_2025071716332/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/langchain%20%E6%8A%80%E6%9C%AF%E8%A7%A3%E8%AF%BB_2025071716332/</guid>
+      <pubDate>Thu, 17 Jul 2025 16:33:00 +0800</pubDate>
+      <description>这一层是所有工作的起点，是你用来设计和搭建房子“毛坯房”的核心工具。它们都是开源免费 (OSS) 的。</description>
+      <category>AI</category>
+      <category>LangChain</category>
+    </item>
+    <item>
+      <title>Git 学习笔记一</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80_2025061919323/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80_2025061919323/</guid>
+      <pubDate>Thu, 19 Jun 2025 19:32:00 +0800</pubDate>
+      <description>运行后，你会看到提示说“Initialized empty Git repository in .../.git/”。这表示 Git 已经在你的项目里安家了。它创建了一个名为 .git 的隐藏文件夹，这就是我们前面说的“档案柜”。</description>
+    </item>
+    <item>
+      <title>说话越来越“官方”，我们正在被社会驯化</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E8%AF%B4%E8%AF%9D%E8%B6%8A%E6%9D%A5%E8%B6%8A%E2%80%9C%E5%AE%98%E6%96%B9%E2%80%9D%EF%BC%8C%E6%88%91%E4%BB%AC%E6%AD%A3%E5%9C%A8%E8%A2%AB%E7%A4%BE%E4%BC%9A%E9%A9%AF%E5%8C%96_20250605154744/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E8%AF%B4%E8%AF%9D%E8%B6%8A%E6%9D%A5%E8%B6%8A%E2%80%9C%E5%AE%98%E6%96%B9%E2%80%9D%EF%BC%8C%E6%88%91%E4%BB%AC%E6%AD%A3%E5%9C%A8%E8%A2%AB%E7%A4%BE%E4%BC%9A%E9%A9%AF%E5%8C%96_20250605154744/</guid>
+      <pubDate>Thu, 05 Jun 2025 15:47:00 +0800</pubDate>
+      <description>最近，好几位朋友不约而同地向我指出，我的说话风格似乎越来越“官方”了。一开始，我并没有太在意，但当这样的反馈接踵而至时，我不得不开始审视自己：那个曾经嬉笑怒骂、快人快语的自己，是什么时候开始变得字斟句酌，习惯用那些听起来“中立”又“严谨”的词句来表达了呢？</description>
+    </item>
+    <item>
+      <title>AI and the Rise of Judgement Over Technical Skill</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E3%80%90%E7%BF%BB%E8%AF%91%E6%90%AC%E8%BF%90%E3%80%91%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%97%B6%E4%BB%A3%EF%BC%9A%E5%88%A4%E6%96%AD%E5%8A%9B%E5%87%8C%E9%A9%BE%E4%BA%8E%E6%8A%80%E6%9C%AF%E6%8A%80%E8%83%BD%E4%B9%8B%E4%B8%8A_20250603200642/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E3%80%90%E7%BF%BB%E8%AF%91%E6%90%AC%E8%BF%90%E3%80%91%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%97%B6%E4%BB%A3%EF%BC%9A%E5%88%A4%E6%96%AD%E5%8A%9B%E5%87%8C%E9%A9%BE%E4%BA%8E%E6%8A%80%E6%9C%AF%E6%8A%80%E8%83%BD%E4%B9%8B%E4%B8%8A_20250603200642/</guid>
+      <pubDate>Tue, 03 Jun 2025 20:06:00 +0800</pubDate>
+      <description>这是一篇搬运作品，笔者觉得写得非常好，希望对大家以后的职业规划起到积极作用，原文链接见文末。</description>
+    </item>
+    <item>
+      <title>使用 DbContext</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%BF%E7%94%A8%20DbContext_20250602081931/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%BF%E7%94%A8%20DbContext_20250602081931/</guid>
+      <pubDate>Mon, 02 Jun 2025 08:19:00 +0800</pubDate>
+      <description>We created our entities and DbContext class in the previous chapters. Here you will learn the overview of working with the DbContext to create a database…</description>
+    </item>
+    <item>
+      <title>人工智能相关</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3_20250602081610/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3_20250602081610/</guid>
+      <pubDate>Mon, 02 Jun 2025 08:16:00 +0800</pubDate>
+      <description>用于人工智能学习的 Anaconda 环境搭建20250302093618 关于在 Anaconda 环境中安装包自动创建内核问题的解决方案20250526202516</description>
+    </item>
+    <item>
+      <title>一键获取文件夹内所有文件的名称</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%B8%80%E9%94%AE%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%A4%B9%E5%86%85%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8D%E7%A7%B0_20250528085840/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%B8%80%E9%94%AE%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%A4%B9%E5%86%85%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E7%9A%84%E5%90%8D%E7%A7%B0_20250528085840/</guid>
+      <pubDate>Wed, 28 May 2025 08:58:40 +0800</pubDate>
+      <description>获取当前文件夹下所有文件的名称并保存在一个filename.txt文件当中：</description>
+      <category>电脑知识</category>
+      <category>技巧</category>
+    </item>
+    <item>
+      <title>关于诸葛亮《隆中对》的思考</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%B3%E4%BA%8E%E8%AF%B8%E8%91%9B%E4%BA%AE%E3%80%8A%E9%9A%86%E4%B8%AD%E5%AF%B9%E3%80%8B%E7%9A%84%E6%80%9D%E8%80%83_20250526211312/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%B3%E4%BA%8E%E8%AF%B8%E8%91%9B%E4%BA%AE%E3%80%8A%E9%9A%86%E4%B8%AD%E5%AF%B9%E3%80%8B%E7%9A%84%E6%80%9D%E8%80%83_20250526211312/</guid>
+      <pubDate>Mon, 26 May 2025 21:13:00 +0800</pubDate>
+      <description>亮躬耕陇亩，好为《梁父吟》。身长八尺，每自比于管仲、乐毅，时人莫之许也。惟博陵崔州平、颍川徐庶元直与亮友善，谓为信然。</description>
+    </item>
+    <item>
+      <title>关于在 Anaconda 环境中安装包自动创建内核问题的解决方案</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%B3%E4%BA%8E%E5%9C%A8%20Anaconda%20%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85%E5%8C%85%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%86%85%E6%A0%B8%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_20250526202516/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%B3%E4%BA%8E%E5%9C%A8%20Anaconda%20%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%AE%89%E8%A3%85%E5%8C%85%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E5%86%85%E6%A0%B8%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_20250526202516/</guid>
+      <pubDate>Mon, 26 May 2025 20:25:00 +0800</pubDate>
+      <description>首先我们需要明确 conda 环境和 jupyter 内核之间的区别与联系，简单来说，Conda 环境像是一个独立的工具箱，里面装着特定版本的 Python 解释器和项目所需的各种库，确保不同项目间的依赖不冲突。而 Jupyter 内核则是 Jupyter Notebook 用来执行代码的“引擎”或“翻译官…</description>
+      <category>人工智能</category>
+    </item>
+    <item>
+      <title>LINQ 查询语法与方法语法</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/LINQ%20%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AF%AD%E6%B3%95_20250522153850/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/LINQ%20%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AF%AD%E6%B3%95_20250522153850/</guid>
+      <pubDate>Thu, 22 May 2025 15:38:00 +0800</pubDate>
+      <description>LINQ (Language Integrated Query) 是 .NET 中一项强大的功能，它允许开发者使用一种统一的、类型安全的方式来查询和操作各种数据源，例如内存中的对象集合、数据库、XML 文档等。在编写 LINQ 查询时，C# 提供了两种主要的风格：查询语法 (Query Syntax) 和…</description>
+    </item>
+    <item>
+      <title>查询语法拉姆达表达式详解</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E6%8B%89%E5%A7%86%E8%BE%BE%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%A6%E8%A7%A3_20250522152436/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%9F%A5%E8%AF%A2%E8%AF%AD%E6%B3%95%E6%8B%89%E5%A7%86%E8%BE%BE%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%A6%E8%A7%A3_20250522152436/</guid>
+      <pubDate>Thu, 22 May 2025 15:24:00 +0800</pubDate>
+      <description>在现代 C# 开发中，Lambda 表达式已经成为一种不可或缺的工具，尤其在处理集合数据时，它能够显著提升代码的简洁性和可读性。本文将深入探讨 Lambda 表达式的语法结构、使用时的关键注意事项，并详细介绍常用的数组及 LINQ 集合操作方法，最后通过对比展示 Lambda 表达式的优势。</description>
+    </item>
+    <item>
+      <title>哑铃侧平举</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%93%91%E9%93%83%E4%BE%A7%E5%B9%B3%E4%B8%BE_2025052212347/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%93%91%E9%93%83%E4%BE%A7%E5%B9%B3%E4%B8%BE_2025052212347/</guid>
+      <pubDate>Thu, 22 May 2025 12:34:00 +0800</pubDate>
+      <description>决定中束刺激范围的大小 上半身略微前倾可以练到后束 前倾角度因人而异，可以在用卡片测量法</description>
+    </item>
+    <item>
+      <title>零工大潮：制造业的结构性变革</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%9B%B6%E5%B7%A5%E5%A4%A7%E6%BD%AE%EF%BC%9A%E5%88%B6%E9%80%A0%E4%B8%9A%E7%9A%84%E7%BB%93%E6%9E%84%E6%80%A7%E5%8F%98%E9%9D%A9_20250506103739/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%9B%B6%E5%B7%A5%E5%A4%A7%E6%BD%AE%EF%BC%9A%E5%88%B6%E9%80%A0%E4%B8%9A%E7%9A%84%E7%BB%93%E6%9E%84%E6%80%A7%E5%8F%98%E9%9D%A9_20250506103739/</guid>
+      <pubDate>Tue, 06 May 2025 10:37:00 +0800</pubDate>
+      <description>近期，北京大学张丹丹教授的研究揭示了中国制造业正在经历的一场深刻变革：零工化趋势日益明显。数据显示，制造业中派遣工已达 4000 万人，占从业人员的 31.12%，意味着三个工人中就有一个是零工。更令人震惊的是，在一些万人大厂，这一比例甚至高达 80%。</description>
+    </item>
+    <item>
+      <title>MBTI 性格测试--INTJ</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/MBTI%20%E6%80%A7%E6%A0%BC%E6%B5%8B%E8%AF%95_20250503120011/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/MBTI%20%E6%80%A7%E6%A0%BC%E6%B5%8B%E8%AF%95_20250503120011/</guid>
+      <pubDate>Sat, 03 May 2025 12:00:00 +0800</pubDate>
+      <description>了解了这个测试之后我认为这个东西不是天生的，它会受到人生经历、环境变化等各种因素的影响，前几年的我来测试应该不是这样的结果。</description>
+    </item>
+    <item>
+      <title>核心机制</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6_20250419105927/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6_20250419105927/</guid>
+      <pubDate>Sat, 19 Apr 2025 10:59:27 +0800</pubDate>
+      <description>《金铲铲之战》的核心机制是游戏的灵魂所在，掌握这些机制能让你在对局中更具优势。本章将深入讲解三大核心机制：棋子羁绊、经济管理和装备系统。</description>
+    </item>
+    <item>
+      <title>游戏基础</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%B8%B8%E6%88%8F%E5%9F%BA%E7%A1%80_20250419105117/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%B8%B8%E6%88%8F%E5%9F%BA%E7%A1%80_20250419105117/</guid>
+      <pubDate>Sat, 19 Apr 2025 10:51:17 +0800</pubDate>
+      <description>《金铲铲之战》是一款8人对战的自动战斗策略游戏。每位玩家通过合理购买、布置、升级棋子，搭配装备和羁绊效果，来组建最强阵容与其他玩家对战。</description>
+    </item>
+    <item>
+      <title>核心总结 20250414085633</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93_20250414085633/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93_20250414085633/</guid>
+      <pubDate>Mon, 14 Apr 2025 08:56:33 +0800</pubDate>
+      <description>DbSet 允许 EF Core 查询和保存指定实体的实例到数据库。</description>
+    </item>
+    <item>
+      <title>DbContext in Entity Framework Core</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%9B%E5%BB%BA%20DbContext_20250414085220/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%9B%E5%BB%BA%20DbContext_20250414085220/</guid>
+      <pubDate>Mon, 14 Apr 2025 08:52:20 +0800</pubDate>
+      <description>The DbContext class is an integral part of the Entity Framework. An instance of DbContext represents a session with the database which can be used to quer…</description>
+    </item>
+    <item>
+      <title>金铲铲从入门到精通</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%87%91%E9%93%B2%E9%93%B2%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A_20250414083941/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%87%91%E9%93%B2%E9%93%B2%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A_20250414083941/</guid>
+      <pubDate>Mon, 14 Apr 2025 08:39:00 +0800</pubDate>
+      <description>欢迎来到《金铲铲从入门到精通》教程！本教程旨在帮助新手玩家快速了解并掌握《金铲铲之战》这款自走棋游戏的核心玩法和策略。</description>
+    </item>
+    <item>
+      <title>核心总结 20250414082121</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93_20250414082121/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%A0%B8%E5%BF%83%E6%80%BB%E7%BB%93_20250414082121/</guid>
+      <pubDate>Mon, 14 Apr 2025 08:21:21 +0800</pubDate>
+      <description>要想对领域类内容进行 CURD 操作，我们需要在 Entity Framework 的 DbContext 类中将它们作为 DbSet 属性包含，以便 EF 引擎能够跟踪它们的状态。</description>
+    </item>
+    <item>
+      <title>Create Entities</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93_20250414081656/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93_20250414081656/</guid>
+      <pubDate>Mon, 14 Apr 2025 08:16:00 +0800</pubDate>
+      <description>Here we will create domain classes for our demo application and will see the difference between domain classes and entity classes of Entity Framework Core.</description>
+    </item>
+    <item>
+      <title>Entity Framework Tutorial</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%BF%BB%E8%AF%91%E5%AD%A6%E4%B9%A0%20Entity%20Framework%20Tutorial_2025041408136/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%BF%BB%E8%AF%91%E5%AD%A6%E4%B9%A0%20Entity%20Framework%20Tutorial_2025041408136/</guid>
+      <pubDate>Mon, 14 Apr 2025 08:13:00 +0800</pubDate>
+      <description>参考文档：Entity Framework Tutorial--边翻译边做注解。</description>
+    </item>
+    <item>
+      <title>LocalSend</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/LocalSend_20250407082622/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/LocalSend_20250407082622/</guid>
+      <pubDate>Mon, 07 Apr 2025 08:26:00 +0800</pubDate>
+      <description>这么好用的软件我不允许还有人不知道。设备之间文件互传，不限制文件大小！免费、开源、全平台使用、最重要的是没有任何广告，下面请看详细介绍。</description>
+    </item>
+    <item>
+      <title>酱油烤南瓜</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%85%B1%E6%B2%B9%E7%83%A4%E5%8D%97%E7%93%9C_20250331092447/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%85%B1%E6%B2%B9%E7%83%A4%E5%8D%97%E7%93%9C_20250331092447/</guid>
+      <pubDate>Mon, 31 Mar 2025 09:24:00 +0800</pubDate>
+      <description>第一步：南瓜去皮切 ​0.5 cm 均匀薄片​（太厚需延长烤时）。</description>
+    </item>
+    <item>
+      <title>鸡肉香菇烤茄子</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%B8%A1%E8%82%89%E9%A6%99%E8%8F%87%E7%83%A4%E8%8C%84%E5%AD%90_20250329222422/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%B8%A1%E8%82%89%E9%A6%99%E8%8F%87%E7%83%A4%E8%8C%84%E5%AD%90_20250329222422/</guid>
+      <pubDate>Sat, 29 Mar 2025 22:24:00 +0800</pubDate>
+      <description>长茄子 2 根 鸡胸肉 200 g 干香菇 5 朵 洋葱半颗 大蒜 5 瓣 生抽 2 勺 橄榄油 5 mL</description>
+    </item>
+    <item>
+      <title>菠菜芙蓉汤：清新滋养的健康之选</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%8F%A0%E8%8F%9C%E8%8A%99%E8%93%89%E6%B1%A4_2025031623307/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%8F%A0%E8%8F%9C%E8%8A%99%E8%93%89%E6%B1%A4_2025031623307/</guid>
+      <pubDate>Sun, 16 Mar 2025 23:30:00 +0800</pubDate>
+      <description>在快节奏的现代生活中，人们对于美食的追求不仅局限于口感的享受，更注重其营养价值与健康属性。今天，我要和大家分享一道既美味又健康的佳肴——菠菜芙蓉汤，这道汤品以其丰富的食材、均衡的营养和低卡高纤的特点，成为了众多食客心中的宠儿。</description>
+    </item>
+    <item>
+      <title>GitHub Actions 连环报错修复实录：从 Actions 缓存失效到权限升级的完整排查</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/GitHub%20Actions%20%E8%BF%9E%E7%8E%AF%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D%E5%AE%9E%E5%BD%95%EF%BC%9A%E4%BB%8E%20Actions%20%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88%E5%88%B0%E6%9D%83%E9%99%90%E5%8D%87%E7%BA%A7%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8E%92%E6%9F%A5_2025031613525/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/GitHub%20Actions%20%E8%BF%9E%E7%8E%AF%E6%8A%A5%E9%94%99%E4%BF%AE%E5%A4%8D%E5%AE%9E%E5%BD%95%EF%BC%9A%E4%BB%8E%20Actions%20%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88%E5%88%B0%E6%9D%83%E9%99%90%E5%8D%87%E7%BA%A7%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8E%92%E6%9F%A5_2025031613525/</guid>
+      <pubDate>Sun, 16 Mar 2025 13:52:00 +0800</pubDate>
+      <description>在为个人博客网站配置持续集成时，我经历了两个阶段的报错排查。以下是完整的故障复现与修复过程：</description>
+    </item>
+    <item>
+      <title>Mac 观看杜比视频发紫解决方案</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/Mac%20%E8%A7%82%E7%9C%8B%E6%9D%9C%E6%AF%94%E8%A7%86%E9%A2%91%E5%8F%91%E7%B4%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_20250315171239/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/Mac%20%E8%A7%82%E7%9C%8B%E6%9D%9C%E6%AF%94%E8%A7%86%E9%A2%91%E5%8F%91%E7%B4%AB%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88_20250315171239/</guid>
+      <pubDate>Sat, 15 Mar 2025 17:12:00 +0800</pubDate>
+      <description>第二步：如下图所示，在观看电影界面点击右下角的三个点，划到最下面，找到色调，拖动红色圈圈小圆点改变值，左上角的红色方块区域会显示值，个人认为调整为 -47 效果是最好的。</description>
+    </item>
+    <item>
+      <title>用于人工智能学习的 Anaconda 环境搭建</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%94%A8%E4%BA%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E7%9A%84%20Anaconda%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA_20250302093618/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E7%94%A8%E4%BA%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AD%A6%E4%B9%A0%E7%9A%84%20Anaconda%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA_20250302093618/</guid>
+      <pubDate>Sun, 02 Mar 2025 09:36:00 +0800</pubDate>
+      <description>打开Anaconda 下载界面，点击 Skip registration，进入下载界面下载对应的软件版本。</description>
+      <category>人工智能</category>
+    </item>
+    <item>
+      <title>西芹苹果汁</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%A5%BF%E8%8A%B9%E8%8B%B9%E6%9E%9C%E6%B1%81_20250228155625/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%A5%BF%E8%8A%B9%E8%8B%B9%E6%9E%9C%E6%B1%81_20250228155625/</guid>
+      <pubDate>Fri, 28 Feb 2025 15:56:00 +0800</pubDate>
+      <description>西芹 150 g（约 3 根中等茎秆） 苹果 100 g（½个富士苹果） 饮用水 250 mL 可选辅料：柠檬汁 5 mL、蜂蜜 5-10 g</description>
+    </item>
+    <item>
+      <title>Synergy 报错：NOTE: Cursor is locked to screen, check Scroll Lock key</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/Synergy%20%E6%8A%A5%E9%94%99_20250228141341/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/Synergy%20%E6%8A%A5%E9%94%99_20250228141341/</guid>
+      <pubDate>Fri, 28 Feb 2025 14:13:00 +0800</pubDate>
+      <description>开启了键盘的滚动锁定 （Scroll Lock）功能，再次点击该按键即可。</description>
+    </item>
+    <item>
+      <title>GPT-4.5 深度评测：更懂人心，但非全能战士</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/GPT-4.5%20%E6%B7%B1%E5%BA%A6%E8%AF%84%E6%B5%8B%EF%BC%9A%E6%9B%B4%E6%87%82%E4%BA%BA%E5%BF%83%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%85%A8%E8%83%BD%E6%88%98%E5%A3%AB_20250228125042/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/GPT-4.5%20%E6%B7%B1%E5%BA%A6%E8%AF%84%E6%B5%8B%EF%BC%9A%E6%9B%B4%E6%87%82%E4%BA%BA%E5%BF%83%EF%BC%8C%E4%BD%86%E9%9D%9E%E5%85%A8%E8%83%BD%E6%88%98%E5%A3%AB_20250228125042/</guid>
+      <pubDate>Fri, 28 Feb 2025 12:50:00 +0800</pubDate>
+      <description>2025 年 2 月 28 日凌晨，OpenAI 以一场 13 分钟的直播发布了最新语言模型 GPT-4.5（代号 Orion）。作为 GPT-4 的迭代版本，这一号称“史上最大规模、最高情商”的模型迅速引发热议。本文将从性能、技术革新、争议点及行业影响四个维度，结合多方评测数据，全面解析 GPT-4.5…</description>
+    </item>
+    <item>
+      <title>八达岭长城游玩攻略</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%85%AB%E8%BE%BE%E5%B2%AD%E6%B8%B8%E7%8E%A9%E6%94%BB%E7%95%A5_202502232314/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%85%AB%E8%BE%BE%E5%B2%AD%E6%B8%B8%E7%8E%A9%E6%94%BB%E7%95%A5_202502232314/</guid>
+      <pubDate>Sun, 23 Feb 2025 23:13:00 +0800</pubDate>
+      <description>很多老攻略建议先坐地铁到德胜门，再换乘 877 路公交直达八达岭长城，但实际情况是 877 路的始发站已经更改。在德胜门公交站，往往只能遇到喊着“直通车”的私营车辆，票价高达 100 元，且不靠谱。</description>
+    </item>
+    <item>
+      <title>做自己的主人，成为更好的自己</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%81%9A%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%BB%E4%BA%BA%EF%BC%8C%E6%88%90%E4%B8%BA%E6%9B%B4%E5%A5%BD%E7%9A%84%E8%87%AA%E5%B7%B1_202502221842/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%81%9A%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%BB%E4%BA%BA%EF%BC%8C%E6%88%90%E4%B8%BA%E6%9B%B4%E5%A5%BD%E7%9A%84%E8%87%AA%E5%B7%B1_202502221842/</guid>
+      <pubDate>Sat, 22 Feb 2025 18:42:00 +0800</pubDate>
+      <description>每个人的人生都是一场独一无二的旅程，充满了挑战与机遇。在这条路上，我们或许会遇到质疑与嘲讽，或许会面对犹豫与迷茫，但无论如何，我们都要坚定地走下去。因为只有我们自己，才是我们人生的主人。以下，是一些我对人生的思考与态度，希望能与你共勉，激励你成为更好的自己。</description>
+    </item>
+    <item>
+      <title>利用 AI 自动化操作电脑开源项目已支持 Deepseek</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%A9%E7%94%A8%20AI%20%E8%87%AA%E5%8A%A8%E5%8C%96%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%B7%B2%E6%94%AF%E6%8C%81%20Deepseek_2025022013309/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%A9%E7%94%A8%20AI%20%E8%87%AA%E5%8A%A8%E5%8C%96%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%B7%B2%E6%94%AF%E6%8C%81%20Deepseek_2025022013309/</guid>
+      <pubDate>Thu, 20 Feb 2025 13:30:00 +0800</pubDate>
+      <description>传统的大型语言模型（LLM）在处理文本和代码时表现优异，但面对图形用户界面（GUI）这一人类最自然的交互方式时，却如同“盲人摸象”——无法精准识别按钮、图标或理解界面逻辑。而近期开源的 OmniParser V 2 项目，打破了这一僵局。通过将屏幕截图转化为结构化数据，它赋予 LLM 一双“数字眼睛”，使其…</description>
+    </item>
+    <item>
+      <title>关于 obsidian 中的公式转化问题</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%85%B3%E4%BA%8E%20obsidian%20%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E8%BD%AC%E5%8C%96%E9%97%AE%E9%A2%98_202502191102/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%85%B3%E4%BA%8E%20obsidian%20%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E8%BD%AC%E5%8C%96%E9%97%AE%E9%A2%98_202502191102/</guid>
+      <pubDate>Wed, 19 Feb 2025 11:02:00 +0800</pubDate>
+      <description>关于 ob 中的公式转化问题一直是我的痛点，用 AI 生成的公式一般都是 \[公式\] 包裹的，这放在 ob 中无法正常显示，之前自己都是重新跟 AI 说让它改成 $$ 包裹的公式，费时又费力，今天逛论坛让我发现了一个帖子，完美解决了这个问题：</description>
+      <category>Obsidian</category>
+      <category>LaTeX</category>
+    </item>
+    <item>
+      <title>天生易便秘？科学调理肠道，重获顺畅生活</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%A4%A9%E7%94%9F%E6%98%93%E4%BE%BF%E7%A7%98%EF%BC%9F%E7%A7%91%E5%AD%A6%E8%B0%83%E7%90%86%E8%82%A0%E9%81%93%EF%BC%8C%E9%87%8D%E8%8E%B7%E9%A1%BA%E7%95%85%E7%94%9F%E6%B4%BB_202502181046/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%A4%A9%E7%94%9F%E6%98%93%E4%BE%BF%E7%A7%98%EF%BC%9F%E7%A7%91%E5%AD%A6%E8%B0%83%E7%90%86%E8%82%A0%E9%81%93%EF%BC%8C%E9%87%8D%E8%8E%B7%E9%A1%BA%E7%95%85%E7%94%9F%E6%B4%BB_202502181046/</guid>
+      <pubDate>Tue, 18 Feb 2025 22:45:00 +0800</pubDate>
+      <description>对于天生容易便秘的人来说，肠道似乎总是“慢半拍”——腹胀、排便费力、甚至长期依赖药物，这些困扰不仅影响生活质量，还可能引发焦虑。事实上，肠道健康与先天体质有关，但后天的科学管理更能扭转局面。通过调整饮食、优化习惯、激活肠道动力，即使“天生肠道弱”，也能逐步建立起规律的排便节奏。</description>
+    </item>
+    <item>
+      <title>青菜香菇豆瓣汤</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%9D%92%E8%8F%9C%E9%A6%99%E8%8F%87%E8%B1%86%E7%93%A3%E6%B1%A4_202502171526/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%9D%92%E8%8F%9C%E9%A6%99%E8%8F%87%E8%B1%86%E7%93%A3%E6%B1%A4_202502171526/</guid>
+      <pubDate>Mon, 17 Feb 2025 15:26:00 +0800</pubDate>
+      <description>在繁忙的生活中，我们常常需要一些既简单又健康的菜肴来满足日常的营养需求。今天，我想和大家分享一道清淡又富有营养的汤品——青菜香菇豆腐汤。这道汤不仅味道鲜美，而且制作过程非常简单，适合家庭日常食用。</description>
+    </item>
+    <item>
+      <title>当 AI 走进街头巷尾</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%BD%93%20AI%20%E8%B5%B0%E8%BF%9B%E8%A1%97%E5%A4%B4%E5%B7%B7%E5%B0%BE_202502151709/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%BD%93%20AI%20%E8%B5%B0%E8%BF%9B%E8%A1%97%E5%A4%B4%E5%B7%B7%E5%B0%BE_202502151709/</guid>
+      <pubDate>Sat, 15 Feb 2025 17:08:00 +0800</pubDate>
+      <description>腊月二十九，村口一片热闹。李大爷的手机里正放着 AI 演绎的京剧唱腔，韵味十足；王奶奶手里珍藏的那张军装照也被 AI 修复得焕然如新。这样的场景，勾勒出中国 AI 技术深深扎根民间的生动画面。曾经让人觉得高深莫测的技术名词，如今成了菜摊老板们讨价还价时的日常话题。这场全民认知的变革，背后是 DeepSeek…</description>
+    </item>
+    <item>
+      <title>20250213 阅读笔记</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0_202502130855/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0_202502130855/</guid>
+      <pubDate>Thu, 13 Feb 2025 08:54:00 +0800</pubDate>
+      <description>今天凌晨，OpenAI 首席执行官 Sam Altman 宣布了关于 GPT-4.5 和 GPT-5 的重要消息。GPT-4.5，即猎户座模型（Orion），将很快发布，并是最后一个非思维链模型。随后，OpenAI 将整合 GPT 和 O 系列模型，推出一个新系统，能够自动选择思考和非思考功能，适用于多种任…</description>
+    </item>
+    <item>
+      <title>一套键鼠同时控制两台电脑</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%B8%80%E5%A5%97%E9%94%AE%E9%BC%A0%E5%90%8C%E6%97%B6%E6%8E%A7%E5%88%B6%E4%B8%A4%E5%8F%B0%E7%94%B5%E8%84%91_202502111359/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%B8%80%E5%A5%97%E9%94%AE%E9%BC%A0%E5%90%8C%E6%97%B6%E6%8E%A7%E5%88%B6%E4%B8%A4%E5%8F%B0%E7%94%B5%E8%84%91_202502111359/</guid>
+      <pubDate>Tue, 11 Feb 2025 13:58:00 +0800</pubDate>
+      <description>要求：Mac 自带的键盘和触摸板非常好用，想要让其同时控制两台电脑。</description>
+    </item>
+    <item>
+      <title>豆腐拌青菜</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%B1%86%E8%85%90%E6%8B%8C%E9%9D%92%E8%8F%9C_20250206203955/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%B1%86%E8%85%90%E6%8B%8C%E9%9D%92%E8%8F%9C_20250206203955/</guid>
+      <pubDate>Thu, 06 Feb 2025 20:39:00 +0800</pubDate>
+      <description>青菜：300 克 胡萝卜：80 克 豆腐：100 克</description>
+    </item>
+    <item>
+      <title>富含膳食纤维的食物有哪些？</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%AF%8C%E5%90%AB%E8%86%B3%E9%A3%9F%E7%BA%A4%E7%BB%B4%E7%9A%84%E9%A3%9F%E7%89%A9%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F_2025020422494/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%AF%8C%E5%90%AB%E8%86%B3%E9%A3%9F%E7%BA%A4%E7%BB%B4%E7%9A%84%E9%A3%9F%E7%89%A9%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F_2025020422494/</guid>
+      <pubDate>Tue, 04 Feb 2025 22:49:00 +0800</pubDate>
+      <description>膳食纤维通过多种机制缓解便秘：不可溶性纤维增加粪便体积，刺激肠道蠕动；可溶性纤维吸水形成凝胶，软化粪便，润滑肠道；膳食纤维作为益生元，其能促进益生菌生长，改善肠道环境；膳食纤维还能延缓胃排空，增加饱腹感，并帮助降低血脂。因此，多吃富含膳食纤维的食物，如蔬菜、水果、全谷物等，能有效改善便秘问题。</description>
+    </item>
+    <item>
+      <title>DeepSeek：AI 行业的“黑马”如何撼动英伟达与市场格局？</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/DeepSeek%EF%BC%9AAI%20%E8%A1%8C%E4%B8%9A%E7%9A%84%E2%80%9C%E9%BB%91%E9%A9%AC%E2%80%9D%E5%A6%82%E4%BD%95%E6%92%BC%E5%8A%A8%E8%8B%B1%E4%BC%9F%E8%BE%BE%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%A0%BC%E5%B1%80%EF%BC%9F_20250128231524/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/DeepSeek%EF%BC%9AAI%20%E8%A1%8C%E4%B8%9A%E7%9A%84%E2%80%9C%E9%BB%91%E9%A9%AC%E2%80%9D%E5%A6%82%E4%BD%95%E6%92%BC%E5%8A%A8%E8%8B%B1%E4%BC%9F%E8%BE%BE%E4%B8%8E%E5%B8%82%E5%9C%BA%E6%A0%BC%E5%B1%80%EF%BC%9F_20250128231524/</guid>
+      <pubDate>Tue, 28 Jan 2025 23:15:00 +0800</pubDate>
+      <description>过去两年里，人工智能（AI）的高速发展被视为推动全球生产力增长的核心动力，而英伟达（Nvidia）作为 AI 芯片领域的龙头企业，一直牢牢占据行业中心地位。然而，最近一家来自中国的 AI 公司——DeepSeek，凭借其卓越的技术创新和开源策略，迅速崛起为行业焦点。更令人震惊的是，DeepSeek 的最新成…</description>
+      <category>AI</category>
+      <category>DeepSeek</category>
+    </item>
+    <item>
+      <title>多媒体演示文稿 PowerPoint 无法打开，可尝试修复此演示文稿</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%A4%9A%E5%AA%92%E4%BD%93%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BFPowerPoint%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%EF%BC%8C%E5%8F%AF%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D%E6%AD%A4%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BF_20250118114421/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%A4%9A%E5%AA%92%E4%BD%93%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BFPowerPoint%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%EF%BC%8C%E5%8F%AF%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D%E6%AD%A4%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BF_20250118114421/</guid>
+      <pubDate>Sat, 18 Jan 2025 11:44:00 +0800</pubDate>
+      <description>当我们在新的设备打开 PPT 文件或者打开别人发来的文件的时候经常出现标题中的提示信息，就算点击修复了打开也是空白文件，经过搜索，我发现了一个测试能用的方法，分享给大家：</description>
+    </item>
+    <item>
+      <title>蚝油上海青</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%9A%9D%E6%B2%B9%E4%B8%8A%E6%B5%B7%E9%9D%92/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%9A%9D%E6%B2%B9%E4%B8%8A%E6%B5%B7%E9%9D%92/</guid>
+      <pubDate>Fri, 17 Jan 2025 22:54:00 +0800</pubDate>
+      <description>青菜洗净，茎叶分离。 将 2 g 盐和 2 mL 食用油（焯烫用，不计入用量）倒入水锅，水沸后先放入青菜梗焯烫，30 秒后放入青菜叶，快速焯烫后捞出沥干。 青菜装盘，浇上稀释的耗油即可。</description>
+    </item>
+    <item>
+      <title>降压减脂菜谱</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%99%8D%E5%8E%8B%E5%87%8F%E8%84%82%E8%8F%9C%E8%B0%B1/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%99%8D%E5%8E%8B%E5%87%8F%E8%84%82%E8%8F%9C%E8%B0%B1/</guid>
+      <pubDate>Fri, 17 Jan 2025 22:52:00 +0800</pubDate>
+      <description>蚝油上海青 豆腐拌青菜 青菜香菇豆瓣汤 西芹苹果汁 菠菜芙蓉汤 鸡肉香菇烤茄子</description>
+    </item>
+    <item>
+      <title>进制转换</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/</guid>
+      <pubDate>Thu, 16 Jan 2025 22:22:00 +0800</pubDate>
+      <description>进制转换是将一个数从一种进制表示转换为另一种进制表示的过程。以下是常见的进制转换方法和计算步骤，包括从非十进制到十进制、从十进制到其他进制以及直接在两种非十进制之间转换。</description>
+    </item>
+    <item>
+      <title>科学降压，从饮食开始</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%A7%91%E5%AD%A6%E9%99%8D%E5%8E%8B%EF%BC%8C%E4%BB%8E%E9%A5%AE%E9%A3%9F%E5%BC%80%E5%A7%8B/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%A7%91%E5%AD%A6%E9%99%8D%E5%8E%8B%EF%BC%8C%E4%BB%8E%E9%A5%AE%E9%A3%9F%E5%BC%80%E5%A7%8B/</guid>
+      <pubDate>Thu, 16 Jan 2025 20:55:00 +0800</pubDate>
+      <description>高血压是现代社会中一种常见的慢性疾病，它不仅影响着我们的日常生活，还可能引发严重的心血管疾病。除了药物治疗，调整饮食结构、摄取有益的营养素也是控制血压的重要手段。今天，我们就来聊聊饮食中那些对降压有益的营养素和食材，让健康从餐桌开始。</description>
+    </item>
+    <item>
+      <title>转发 api 配置教程</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E8%BD%AC%E5%8F%91api%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B_20250111143520/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E8%BD%AC%E5%8F%91api%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B_20250111143520/</guid>
+      <pubDate>Sat, 11 Jan 2025 14:35:00 +0800</pubDate>
+      <description>打开ChatAnywhere网站你会看到如下界面：</description>
+    </item>
+    <item>
+      <title>二零二四年博客内容汇总</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E4%BA%8C%E9%9B%B6%E4%BA%8C%E5%9B%9B%E5%B9%B4%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E6%B1%87%E6%80%BB_20250102114010/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E4%BA%8C%E9%9B%B6%E4%BA%8C%E5%9B%9B%E5%B9%B4%E5%8D%9A%E5%AE%A2%E5%86%85%E5%AE%B9%E6%B1%87%E6%80%BB_20250102114010/</guid>
+      <pubDate>Thu, 02 Jan 2025 11:40:00 +0800</pubDate>
+      <description>12-08：阅读笔记分享 12-07：二零二一年一月份</description>
+    </item>
+    <item>
+      <title>20241208 阅读笔记分享</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E5%88%86%E4%BA%AB_20241208185942/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E5%88%86%E4%BA%AB_20241208185942/</guid>
+      <pubDate>Sun, 08 Dec 2024 18:59:00 +0800</pubDate>
+      <description>AI 技术影响的不止医疗领域，这关乎到我们生活的方方面面，今后的年轻人想要获得更好的发展就一定要拥抱 AI，善于使用 AI。</description>
+    </item>
+    <item>
+      <title>二零二一年一月份</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BA%8C%E9%9B%B6%E4%BA%8C%E4%B8%80%E5%B9%B4%E4%B8%80%E6%9C%88%E4%BB%BD_20241207153647/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BA%8C%E9%9B%B6%E4%BA%8C%E4%B8%80%E5%B9%B4%E4%B8%80%E6%9C%88%E4%BB%BD_20241207153647/</guid>
+      <pubDate>Sat, 07 Dec 2024 15:36:00 +0800</pubDate>
+      <description>1、M: That skirt you are wearing looks beautiful. How much did it cost?</description>
+    </item>
+    <item>
+      <title>GET</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/GET_20241207153536/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/GET_20241207153536/</guid>
+      <pubDate>Sat, 07 Dec 2024 15:35:00 +0800</pubDate>
+      <description>二零二一年一月份</description>
+    </item>
+    <item>
+      <title>插叙人生歌词赏析</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%8F%92%E5%8F%99%E4%BA%BA%E7%94%9F%E6%AD%8C%E8%AF%8D%E8%B5%8F%E6%9E%90_2024112318387/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%8F%92%E5%8F%99%E4%BA%BA%E7%94%9F%E6%AD%8C%E8%AF%8D%E8%B5%8F%E6%9E%90_2024112318387/</guid>
+      <pubDate>Sat, 23 Nov 2024 18:38:00 +0800</pubDate>
+      <description>先说下我对这首歌的认识，起初这首歌发布的时候我就听过了，当时没怎么看歌词，就是觉得挺好听的就加入歌单了，半年后当我再次打开这首歌的时候没想到播放量达到了好几百万，随后我就认真看了看歌词，越看越牛逼，最后直接给跪了。这首歌的听感、故事性、韵脚等都达到了顶级水平，真的是大师级的作品！拓宽了中文说唱的边界，正如黄…</description>
+    </item>
+    <item>
+      <title>在 zotero 中使用 AI 辅助阅读</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/AI%20%E8%BE%85%E5%8A%A9%E9%98%85%E8%AF%BB_2024112315422/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/AI%20%E8%BE%85%E5%8A%A9%E9%98%85%E8%AF%BB_2024112315422/</guid>
+      <pubDate>Sat, 23 Nov 2024 15:42:00 +0800</pubDate>
+      <description>在 zotero 中安装插件：MuiseDestiny/zotero-gpt: GPT Meet Zotero. 准备 api，这里推荐我正在使用的 chatanywhere ，在里面可以购买转发 api 在国内随时随地都可以使用 GPT（当然，现在国内大模型基本不弱于 GPT 了，如果不需要这个，直接在找…</description>
+      <category>AI</category>
+      <category>Zotero</category>
+      <category>阅读</category>
+    </item>
+    <item>
+      <title>关于深海的鱼类和石头压不碎的原因思考</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%85%B3%E4%BA%8E%E6%B7%B1%E6%B5%B7%E7%9A%84%E9%B1%BC%E7%B1%BB%E5%92%8C%E7%9F%B3%E5%A4%B4%E5%8E%8B%E4%B8%8D%E7%A2%8E%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%80%9D%E8%80%83_20241105082752/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%85%B3%E4%BA%8E%E6%B7%B1%E6%B5%B7%E7%9A%84%E9%B1%BC%E7%B1%BB%E5%92%8C%E7%9F%B3%E5%A4%B4%E5%8E%8B%E4%B8%8D%E7%A2%8E%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%80%9D%E8%80%83_20241105082752/</guid>
+      <pubDate>Tue, 05 Nov 2024 08:27:00 +0800</pubDate>
+      <description>昨天课上老师提出了一个问题我非常感兴趣：深海的压强非常大，有些鱼类却能正常生存，而且在如此巨大的压强下石头也没有碎裂，这是为什么呢？</description>
+    </item>
+    <item>
+      <title>装机体验心得</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E8%A3%85%E6%9C%BA%E4%BD%93%E9%AA%8C%E5%BF%83%E5%BE%97_2024110508266/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E8%A3%85%E6%9C%BA%E4%BD%93%E9%AA%8C%E5%BF%83%E5%BE%97_2024110508266/</guid>
+      <pubDate>Tue, 05 Nov 2024 08:26:00 +0800</pubDate>
+      <description>购买内存的时候可以提前和商家说好让他给自己装好需要的系统，一般都是要 win 10 或者 win 11 的。这些服务都是免费的。</description>
+    </item>
+    <item>
+      <title>全身肌肉训练笔记</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%A8%E8%BA%AB%E8%82%8C%E8%82%89%E8%AE%AD%E7%BB%83%E7%AC%94%E8%AE%B0_2024102918596/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%A8%E8%BA%AB%E8%82%8C%E8%82%89%E8%AE%AD%E7%BB%83%E7%AC%94%E8%AE%B0_2024102918596/</guid>
+      <pubDate>Tue, 29 Oct 2024 18:59:00 +0800</pubDate>
+      <description>身体上斜 斜向上哑铃 斜向上飞鸟 斜向上卧推 低位俯卧撑</description>
+    </item>
+    <item>
+      <title>Follow</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/Follow_20241029122744/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/Follow_20241029122744/</guid>
+      <pubDate>Tue, 29 Oct 2024 12:27:00 +0800</pubDate>
+      <description>之前我发文介绍过 rss 订阅--关于 RSS 阅读20240611163019，最新非常火的一款软件叫做 Follow 相信不少人都听说了，想要了解更具体点的话大家可以看我之前的文章和下面推荐的的几篇博文：</description>
+    </item>
+    <item>
+      <title>Zotero 文献下载</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/Zotero%20%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD_20241021191937/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/Zotero%20%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD_20241021191937/</guid>
+      <pubDate>Mon, 21 Oct 2024 19:19:00 +0800</pubDate>
+      <description>文献管理在学术研究和专业领域中扮演着至关重要的角色。有效的文献管理不仅可以提高资料的组织和检索效率，还能够增强研究者的学术诚信与系统性思维。通过规范化的管理方法，研究人员能够清晰地标识引用来源，避免抄袭风险，从而提升研究质量与可信度。市面上目前有很多种文献管理软件，经过大量尝试我觉得zotero是最优秀，它…</description>
+    </item>
+    <item>
+      <title>zotero 同步插件及其配置文件</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/zotero_%E5%90%8C%E6%AD%A5%E6%8F%92%E4%BB%B6%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6_2024101322142/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/zotero_%E5%90%8C%E6%AD%A5%E6%8F%92%E4%BB%B6%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6_2024101322142/</guid>
+      <pubDate>Sun, 13 Oct 2024 22:14:00 +0800</pubDate>
+      <description>当我们用两台电脑看文献的时候可能涉及到文献的同步问题，关于如何配置文献这篇文章暂且不聊，本文主要想解决的问题是：在使用 zotero 官方同步的时候，两台电脑只能同步 PDF 文件和笔记文件，我们下载的插件以及配置都没有办法同步，如果手动同步的话就太原始了。非常感谢 zotero 中文社区的 @摸鱼仙人为我…</description>
+    </item>
+    <item>
+      <title>zotero 系列教程</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/zotero%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B_2024101122465/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/zotero%20%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B_2024101122465/</guid>
+      <pubDate>Fri, 11 Oct 2024 22:46:00 +0800</pubDate>
+      <description>大家好，今天博客开发一个新的板块，zotero 系列。作为一个开源软件，它和 obsidian 一样，高度定制化，给你一个毛坯房让你按照自己的喜好自由装修，在满足文献阅读所有功能的基础上还能兼顾美观真的很优秀。</description>
+    </item>
+    <item>
+      <title>利用 PowerShell 批量删除文件名中的多余字段</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%A9%E7%94%A8PowerShell%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%BD%99%E5%AD%97%E6%AE%B5_20241006101357/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%A9%E7%94%A8PowerShell%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%BD%99%E5%AD%97%E6%AE%B5_20241006101357/</guid>
+      <pubDate>Sun, 06 Oct 2024 10:13:00 +0800</pubDate>
+      <description>在我们从网上下载视频的时候总会碰到文件名称中带有各种各样的广告或者多余字段的情况，比如说 1-引言-1080P 高清-AVC 这段文件名后面的 -1080P 高清-AVC 我就不想让他存在（强迫症），接下来我将介绍利用 PowerShell 批量删除文件名中的多余字段的方法：</description>
+    </item>
+    <item>
+      <title>志愿军——存亡之战影评</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%BF%97%E6%84%BF%E5%86%9B_%E5%AD%98%E4%BA%A1%E4%B9%8B%E6%88%98%E5%BD%B1%E8%AF%84_20241005125911/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%BF%97%E6%84%BF%E5%86%9B_%E5%AD%98%E4%BA%A1%E4%B9%8B%E6%88%98%E5%BD%B1%E8%AF%84_20241005125911/</guid>
+      <pubDate>Sat, 05 Oct 2024 12:59:00 +0800</pubDate>
+      <description>战争场面 + IMAX 非常震撼。 剧情一般般，有一些想不明白的地方。 个人英雄主义，略像战狼。 孙醒出手很帅！ 最后张子枫演的那段很催泪。</description>
+    </item>
+    <item>
+      <title>北京动物园</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%8C%97%E4%BA%AC%E5%8A%A8%E7%89%A9%E5%9B%AD_20241005125852/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%8C%97%E4%BA%AC%E5%8A%A8%E7%89%A9%E5%9B%AD_20241005125852/</guid>
+      <pubDate>Sat, 05 Oct 2024 12:58:00 +0800</pubDate>
+      <description>五天前去的，由于拖延症一直没评价，这次好好说一说：公园很大（不比颐和园小），动物种类繁多，对于这个票价（19 元门票 + 大熊猫馆）来说超值。一圈逛下来个人感觉最值得看的如下：</description>
+    </item>
+    <item>
+      <title>何为边界感</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%95%E4%B8%BA%E8%BE%B9%E7%95%8C%E6%84%9F_20240925085444/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%95%E4%B8%BA%E8%BE%B9%E7%95%8C%E6%84%9F_20240925085444/</guid>
+      <pubDate>Wed, 25 Sep 2024 08:54:00 +0800</pubDate>
+      <description>边界感是指在人际关系、个人生活以及心理层面中，对自我与他人、自我与外部世界之间设定的合理界限。</description>
+    </item>
+    <item>
+      <title>笔记本电脑重装完系统后连接电源会嘀的一声</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85%E5%AE%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E8%BF%9E%E6%8E%A5%E7%94%B5%E6%BA%90%E4%BC%9A%E5%98%80%E7%9A%84%E4%B8%80%E5%A3%B0_20240917142147/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%B5%E8%84%91%E9%87%8D%E8%A3%85%E5%AE%8C%E7%B3%BB%E7%BB%9F%E5%90%8E%E8%BF%9E%E6%8E%A5%E7%94%B5%E6%BA%90%E4%BC%9A%E5%98%80%E7%9A%84%E4%B8%80%E5%A3%B0_20240917142147/</guid>
+      <pubDate>Tue, 17 Sep 2024 14:21:00 +0800</pubDate>
+      <description>自从自己的电脑重装完系统之后，每次连接电源或者断开电源的时候都会发出嘀的一声提示音。这要是在家里还好，如果在自习室或者班里面就很社死了，今天花了一点时间终于解决了这个问题，请看操作。</description>
+    </item>
+    <item>
+      <title>颐和园</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E9%A2%90%E5%92%8C%E5%9B%AD_20240916224256/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E9%A2%90%E5%92%8C%E5%9B%AD_20240916224256/</guid>
+      <pubDate>Mon, 16 Sep 2024 22:42:00 +0800</pubDate>
+      <description>今天是假期的第二天，我们来到颐和园，这里的景色在我看来是优于圆明园的。当然缺点也是非常明显--需要爬山，走的路更多，一圈下来我们走了将近四个小时才出来，下面就看我一一介绍做遇到的景点吧。</description>
+    </item>
+    <item>
+      <title>圆明园</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%9C%86%E6%98%8E%E5%9B%AD_20240916074947/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%9C%86%E6%98%8E%E5%9B%AD_20240916074947/</guid>
+      <pubDate>Mon, 16 Sep 2024 07:49:00 +0800</pubDate>
+      <description>昨日有幸和舍友打卡了小学语文课本上的一张图片--圆明园西洋楼遗址，园内景色很美，到处都是郁郁葱葱的树木和含苞待放的荷花。看完之后有惊艳，也有叹息，更有热血！建议来旅游的朋友们带好饮料、食物、充电宝等，早点去，像我们下午四点半才入园，第一个景点万觉寺都已经关门了，还是比较遗憾的。</description>
+    </item>
+    <item>
+      <title>数值分析</title>
+      <link>https://nn66kk.github.io/Mon-Blog/C-Highlights/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90_20240911133421/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/C-Highlights/%E6%95%B0%E5%80%BC%E5%88%86%E6%9E%90_20240911133421/</guid>
+      <pubDate>Wed, 11 Sep 2024 13:34:00 +0800</pubDate>
+      <description>教材寻找人：牛牛大将軍 教材提供人：牛牛大将軍</description>
+    </item>
+    <item>
+      <title>机械表调整教程</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%9C%BA%E6%A2%B0%E8%A1%A8%E8%B0%83%E6%95%B4%E6%95%99%E7%A8%8B_20240705105722/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%9C%BA%E6%A2%B0%E8%A1%A8%E8%B0%83%E6%95%B4%E6%95%99%E7%A8%8B_20240705105722/</guid>
+      <pubDate>Fri, 05 Jul 2024 10:57:00 +0800</pubDate>
+      <description>调节时间的时候要逆时针转动调节按钮，不可让表盘逆时针转动，否则会损坏机芯。</description>
+    </item>
+    <item>
+      <title>孵化教程</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%AD%B5%E5%8C%96%E6%95%99%E7%A8%8B_20240705104333/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%AD%B5%E5%8C%96%E6%95%99%E7%A8%8B_20240705104333/</guid>
+      <pubDate>Fri, 05 Jul 2024 10:43:00 +0800</pubDate>
+      <description>孵化其他种蛋需要自行调试机器，按一下 SET 键，显示数字开始闪烁，点按“+”或“-”调整到需要的温度，再次点一下 SET 键完成温度设定。</description>
+    </item>
+    <item>
+      <title>文件后缀名批量修改</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E5%90%8D%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9_20240702205521/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E5%90%8D%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9_20240702205521/</guid>
+      <pubDate>Tue, 02 Jul 2024 20:55:00 +0800</pubDate>
+      <description>有时候我们下载下来的文件有批量修改后缀名的需求，以下代码能够实现，使用方式与之前写过的一篇文章相同：利用批处理脚本给当前文件夹下的所有文件按照顺序进行重命名20240621173057。</description>
+    </item>
+    <item>
+      <title>王刚：酸辣土豆丝</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%8E%8B%E5%88%9A%EF%BC%9A%E9%85%B8%E8%BE%A3%E5%9C%9F%E8%B1%86%E4%B8%9D_20240624172920/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%8E%8B%E5%88%9A%EF%BC%9A%E9%85%B8%E8%BE%A3%E5%9C%9F%E8%B1%86%E4%B8%9D_20240624172920/</guid>
+      <pubDate>Mon, 24 Jun 2024 17:29:00 +0800</pubDate>
+      <description>土豆过凉水淘洗干净； 锅中烧开水，放入土豆丝至半透明状捞出，迅速过凉水； 锅中放稍微多点油，放入干辣椒煸香后放入土豆丝； 锅边淋入陈醋和酱油，快速翻炒十来秒； 加入适量食盐和白糖调味； 加入葱花再翻炒几下即可出锅。</description>
+    </item>
+    <item>
+      <title>利用批处理脚本给当前文件夹下的所有文件按照顺序进行重命名</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%88%A9%E7%94%A8%E6%89%B9%E5%A4%84%E7%90%86%E8%84%9A%E6%9C%AC%E7%BB%99%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E6%8C%89%E7%85%A7%E9%A1%BA%E5%BA%8F%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%91%BD%E5%90%8D_20240621173057/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E5%88%A9%E7%94%A8%E6%89%B9%E5%A4%84%E7%90%86%E8%84%9A%E6%9C%AC%E7%BB%99%E5%BD%93%E5%89%8D%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E6%8C%89%E7%85%A7%E9%A1%BA%E5%BA%8F%E8%BF%9B%E8%A1%8C%E9%87%8D%E5%91%BD%E5%90%8D_20240621173057/</guid>
+      <pubDate>Fri, 21 Jun 2024 17:30:00 +0800</pubDate>
+      <description>有时候我们在网上下载下来的电视剧或者网课每集的名字里都带着乱七八糟的广告，导致我们想要看具体第几集的时候很难找到。基于以上痛点我写了个小小的批处理脚本来给当前文件夹下的所有文件按照顺序进行重命名，接下来请跟我一步一步实现它吧！</description>
+    </item>
+    <item>
+      <title>关于 RSS 阅读</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%B3%E4%BA%8E%20RSS%20%E9%98%85%E8%AF%BB_20240611163019/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%85%B3%E4%BA%8E%20RSS%20%E9%98%85%E8%AF%BB_20240611163019/</guid>
+      <pubDate>Tue, 11 Jun 2024 16:30:00 +0800</pubDate>
+      <description>今天鸟姐群里面讨论了关于 RSS 阅读的经验，再次丰富了我的阅读方式。</description>
+    </item>
+    <item>
+      <title>手动双面打印</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E6%89%8B%E5%8A%A8%E5%8F%8C%E9%9D%A2%E6%89%93%E5%8D%B0_20240606145947/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E6%89%8B%E5%8A%A8%E5%8F%8C%E9%9D%A2%E6%89%93%E5%8D%B0_20240606145947/</guid>
+      <pubDate>Thu, 06 Jun 2024 14:59:00 +0800</pubDate>
+      <description>第一步：利用 GPT 生成所有奇数页的页码序号，以下是指令和可以直接复制的序号：</description>
+    </item>
+    <item>
+      <title>新生儿智商影响外因</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%96%B0%E7%94%9F%E5%84%BF%E6%99%BA%E5%95%86%E5%BD%B1%E5%93%8D%E5%A4%96%E5%9B%A0_20240606135825/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%96%B0%E7%94%9F%E5%84%BF%E6%99%BA%E5%95%86%E5%BD%B1%E5%93%8D%E5%A4%96%E5%9B%A0_20240606135825/</guid>
+      <pubDate>Thu, 06 Jun 2024 13:58:00 +0800</pubDate>
+      <description>出生时体重大的孩子比出生时体重小的孩子平均智商更高，出生时孩子的体重严重影响其一生的智力水平。 发达国家低体重应该比例比较高 女性现在追求变瘦，生出的孩子体重也会变小 ADHD（注意力不足运动症）多发生在体重较小的新生儿</description>
+    </item>
+    <item>
+      <title>咖啡</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%92%96%E5%95%A1_20240606133219/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%92%96%E5%95%A1_20240606133219/</guid>
+      <pubDate>Thu, 06 Jun 2024 13:32:00 +0800</pubDate>
+      <description>提神醒脑 提高警惕性（开车犯困的时候喝杯咖啡） 降低死亡率（全因死亡率） 黑咖啡 U 型相关每天 2.5-4.5 杯（一杯 270 mL 左右） 咖啡加糖更好（每天不能超过 1.5-2.5 杯，不能加太多） 人工甜味剂最好不要加 抗老化 有多酚（深色化合物，深颜色的蔬菜水果也可以） 可以减少皮肤色斑 降低心…</description>
+    </item>
+    <item>
+      <title>168 断食法</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/168%20%E6%96%AD%E9%A3%9F%E6%B3%95_20240606121851/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/168%20%E6%96%AD%E9%A3%9F%E6%B3%95_20240606121851/</guid>
+      <pubDate>Thu, 06 Jun 2024 12:18:00 +0800</pubDate>
+      <description>168 断食法（16/8 Intermittent Fasting）是一种间歇性断食方法，它的基本原则是每天在一个 8 小时的进食窗口内进食，然后在剩余的 16 小时内不摄入任何热量。</description>
+    </item>
+    <item>
+      <title>打印方式</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%89%93%E5%8D%B0%E6%96%B9%E5%BC%8F_20240605110444/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%89%93%E5%8D%B0%E6%96%B9%E5%BC%8F_20240605110444/</guid>
+      <pubDate>Wed, 05 Jun 2024 11:04:00 +0800</pubDate>
+      <description>适用于不需要专业处理且重要性较低的文档。打印件看起来会比使用其他配置文件打印的打印件淡一些，但使用的墨粉较少。</description>
+    </item>
+    <item>
+      <title>体育运动中的功能性训练：第2版</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%93%E8%82%B2%E8%BF%90%E5%8A%A8%E4%B8%AD%E7%9A%84%E5%8A%9F%E8%83%BD%E6%80%A7%E8%AE%AD%E7%BB%83%EF%BC%9A%E7%AC%AC2%E7%89%88_2024060409412/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BD%93%E8%82%B2%E8%BF%90%E5%8A%A8%E4%B8%AD%E7%9A%84%E5%8A%9F%E8%83%BD%E6%80%A7%E8%AE%AD%E7%BB%83%EF%BC%9A%E7%AC%AC2%E7%89%88_2024060409412/</guid>
+      <pubDate>Tue, 04 Jun 2024 09:41:00 +0800</pubDate>
+      <description>无论运动员看起来有多么不同，训练方案都是相似的。 功能性训练的最大特点就是练习时双脚与地面接触，没有器械的辅助，极少有例外。 功能性训练包括简单的下蹲、向前弯身、弓箭步、推和拉。其目的是提供一系列连续的练习，训练运动员在所有运动平面中控制自己的身体。</description>
+    </item>
+    <item>
+      <title>obsidian 中指定页面取消鼠标悬浮预览</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/obsidian%20%E4%B8%AD%E6%8C%87%E5%AE%9A%E9%A1%B5%E9%9D%A2%E5%8F%96%E6%B6%88%E9%BC%A0%E6%A0%87%E6%82%AC%E6%B5%AE%E9%A2%84%E8%A7%88_20240524143214/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/obsidian%20%E4%B8%AD%E6%8C%87%E5%AE%9A%E9%A1%B5%E9%9D%A2%E5%8F%96%E6%B6%88%E9%BC%A0%E6%A0%87%E6%82%AC%E6%B5%AE%E9%A2%84%E8%A7%88_20240524143214/</guid>
+      <pubDate>Fri, 24 May 2024 14:32:00 +0800</pubDate>
+      <description>从鸟姐库中扒下来的 calendar 面板总有一个小小的痛点（对我来说）——在鼠标悬停的时候会弹出悬浮窗口，而我的 tasks 都是在指定文件夹当中的，并不需要这个预览功能，而且鼠标放在 calendar 任何地方都出现悬浮框的话很影响观感，还会引起电脑的卡顿。那么问题又来了，我不能把整个库的悬浮预览功能全…</description>
+      <category>Obsidian</category>
+    </item>
+    <item>
+      <title>家用空气炸锅烤生蚝</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E7%A9%BA%E6%B0%94%E7%82%B8%E9%94%85%E7%83%A4%E7%94%9F%E8%9A%9D_2024052110485/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E7%A9%BA%E6%B0%94%E7%82%B8%E9%94%85%E7%83%A4%E7%94%9F%E8%9A%9D_2024052110485/</guid>
+      <pubDate>Tue, 21 May 2024 10:48:00 +0800</pubDate>
+      <description>用刷子将生蚝外壳刷洗干净 撬生蚝 找到洞捅进去，然后找到个点左右摇摆 生蚝肉取出冲洗干净，裙边需要去掉（有咸腥味） 蒜蓉酱调制 大蒜剁碎成蒜蓉 小米辣切碎（可不加） 调味料：盐、白糖、生抽、蚝油、胡椒粉 花生油烧到锅边冒白烟浇入蒜蓉当中</description>
+    </item>
+    <item>
+      <title>win 10 系统无缘无故被限速</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/win%2010%20%E7%B3%BB%E7%BB%9F%E6%97%A0%E7%BC%98%E6%97%A0%E6%95%85%E8%A2%AB%E9%99%90%E9%80%9F_2024051514575/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/win%2010%20%E7%B3%BB%E7%BB%9F%E6%97%A0%E7%BC%98%E6%97%A0%E6%95%85%E8%A2%AB%E9%99%90%E9%80%9F_2024051514575/</guid>
+      <pubDate>Wed, 15 May 2024 14:57:00 +0800</pubDate>
+      <description>之前自己的电脑下载东西一直是 10 mb/s 左右的网速，最近几天最高才能达到 1 mb/s，但是利用网络测速软件进行测试却是 10 mb/s，这就很不正常！查了一圈原来是 win10 系统默认限制网速，我真的搞不明白为什么整这个限速 ....，接下来我将展示解决办法。</description>
+    </item>
+    <item>
+      <title>python 中的身份运算符</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/python%20%E4%B8%AD%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%BF%90%E7%AE%97%E7%AC%A6_20240515091341/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/python%20%E4%B8%AD%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%BF%90%E7%AE%97%E7%AC%A6_20240515091341/</guid>
+      <pubDate>Wed, 15 May 2024 09:13:00 +0800</pubDate>
+      <description>在 Python 中，身份运算符用于比较两个对象的内存地址，以确定它们是否是同一个对象。Python 提供了两个身份运算符：</description>
+    </item>
+    <item>
+      <title>二进制计算</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%AE%A1%E7%AE%97_20240515090418/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%AE%A1%E7%AE%97_20240515090418/</guid>
+      <pubDate>Wed, 15 May 2024 09:04:00 +0800</pubDate>
+      <description>25 ÷ 2 12 余 1 12 ÷ 2 6 余 0 6 ÷ 2 3 余 0 3 ÷ 2 1 余 1 1 ÷ 2 0 余 1</description>
+    </item>
+    <item>
+      <title>利用 AI 练习英语口语</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%A9%E7%94%A8%20AI%20%E7%BB%83%E4%B9%A0%E8%8B%B1%E8%AF%AD%E5%8F%A3%E8%AF%AD_2024051416167/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%88%A9%E7%94%A8%20AI%20%E7%BB%83%E4%B9%A0%E8%8B%B1%E8%AF%AD%E5%8F%A3%E8%AF%AD_2024051416167/</guid>
+      <pubDate>Tue, 14 May 2024 16:16:00 +0800</pubDate>
+      <description>今天群友推了一款应用，叫做豆包，可以进行英文对话，帮助我们练习口语，可以直接安装在手机端，非常方便，有兴趣的朋友可以去试试。</description>
+    </item>
+    <item>
+      <title>obsidian 问题解决记录</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/obsidian%20%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95_20240508081525/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/obsidian%20%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95_20240508081525/</guid>
+      <pubDate>Wed, 08 May 2024 08:15:00 +0800</pubDate>
+      <description>如果我的文件命名后面附加了 uuid，在使用 dataview 进行检索的时候能不能让检索出来的结果既带着超链接属性又隐藏后面的 uuid</description>
+      <category>Obsidian</category>
+    </item>
+    <item>
+      <title>邱建良 vs 秋元皓贵</title>
+      <link>https://nn66kk.github.io/Mon-Blog/C-Highlights/%E9%82%B1%E5%BB%BA%E8%89%AF%20vs%20%E7%A7%8B%E5%85%83%E7%9A%93%E8%B4%B5_20240504094645/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/C-Highlights/%E9%82%B1%E5%BB%BA%E8%89%AF%20vs%20%E7%A7%8B%E5%85%83%E7%9A%93%E8%B4%B5_20240504094645/</guid>
+      <pubDate>Sat, 04 May 2024 09:46:00 +0800</pubDate>
+      <description>链接：https://pan. baidu. com/s/1 lxvWsmTzyx 4 Ze 83 QPxUBcg? pwdeqnt 提取码：eqnt --来自百度网盘超级会员 V 6 的分享</description>
+    </item>
+    <item>
+      <title>04-05 ONE 周五格斗夜 58：苏波邦 vs. 格里戈里安</title>
+      <link>https://nn66kk.github.io/Mon-Blog/C-Highlights/%E6%97%A5%E6%9C%9F%EF%BC%9A04-05%20ONE%20%E5%91%A8%E4%BA%94%E6%A0%BC%E6%96%97%E5%A4%9C%2058%EF%BC%9A%E8%8B%8F%E6%B3%A2%E9%82%A6%20vs.%20%E6%A0%BC%E9%87%8C%E6%88%88%E9%87%8C%E5%AE%89_20240504084339/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/C-Highlights/%E6%97%A5%E6%9C%9F%EF%BC%9A04-05%20ONE%20%E5%91%A8%E4%BA%94%E6%A0%BC%E6%96%97%E5%A4%9C%2058%EF%BC%9A%E8%8B%8F%E6%B3%A2%E9%82%A6%20vs.%20%E6%A0%BC%E9%87%8C%E6%88%88%E9%87%8C%E5%AE%89_20240504084339/</guid>
+      <pubDate>Sat, 04 May 2024 08:43:00 +0800</pubDate>
+      <description>https://pan.baidu.com/s/1HgidPEeQ8nVSlUyVR2WUZA?pwdb2d6 提取码：b2d6 --来自百度网盘超级会员V6的分享</description>
+    </item>
+    <item>
+      <title>ONE 冠军赛事</title>
+      <link>https://nn66kk.github.io/Mon-Blog/C-Highlights/ONE%20%E5%86%A0%E5%86%9B%E8%B5%9B%E4%BA%8B_20240504083536/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/C-Highlights/ONE%20%E5%86%A0%E5%86%9B%E8%B5%9B%E4%BA%8B_20240504083536/</guid>
+      <pubDate>Sat, 04 May 2024 08:35:00 +0800</pubDate>
+      <description>英文网站首页：🚀 可看直播 中文网站：🚀 不可看直播，可看赛程和阵容 实时字幕翻译方法：🚀</description>
+    </item>
+    <item>
+      <title>两台手机互相开热点</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E4%B8%A4%E5%8F%B0%E6%89%8B%E6%9C%BA%E4%BA%92%E7%9B%B8%E5%BC%80%E7%83%AD%E7%82%B9_20240411091923/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E4%B8%A4%E5%8F%B0%E6%89%8B%E6%9C%BA%E4%BA%92%E7%9B%B8%E5%BC%80%E7%83%AD%E7%82%B9_20240411091923/</guid>
+      <pubDate>Thu, 11 Apr 2024 09:19:23 +0800</pubDate>
+      <description>开热点手机：华为 nova 2s 连接热点手机：小米 14 pro</description>
+    </item>
+    <item>
+      <title>淀粉肠</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E6%B7%80%E7%B2%89%E8%82%A0%E5%81%9A%E6%B3%95_20240402111317/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E6%B7%80%E7%B2%89%E8%82%A0%E5%81%9A%E6%B3%95_20240402111317/</guid>
+      <pubDate>Tue, 02 Apr 2024 11:13:17 +0800</pubDate>
+      <description>盐 白糖 花椒粉 五香粉 大蒜粉 耗油 鸡精 红曲粉 姜末</description>
+    </item>
+    <item>
+      <title>GPT 交流技巧</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/GPT%20%E4%BA%A4%E6%B5%81%E6%8A%80%E5%B7%A7_20240211100541/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/GPT%20%E4%BA%A4%E6%B5%81%E6%8A%80%E5%B7%A7_20240211100541/</guid>
+      <pubDate>Sun, 11 Feb 2024 10:05:00 +0800</pubDate>
+      <description>提示结构： 任务 讲清楚，别说的太模糊 格式 限制字数 要求分条作答 使用表格输出 角色 措辞用语和详细程度 角色属性、专业不想关或者答案明确的话对输出结果影响不大 例子 不是绝对必要的，但能提高输出质量 小技巧 循环提问（GPT 能够理解上下文） 拆分任务 改变人设（三种人设） 友善礼貌 主动发问 给出明…</description>
+      <category>GPT</category>
+    </item>
+    <item>
+      <title>美国国家体能协会运动营养指南</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E7%BE%8E%E5%9B%BD%E5%9B%BD%E5%AE%B6%E4%BD%93%E8%83%BD%E5%8D%8F%E4%BC%9A%E8%BF%90%E5%8A%A8%E8%90%A5%E5%85%BB%E6%8C%87%E5%8D%97_20240211092519/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E7%BE%8E%E5%9B%BD%E5%9B%BD%E5%AE%B6%E4%BD%93%E8%83%BD%E5%8D%8F%E4%BC%9A%E8%BF%90%E5%8A%A8%E8%90%A5%E5%85%BB%E6%8C%87%E5%8D%97_20240211092519/</guid>
+      <pubDate>Sun, 11 Feb 2024 09:25:00 +0800</pubDate>
+      <description>碳水化合物是主要能量来源，蛋白质的主要功能是增加和保持瘦体重。 每天摄入 1.52.0 克/千克体重的蛋白质不仅非常安全，而且还有助于提升对运动训练的适应性。 注意补水，脱水会严重影响运动表现。</description>
+      <category>运动</category>
+      <category>健身</category>
+      <category>营养</category>
+    </item>
+    <item>
+      <title>科学健身十册</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E7%A7%91%E5%AD%A6%E5%81%A5%E8%BA%AB%E5%8D%81%E5%86%8C_20240211092411/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E7%A7%91%E5%AD%A6%E5%81%A5%E8%BA%AB%E5%8D%81%E5%86%8C_20240211092411/</guid>
+      <pubDate>Sun, 11 Feb 2024 09:24:00 +0800</pubDate>
+      <description>美国国家体能协会运动营养指南 体育运动中的功能性训练：第2版</description>
+    </item>
+    <item>
+      <title>洗衣机功能介绍</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/%E6%B4%97%E8%A1%A3%E6%9C%BA%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D_20240205124510/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/%E6%B4%97%E8%A1%A3%E6%9C%BA%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D_20240205124510/</guid>
+      <pubDate>Mon, 05 Feb 2024 12:45:00 +0800</pubDate>
+      <description>洗涤 ：这个程序是用来清洁衣物的主要程序，它会在洗衣机中注入水和洗涤剂，然后通过旋转和摩擦来清洗衣物。</description>
+      <category>洗衣机</category>
+    </item>
+    <item>
+      <title>运动笔记</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E8%BF%90%E5%8A%A8%E7%AC%94%E8%AE%B0_20240130133714/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E8%BF%90%E5%8A%A8%E7%AC%94%E8%AE%B0_20240130133714/</guid>
+      <pubDate>Tue, 30 Jan 2024 13:37:00 +0800</pubDate>
+      <description>科学健身十册</description>
+      <category>运动</category>
+      <category>打卡</category>
+      <category>自律</category>
+    </item>
+    <item>
+      <title>清汤面教程</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E6%B8%85%E6%B1%A4%E9%9D%A2%E6%95%99%E7%A8%8B-2024-01-13/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E6%B8%85%E6%B1%A4%E9%9D%A2%E6%95%99%E7%A8%8B-2024-01-13/</guid>
+      <pubDate>Sat, 13 Jan 2024 15:29:00 +0800</pubDate>
+      <description>第一步：碗中加入生抽、白糖、胡椒粉、香醋、猪油（芝麻香油）、小葱切碎、西红柿切片，然后碗中加入开水化开调料。</description>
+      <category>美食</category>
+      <category>教程</category>
+      <category>清汤面</category>
+    </item>
+    <item>
+      <title>syncthing 同步基础教程</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/syncthing%20%E5%90%8C%E6%AD%A5%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B-2024-01-10/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/syncthing%20%E5%90%8C%E6%AD%A5%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B-2024-01-10/</guid>
+      <pubDate>Wed, 10 Jan 2024 08:36:00 +0800</pubDate>
+      <description>不少人深入使用 ob 之后都会有同步的需求，本人分别用 webdav、icloud、Onedrive、阿里云 oss 同步过，在我还没有了解过 syncthing 的时候后一直用的是 webdav 同步，其缺点是同步缓慢，需要借助 ob 中的插件，并且还出现过丢失重要文件的 BUG，经过群友的推荐我了解到了…</description>
+      <category>syncthiing</category>
+      <category>同步</category>
+      <category>obsidian</category>
+    </item>
+    <item>
+      <title>博客提交问题汇总</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/github%20push%20%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB-2024-01-08/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/github%20push%20%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB-2024-01-08/</guid>
+      <pubDate>Mon, 08 Jan 2024 23:06:00 +0800</pubDate>
+      <description>报错： fatal:unbale to access xxx:The requested URL returned error:502</description>
+      <category>博客</category>
+      <category>push</category>
+      <category>github</category>
+    </item>
+    <item>
+      <title>obsidian 中用 css 控制白天和黑夜的不同效果</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/obsidian%20%E4%B8%AD%E7%94%A8%20css%20%E6%8E%A7%E5%88%B6%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E4%B8%8D%E5%90%8C%E6%95%88%E6%9E%9C-2024-01-07/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/obsidian%20%E4%B8%AD%E7%94%A8%20css%20%E6%8E%A7%E5%88%B6%E7%99%BD%E5%A4%A9%E5%92%8C%E9%BB%91%E5%A4%9C%E7%9A%84%E4%B8%8D%E5%90%8C%E6%95%88%E6%9E%9C-2024-01-07/</guid>
+      <pubDate>Sun, 07 Jan 2024 20:18:00 +0800</pubDate>
+      <description>在使用 obsidian 主题的过程中，我们可能会需要切换白天和黑夜模式，有时候主题的配色在白天适配但是在黑夜并不适配，这个时候我们可以通过 css 使得 ob 根据白天黑夜模式自动切换配色</description>
+      <category>Obsidian</category>
+      <category>CSS</category>
+      <category>主题</category>
+    </item>
+    <item>
+      <title>破伤风</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E7%A0%B4%E4%BC%A4%E9%A3%8E/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E7%A0%B4%E4%BC%A4%E9%A3%8E/</guid>
+      <pubDate>Sun, 12 Nov 2023 11:24:00 +0800</pubDate>
+      <description>伤口的外小内深造成的（无氧环境）。 留意 钉子 木刺 剪刀 玻璃碴 烧伤</description>
+      <category>破伤风</category>
+      <category>医学</category>
+    </item>
+    <item>
+      <title>iphone 关闭自动调节亮度</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/iphone%20%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/iphone%20%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E8%B0%83%E8%8A%82%E4%BA%AE%E5%BA%A6/</guid>
+      <pubDate>Sun, 15 Oct 2023 12:20:00 +0800</pubDate>
+      <description>打开设置，点击辅助功能选项 点击显示与文字大小 滑到最底部，将自动亮度调节关闭即可</description>
+      <category>iphone</category>
+      <category>亮度调节</category>
+      <category>生活技巧</category>
+      <category>手机</category>
+    </item>
+    <item>
+      <title>求导与求微分的概念辨析</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%B1%82%E5%AF%BC%E4%B8%8E%E6%B1%82%E5%BE%AE%E5%88%86%E7%9A%84%E6%A6%82%E5%BF%B5%E8%BE%A8%E6%9E%90/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E6%B1%82%E5%AF%BC%E4%B8%8E%E6%B1%82%E5%BE%AE%E5%88%86%E7%9A%84%E6%A6%82%E5%BF%B5%E8%BE%A8%E6%9E%90/</guid>
+      <pubDate>Thu, 14 Sep 2023 16:07:00 +0800</pubDate>
+      <description>求导和求微分是微积分中两个相关但稍有不同的概念。</description>
+    </item>
+    <item>
+      <title>行李箱使用技巧</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E8%A1%8C%E6%9D%8E%E7%AE%B1%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E8%A1%8C%E6%9D%8E%E7%AE%B1%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+      <pubDate>Mon, 28 Aug 2023 09:43:00 +0800</pubDate>
+      <description>首先找到密码锁的侧面，拨动转盘，使得带有凹槽的部分朝外。</description>
+      <category>生活技巧</category>
+    </item>
+    <item>
+      <title>幂级数与幂级数的和函数的区别与联系</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%B9%82%E7%BA%A7%E6%95%B0%E4%B8%8E%E5%B9%82%E7%BA%A7%E6%95%B0%E7%9A%84%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E5%B9%82%E7%BA%A7%E6%95%B0%E4%B8%8E%E5%B9%82%E7%BA%A7%E6%95%B0%E7%9A%84%E5%92%8C%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/</guid>
+      <pubDate>Mon, 14 Aug 2023 13:59:00 +0800</pubDate>
+      <description>幂级数是一种特殊的函数表示形式，它可以表示为一个无穷级数的形式，其中每一项都是自变量的幂次与系数的乘积。幂级数可以表示为：</description>
+    </item>
+    <item>
+      <title>相互独立与两两独立</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%9B%B8%E4%BA%92%E7%8B%AC%E7%AB%8B%E4%B8%8E%E4%B8%A4%E4%B8%A4%E7%8B%AC%E7%AB%8B/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/%E7%9B%B8%E4%BA%92%E7%8B%AC%E7%AB%8B%E4%B8%8E%E4%B8%A4%E4%B8%A4%E7%8B%AC%E7%AB%8B/</guid>
+      <pubDate>Mon, 14 Aug 2023 09:28:00 +0800</pubDate>
+      <description>“两两独立”和“相互独立”是统计学和概率论领域中常用的概念，用于描述多个事件或变量之间的关系。它们的含义略有不同：</description>
+    </item>
+    <item>
+      <title>雨刮器购买指南和使用注意事项</title>
+      <link>https://nn66kk.github.io/Mon-Blog/A-Life/%E9%9B%A8%E5%88%AE%E5%99%A8%E8%B4%AD%E4%B9%B0%E6%8C%87%E5%8D%97/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/A-Life/%E9%9B%A8%E5%88%AE%E5%99%A8%E8%B4%AD%E4%B9%B0%E6%8C%87%E5%8D%97/</guid>
+      <pubDate>Sat, 12 Aug 2023 18:29:00 +0800</pubDate>
+      <description>选用特氟龙涂层的 雨刮器的刚片选择高碳钢 要拿掉胶条保护套 换雨刮器之前建议进行一次油膜清理</description>
+      <category>备胎说车</category>
+    </item>
+    <lastBuildDate>Fri, 23 Oct 2026 20:47:28 +0800</lastBuildDate>
+  </channel>
+</rss>
