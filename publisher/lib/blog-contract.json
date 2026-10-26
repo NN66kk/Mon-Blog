@@ -9,6 +9,7 @@
   "exclude_docs": "superpowers\nB-Notes/003英语/总结.md\nD-Orginals/苹果电脑自动化脚本教程_2025070215169.md\n",
   "extra": {
     "rss_feed": "feed.xml",
+    "rss_limit": 3,
     "dataview_static_paths": [
       "B-Notes/003英语/英语一真题/*/Text[1-4].md"
     ],

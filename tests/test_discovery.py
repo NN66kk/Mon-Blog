@@ -57,6 +57,44 @@ def read_feed(config):
 
 
 class DiscoveryTests(unittest.TestCase):
+    def test_feed_keeps_latest_three_and_rolls_forward_without_changing_article_identity(self):
+        with TemporaryDirectory() as directory:
+            config = config_for(Path(directory))
+            config["extra"]["rss_limit"] = 3
+            pages = [make_page(config, "old", date="2026-01-01", updated_at="2026-12-01"),
+                     make_page(config, "second", date="2026-01-02"),
+                     make_page(config, "third", date="2026-01-03"),
+                     make_page(config, "fourth", date="2026-01-04"),
+                     make_page(config, "undated")]
+            for status in ("draft", "private", "hidden", "redirect"):
+                pages.append(make_page(config, status, date="2026-02-01", status=status))
+            nav = prepare(config, pages)
+            items = read_feed(config).findall("channel/item")
+            self.assertEqual([item.findtext("title") for item in items], ["fourth", "third", "second"])
+            self.assertEqual(nav.blog["feed_count"], 3)
+            self.assertEqual(nav.blog["count"], 5, "RSS limit must not truncate website articles")
+            identities = {item.findtext("title"): (item.findtext("guid"), item.findtext("pubDate")) for item in items}
+            self.assertTrue(all("Its final paragraph." in item.findtext("description") for item in items))
+            pages.append(make_page(config, "fifth", date="2026-01-05"))
+            prepare(config, pages)
+            items = read_feed(config).findall("channel/item")
+            self.assertEqual([item.findtext("title") for item in items], ["fifth", "fourth", "third"])
+            for item in items[1:]:
+                self.assertEqual((item.findtext("guid"), item.findtext("pubDate")), identities[item.findtext("title")])
+
+    def test_feed_limit_allows_fewer_articles_and_rejects_invalid_configuration(self):
+        with TemporaryDirectory() as directory:
+            config = config_for(Path(directory))
+            config["extra"]["rss_limit"] = 3
+            pages = [make_page(config, "only", date="2026-01-01")]
+            nav = prepare(config, pages)
+            self.assertEqual(nav.blog["feed_count"], 1)
+            self.assertEqual(len(read_feed(config).findall("channel/item")), 1)
+            for limit in (0, -1, True, "3", 2.5):
+                config["extra"]["rss_limit"] = limit
+                with self.subTest(limit=limit), self.assertRaisesRegex(ValueError, "rss_limit"):
+                    prepare(config, pages)
+
     def test_feed_contains_full_rendered_body_and_absolute_article_resources(self):
         with TemporaryDirectory() as directory:
             config = config_for(Path(directory))

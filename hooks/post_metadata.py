@@ -702,7 +702,7 @@ def on_nav(nav, config, files):
         "posts_by_collection": posts_by_collection,
         "topics": topics,
         "series": series,
-        "feed_count": sum(bool(page.blog_publish_iso) for page in posts),
+        "feed_count": len(_feed_entries(config)),
     }
     nav.blog = blog
     return nav
@@ -716,6 +716,22 @@ def _feed_datetime(value: str) -> datetime | None:
     except ValueError:
         return None
     return parsed.replace(tzinfo=BLOG_TIMEZONE) if parsed.tzinfo is None else parsed
+
+
+def _feed_item_limit(config):
+    limit = _config_extra(config).get("rss_limit")
+    if limit is not None and (type(limit) is not int or limit < 1):
+        raise ValueError("rss_limit must be a positive integer")
+    return limit
+
+
+def _feed_entries(config):
+    # The public model is already newest first. Filter before limiting so
+    # private or undated notes never displace a valid subscription entry.
+    eligible = [page for page in _feed_pages
+                if page.blog_is_listed and page.blog_status not in UNLISTED_STATUSES
+                and _feed_datetime(page.blog_publish_iso) is not None]
+    return eligible[:_feed_item_limit(config)]
 
 
 def on_post_build(config):
@@ -743,13 +759,8 @@ def on_post_build(config):
         "href": urljoin(base, quote(feed_path, safe="/%")), "rel": "self", "type": "application/rss+xml",
     })
     updates: list[datetime] = []
-    for page in _feed_pages:
-        if not page.blog_is_listed or page.blog_status in UNLISTED_STATUSES:
-            continue
+    for page in _feed_entries(config):
         published = _feed_datetime(page.blog_publish_iso)
-        if published is None:
-            # An undated note stays discoverable on the site, not in a dated feed.
-            continue
         link = urljoin(base, quote(str(page.url).lstrip("/"), safe="/%:@"))
         item = ET.SubElement(channel, "item")
         ET.SubElement(item, "title").text = HTML_TAG_RE.sub("", str(page.title))

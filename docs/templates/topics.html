@@ -36,6 +36,6 @@
       {% else %}<p>系列正在整理中，先从感兴趣的主题开始吧。</p>{% endfor %}
     </div>
   </section>
-  {% if config.extra.rss_feed %}<footer class="topics-subscribe"><strong>把花园带进你的阅读器</strong><p>用 RSS 订阅有发布日期的公开文章，按自己的节奏阅读。</p><a href="{{ config.extra.rss_feed|url|e }}">订阅 {{ blog.feed_count }} 篇文章 →</a></footer>{% endif %}
+  {% if config.extra.rss_feed %}<footer class="topics-subscribe"><strong>把花园带进你的阅读器</strong><p>在阅读器中接收新文章全文，按自己的节奏阅读。</p><a href="{{ config.extra.rss_feed|url|e }}">订阅最新 {{ blog.feed_count }} 篇文章 →</a></footer>{% endif %}
 </div>
 {% endblock %}

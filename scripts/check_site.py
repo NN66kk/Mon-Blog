@@ -312,6 +312,12 @@ class SiteCheck:
         feed_path = config.get("extra", {}).get("rss_feed")
         if not feed_path:
             return
+        from hooks.post_metadata import _feed_item_limit
+        try:
+            item_limit = _feed_item_limit(config)
+        except ValueError as exc:
+            self.error("rss", str(exc))
+            return
         if not isinstance(feed_path, str) or feed_path.startswith("/") or ".." in Path(feed_path).parts or urlsplit(feed_path).scheme:
             self.error("rss", "rss_feed must be a relative file path inside the build")
             return
@@ -334,6 +340,8 @@ class SiteCheck:
             self.error(feed_path, "RSS self link must point to the configured feed")
         targets = set()
         previous = None
+        if item_limit is not None and len(channel.findall("item")) > item_limit:
+            self.error(feed_path, f"RSS exceeds configured limit of {item_limit} articles")
         for index, item in enumerate(channel.findall("item")):
             source = f"{feed_path} item[{index}]"
             link = item.findtext("link") or ""
@@ -386,10 +394,18 @@ class SiteCheck:
                 self.error(source, "invalid RSS pubDate")
         if config.get("extra", {}).get("collections"):
             expected = set(self.feed_expected_dates)
-            for target in sorted(expected - targets):
+            required = allowed = expected
+            if item_limit is not None and len(expected) > item_limit:
+                cutoff = sorted(self.feed_expected_dates.values(), reverse=True)[item_limit - 1]
+                required = {path for path, date in self.feed_expected_dates.items() if date > cutoff}
+                allowed = {path for path, date in self.feed_expected_dates.items() if date >= cutoff}
+            expected_count = len(expected) if item_limit is None else min(item_limit, len(expected))
+            if len(targets) != expected_count:
+                self.error(feed_path, f"RSS must contain the newest {expected_count} dated public articles")
+            for target in sorted(required - targets):
                 self.error(feed_path, f"dated public article missing from RSS: {target.relative_to(self.site_dir)}")
-            for target in sorted(targets - expected):
-                self.error(feed_path, f"RSS contains undated or non-article page: {target.relative_to(self.site_dir)}")
+            for target in sorted(targets - allowed):
+                self.error(feed_path, f"RSS contains an old, undated or non-article page outside the newest articles: {target.relative_to(self.site_dir)}")
         for path, page in self.pages.items():
             if path.name == "404.html":
                 continue
