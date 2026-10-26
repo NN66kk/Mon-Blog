@@ -74,11 +74,25 @@ class Page(HTMLParser):
         self.canonicals = []
         self.dataview_count = 0
         self.rss_feeds = []
+        self.text = []
+        self.body_text = []
+        self.body_images = 0
+        self.body_depth = 0
+        self.omitted_text = []
         self.feed(html)
         self.close()
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag in {"script", "style", "iframe", "object", "template"}:
+            self.omitted_text.append(tag)
+        if tag == "div":
+            if self.body_depth:
+                self.body_depth += 1
+            elif "data-post-body" in attrs:
+                self.body_depth = 1
+        if tag == "img" and self.body_depth and not self.omitted_text:
+            self.body_images += 1
         if attrs.get("id"):
             self.anchors.add(attrs["id"])
         if tag == "a" and attrs.get("name"):
@@ -98,6 +112,19 @@ class Page(HTMLParser):
 
     def handle_startendtag(self, tag, attrs):
         self.handle_starttag(tag, attrs)
+        self.handle_endtag(tag)
+
+    def handle_endtag(self, tag):
+        if self.omitted_text and tag == self.omitted_text[-1]:
+            self.omitted_text.pop()
+        if tag == "div" and self.body_depth:
+            self.body_depth -= 1
+
+    def handle_data(self, data):
+        if not self.omitted_text:
+            self.text.append(data)
+            if self.body_depth:
+                self.body_text.append(data)
 
 def page_url(path):
     """MkDocs directory URLs, including the site homepage."""
@@ -313,6 +340,23 @@ class SiteCheck:
                 targets.add(target)
             if not item.findtext("title") or item.findtext("guid") != link:
                 self.error(source, "item needs a title and a stable URL guid")
+            body = item.findtext("description") or ""
+            fragment = Page(body)
+            if not body.strip() or not re.search(r"<[a-z][a-z0-9]*(?:\s|>)", body, re.I):
+                self.error(source, "RSS description must contain full article HTML")
+            article = self.pages.get(target)
+            if article is not None:
+                article_text = re.sub(r"\s+", " ", "".join(article.body_text)).strip()
+                feed_text = re.sub(r"\s+", " ", "".join(fragment.text)).strip()
+                if article_text and not feed_text.startswith(article_text):
+                    self.error(source, "RSS body does not contain the complete article text")
+                if sum(tag == "img" for _, tag, _ in fragment.references) < article.body_images:
+                    self.error(source, "RSS body is missing article images")
+            for ref, tag, _ in fragment.references:
+                if urlsplit(ref).scheme not in {"http", "https", "mailto", "tel"}:
+                    self.error(source, f"RSS body contains a non-absolute or unsafe {tag} URL: {ref!r}")
+                else:
+                    self.target(ref, link, source)
             try:
                 published = parsedate_to_datetime(item.findtext("pubDate") or "")
                 if published.tzinfo is None:

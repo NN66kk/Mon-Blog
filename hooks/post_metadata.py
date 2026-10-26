@@ -22,6 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 from shared.content_contract import CONTRACT, RULES
+from hooks.rss_content import full_text_html
 
 FRONT_MATTER_RE = re.compile(r"\A---\s*\r?\n(.*?)\r?\n---\s*(?:\r?\n|$)", re.DOTALL)
 FENCED_CODE_RE = re.compile(r"^\s*(```|~~~).*?^\s*\1\s*$", re.MULTILINE | re.DOTALL)
@@ -755,7 +756,9 @@ def on_post_build(config):
         ET.SubElement(item, "link").text = link
         ET.SubElement(item, "guid", {"isPermaLink": "true"}).text = link
         ET.SubElement(item, "pubDate").text = format_datetime(published)
-        ET.SubElement(item, "description").text = page.blog_description_text
+        # RSS description may contain the full HTML article. Keeping the body
+        # here also supports readers that ignore content:encoded extensions.
+        ET.SubElement(item, "description").text = full_text_html(page.content, link)
         for tag in page.blog_topic_tags:
             ET.SubElement(item, "category").text = tag
         updates.append(_feed_datetime(page.blog_updated_iso) or published)

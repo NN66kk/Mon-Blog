@@ -1,4 +1,5 @@
 from contextlib import redirect_stderr, redirect_stdout
+from html import escape
 import io
 import json
 from pathlib import Path
@@ -128,13 +129,30 @@ class SiteArtifactTests(unittest.TestCase):
         (self.docs / "B-Notes/note.md").write_text(f"---\nstatus: {status}\ndate: '{date}'\n---\n# Note", encoding="utf-8")
         discovery = '<link rel="alternate" type="application/rss+xml" href="' + BASE + 'feed.xml">'
         self.write("index.html", f'<link rel="canonical" href="{BASE}">{discovery}<h1>Home</h1>')
-        self.write("B-Notes/note/index.html", f'<link rel="canonical" href="{BASE}B-Notes/note/">{discovery}<h1>Note</h1>')
+        body = '<p>First paragraph.</p><p>Final paragraph.</p>'
+        self.write("B-Notes/note/index.html", f'<link rel="canonical" href="{BASE}B-Notes/note/">{discovery}<h1>Note</h1><div data-post-body>{body}</div>')
         link = link or BASE + "B-Notes/note/"
-        self.write("feed.xml", f'<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog</title><description>Notes</description><link>{BASE}</link><atom:link href="{BASE}feed.xml" rel="self"/><item><title>Note</title><link>{link}</link><guid>{link}</guid><pubDate>{pub_date}</pubDate></item></channel></rss>')
+        self.write("feed.xml", f'<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog</title><description>Notes</description><link>{BASE}</link><atom:link href="{BASE}feed.xml" rel="self"/><item><title>Note</title><link>{link}</link><guid>{link}</guid><pubDate>{pub_date}</pubDate><description>{escape(body)}</description></item></channel></rss>')
         return {"extra": {"rss_feed": "feed.xml", "collections": {"B": {"source_dir": "B-Notes", "index_src": "B-Notes/index.md"}}}}
 
     def test_rss_matches_source_dates_and_site_base(self):
         self.assertEqual(self.check(self.rss_fixture()), [])
+
+    def test_rss_rejects_summary_only_and_relative_body_resources(self):
+        config = self.rss_fixture()
+        path = self.site / "feed.xml"
+        path.write_text(path.read_text().replace(escape('<p>Final paragraph.</p>'), ""))
+        self.assertTrue(any("complete article text" in e for e in self.check(config)))
+        config = self.rss_fixture()
+        path.write_text(path.read_text().replace(escape('<p>Final paragraph.</p>'),
+                                               escape('<p>Final paragraph.</p><img src="../image.png">')))
+        self.assertTrue(any("non-absolute" in e for e in self.check(config)))
+
+    def test_rss_rejects_missing_article_images(self):
+        config = self.rss_fixture()
+        page = self.site / "B-Notes/note/index.html"
+        page.write_text(page.read_text().replace('</div>', '<img src="https://images.example.test/photo.png"></div>'))
+        self.assertTrue(any("missing article images" in e for e in self.check(config)))
 
     def test_rss_accepts_publisher_millisecond_timestamps_at_second_precision(self):
         config = self.rss_fixture(date="2026-10-22T01:02:03.456Z", pub_date="Thu, 22 Oct 2026 01:02:03 +0000")

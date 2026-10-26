@@ -41,7 +41,8 @@ def make_page(config, name, **metadata):
                     + "---\n# Article\n\nThis is a useful article with enough content for an excerpt.\n",
                     encoding="utf-8")
     return SimpleNamespace(file=SimpleNamespace(src_uri=src), meta={},
-                           title=metadata.get("title", name), url=f"B-Notes/{name}/")
+                           title=metadata.get("title", name), url=f"B-Notes/{name}/",
+                           content="<p>This is the rendered article.</p><p>Its final paragraph.</p>")
 
 
 def prepare(config, pages):
@@ -56,6 +57,28 @@ def read_feed(config):
 
 
 class DiscoveryTests(unittest.TestCase):
+    def test_feed_contains_full_rendered_body_and_absolute_article_resources(self):
+        with TemporaryDirectory() as directory:
+            config = config_for(Path(directory))
+            page = make_page(config, "article", date="2026-01-02", description="Short excerpt")
+            page.content = ('<p>First paragraph &amp; introduction.</p><h2 id="last">Final section</h2>'
+                            '<p>Final paragraph beyond the excerpt.</p>'
+                            '<img src="../attachments/中文 image.png" alt="An &quot;image&quot;">'
+                            '<a href="../other/#section">Another article</a><a href="#last">Jump</a>'
+                            '<pre><code>&lt;example&gt; &amp; code</code></pre>')
+            prepare(config, [page])
+            item = read_feed(config).find("channel/item")
+            body = item.findtext("description")
+            self.assertIn("Final paragraph beyond the excerpt.", body)
+            self.assertIn('<h2 id="last">Final section</h2>', body)
+            self.assertIn('src="https://example.test/Mon-Blog/B-Notes/attachments/%E4%B8%AD%E6%96%87%20image.png"', body)
+            self.assertIn('href="https://example.test/Mon-Blog/B-Notes/other/#section"', body)
+            self.assertIn('href="https://example.test/Mon-Blog/B-Notes/article/#last"', body)
+            self.assertIn('<pre><code>&lt;example&gt; &amp; code</code></pre>', body)
+            self.assertNotIn("Short excerpt", body)
+            self.assertEqual(page.blog_description_text, "Short excerpt")
+            self.assertIsNone(item.find("description/p"), "HTML must be XML character data")
+
     def test_feed_sorts_real_dates_encodes_urls_and_escapes_xml(self):
         with TemporaryDirectory() as directory:
             config = config_for(Path(directory))
