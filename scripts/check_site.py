@@ -79,11 +79,20 @@ class Page(HTMLParser):
         self.body_images = 0
         self.body_depth = 0
         self.omitted_text = []
+        self.heading_depth = 0
+        self.heading_permalink_count = 0
         self.feed(html)
         self.close()
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag in {"h1", "h2", "h3", "h4", "h5", "h6"}:
+            self.heading_depth += 1
+        if self.heading_depth and tag == "a" and "headerlink" in (attrs.get("class") or "").split():
+            self.heading_permalink_count += 1
+            # Exclude website-only heading controls from the body comparison,
+            # while continuing to validate their links on the website itself.
+            self.omitted_text.append(tag)
         if tag in {"script", "style", "iframe", "object", "template"}:
             self.omitted_text.append(tag)
         if tag == "div":
@@ -117,6 +126,8 @@ class Page(HTMLParser):
     def handle_endtag(self, tag):
         if self.omitted_text and tag == self.omitted_text[-1]:
             self.omitted_text.pop()
+        if tag in {"h1", "h2", "h3", "h4", "h5", "h6"} and self.heading_depth:
+            self.heading_depth -= 1
         if tag == "div" and self.body_depth:
             self.body_depth -= 1
 
@@ -342,6 +353,8 @@ class SiteCheck:
                 self.error(source, "item needs a title and a stable URL guid")
             body = item.findtext("description") or ""
             fragment = Page(body)
+            if fragment.heading_permalink_count:
+                self.error(source, "RSS body must omit generated heading permalink controls")
             if not body.strip() or not re.search(r"<[a-z][a-z0-9]*(?:\s|>)", body, re.I):
                 self.error(source, "RSS description must contain full article HTML")
             article = self.pages.get(target)

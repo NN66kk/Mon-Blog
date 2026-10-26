@@ -138,6 +138,19 @@ class SiteArtifactTests(unittest.TestCase):
     def test_rss_matches_source_dates_and_site_base(self):
         self.assertEqual(self.check(self.rss_fixture()), [])
 
+    def test_rss_omits_website_heading_controls_without_losing_heading_text(self):
+        config = self.rss_fixture()
+        plain_heading = '<h2 id="section">Section</h2>'
+        web_heading = '<h2 id="section">Section<a class="headerlink" href="#section">¶</a></h2>'
+        article = self.site / 'B-Notes/note/index.html'
+        article.write_text(article.read_text().replace('<p>Final paragraph.</p>', web_heading + '<p>Final paragraph.</p>'))
+        feed = self.site / 'feed.xml'
+        feed.write_text(feed.read_text().replace(escape('<p>Final paragraph.</p>'),
+                                               escape(plain_heading + '<p>Final paragraph.</p>')))
+        self.assertEqual(self.check(config), [])
+        feed.write_text(feed.read_text().replace(escape(plain_heading), escape(web_heading)))
+        self.assertTrue(any('heading permalink controls' in e for e in self.check(config)))
+
     def test_rss_rejects_summary_only_and_relative_body_resources(self):
         config = self.rss_fixture()
         path = self.site / "feed.xml"

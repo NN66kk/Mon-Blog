@@ -37,6 +37,7 @@ class _FeedHTML(HTMLParser):
         self.parts = []
         self.omitted = []
         self.needs_original = False
+        self.heading_depth = 0
 
     def handle_starttag(self, tag, attrs):
         if tag in OMIT_CONTENT:
@@ -46,6 +47,13 @@ class _FeedHTML(HTMLParser):
             return
         attrs = dict(attrs)
         classes = (attrs.get("class") or "").split()
+        if tag in {"h1", "h2", "h3", "h4", "h5", "h6"}:
+            self.heading_depth += 1
+        if self.heading_depth and tag == "a" and "headerlink" in classes:
+            # MkDocs adds a permalink control to headings for the website.
+            # It is decorative UI, not article content for a feed reader.
+            self.omitted.append(tag)
+            return
         if "arithmatex" in classes or "garden-mermaid" in classes:
             self.needs_original = True
         # Keep task states readable without the website's checkbox CSS.
@@ -76,6 +84,8 @@ class _FeedHTML(HTMLParser):
             if tag == self.omitted[-1]:
                 self.omitted.pop()
             return
+        if tag in {"h1", "h2", "h3", "h4", "h5", "h6"} and self.heading_depth:
+            self.heading_depth -= 1
         if tag in ALLOWED_TAGS and tag not in VOID_TAGS:
             self.parts.append(f"</{tag}>")
 
