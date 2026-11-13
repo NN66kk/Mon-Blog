@@ -1,0 +1,381 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Mon's Digital Garden</title>
+    <link>https://nn66kk.github.io/Mon-Blog/</link>
+    <description>Mon 的学习笔记、生活记录与行旅札记。</description>
+    <language>zh-CN</language>
+    <atom:link href="https://nn66kk.github.io/Mon-Blog/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我给 Excalidraw 加上了纸张：用 Baiban 整理讲义、笔记和方案</title>
+      <link>https://nn66kk.github.io/Mon-Blog/D-Orginals/261023204646/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/D-Orginals/261023204646/</guid>
+      <pubDate>Fri, 23 Oct 2026 20:46:35 +0800</pubDate>
+      <description>&lt;p&gt;无限白板适合展开思路，但要把画布上的内容整理成一份可以打印、分享的资料，还需要考虑纸张尺寸、分页和阅读顺序。&lt;/p&gt;
+&lt;p&gt;我基于 Excalidraw 做了一个叫「白板 · Baiban」的项目：保留自由绘图和无限画布，同时加入 A4 / A5 纸张、页面管理、图片适配和多页 PDF 导出。可以先在画布上摆放素材、画图和批注，再把内容整理到一张张纸上，形成讲义、学习笔记或项目方案。&lt;/p&gt;
+&lt;p&gt;本文介绍截至 2026 年 10 月 23 日已经实现的功能，以及这些改动适合解决哪些具体问题。&lt;/p&gt;
+&lt;h2 id="_1"&gt;从自由画布到可以交付的页面&lt;/h2&gt;
+&lt;p&gt;Excalidraw 已经提供了无限画布、手绘风格的图形、文字、图片、箭头、撤销重做，以及可编辑文件保存等能力。Baiban 在这些能力之上扩展，绘图编辑器本身仍来自 Excalidraw。&lt;/p&gt;
+&lt;p&gt;我想补充的是内容整理与输出的环节：画图时可以自由展开，交付时可以按纸张组织。&lt;/p&gt;
+&lt;p&gt;例如，整理一道题时，可以把题目截图、辅助图和推导草稿放在同一片画布里；准备分享时，再把需要呈现的内容排进 A4 页面。纸张之外仍然有空间存放素材，纸张之内则有明确的尺寸和边界。&lt;/p&gt;
+&lt;p&gt;围绕这个过程，我主要做了以下升级。&lt;/p&gt;
+&lt;h2 id="_2"&gt;我做了哪些升级&lt;/h2&gt;
+&lt;h3 id="1"&gt;1. 在无限画布上加入真实尺寸的纸张&lt;/h3&gt;
+&lt;p&gt;现在可以在画布上添加 A4、A5，也可以输入自定义毫米尺寸。纸张支持横向和纵向，同一画布可以混用多种规格：文字说明放在纵向页，比较宽的流程图放在横向页。&lt;/p&gt;
+&lt;p&gt;每张纸还可以设置背景颜色、横线、方格、点阵，以及上、下、左、右四边的安全边距。这些参考线可以帮助对齐文字、图形和图片。&lt;/p&gt;
+&lt;p&gt;这里有两个细节：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;纸张尺寸、画布缩放和导出清晰度分别控制。放大画布方便编辑，不会改变 A4 的实际尺寸。&lt;/li&gt;
+&lt;li&gt;横线、方格、点阵、页边距参考线、框线和纸张名称只在编辑时显示，不会出现在分页导出结果里；纸张背景颜色会保留。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因此，参考模板更适合辅助排版。如果想打印一张带方格的练习纸，目前还需要把方格作为实际内容绘制进去。&lt;/p&gt;
+&lt;h3 id="2"&gt;2. 让多页内容更容易管理&lt;/h3&gt;
+&lt;p&gt;纸张多了以后，仅靠在画布上拖来拖去，很难快速找到目标页。我增加了纸张面板，可以点击缩略图定位，修改名称和规格，调整页序，也可以复制整页及其中的内容。&lt;/p&gt;
+&lt;p&gt;「整齐排列」会按页序把纸张排成两列，并带动纸内对象一起移动。画布上的位置和输出时的阅读顺序，也可以通过这些操作重新整理。&lt;/p&gt;
+&lt;p&gt;我还优化了连续加页的体验。已有纸张时，点击「＋ 添加纸张」，会沿用&lt;strong&gt;按页序排列的最后一张纸&lt;/strong&gt;的尺寸、方向、背景、参考模板和边距，直接生成一张空白页，并自动命名、定位。&lt;/p&gt;
+&lt;p&gt;如果上一页是横向 A5 方格纸，下一张就继续使用这套设置；需要换规格时，打开「新纸张设置」调整即可。新增空白页与复制整页是两个独立操作，前者不会把上一页的内容一起带过来。&lt;/p&gt;
+&lt;p&gt;新建、设置、排序、复制和排列等操作都接入了撤销与重做，便于在整理过程中反复调整。&lt;/p&gt;
+&lt;h3 id="3"&gt;3. 一键把图片适配到纸张&lt;/h3&gt;
+&lt;p&gt;题目截图、网页截取和示意图的尺寸通常并不统一。粘贴后逐张缩放、对齐，会占用不少排版时间。&lt;/p&gt;
+&lt;p&gt;为此，我增加了「适配纸张」：选中图片后点击按钮，图片会按原始比例缩放到纸张边距内的可用区域，水平居中，并在能完整放入页面的前提下尽量保留原来的纵向位置。过宽或过高的图片都可以完整放入，不会为了铺满页面而拉伸变形。&lt;/p&gt;
+&lt;p&gt;默认会根据图片所属或附近的纸张选择目标，也可以在纸张面板里指定「将选中图片适配到此页」。支持多选图片，以及一步撤销、重做。&lt;/p&gt;
+&lt;p&gt;这个功能负责尺寸与位置调整，多张图片之间的排版仍由使用者决定。锁定、处于组合或存在关联对象的图片会被跳过，避免破坏已经整理好的内容关系。&lt;/p&gt;
+&lt;h3 id="4"&gt;4. 把画布导出成有顺序的多页文件&lt;/h3&gt;
+&lt;p&gt;这是整个改造中最直接影响交付的一部分。现在可以选择全部或部分纸张，临时调整导出顺序，再选择输出格式：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;输出方式&lt;/th&gt;
+&lt;th&gt;适合的用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;每页 PNG&lt;/td&gt;
+&lt;td&gt;把某页插入文章、课件或笔记，逐页分享&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;每页独立 PDF&lt;/td&gt;
+&lt;td&gt;分别保存、分发不同主题的页面&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;合并为多页 PDF&lt;/td&gt;
+&lt;td&gt;输出完整讲义、复习资料或方案说明&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;多份独立文件会自动打包为 ZIP，单页直接下载。原有的全画布导出入口也保留了下来。&lt;/p&gt;
+&lt;p&gt;导出支持 150 和 300 DPI。以纵向 A4 为例，300 DPI 的 PNG 为 &lt;strong&gt;2480 × 3508 像素&lt;/strong&gt;；PDF 页面则保持对应的物理尺寸。提高 DPI 会增加导出像素，但无法补回原始截图里已经缺失的细节。&lt;/p&gt;
+&lt;p&gt;批量导出还增加了进度显示和取消操作。任务开始时会固定内容快照，并检查字体和图片资源，避免导出过程中修改画布导致前后页面内容不一致，或在缺图、缺字时悄悄生成文件。&lt;/p&gt;
+&lt;p&gt;目前 PDF 采用栅格图像页面，文字不能直接选中、复制，放大清晰度也受导出分辨率限制。它适合保存页面的视觉排版；需要可选中文字或矢量输出的场景，还需要后续扩展。&lt;/p&gt;
+&lt;h3 id="5"&gt;5. 保留可编辑文件，聚焦个人使用&lt;/h3&gt;
+&lt;p&gt;导出 PDF 之后，后续通常还会修改内容。因此，Baiban 提供了「保存可编辑文件」，将纸张设置、页序、图文和图片资源一起保存为 &lt;code&gt;.excalidraw&lt;/code&gt; 文件，再通过「打开」恢复编辑。&lt;/p&gt;
+&lt;p&gt;当前个人部署版本使用浏览器本地存储，并关闭了协作、AI、云端分享和推广入口，以及统计与 Sentry 错误上报。网站部署在 Cloudflare Pages，打开网址即可使用。&lt;/p&gt;
+&lt;p&gt;需要分清的是：&lt;strong&gt;同一个网址不等于同一份画布。&lt;/strong&gt; 电脑、平板和不同浏览器的存档各自独立，需要通过 &lt;code&gt;.excalidraw&lt;/code&gt; 文件传递可编辑内容。本地自动保存也不能代替备份，重要资料应另存文件。&lt;/p&gt;
+&lt;h2 id="_3"&gt;这些升级适合什么场景&lt;/h2&gt;
+&lt;h3 id="_4"&gt;备课讲义与题目解析&lt;/h3&gt;
+&lt;p&gt;把题目截图放进 A4 页面，适配图片大小，再补充解题步骤、受力示意图、箭头和批注。需要更多篇幅时，直接沿用上一页的规格继续添加，最后合并导出成一份 PDF。&lt;/p&gt;
+&lt;p&gt;这种方式适合图、文字和手写推导混合出现的内容，例如物理题解析、几何作图说明，或需要逐步展示过程的小型讲义。&lt;/p&gt;
+&lt;h3 id="_5"&gt;错题整理与复习笔记&lt;/h3&gt;
+&lt;p&gt;每页放一道题或一个知识主题，在截图旁记录错误原因、关键条件和自己的理解。复习时，可以只选部分页面导出，也可以调整顺序，重新组合一份专题资料。&lt;/p&gt;
+&lt;p&gt;这里的价值在于自由组织图文。题目内容仍需要自己导入和整理，当前版本没有 OCR 或自动解题功能。&lt;/p&gt;
+&lt;h3 id="_6"&gt;项目方案、流程说明与技术沟通&lt;/h3&gt;
+&lt;p&gt;先在画布上展开流程、系统关系或多个方案，再把需要交付的部分整理进纸张：一页概览，一页关键流程，一页补充说明。横向页适合较宽的关系图，纵向页适合分步骤解释。&lt;/p&gt;
+&lt;p&gt;输出的 PDF 可以供他人阅读和讨论，&lt;code&gt;.excalidraw&lt;/code&gt; 文件则用于继续修改。对于需要边画边讲的轻量方案，这样的工作方式比较直接。&lt;/p&gt;
+&lt;h3 id="_7"&gt;个人会议记录与知识整理&lt;/h3&gt;
+&lt;p&gt;记录时先自由摆放关键词、截图和关系线，之后再按主题整理成页面。既可以保留画布上的完整思路，也能从中选出几页形成便于阅读的记录。&lt;/p&gt;
+&lt;p&gt;当前部署面向个人编辑；需要多人同时操作同一块白板时，它还不能承担在线协作工具的角色。&lt;/p&gt;
+&lt;h2 id="_8"&gt;以一份三页讲义为例&lt;/h2&gt;
+&lt;p&gt;可以按下面的流程完成一次从整理到输出的操作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开「纸张」面板，添加一张纵向 A4，设置合适的边距。&lt;/li&gt;
+&lt;li&gt;粘贴题目截图，保持选中，点击「适配纸张」。&lt;/li&gt;
+&lt;li&gt;根据版面需要继续缩放或移动图片，添加文字、图形和解题标注。&lt;/li&gt;
+&lt;li&gt;点击「＋ 添加纸张」，沿用已有规格继续写第二页、第三页。&lt;/li&gt;
+&lt;li&gt;在纸张面板调整名称和页序，必要时使用「整齐排列」。&lt;/li&gt;
+&lt;li&gt;先保存一份 &lt;code&gt;.excalidraw&lt;/code&gt; 可编辑文件，再通过「导出纸张」选择合并 PDF；需要较高输出清晰度时选择 300 DPI。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样会得到两份用途明确的文件：一份保留编辑能力，一份用于阅读、分享或打印。打印时仍应检查打印软件的纸张与缩放设置。&lt;/p&gt;
+&lt;h2 id="_9"&gt;实现时，我重点处理了哪些细节&lt;/h2&gt;
+&lt;p&gt;纸张复用了 Excalidraw 原有的 frame，并通过元素元数据保存毫米尺寸、页序、背景和边距等设置。这样可以接入既有的画布对象关系、保存机制和撤销历史，减少独立页面系统与编辑器之间的状态冲突。纸张规格通过设置修改，避免普通拖拽缩放意外改变打印尺寸。&lt;/p&gt;
+&lt;p&gt;图片适配也考虑了裁剪、翻转和旋转后的几何关系；分页导出则单独处理精确像素、物理尺寸、资源检查和批次快照。纸张能否在刷新、复制、撤销、保存再打开之后保持一致，是这些改动的验证重点。&lt;/p&gt;
+&lt;p&gt;除了自动化测试，项目还完成了基于 20 页 A4 合成样例的浏览器测试，样例包含中文、图片和跨界笔迹。2026 年 10 月 15 日，在本机 Chromium 环境中，300 DPI 合并 PDF 的导出耗时约 &lt;strong&gt;9.4 秒&lt;/strong&gt;，文件约 &lt;strong&gt;6.02 MB&lt;/strong&gt;；逐页 PNG 打包约 &lt;strong&gt;1.69 秒&lt;/strong&gt;，并核对了页数和输出尺寸。&lt;/p&gt;
+&lt;p&gt;这组数据只描述该样例在当时设备上的表现。高分辨率导出仍会消耗浏览器内存，同步编码时可能短暂停顿；取消也需要等待当前同步步骤结束。&lt;/p&gt;
+&lt;h2 id="_10"&gt;当前边界与后续方向&lt;/h2&gt;
+&lt;p&gt;Baiban 当前比较适合个人使用，以及以图文混排为主的讲义、笔记和方案。使用时还需要了解几处边界：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;跨页内容遵循 frame 归属规则。&lt;/strong&gt; 属于某张纸的对象不会自动复制到其他页；无归属的跨页对象可以按纸张范围裁剪。暂时没有忽略归属、按空间任意切片的导出模式。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;安全边距是排版参考。&lt;/strong&gt; 设置边距不会自动重新排版所有文字和图形；图片可以通过「适配纸张」单独调整。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;离线使用依赖已加载的资源。&lt;/strong&gt; 首次使用时，字体和部分功能资源需要联网加载，不能假定从未加载过的资源也能离线使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;矢量 PDF、更灵活的跨页切片，以及多人纸张排序，都是后续可以继续完善的方向，尚未包含在当前版本中。&lt;/p&gt;
+&lt;p&gt;我希望这个项目能让自由整理与正式输出衔接得更顺手：把想法画出来之后，可以继续在同一个工具里整理页面，留下可编辑源文件，再导出一份别人能直接阅读的资料。&lt;/p&gt;
+&lt;p&gt;可以从一张题目截图、一页笔记或一幅流程图开始体验：&lt;a href="https://baiban-personal-1023.pages.dev/"&gt;打开白板 · Baiban&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;感谢 &lt;a href="https://github.com/excalidraw/excalidraw"&gt;Excalidraw&lt;/a&gt; 提供的编辑器基础，让这些围绕纸张和输出的扩展能够建立在已有绘图能力之上。&lt;/p&gt;&lt;p&gt;&lt;a href="https://nn66kk.github.io/Mon-Blog/D-Orginals/261023204646/"&gt;阅读原文&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>一个底层漏洞，为什么会让政府网站暂时“关门”？</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/261022120840/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/261022120840/</guid>
+      <pubDate>Thu, 22 Oct 2026 12:08:33 +0800</pubDate>
+      <description>&lt;p&gt;2026 年 10 月，一批网站紧急维护，部分政府机构也暂停了网上服务。引发这场应急行动的，是一组被称为“PHP2Shell”的严重安全漏洞。&lt;/p&gt;
+&lt;p&gt;听到“政府网站关停”，很多人的第一反应可能是：网站已经被黑客攻破了吗？&lt;/p&gt;
+&lt;p&gt;目前能够确认的是，一些机构采取了预防性措施。荷兰国家网络安全中心曾主动关闭自己的官网，芬兰环境研究所也暂停了旗下多个网站，等待修复。&lt;/p&gt;
+&lt;p&gt;这就像发现大楼存在安全隐患后，先暂停对外开放。暂停营业说明需要处理风险，不能仅凭这一点认定资料已经被盗。&lt;/p&gt;
+&lt;p&gt;那么，这次到底出了什么问题？&lt;/p&gt;
+&lt;p&gt;先认识一下 PHP。它是一种广泛用于网站后台的编程语言，而负责运行这些程序的 PHP 引擎，就在服务器上替网站干活。&lt;/p&gt;
+&lt;p&gt;你点击登录、提交表格、查询资料，浏览器都会向服务器发出请求。PHP 网站收到请求后，由 PHP 引擎运行相应程序，处理数据，再把结果返回给你。&lt;/p&gt;
+&lt;p&gt;可以把网站想象成一个办事大厅：页面是窗口，网站程序是办事流程，PHP 引擎则是负责执行流程的工作人员。&lt;/p&gt;
+&lt;p&gt;这次的缺陷，出在这个基础引擎内部。因此，即使某个网站的业务流程设计得很仔细，也可能受到影响。&lt;/p&gt;
+&lt;p&gt;问题与“内存”有关。&lt;/p&gt;
+&lt;p&gt;内存可以理解为工作人员的办公桌。处理一份申请时，需要把表格、临时资料和工作记录放在桌上。申请办完，这些临时空间就会被回收，留给后续工作使用。&lt;/p&gt;
+&lt;p&gt;为了找到资料，程序还会记录它们的位置。这种位置记录叫作“指针”，可以理解为一张便条，上面写着：“这份材料放在第 8 格。”&lt;/p&gt;
+&lt;p&gt;PHP2Shell 涉及两类错误。&lt;/p&gt;
+&lt;p&gt;第一类，是工作做到一半突然中止，收尾时却误以为已经做完。&lt;/p&gt;
+&lt;p&gt;想象工作人员刚在清单上记下“收到一份新材料”，但材料的具体信息还没有填完整，桌面空间就不够用了，工作被迫停止。&lt;/p&gt;
+&lt;p&gt;正常情况下，收尾人员应该知道哪些工作没完成，并安全地处理它们。但有缺陷的程序可能把这些半成品当成完整资料，按照错误的信息去读取或修改内存。&lt;/p&gt;
+&lt;p&gt;这里的“空间不够”，不一定意味着整台服务器的内存都用光了。PHP 可以给每次请求设置使用额度，只要某个请求达到这个额度，就可能触发相应的异常处理。&lt;/p&gt;
+&lt;p&gt;第二类，是资料已经撤走，指向它的旧便条却还留着。&lt;/p&gt;
+&lt;p&gt;第一份申请处理结束，第 8 格已经腾空，后来又放入了其他资料。但工作人员仍保留着“原来的材料在第 8 格”这张便条。&lt;/p&gt;
+&lt;p&gt;下一份申请到来时，程序继续按照旧便条寻找资料，把现在那个位置的内容当成原来的东西使用。这就是所谓的“释放后继续使用”。&lt;/p&gt;
+&lt;p&gt;网站通常会让同一个工作进程连续处理多个请求，因此，上一次请求留下的错误状态，有机会影响下一次请求。&lt;/p&gt;
+&lt;p&gt;读错一份资料，为什么会发展成“控制服务器”？&lt;/p&gt;
+&lt;p&gt;因为内存里不仅存放用户提交的文字，还存放程序自己的管理信息，例如数据的位置、长度、类型，以及执行某些操作时需要使用的信息。&lt;/p&gt;
+&lt;p&gt;普通错误可能只会让程序报错或崩溃。但攻击者会精心安排输入，试图让程序在出错后，把攻击者能够影响的数据当成可信的内部信息。&lt;/p&gt;
+&lt;p&gt;如果程序读错了位置，就可能把不该公开的内存内容返回出去，其中可能包含登录凭据或访问令牌。&lt;/p&gt;
+&lt;p&gt;如果程序的执行流程被改变，就可能开始运行攻击者安排的代码。这就是“远程代码执行”：攻击者人在远处，却能让服务器执行自己的指令。&lt;/p&gt;
+&lt;p&gt;攻击者首先获得的是网站进程所拥有的权限，不一定直接拥有整台服务器的最高权限。不过，网站进程往往能够读取业务文件、连接数据库，已经足以造成严重损失。&lt;/p&gt;
+&lt;p&gt;更令人担心的是，部分攻击不需要登录。&lt;/p&gt;
+&lt;p&gt;很多人认为，网站有密码、有验证码，陌生人就进不来。但服务器必须先接收和解析请求，之后才有机会执行网站自己的登录检查。&lt;/p&gt;
+&lt;p&gt;这次已经确认的某些攻击路径，恰好发生在登录检查之前。好比访客递交材料时，就能触发大厅设备的故障，还没轮到工作人员核验身份证。&lt;/p&gt;
+&lt;p&gt;这也解释了为什么只加强密码，解决不了这次问题。&lt;/p&gt;
+&lt;p&gt;这些漏洞并非在公布当天才突然出现。&lt;/p&gt;
+&lt;p&gt;PHP 基金会的复盘显示，2024 年就已经发现相关问题的苗头。但当时尚未证明明确的远程攻击路径，修复又牵涉兼容性、性能和大量扩展组件，再加上人手与决策机制的问题，修复工作曾反复停滞。&lt;/p&gt;
+&lt;p&gt;到了 2026 年，研究人员找到了实际可行的攻击路径，风险变得更加明确。他们也使用 AI 辅助分析代码、验证假设和调试复杂问题，但研究判断、结果验证和修复仍需要人的参与。&lt;/p&gt;
+&lt;p&gt;随后，各方准备协调发布补丁，希望网站运营者能在漏洞细节公开时尽快更新。然而，漏洞编号提前流传，攻击演示视频也被误发布，打乱了原定节奏。PHP 最终将修复发布提前一天，于 10 月 21 日推出安全更新。&lt;/p&gt;
+&lt;p&gt;这就出现了一个让网站管理者非常紧张的时间窗口：风险已经公开，自己的系统却可能还没完成更新。&lt;/p&gt;
+&lt;p&gt;政府机构和企业此时需要做选择。继续提供服务，就要承担尚未修复的风险；暂时关闭入口，会影响用户使用，却能减少修复期间遭到攻击的机会。&lt;/p&gt;
+&lt;p&gt;因此，一些机构选择先暂停服务，等补丁安装并验证后再恢复。&lt;/p&gt;
+&lt;p&gt;这次事件影响广，主要是因为许多看起来毫无关系的网站，共同依赖 PHP 这套基础软件。底层出了问题，不同机构的网站就可能同时需要应急处理。&lt;/p&gt;
+&lt;p&gt;不过，“可能受影响”与“已经被攻破”仍是两回事。不同版本、配置和部署方式，会影响具体攻击条件，不能把所有 PHP 网站都理解成已经失守。&lt;/p&gt;
+&lt;p&gt;真正的修复，需要更新网站实际使用的 PHP 运行时，并重启相关工作进程，让修复后的代码接管服务。只更新网页、主题或插件，通常不能修好引擎内部的缺陷。防火墙能够阻挡部分攻击，也不能替代补丁。&lt;/p&gt;
+&lt;p&gt;对普通用户来说，看到网站发布紧急维护公告，可以先查看官方说明，了解恢复安排。如果服务方确认发生了数据泄露，再按通知修改密码或处理相关账号。&lt;/p&gt;
+&lt;p&gt;这次事件提醒我们：日常使用的网站背后，往往共享着同一批看不见的基础软件。维护这些基础软件、及时修复其中的缺陷，与页面是否漂亮、功能是否丰富一样，直接关系到网上服务能否安全运行。&lt;/p&gt;&lt;p&gt;&lt;a href="https://nn66kk.github.io/Mon-Blog/B-Notes/261022120840/"&gt;阅读原文&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>一次 Android 通知转发故障复盘</title>
+      <link>https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/</link>
+      <guid isPermaLink="true">https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/</guid>
+      <pubDate>Mon, 05 Oct 2026 13:43:29 +0800</pubDate>
+      <description>&lt;p&gt;一款待办 App 到点发出任务通知，手机会响铃、会震动，通知栏也有完整内容。但手腕上的手环毫无反应，连消息列表里都找不到这条提醒。&lt;/p&gt;
+&lt;p&gt;同一台手机上的微信、QQ 邮箱却能正常提醒。更令人困惑的是，华为运动健康的应用通知列表里，这款待办 App 明明已经被勾选。&lt;/p&gt;
+&lt;p&gt;最初，我们怀疑通知格式不兼容，为此发布了一版兼容性调整。结果仍然无效。直到连接真机，读取到华为运动健康自己的过滤日志，才找到当次通知的直接阻断原因：&lt;strong&gt;后台把这个应用的转发开关判定为关闭。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;重新进入消息通知设置并刷新对应应用开关后，新的任务提醒成功出现在手环上，并触发震动。最终恢复时，手机仍然使用原来的 2.3.2，没有再次构建或安装 APK。&lt;/p&gt;
+&lt;p&gt;这篇文章记录排查过程，也记录那些看上去合理、却没有被证据证实的猜测。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;脱敏说明：自研应用统一称为“待办 App”，示例包名使用 &lt;code&gt;com.example.todo.debug&lt;/code&gt;。日志经过筛选、裁剪和标识替换，不包含真实设备序列号、账号、业务内容、任务标识、服务地址和本机路径。保留设备型号及相关软件版本，用于说明复现环境。文中的日志片段来自本次实测，不代表厂商公开承诺的稳定接口。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="_1"&gt;先确定：通知在哪一段消失了&lt;/h2&gt;
+&lt;p&gt;这次的设备组合是小米 14 Pro、华为手环 10，手机运行 HyperOS 3 / Android 16，配套应用为华为运动健康 17.0.8.300。&lt;/p&gt;
+&lt;p&gt;待办 App 的提醒流程是：先把任务排程同步到手机，再由 Android 系统闹钟到点触发，最后发布系统通知。&lt;/p&gt;
+&lt;p&gt;对这条经华为运动健康转发的链路，可以分成几个独立阶段：&lt;/p&gt;
+&lt;pre class="garden-mermaid"&gt;&lt;code&gt;flowchart TD
+    A[任务排程与系统闹钟] --&amp;gt; B[App 发布 Android 通知]
+    B --&amp;gt; C[华为运动健康接收通知]
+    C --&amp;gt; D[检查应用开关及过滤条件]
+    D --&amp;gt; E[向手环发送消息]
+    E --&amp;gt; F[手环显示消息并按设置提醒]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;华为官方的支持说明也描述了这一机制：运动健康与穿戴设备保持蓝牙连接时，会把手机通知栏产生的消息转发到设备。（参考资料 1）&lt;/p&gt;
+&lt;p&gt;因此，“服务器把消息推送给微信”和“本地闹钟让待办 App 发出通知”属于上游实现差异。对本次故障来说，手机已经产生通知，调查重点应该转向后面的接收、过滤和转发。&lt;/p&gt;
+&lt;p&gt;最有用的三个问题是：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;需要确认的现象&lt;/th&gt;
+&lt;th&gt;能缩小到的排查范围&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;手机通知栏有没有具体任务通知？&lt;/td&gt;
+&lt;td&gt;如果没有，先查排程、闹钟、权限和通知发布&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;手环消息列表有没有这条消息？&lt;/td&gt;
+&lt;td&gt;如果有但不震动，重点查手环提醒模式；如果完全没有，继续查转发&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;手机锁屏时能否复现？&lt;/td&gt;
+&lt;td&gt;避免把“亮屏使用手机时不提醒”混入问题&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;这次的答案很明确：手机锁屏时会显示任务通知并响铃或震动，手环消息列表完全没有记录。&lt;/p&gt;
+&lt;p&gt;微信和邮件正常，是转发链路并未全面失效的线索，但它不能证明待办 App 也通过了自己的应用开关和过滤条件。&lt;/p&gt;
+&lt;h2 id="_2"&gt;第一轮尝试：调整通知格式，结果没有解决&lt;/h2&gt;
+&lt;p&gt;在没有真机日志的时候，我们先检查了应用代码，并做了一次兼容性尝试。&lt;/p&gt;
+&lt;p&gt;2.3.2 调整了以下内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将通知类别从 &lt;code&gt;CATEGORY_REMINDER&lt;/code&gt; 改为 &lt;code&gt;CATEGORY_MESSAGE&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;补充 &lt;code&gt;tickerText&lt;/code&gt; 摘要，保留标准标题、正文和展开文字。&lt;/li&gt;
+&lt;li&gt;移除任务通知的 &lt;code&gt;FLAG_ONLY_ALERT_ONCE&lt;/code&gt;，继续用应用自身的提交记录去重。&lt;/li&gt;
+&lt;li&gt;从“固定数字 ID + 不同 tag”，改为“稳定的不同数字 ID + 完整 tag”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些改动是在验证兼容性假设。当时没有证据证明华为会过滤 &lt;code&gt;CATEGORY_REMINDER&lt;/code&gt;，也没有证据证明它忽略通知的 tag。&lt;/p&gt;
+&lt;p&gt;原生测试和 Android 16 模拟器验证通过，说明修改后的通知能被系统发布、分别保留、正确去重和撤销。它们没有覆盖真实手机上的华为运动健康，更没有覆盖手环端的显示和震动。&lt;/p&gt;
+&lt;p&gt;用户安装后，故障依然存在。&lt;/p&gt;
+&lt;p&gt;这一轮最值得反思的是验证顺序：我们先修改了自己能控制的通知字段，之后才观察负责转发的组件。一次失败的兼容性试验可以缩小范围，但持续猜字段、改版本，不能替代对实际拒绝原因的读取。&lt;/p&gt;
+&lt;h2 id="_3"&gt;接上真机后，先排除安装身份和监听状态&lt;/h2&gt;
+&lt;p&gt;读取实际运行状态后，我们确认了几件事：手机安装的是预期版本和包名；应用通知权限已授予；华为运动健康的通知监听组件既被授权，也处于在线状态。&lt;/p&gt;
+&lt;p&gt;这里需要区分两种权限：待办 App 获准“发通知”，与运动健康获准“读取其他应用的通知”，分别属于通知链路的不同环节。Android 的 &lt;code&gt;NotificationListenerService&lt;/code&gt; 就是通知监听服务的基础接口。（参考资料 2）&lt;/p&gt;
+&lt;p&gt;安装包身份也不能只看桌面上的应用名称。内部 Debug 包和正式包可能具有相同名称，却使用不同包名。排查时应把“哪个包正在发通知”和“转发设置对应哪个包”对上。本次真机核验没有发现装错包。&lt;/p&gt;
+&lt;p&gt;另一个细节是：&lt;strong&gt;不要只查看配套应用主进程的日志。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这次最初只检查了华为运动健康主进程，没有找到有用记录。继续定位服务后，才发现通知监听器运行在独立的 &lt;code&gt;:DaemonService&lt;/code&gt; 进程中。切换到该进程的日志，过滤原因就出现了。&lt;/p&gt;
+&lt;p&gt;这个进程名属于本次观察到的版本实现，其他版本应重新确认，不能直接假定相同。&lt;/p&gt;
+&lt;h2 id="_4"&gt;关键证据：消息已经收到，随后被应用开关拒绝&lt;/h2&gt;
+&lt;p&gt;我们新建了一条未来触发的测试任务，锁屏等待，并要求触发后暂时保留手机通知。&lt;/p&gt;
+&lt;p&gt;华为监听进程的日志先记录了这条任务通知，随后明确拒绝转发。下面保留了有诊断价值的字段，包名、通道名和提醒标识均已替换：&lt;/p&gt;
+&lt;div class="language-text highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-0-1"&gt;&lt;a id="__codelineno-0-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-1"&gt;&lt;/a&gt;Start onNotificationPosted:
+&lt;/span&gt;&lt;span id="__span-0-2"&gt;&lt;a id="__codelineno-0-2" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-2"&gt;&lt;/a&gt;  pkg=com.example.todo.debug
+&lt;/span&gt;&lt;span id="__span-0-3"&gt;&lt;a id="__codelineno-0-3" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-3"&gt;&lt;/a&gt;  channel=task_reminders_v1
+&lt;/span&gt;&lt;span id="__span-0-4"&gt;&lt;a id="__codelineno-0-4" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-4"&gt;&lt;/a&gt;  id=&amp;lt;NOTIFICATION_ID&amp;gt;
+&lt;/span&gt;&lt;span id="__span-0-5"&gt;&lt;a id="__codelineno-0-5" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-5"&gt;&lt;/a&gt;  tag=&amp;lt;REMINDER_TAG&amp;gt;
+&lt;/span&gt;&lt;span id="__span-0-6"&gt;&lt;a id="__codelineno-0-6" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-6"&gt;&lt;/a&gt;  flags=AUTO_CANCEL
+&lt;/span&gt;&lt;span id="__span-0-7"&gt;&lt;a id="__codelineno-0-7" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-7"&gt;&lt;/a&gt;  category=msg
+&lt;/span&gt;&lt;span id="__span-0-8"&gt;&lt;a id="__codelineno-0-8" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-8"&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;span id="__span-0-9"&gt;&lt;a id="__codelineno-0-9" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-9"&gt;&lt;/a&gt;onNotificationPosted FILTERED because SUB_SWITCH_TURN_OFF,
+&lt;/span&gt;&lt;span id="__span-0-10"&gt;&lt;a id="__codelineno-0-10" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-10"&gt;&lt;/a&gt;pkg=com.example.todo.debug
+&lt;/span&gt;&lt;span id="__span-0-11"&gt;&lt;a id="__codelineno-0-11" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-11"&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;span id="__span-0-12"&gt;&lt;a id="__codelineno-0-12" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-12"&gt;&lt;/a&gt;com.example.todo.debug onNotificationPosted
+&lt;/span&gt;&lt;span id="__span-0-13"&gt;&lt;a id="__codelineno-0-13" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-0-13"&gt;&lt;/a&gt;isMeetPushConditions?(false=filtered): false
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这组记录将当次失败定位到了很具体的位置：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;任务已触发，Android 已经产生通知。&lt;/li&gt;
+&lt;li&gt;华为运动健康的监听器收到了这条通知。&lt;/li&gt;
+&lt;li&gt;它以 &lt;code&gt;SUB_SWITCH_TURN_OFF&lt;/code&gt; 为理由拒绝继续转发。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;此时再调整上游的任务同步、闹钟调度，或者通知标题的写法，都没有命中已经观察到的阻断点。&lt;/p&gt;
+&lt;p&gt;但日志仍然没有解释全部问题。之后进入运动健康的消息通知页面检查时，待办 App 的开关显示为开启，与先前运行日志中的关闭判定不一致。&lt;/p&gt;
+&lt;p&gt;这里应把结论写得准确：&lt;strong&gt;我们观察到了先前的后台关闭判定与随后界面开启状态之间的不一致。&lt;/strong&gt;这还不足以证明两者在同一瞬间一定不一致，也不能直接断言厂商存在某一种缓存、数据库或跨进程同步缺陷。&lt;/p&gt;
+&lt;h2 id="_5"&gt;恢复过程：刷新配置，再验证新的提醒&lt;/h2&gt;
+&lt;p&gt;实际操作很小：进入华为运动健康的设备消息通知页面，核对目标应用，把这一项关闭后重新开启，再确认界面状态。其他应用开关没有批量调整，也没有清空应用数据、重装配套应用或重置手环。&lt;/p&gt;
+&lt;p&gt;不过，复盘不能省略一个重要的时序细节：&lt;strong&gt;在显式关闭再开启之前，重新进入设置的排查阶段就已经出现了后台放行记录。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;按事件先后整理，过程是这样的：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;阶段&lt;/th&gt;
+&lt;th&gt;观察到的证据&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;首次测试任务触发&lt;/td&gt;
+&lt;td&gt;华为收到任务通知，以 &lt;code&gt;SUB_SWITCH_TURN_OFF&lt;/code&gt; 拒绝&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;重新进入设置的排查阶段&lt;/td&gt;
+&lt;td&gt;后续通知开始通过应用开关检查；当时观察到的是常驻状态通知&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;检查界面&lt;/td&gt;
+&lt;td&gt;目标应用开关显示开启&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;显式刷新开关&lt;/td&gt;
+&lt;td&gt;只将目标应用关闭再开启，并核对状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;新建任务复测&lt;/td&gt;
+&lt;td&gt;任务通知通过检查，华为启动推送；手环显示消息并震动&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;因此，不能把这次经历简化成“关开一次必然修好”。目前能确认的是：进入并刷新这组配置后，运行态恢复了放行，新提醒完成了端到端验证。究竟是重新进入页面、其中的配置刷新，还是多个动作共同促成恢复，没有单变量实验能够继续区分。&lt;/p&gt;
+&lt;p&gt;复测时，华为日志从拒绝变成了以下记录：&lt;/p&gt;
+&lt;div class="language-text highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-1-1"&gt;&lt;a id="__codelineno-1-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-1-1"&gt;&lt;/a&gt;com.example.todo.debug onNotificationPosted
+&lt;/span&gt;&lt;span id="__span-1-2"&gt;&lt;a id="__codelineno-1-2" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-1-2"&gt;&lt;/a&gt;isMeetPushConditions?(false=filtered): true
+&lt;/span&gt;&lt;span id="__span-1-3"&gt;&lt;a id="__codelineno-1-3" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-1-3"&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;span id="__span-1-4"&gt;&lt;a id="__codelineno-1-4" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-1-4"&gt;&lt;/a&gt;onNotificationPosted startBroadcastToPhoneService method start!
+&lt;/span&gt;&lt;span id="__span-1-5"&gt;&lt;a id="__codelineno-1-5" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-1-5"&gt;&lt;/a&gt;onNotificationPosted reminderStatus is(15=0x000F=vibrate): 15
+&lt;/span&gt;&lt;span id="__span-1-6"&gt;&lt;a id="__codelineno-1-6" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-1-6"&gt;&lt;/a&gt;onNotificationPosted start to push notification msg
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这里的 &lt;code&gt;15&lt;/code&gt; 是本次厂商日志对振动状态的描述，不应被当成 Android 通用协议。日志中的“启动推送”也不能单独证明手环收到消息。&lt;/p&gt;
+&lt;p&gt;最后一环来自实际使用者的确认：&lt;strong&gt;手环已显示消息，并且震动了。&lt;/strong&gt;至此，系统通知、配套应用放行、发送动作和手环结果才对上。&lt;/p&gt;
+&lt;p&gt;复测仍然使用 2.3.2。我们没有回退到之前的通知实现做对照，所以不能据此证明此前的兼容性改动“必不可少”，也不能证明它们“完全没有作用”。可以确认的是，本次恢复不需要继续改代码或再次发版。&lt;/p&gt;
+&lt;h2 id="_6"&gt;两个容易把调查带偏的线索&lt;/h2&gt;
+&lt;h3 id="_7"&gt;系统生成的合组摘要，不等于真正的任务通知&lt;/h3&gt;
+&lt;p&gt;真机上还能看到 Android 自动生成的通知摘要，其中带有 &lt;code&gt;LOCAL_ONLY&lt;/code&gt;、&lt;code&gt;GROUP_SUMMARY&lt;/code&gt; 等标记。只看这一条，很容易怀疑系统禁止了手环转发。&lt;/p&gt;
+&lt;p&gt;但这条摘要与应用真正发布的任务通知是不同的记录。Android 官方文档说明，系统可能自动合组，具体行为还会因设备而异。（参考资料 3）&lt;/p&gt;
+&lt;p&gt;在本次失败样本中，华为已经记录了带任务通道、具体提醒标识和 &lt;code&gt;AUTO_CANCEL&lt;/code&gt; 标记的原始通知，并给出了应用开关关闭的拒绝理由。因此，不能把摘要上的 &lt;code&gt;LOCAL_ONLY&lt;/code&gt; 直接认定为这次任务漏转的根因。&lt;/p&gt;
+&lt;h3 id="_8"&gt;常驻状态通知被过滤，不等于任务仍然失败&lt;/h3&gt;
+&lt;p&gt;待办 App 同时有两种通知：一种是任务到点提醒，另一种是后台同步服务的常驻状态通知。&lt;/p&gt;
+&lt;p&gt;配置恢复后，常驻通知仍然出现过这样的日志：&lt;/p&gt;
+&lt;div class="language-text highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-2-1"&gt;&lt;a id="__codelineno-2-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-2-1"&gt;&lt;/a&gt;isMeetPushConditions?(false=filtered): true
+&lt;/span&gt;&lt;span id="__span-2-2"&gt;&lt;a id="__codelineno-2-2" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-2-2"&gt;&lt;/a&gt;onNotificationPosted FILTERED because FLAG_NO_CLEAR,
+&lt;/span&gt;&lt;span id="__span-2-3"&gt;&lt;a id="__codelineno-2-3" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-2-3"&gt;&lt;/a&gt;pkg=com.example.todo.debug
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;它先通过应用开关检查，再因不可清除的常驻属性被过滤。在本次实现中，这与普通任务通知的处理结果不同。&lt;/p&gt;
+&lt;p&gt;如果只搜索包名，看到一条 &lt;code&gt;FILTERED&lt;/code&gt; 就宣布“还没修好”，会把两种通知混在一起。需要结合通道、通知 ID、tag、触发时间和处理线程，确认每条日志究竟对应哪个事件。&lt;/p&gt;
+&lt;p&gt;同样，源码里配置了高重要性，也不能代替读取手机的实际通知通道设置。Android 通道创建后，用户能够修改其行为，应用重新创建同名通道不会把这些设置重置回源码中的默认值。（参考资料 4）&lt;/p&gt;
+&lt;h2 id="_9"&gt;留下一套更短的排查路径&lt;/h2&gt;
+&lt;p&gt;今后遇到“手机正常、手环无提示”，我会先按下面的顺序取证，再决定是否修改代码。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步，固定一条测试消息。&lt;/strong&gt;使用无隐私的测试标题，设置未来的触发时间；记录是否锁屏，并分别检查手机通知、手环消息列表和震动。应用可能对已提交提醒做去重，刷新转发开关后应新建提醒，不要等待旧通知自动重放。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步，核对实际安装包。&lt;/strong&gt;下面的命令假设电脑只连接了一台已授权调试的设备；示例包名需要替换为实际包名。&lt;/p&gt;
+&lt;div class="language-bash highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-3-1"&gt;&lt;a id="__codelineno-3-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-3-1"&gt;&lt;/a&gt;adb&lt;span class="w"&gt; &lt;/span&gt;devices&lt;span class="w"&gt; &lt;/span&gt;-l
+&lt;/span&gt;&lt;span id="__span-3-2"&gt;&lt;a id="__codelineno-3-2" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-3-2"&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;span id="__span-3-3"&gt;&lt;a id="__codelineno-3-3" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-3-3"&gt;&lt;/a&gt;&lt;span class="nv"&gt;TASK_PACKAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'com.example.todo.debug'&lt;/span&gt;
+&lt;/span&gt;&lt;span id="__span-3-4"&gt;&lt;a id="__codelineno-3-4" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-3-4"&gt;&lt;/a&gt;adb&lt;span class="w"&gt; &lt;/span&gt;shell&lt;span class="w"&gt; &lt;/span&gt;pm&lt;span class="w"&gt; &lt;/span&gt;list&lt;span class="w"&gt; &lt;/span&gt;packages&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$TASK_PACKAGE&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;/span&gt;&lt;span id="__span-3-5"&gt;&lt;a id="__codelineno-3-5" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-3-5"&gt;&lt;/a&gt;adb&lt;span class="w"&gt; &lt;/span&gt;shell&lt;span class="w"&gt; &lt;/span&gt;dumpsys&lt;span class="w"&gt; &lt;/span&gt;package&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$TASK_PACKAGE&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;span id="__span-3-6"&gt;&lt;a id="__codelineno-3-6" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-3-6"&gt;&lt;/a&gt;&lt;span class="w"&gt;  &lt;/span&gt;rg&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'versionName=|versionCode=|User [0-9]|POST_NOTIFICATIONS'&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;第三步，核对通知监听是否获准且在线。&lt;/strong&gt;启用名单和当前存活的服务要分别查看，不能只凭界面上的授权开关判断。&lt;/p&gt;
+&lt;div class="language-bash highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-4-1"&gt;&lt;a id="__codelineno-4-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-4-1"&gt;&lt;/a&gt;adb&lt;span class="w"&gt; &lt;/span&gt;shell&lt;span class="w"&gt; &lt;/span&gt;settings&lt;span class="w"&gt; &lt;/span&gt;get&lt;span class="w"&gt; &lt;/span&gt;secure&lt;span class="w"&gt; &lt;/span&gt;enabled_notification_listeners
+&lt;/span&gt;&lt;span id="__span-4-2"&gt;&lt;a id="__codelineno-4-2" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-4-2"&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;span id="__span-4-3"&gt;&lt;a id="__codelineno-4-3" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-4-3"&gt;&lt;/a&gt;adb&lt;span class="w"&gt; &lt;/span&gt;shell&lt;span class="w"&gt; &lt;/span&gt;dumpsys&lt;span class="w"&gt; &lt;/span&gt;notification&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;span id="__span-4-4"&gt;&lt;a id="__codelineno-4-4" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-4-4"&gt;&lt;/a&gt;&lt;span class="w"&gt;  &lt;/span&gt;sed&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'/^  Notification listeners:/,/^  Notification assistant services:/p'&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;第四步，定位真正处理通知的进程。&lt;/strong&gt;本次版本使用下面的进程名；如果查询不到，应先检查服务所属进程，不要继续用空 PID 抓日志。&lt;/p&gt;
+&lt;div class="language-bash highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-5-1"&gt;&lt;a id="__codelineno-5-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-5-1"&gt;&lt;/a&gt;&lt;span class="nv"&gt;HEALTH_LISTENER_PID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;adb&lt;span class="w"&gt; &lt;/span&gt;shell&lt;span class="w"&gt; &lt;/span&gt;pidof&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'com.huawei.health:DaemonService'&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tr&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'\r'&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;/span&gt;&lt;span id="__span-5-2"&gt;&lt;a id="__codelineno-5-2" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-5-2"&gt;&lt;/a&gt;
+&lt;/span&gt;&lt;span id="__span-5-3"&gt;&lt;a id="__codelineno-5-3" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-5-3"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$HEALTH_LISTENER_PID&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;span id="__span-5-4"&gt;&lt;a id="__codelineno-5-4" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-5-4"&gt;&lt;/a&gt;&lt;span class="w"&gt;  &lt;/span&gt;adb&lt;span class="w"&gt; &lt;/span&gt;logcat&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="w"&gt; &lt;/span&gt;--pid&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$HEALTH_LISTENER_PID&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;threadtime&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;span id="__span-5-5"&gt;&lt;a id="__codelineno-5-5" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-5-5"&gt;&lt;/a&gt;&lt;span class="w"&gt;    &lt;/span&gt;rg&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'com\.example\.todo\.debug'&lt;/span&gt;
+&lt;/span&gt;&lt;span id="__span-5-6"&gt;&lt;a id="__codelineno-5-6" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-5-6"&gt;&lt;/a&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;按包名筛选可以快速找到接收和拒绝记录，但不包含包名的后续发送日志也可能被筛掉。找到测试通知后，还应结合相邻时间与线程继续追踪。不能因为一次关键词搜索没有结果，就断定某个步骤没有执行；并非所有厂商或版本都会输出同样的诊断日志。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第五步，依据实际拒绝理由做最小修正。&lt;/strong&gt;如果明确拒绝于目标应用的转发开关，就核对并刷新这一项；如果拒绝于其他条件，继续沿对应分支查。不要同时重装应用、清空数据、重置蓝牙和修改通知代码，否则即使恢复，也很难知道哪个动作起了作用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第六步，用新通知完成验证。&lt;/strong&gt;“应用调用成功”“系统里有通知”“华为开始推送”和“手环实际提醒”是四种不同的结果。记录时应分别命名，不能都写成“发送成功”。&lt;/p&gt;
+&lt;p&gt;排查命令的原始输出可能包含设备标识、其他应用名称和通知内容。公开复盘时，只保留与测试事件有关的字段，用一致的示例包名和占位符替换可识别信息。本篇也没有附上全量系统日志或第三方应用程序文件。&lt;/p&gt;
+&lt;h2 id="_10"&gt;这次经验会如何改变后续开发&lt;/h2&gt;
+&lt;p&gt;首先，通知诊断需要覆盖应用之外的接收方。我们自己的“已提交系统通知”状态是有用的，但它证明不了手环收到；界面上的勾选也证明不了当时运行中的过滤逻辑已经放行。应尽早把下一跳实际接收到什么、为什么拒绝，纳入排查。&lt;/p&gt;
+&lt;p&gt;其次，开发者容易优先修改自己熟悉的部分。本次借助 AI 阅读代码、比对通知字段、整理日志，都能提高效率；但在没有真机证据的时候，把一个合理猜测迅速变成新版本，也可能让排查走得更远。让工具先找出具体拒绝点，通常比让它再猜一组兼容性参数更有价值。&lt;/p&gt;
+&lt;p&gt;最后，修复记录应保留结论的边界。这次已经解决了连接设备上的问题，也确认了失败样本被应用开关拒绝。配置状态为什么出现差异、是否会在其他版本复现、旧通知实现是否同样能恢复，都没有完成验证。把这些问题留在记录里，后续再次遇到类似现象时，才不会把一次成功经验误用成普遍规则。&lt;/p&gt;
+&lt;p&gt;这次最有价值的产物，是一段能说明通知在哪里被拒绝的日志，以及一条经过实际手环确认的成功提醒。有了这两端的证据，修复才有明确的起点和终点。&lt;/p&gt;
+&lt;h2 id="_11"&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;以下官方资料用于解释系统机制和常规检查项；本文关于具体失败原因与恢复结果的结论，来自本次真机日志和实际验收。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;华为官方：华为手表／手环连接华为或安卓手机后，收不到消息怎么办？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="language-text highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-6-1"&gt;&lt;a id="__codelineno-6-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-6-1"&gt;&lt;/a&gt;https://consumer.huawei.com/cn/support/content/zh-cn15958978/
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;Android Developers：NotificationListenerService。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="language-text highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-7-1"&gt;&lt;a id="__codelineno-7-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-7-1"&gt;&lt;/a&gt;https://developer.android.com/reference/android/service/notification/NotificationListenerService
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;Android Developers：Create a group of notifications。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="language-text highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-8-1"&gt;&lt;a id="__codelineno-8-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-8-1"&gt;&lt;/a&gt;https://developer.android.com/develop/ui/views/notifications/group
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;Android Developers：Create and manage notification channels。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="language-text highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span id="__span-9-1"&gt;&lt;a id="__codelineno-9-1" href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/#__codelineno-9-1"&gt;&lt;/a&gt;https://developer.android.com/develop/ui/compose/notifications/channels
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href="https://nn66kk.github.io/Mon-Blog/B-Notes/261005134337/"&gt;阅读原文（查看公式、图表或嵌入内容的完整呈现）&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <lastBuildDate>Fri, 23 Oct 2026 20:47:28 +0800</lastBuildDate>
+  </channel>
+</rss>
