@@ -4,6 +4,7 @@ from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 from xml.etree import ElementTree as ET
 import importlib.util
+import json
 import unittest
 
 from jinja2 import ChoiceLoader, DictLoader, Environment, FileSystemLoader
@@ -232,6 +233,35 @@ class DiscoveryTests(unittest.TestCase):
             self.assertNotEqual(METADATA._discovery_anchor("topic", "AI"),
                                 METADATA._discovery_anchor("series", "AI"))
 
+    def test_related_reading_does_not_guess_from_a_broad_collection(self):
+        with TemporaryDirectory() as directory:
+            config = config_for(Path(directory))
+            hiking = make_page(config, "hiking", tags=["徒步"])
+            route = make_page(config, "route", tags=["徒步"])
+            cooking = make_page(config, "cooking")
+            other = make_page(config, "other")
+            nav = prepare(config, [hiking, route, cooking, other])
+            self.assertEqual(hiking.blog_related_pages, [route])
+            self.assertEqual(cooking.blog_related_pages, [])
+            self.assertEqual(other.blog_related_pages, [])
+            self.assertEqual([topic["name"] for topic in nav.blog["home_topics"]], ["徒步"])
+
+    def test_search_metadata_contains_only_public_articles_and_keeps_original_dates(self):
+        with TemporaryDirectory() as directory:
+            config = config_for(Path(directory))
+            visible = make_page(config, "中文 note", published_at="2026-01-01", updated_at="2026-11-13")
+            pages = [visible, make_page(config, "undated")]
+            pages.extend(make_page(config, status, status=status)
+                         for status in ("private", "draft", "hidden", "redirect"))
+            prepare(config, pages)
+            METADATA.on_post_build(config)
+            metadata = json.loads((Path(config["site_dir"]) / "assets/search-posts.json").read_text())
+            self.assertEqual([{key: value for key, value in item.items() if key != "description"} for item in metadata], [
+                {"url": "B-Notes/中文 note/", "collection": "Notes", "date": "2026-01-01"},
+                {"url": "B-Notes/undated/", "collection": "Notes", "date": ""},
+            ])
+            self.assertEqual(metadata[0]["description"], visible.blog_description_text)
+
     def test_discovery_templates_escape_names_and_preserve_article_links(self):
         with TemporaryDirectory() as directory:
             config = config_for(Path(directory))
@@ -268,7 +298,7 @@ class DiscoveryTests(unittest.TestCase):
                 METADATA.on_post_build(config)
             config["extra"].pop("rss_feed")
             METADATA.on_post_build(config)
-            self.assertFalse(Path(config["site_dir"]).exists())
+            self.assertFalse((Path(config["site_dir"]) / "feed.xml").exists())
 
 
 if __name__ == "__main__":

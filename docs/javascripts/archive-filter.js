@@ -145,6 +145,8 @@ function initializeArchiveFilter(root = document) {
         section.querySelectorAll("[data-archive-card]"),
       ).some((card) => !card.hidden);
       section.hidden = !hasVisibleCard;
+      const yearLink = archive.querySelector(`[data-archive-year-link="${section.dataset.archiveYear}"]`);
+      if (yearLink) yearLink.hidden = !hasVisibleCard;
     });
 
     const hasFilter = Boolean(normalizeArchiveText(query) || selectedCollection);
@@ -153,6 +155,8 @@ function initializeArchiveFilter(root = document) {
       : `共 ${cards.length} 篇`;
     timeline.hidden = visibleCount === 0;
     emptyState.hidden = visibleCount !== 0;
+    const yearNav = archive.querySelector(".archive-years");
+    if (yearNav) yearNav.hidden = visibleCount === 0;
 
     if (clearButton) {
       clearButton.hidden = !normalizeArchiveText(query);

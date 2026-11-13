@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import re
 import hashlib
+import json
 import logging
 import sys
 from collections import Counter
@@ -648,7 +649,9 @@ def on_nav(nav, config, files):
             same_collection = (
                 page.blog_collection_key == candidate.blog_collection_key
             )
-            if shared == 0 and (page_topics or not same_collection):
+            # A broad collection is not enough to recommend the next read.
+            # Untagged notes still offer their collection and archive links.
+            if shared == 0:
                 continue
             score = shared * 100 + (10 if same_collection else 0)
             candidates.append((score, -candidate_index, candidate))
@@ -656,6 +659,10 @@ def on_nav(nav, config, files):
         page.blog_related_pages = [item[2] for item in candidates[:3]]
 
     topics, series = _discovery_views(posts)
+    home_topics = [
+        topic for name in ("AI", "Obsidian", "徒步", "个人思考")
+        for topic in topics if topic["name"].casefold() == name.casefold()
+    ]
     _feed_pages = list(posts)
 
     collection_order = [
@@ -701,6 +708,7 @@ def on_nav(nav, config, files):
         "collection_counts": collection_counts,
         "posts_by_collection": posts_by_collection,
         "topics": topics,
+        "home_topics": home_topics,
         "series": series,
         "feed_count": len(_feed_entries(config)),
     }
@@ -736,6 +744,14 @@ def _feed_entries(config):
 
 def on_post_build(config):
     """Write RSS from the same public model, without inventing publication dates."""
+
+    metadata_path = Path(str(config["site_dir"])) / "assets/search-posts.json"
+    metadata_path.parent.mkdir(parents=True, exist_ok=True)
+    metadata_path.write_text(json.dumps([
+        {"url": page.url, "collection": page.blog_collection.get("label", ""),
+         "date": page.blog_publish_label[:10], "description": page.blog_description_text}
+        for page in _feed_pages if page.blog_is_listed
+    ], ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     feed_path = _normalize_text(_config_extra(config).get("rss_feed"))
     if not feed_path:

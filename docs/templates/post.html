@@ -52,7 +52,7 @@
         {% for topic in page.blog_topic_links %}<a href="{{ ('topics/#' ~ topic.id)|url|e }}"># {{ topic.name|e }}</a>{% endfor %}
       </div>
     {% endif %}
-    {% if page.blog_updated_iso and page.blog_updated_iso != page.blog_publish_iso %}
+    {% if page.blog_updated_iso and page.blog_updated_label[:10] != page.blog_publish_label[:10] %}
       <p class="post-header-updated">最后修订于 <time datetime="{{ page.blog_updated_iso|e }}">{{ page.blog_updated_label[:10]|e }}</time></p>
     {% endif %}
   </header>
@@ -88,11 +88,16 @@
           <a href="{{ related.url|url }}">
             <small>{{ related.blog_collection.mark }} · {{ related.blog_collection.label }}</small>
             <strong>{{ related.title|striptags|e }}</strong>
+            {% if related.blog_description_text %}<p>{{ related.blog_description_text|striptags|trim|truncate(86)|e }}</p>{% endif %}
             <span aria-hidden="true">→</span>
           </a>
         {% endfor %}
       </div>
     </aside>
+  {% endif %}
+
+  {% if page.blog_series_next %}
+    <a class="post-continue-series" rel="next" href="{{ page.blog_series_next.url|url|e }}"><span><small>继续这个系列 · {{ page.blog_series.name|e }}</small><strong>{{ page.blog_series_next.title|striptags|e }}</strong></span><span aria-hidden="true">→</span></a>
   {% endif %}
 
   <nav class="post-neighbors" aria-label="相邻文章">
@@ -124,6 +129,7 @@
       aria-expanded="false"
     >
       <span class="article-toc-fab-icon" aria-hidden="true"></span>
+      <span class="article-toc-fab-label">目录</span>
     </button>
 
     <div class="article-toc-backdrop" data-article-toc-close aria-hidden="true"></div>

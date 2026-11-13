@@ -48,6 +48,7 @@
           >
             {% set icon = config.theme.icon.search or "material/magnify" %}
             {% include ".icons/" ~ icon ~ ".svg" %}
+            <span class="site-search-label">搜索</span><kbd class="site-search-shortcut" aria-hidden="true">⌘ K</kbd>
           </button>
           {% include "partials/search.html" %}
         {% endif %}

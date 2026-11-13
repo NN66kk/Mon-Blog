@@ -3,26 +3,23 @@
 {% block content %}
   <div class="garden-archive" data-archive-root data-page-layout="archive">
     <header class="archive-hero">
-      <span class="garden-eyebrow"><i aria-hidden="true"></i> ARCHIVE / {{ blog.count }} NOTES</span>
+      <span class="garden-eyebrow">THE ARCHIVE <span class="archive-total">{{ blog.count }} 篇记录</span></span>
       <div class="archive-hero__heading">
         <h1{% if page.blog_title_id %} id="{{ page.blog_title_id|e }}" tabindex="-1"{% endif %}>全部文章</h1>
         <p>学习、生活、行旅与收藏，按时间收在这里。</p>
       </div>
       <nav class="archive-filters" aria-label="按专栏筛选" data-archive-collections>
-        {% set archive_collections = (blog.collections|selectattr("key", "equalto", "C")|list) + (blog.collections|rejectattr("key", "equalto", "C")|list) %}
-        {% for collection in archive_collections %}
+        <button type="button" class="archive-filters__all is-active" data-archive-collection="" aria-pressed="true" aria-label="全部文章"><strong>全部</strong><small data-archive-count="">{{ blog.count }}</small></button>
+        {% for collection in blog.collections %}
           <button type="button" data-archive-collection="{{ collection.key }}" aria-pressed="false">
-            <span aria-hidden="true">{{ collection.mark }}</span><strong>{{ collection.label }}</strong><small data-archive-count="{{ collection.key }}">{{ collection.count }}</small>
+            <strong>{{ collection.label }}</strong><small data-archive-count="{{ collection.key }}">{{ collection.count }}</small>
           </button>
         {% endfor %}
-        <button type="button" class="archive-filters__all is-active" data-archive-collection="" aria-pressed="true">
-          <span class="archive-filters__label"><span aria-hidden="true">全</span><strong>全部文章</strong></span><small data-archive-count="">{{ blog.count }}</small>
-        </button>
       </nav>
     </header>
 
     <section class="archive-tools" data-archive-filter aria-labelledby="archive-search-label">
-      <label id="archive-search-label" for="archive-search">搜索花园</label>
+      <div class="archive-tools__heading"><label id="archive-search-label" for="archive-search">筛选文章</label><button class="archive-fulltext" type="button" data-open-site-search data-search-query-source="#archive-search">搜索全文 <span aria-hidden="true">↗</span></button></div>
       <div class="archive-search">
         <span aria-hidden="true"></span>
         <input
@@ -33,15 +30,19 @@
           placeholder="标题、摘要、标签或年份"
           autocomplete="off"
           spellcheck="false"
+          aria-describedby="archive-search-hint"
           data-archive-search
         >
         <button type="button" data-archive-clear hidden>清除</button>
       </div>
+      <span id="archive-search-hint" class="sr-only">在当前列表中筛选标题、摘要、标签或年份。查找正文内容，请使用搜索全文。</span>
       <div class="archive-tools__status">
         <output data-archive-results for="archive-search" aria-live="polite">共 {{ blog.count }} 篇</output>
         <button type="button" data-archive-reset hidden>重置筛选</button>
       </div>
     </section>
+
+    <nav class="archive-years" aria-label="跳至年份"><span>按年翻阅</span>{% set jumps = namespace(current='') %}{% for post in blog.posts %}{% set year = post.blog_publish_label[:4] if post.blog_publish_label[:4].isdigit() else '未定' %}{% if year != jumps.current %}<a href="#archive-year-{{ year|e }}" data-archive-year-link="{{ year|e }}">{{ year }}</a>{% set jumps.current = year %}{% endif %}{% endfor %}</nav>
 
     <div class="archive-timeline" data-archive-timeline>
       {% set years = namespace(current="") %}
@@ -65,12 +66,11 @@
           <a href="{{ post.url|url }}">
             <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>
               <b>{{ post.blog_publish_label[5:10]|default("未定", true)|e }}</b>
-              <span>{{ post.blog_collection.label }}</span>
             </time>
             <div class="archive-card__copy">
-              <span class="garden-kicker">{{ post.blog_collection.mark }} · {{ post.blog_collection.label }}</span>
               <h3>{{ post.title|striptags|e }}</h3>
               {% if post.blog_description_text %}<p>{{ post.blog_description_text|striptags|trim|truncate(132)|e }}</p>{% endif %}
+              <span class="archive-card__category">{{ post.blog_collection.label }}{% if post.blog_topic_tags %}<span aria-hidden="true"> · </span>{{ post.blog_topic_tags[0]|e }}{% endif %}</span>
             </div>
             <span class="archive-card__arrow" aria-hidden="true">→</span>
           </a>
@@ -85,6 +85,7 @@
       <h2>这条小径暂时没有结果</h2>
       <p>换一个关键词，或清除当前专栏筛选后再看看。</p>
       <button type="button" data-archive-empty-reset>查看全部文章</button>
+      <button type="button" class="archive-empty__fulltext" data-open-site-search data-search-query-source="#archive-search">用这个词搜索全文 ↗</button>
     </div>
   </div>
 {% endblock %}

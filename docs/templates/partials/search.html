@@ -1,11 +1,11 @@
-<div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-no-results="{{ lang.t('search.result.none') }}" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
+<div id="site-search" class="md-search garden-search" data-md-component="search" data-search-state="idle" data-search-metadata-url="{{ 'assets/search-posts.json'|url }}" data-search-base-url="{{ nav.homepage.url|url }}" data-search-no-results="{{ lang.t('search.result.none') }}" role="dialog" aria-modal="true" aria-labelledby="site-search-title">
   <label class="md-search__overlay" for="__search" aria-hidden="true"></label>
   <div class="md-search__inner" role="search">
     <header class="garden-search__heading">
       <div>
-        <span class="garden-search__eyebrow">搜索这座花园</span>
-        <h2 id="site-search-title">在记录里，找到一点线索。</h2>
-        <p>查找文章标题、正文，或某个记得的片段。</p>
+        <span class="garden-search__eyebrow">SEARCH THE GARDEN</span>
+        <h2 id="site-search-title">找回某一页，某个念头。</h2>
+        <p>全文搜索 · 查找标题、正文与记得的片段</p>
       </div>
       <button class="garden-search__close" type="button" aria-label="关闭搜索" data-site-search-close>
         {% include ".icons/material/close.svg" %}

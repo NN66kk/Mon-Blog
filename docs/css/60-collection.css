@@ -1,5 +1,5 @@
 .md-content__inner--collection {
-  max-width: var(--garden-wide-width);
+  max-width: 57rem;
   margin: 0 auto;
 }
 
@@ -9,21 +9,22 @@
 
 .collection-hero {
   display: grid;
-  min-height: 16rem;
-  padding: 1.8rem 0;
-  grid-template-columns: 7rem minmax(0, 1fr) 8rem;
+  min-height: 11rem;
+  padding: 1.3rem 0;
+  grid-template-columns: 5rem minmax(0, 1fr) 6rem;
   align-items: center;
   gap: 2rem;
-  border-top: 2px solid var(--garden-ink);
+  border-top: var(--garden-line);
   border-bottom: var(--garden-line);
 }
 
 .collection-hero__mark {
   display: grid;
-  width: 6rem;
-  height: 6rem;
+  width: 4.5rem;
+  height: 4.5rem;
   place-items: center;
   border: 1px solid var(--garden-border-strong);
+  border-radius: 50% 50% 4px 4px;
   background: var(--garden-moss-soft);
   color: var(--garden-copper);
   font: 700 2.8rem/1 var(--garden-serif);
@@ -31,15 +32,15 @@
 
 .collection-hero__copy h1 {
   margin: 0.4rem 0 0.55rem;
-  font-size: clamp(2.7rem, 6vw, 4.8rem);
-  line-height: 1;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.3;
 }
 
 .collection-hero__copy p {
   max-width: 38rem;
   margin: 0;
   color: var(--garden-muted);
-  font: 560 var(--garden-lead)/1.72 var(--garden-serif);
+  font: 400 14px/1.9 var(--garden-sans);
 }
 
 .collection-hero__meta {
@@ -80,6 +81,7 @@
   min-height: 2.2rem;
   padding: 0.35rem 0.58rem;
   border: var(--garden-line);
+  border-radius: 4px;
   color: var(--garden-muted);
   font-size: var(--garden-xs);
   text-decoration: none;
@@ -92,12 +94,12 @@
 }
 
 .collection-content {
-  padding-top: 3.8rem;
+  padding-top: 2rem;
 }
 
 .collection-posts {
   margin-top: 1.4rem;
-  border-top: 2px solid var(--garden-ink);
+  border-top: 1px solid var(--garden-border-strong);
 }
 
 .collection-post {
@@ -169,8 +171,8 @@
 }
 
 .collection-post--lead > a {
-  min-height: 9rem;
-  background: color-mix(in srgb, var(--garden-moss-soft) 45%, transparent);
+  min-height: 8rem;
+  background: color-mix(in srgb, var(--garden-sheet) 65%, transparent);
 }
 
 .collection-post--lead .collection-post__copy h3 {
@@ -264,11 +266,11 @@
   }
 
   .collection-hero__copy h1 {
-    font-size: 2.7rem;
+    font-size: 2rem;
   }
 
   .collection-hero__copy p {
-    font-size: 0.84rem;
+    font-size: 13px;
   }
 
   .collection-hero__meta {
@@ -285,7 +287,7 @@
   }
 
   .collection-content {
-    padding-top: 2.7rem;
+    padding-top: 1.5rem;
   }
 
   .collection-post > a {
@@ -309,11 +311,14 @@
 
 @media screen and (max-width: 25.99em) {
   .collection-hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 0.7rem;
   }
 
+  .collection-hero__mark { width: 3rem; height: 3.5rem; font-size: 1.6rem; }
+
   .collection-hero__meta {
-    grid-column: 1;
+    grid-column: 2;
   }
 
   .collection-post > a {
@@ -331,6 +336,6 @@
   }
 
   .collection-post__copy p {
-    display: none;
+    font-size: 12px;
   }
 }

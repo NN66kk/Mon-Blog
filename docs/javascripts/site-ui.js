@@ -117,7 +117,10 @@ function updateReadingProgress(root = document) {
   }
 
   const articleTop = article.getBoundingClientRect().top + window.scrollY;
-  const available = Math.max(1, article.offsetHeight - window.innerHeight);
+  const body = root.querySelector("[data-post-body]");
+  const articleEnd = body ? body.getBoundingClientRect().bottom + window.scrollY
+    : articleTop + article.offsetHeight;
+  const available = Math.max(1, articleEnd - articleTop - window.innerHeight);
   const value = Math.min(1, Math.max(0, (window.scrollY - articleTop) / available));
 
   progress.style.setProperty("--reading-progress", String(value));
@@ -260,6 +263,21 @@ function initializeSiteMenu(root = document) {
 }
 
 let disposeSiteSearch = null;
+const searchMetadataCache = new Map();
+
+function searchMetadataKey(href, baseUrl) {
+  try {
+    const url = new URL(href, baseUrl);
+    return `${url.origin}${decodeURIComponent(url.pathname)}`;
+  } catch (error) {
+    return "";
+  }
+}
+
+function indexSearchMetadata(entries, baseUrl) {
+  return new Map(entries.filter((entry) => entry && typeof entry.url === "string")
+    .map((entry) => [searchMetadataKey(entry.url, baseUrl), entry]));
+}
 
 function initializeSearchButton(root = document) {
   const button = root.querySelector("[data-site-search-button]");
@@ -280,6 +298,11 @@ function initializeSearchButton(root = document) {
   const meta = dialog.querySelector(".md-search-result__meta");
   const list = dialog.querySelector(".md-search-result__list");
   const scrollwrap = dialog.querySelector(".md-search__scrollwrap");
+  // The header survives instant navigation. Resolve its relative data URLs
+  // while they still belong to the page that rendered the header.
+  const metadataUrl = dialog.dataset.searchMetadataUrl
+    ? new URL(dialog.dataset.searchMetadataUrl, window.location.href).href : "";
+  const metadataBaseUrl = new URL(dialog.dataset.searchBaseUrl || "./", window.location.href).href;
   let active = false;
   let composing = false;
   let returnFocus = button;
@@ -288,6 +311,51 @@ function initializeSearchButton(root = document) {
   let queryValue = query.value;
   let resultValue = null;
   let emptyTimer = null;
+  let searchMetadata = null;
+
+  function decorateSearchResults() {
+    if (!searchMetadata || !list?.isConnected) return;
+    list.querySelectorAll(".md-search-result__item").forEach((item) => {
+      const link = item.querySelector(".md-search-result__link");
+      const article = link?.querySelector(".md-search-result__article");
+      if (!article || article.querySelector(".garden-search-result-meta")) return;
+      const entry = searchMetadata.get(searchMetadataKey(link.href, window.location.href));
+      if (!entry) return;
+      const metadata = document.createElement("div");
+      metadata.className = "garden-search-result-meta";
+      const collection = document.createElement("span");
+      collection.textContent = entry.collection;
+      metadata.append(collection);
+      if (entry.date) {
+        const date = document.createElement("time");
+        date.dateTime = entry.date;
+        date.textContent = entry.date;
+        metadata.append(date);
+      }
+      article.prepend(metadata);
+      if (!article.querySelector("p") && entry.description) {
+        const excerpt = document.createElement("p");
+        excerpt.textContent = entry.description;
+        article.append(excerpt);
+      }
+    });
+  }
+
+  function loadSearchMetadata() {
+    if (!metadataUrl) return;
+    if (!searchMetadataCache.has(metadataUrl)) {
+      searchMetadataCache.set(metadataUrl, fetch(metadataUrl)
+        .then((response) => {
+          if (!response.ok) throw new Error("Search metadata unavailable");
+          return response.json();
+        }).then((entries) => indexSearchMetadata(entries, metadataBaseUrl))
+        .catch(() => { searchMetadataCache.delete(metadataUrl); return null; }));
+    }
+    searchMetadataCache.get(metadataUrl).then((metadata) => {
+      searchMetadata = metadata;
+      decorateSearchResults();
+    });
+  }
 
   function unlockScroll() {
     document.body.classList.remove("site-search-open");
@@ -348,6 +416,7 @@ function initializeSearchButton(root = document) {
     // Keep this synchronous with the gesture so iOS can open its keyboard.
     query.focus({ preventScroll: true });
     query.select();
+    loadSearchMetadata();
   }
 
   function syncQueryState() {
@@ -383,6 +452,20 @@ function initializeSearchButton(root = document) {
     }, 150);
   });
   if (meta) resultObserver.observe(meta, { childList: true, characterData: true, subtree: true });
+  const listObserver = new MutationObserver(decorateSearchResults);
+  if (list) listObserver.observe(list, { childList: true, subtree: true });
+
+  document.addEventListener("click", (event) => {
+    const trigger = event.target instanceof Element
+      ? event.target.closest("[data-open-site-search]") : null;
+    if (!trigger) return;
+    const source = trigger.dataset.searchQuerySource
+      ? document.querySelector(trigger.dataset.searchQuerySource) : null;
+    if (source) query.value = source.value || "";
+    openSearch(event);
+    returnFocus = trigger;
+    notifyQueryChange();
+  }, events);
 
   button.addEventListener("click", openSearch, events);
   toggle.addEventListener("change", syncExpanded, events);
@@ -471,6 +554,7 @@ function initializeSearchButton(root = document) {
   disposeSiteSearch = () => {
     controller.abort();
     resultObserver.disconnect();
+    listObserver.disconnect();
     toggleObserver.disconnect();
     window.clearTimeout(emptyTimer);
     unlockScroll();
@@ -482,7 +566,15 @@ function initializeSearchButton(root = document) {
   syncExpanded();
 }
 
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { searchMetadataKey, indexSearchMetadata };
+}
+
 function updateSiteUi(root = document) {
+  // Head icons also survive instant navigation; keep their source stable.
+  root.querySelectorAll('link[rel~="icon"][href]').forEach((icon) => {
+    if (icon.getAttribute("href") !== icon.href) icon.setAttribute("href", icon.href);
+  });
   syncPageLayout(root);
   enhanceCodeBlocks(root);
   updatePostStats(root);

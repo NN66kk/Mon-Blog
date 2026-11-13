@@ -70,7 +70,7 @@
   gap: 0.45rem;
   color: var(--garden-copper);
   font-size: var(--garden-xs);
-  font-weight: 780;
+  font-weight: 500;
   letter-spacing: 0.16em;
   line-height: 1.4;
 }
@@ -97,7 +97,7 @@
   justify-content: center;
   gap: 0.45rem;
   border: 1px solid var(--garden-border-strong);
-  border-radius: 0;
+  border-radius: var(--garden-radius);
   font-size: var(--garden-sm);
   font-weight: 720;
   line-height: 1.2;
@@ -174,8 +174,8 @@
   position: relative;
   margin: 1.6rem 0;
   padding: 0.75rem 1rem 0.75rem 1.25rem;
-  border-left: 3px solid var(--garden-copper);
-  background: color-mix(in srgb, var(--garden-copper-soft) 48%, transparent);
+  border-left: 2px solid var(--garden-copper);
+  background: color-mix(in srgb, var(--garden-sheet) 75%, transparent);
   color: var(--garden-ink);
   font-family: var(--garden-serif);
   font-size: 0.9rem;

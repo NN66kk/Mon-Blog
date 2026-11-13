@@ -5,12 +5,14 @@
     <section class="home-hero home-hero--folio" aria-labelledby="home-title">
       <div class="home-hero__identity">
         <div>
+          <span class="garden-eyebrow">MON'S DIGITAL GARDEN</span>
           <h1 id="home-title">读书与行路</h1>
-          <p class="home-hero__intro">记录学习与思考，<br>也记下沿途所见。</p>
+          <p class="home-hero__intro"><span>记录学习与思考，也记下沿途所见。</span><span>让零散的日常，慢慢长成一座花园。</span></p>
         </div>
-        <a class="garden-more-link" href="{{ config.extra.about_url|url }}">关于我 <span aria-hidden="true">↗</span></a>
+        <div class="home-hero__foot"><a class="garden-more-link" href="{{ config.extra.about_url|url }}">认识花园的主人 <span aria-hidden="true">↗</span></a><span>{{ blog.count }} 篇记录 · 持续生长</span></div>
       </div>
       <figure class="home-hero__epigraph">
+        <span class="home-hero__note">写在扉页</span>
         <blockquote class="home-hero__quotation">
           <p><span>永远不要自怜，</span><span>永远不要嫉妒。</span></p>
         </blockquote>
@@ -18,41 +20,57 @@
       </figure>
     </section>
 
+    {% if blog.home_topics %}
+    <nav class="home-topics" aria-label="按兴趣探索">
+      <span>循着兴趣</span>
+      <div>{% for topic in blog.home_topics %}<a href="{{ ('topics/#' ~ topic.id)|url|e }}">{{ topic.name|e }} <small>{{ topic.posts|length }}</small></a>{% endfor %}</div>
+      <a class="home-topics__all" href="{{ 'topics/'|url }}">所有主题 <span aria-hidden="true">↗</span></a>
+    </nav>
+    {% endif %}
+
+    <div class="home-feed-shell">
+    <section class="home-collections" aria-labelledby="home-collections-title">
+      <header class="section-heading"><div><span class="garden-eyebrow">THE COLLECTIONS</span><h2 id="home-collections-title">花园里的四条小径</h2></div></header>
+      <div class="home-collections__grid">
+        {% for collection in blog.collections %}
+          <a class="collection-card" href="{{ collection.index|url }}">
+            <span class="collection-card__mark" aria-hidden="true">{{ collection.mark }}</span>
+            <span class="collection-card__heading"><strong>{{ collection.label }}</strong><small>{{ collection.count }} 篇 <span aria-hidden="true">↗</span></small></span>
+            <span class="collection-card__description">{{ collection.description }}</span>
+          </a>
+        {% endfor %}
+      </div>
+      {% if config.extra.rss_feed %}<div class="home-subscribe"><span class="garden-eyebrow">KEEP IN TOUCH</span><h3>下次更新，阅读器里见。</h3><p>让新写下的文字，安静抵达。</p><a class="garden-more-link" href="{{ config.extra.rss_feed|url|e }}">通过 RSS 订阅 <span aria-hidden="true">↗</span></a></div>{% endif %}
+    </section>
+
     <section class="home-reading" aria-labelledby="home-reading-title">
       <header class="section-heading">
-        <h2 id="home-reading-title">最新文章</h2>
-        <a class="garden-more-link" href="{{ 'archive/'|url }}">全部文章 · {{ blog.count }} <span aria-hidden="true">→</span></a>
+        <div><span class="garden-eyebrow">RECENT ENTRIES</span><h2 id="home-reading-title">最近写下</h2></div>
+        <a class="garden-more-link" href="{{ 'archive/'|url }}">全部文章 <span aria-hidden="true">↗</span></a>
       </header>
       <div class="home-reading__grid">
         <div class="recent-notes">
           {% for post in blog.posts[:10] %}
             <article class="recent-note">
               <a href="{{ post.url|url }}">
+                <span class="recent-note__number" aria-hidden="true">{{ '%02d'|format(loop.index) }}</span>
+                <div class="recent-note__copy">
                 <h3>{{ post.title|striptags|e }}</h3>
                 {% if post.blog_description_text %}<p>{{ post.blog_description_text|striptags|trim|truncate(120)|e }}</p>{% endif %}
                 <div class="recent-note__meta">
                   <time{% if post.blog_publish_iso %} datetime="{{ post.blog_publish_iso|e }}"{% endif %}>{{ post.blog_publish_label[:10]|default("日期未记", true)|e }}</time>
                   <span>{{ post.blog_collection.label }}</span>
+                  {% if post.blog_topic_tags %}<span class="recent-note__topic">{{ post.blog_topic_tags[0]|e }}</span>{% endif %}
                 </div>
+                </div>
+                <span class="recent-note__arrow" aria-hidden="true">↗</span>
               </a>
             </article>
           {% endfor %}
         </div>
       </div>
+      <a class="home-reading__more" href="{{ 'archive/'|url }}">继续翻阅全部 {{ blog.count }} 篇记录 <span aria-hidden="true">→</span></a>
     </section>
-
-    <section class="home-collections" aria-labelledby="home-collections-title">
-      <header class="section-heading">
-        <h2 id="home-collections-title">按分类阅读</h2>
-      </header>
-      <div class="home-collections__grid">
-        {% for collection in blog.collections %}
-          <a class="collection-card" href="{{ collection.index|url }}">
-            <span class="collection-card__heading"><strong>{{ collection.label }}</strong><small>{{ collection.count }} 篇</small></span>
-            <span class="collection-card__description">{{ collection.description }}</span>
-          </a>
-        {% endfor %}
-      </div>
-    </section>
+    </div>
   </div>
 {% endblock %}

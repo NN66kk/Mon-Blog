@@ -91,3 +91,7 @@
     </article>
   </div>
 {% endblock %}
+
+{% block footer %}
+<footer class="garden-colophon"><div class="garden-colophon__inner"><div><strong>Mon 的个人花园</strong><p>独处 · 观察 · 前行</p></div><nav aria-label="页脚导航"><a href="{{ config.extra.about_url|url }}">关于我</a><a href="{{ 'archive/'|url }}">全部文章</a>{% if config.extra.rss_feed %}<a href="{{ config.extra.rss_feed|url|e }}">RSS 订阅 ↗</a>{% endif %}</nav></div></footer>
+{% endblock %}
